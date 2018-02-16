@@ -1,8 +1,8 @@
 package com.black_dog20.gadgetron.init;
 
-import com.black_dog20.gadgetron.reference.Reference;
-
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.black_dog20.gadgetron.reference.Reference;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class Recipes {
