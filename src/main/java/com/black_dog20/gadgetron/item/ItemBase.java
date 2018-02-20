@@ -19,17 +19,10 @@ import com.black_dog20.gadgetron.reference.Reference;
 public class ItemBase extends Item implements IItemModelRegister{
 
 	public ItemBase(String name) {
-
-		this();
+		super();
 		this.setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
 		this.setUnlocalizedName(this.getRegistryName().toString());
-	}
-
-	public ItemBase() {
-
-		super();
-		this.setCreativeTab(CreativeTabGT.MOT_TAB);
-
+		this.setCreativeTab(CreativeTabGT.TAB);
 	}
 	
 	

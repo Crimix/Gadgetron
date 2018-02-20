@@ -1,8 +1,14 @@
 //Items
-item.gadgetron:itemmagnett1.name=Item grabber V1
-item.gadgetron:itemmagnett2.name=Item grabber V2
+item.gadgetron:itemraritaniumcrystal.name=Raritanium Crystal
 
 //Info Items
+
+//Blocks
+tile.gadgetron:blockraritaniumore.name=Raritanium Ore
+tile.gadgetron:blockadamantineore.name=Adamantine Ore
+tile.gadgetron:blockcarbonoxore.name=Carbonox Ore
+tile.gadgetron:blocktrilliumore.name=Trillium Ore
+tile.gadgetron:blocktitaniumore.name=Titanium Ore
 
 //Entities
 

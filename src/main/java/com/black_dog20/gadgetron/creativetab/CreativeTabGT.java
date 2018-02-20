@@ -4,15 +4,16 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.reference.Reference;
 
 public class CreativeTabGT{
 
-	public static final CreativeTabs MOT_TAB = new CreativeTabs(Reference.MOD_ID.toLowerCase()) {
+	public static final CreativeTabs TAB = new CreativeTabs(Reference.MOD_ID.toLowerCase()) {
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(Items.ACACIA_BOAT);
+			return new ItemStack(ModBlocks.blockAdamantineOre);
 		}
 
 		@Override

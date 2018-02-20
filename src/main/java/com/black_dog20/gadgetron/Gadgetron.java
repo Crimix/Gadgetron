@@ -6,16 +6,16 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import org.apache.logging.log4j.Logger;
 
 import com.black_dog20.gadgetron.handler.EventHandler;
-import com.black_dog20.gadgetron.handler.GuiHandler;
 import com.black_dog20.gadgetron.handler.PlayerEventHandler;
 import com.black_dog20.gadgetron.init.Recipes;
 import com.black_dog20.gadgetron.proxies.IProxy;
 import com.black_dog20.gadgetron.reference.Reference;
+import com.black_dog20.gadgetron.worldgen.OreGenerator;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.MC_VERSIONS)
 public class Gadgetron {
@@ -39,9 +39,8 @@ public class Gadgetron {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		Recipes.init();
-		
+		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 		logger.info("Initialization Complete!");
 }
 
@@ -49,9 +48,5 @@ public class Gadgetron {
 	public void postInit(FMLPostInitializationEvent event) {
 
 		logger.info("Post Initialization Complete!");
-	}
-
-	public void reloadRecipes() {
-		Recipes.init();
 	}
 }
