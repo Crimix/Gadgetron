@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "gadgetron:items/itemraritaniumcrystal"
+        "layer0": "gadgetron:items/titaniumdust"
     }
     
 }

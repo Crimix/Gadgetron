@@ -1,0 +1,60 @@
+//Items
+item.gadgetron:raritaniumcrystal.name=Raritanium Crystal
+item.gadgetron:adamantineingot.name=Adamantine Ingot
+item.gadgetron:carbonoxingot.name=Carbonox Ingot
+item.gadgetron:trilliumingot.name=Trillium Ingot
+item.gadgetron:titaniumingot.name=Titanium Ingot
+item.gadgetron:adamantinedust.name=Adamantine Dust
+item.gadgetron:carbonoxdust.name=Carbonox Dust
+item.gadgetron:trilliumdust.name=Trillium Dust
+item.gadgetron:titaniumdust.name=Titanium Dust
+item.gadgetron:raritaniumrod.name=Raritanium Rod
+
+//Item tools
+item.gadgetron:raritaniumpickaxe.name=Raritanium Pickaxe
+item.gadgetron:raritaniumaxe.name=Raritanium Axe
+item.gadgetron:raritaniumsword.name=Raritanium Sword
+item.gadgetron:raritaniumhoe.name=Raritanium Hoe
+item.gadgetron:raritaniumshovel.name=Raritanium Shovel
+item.gadgetron:adamantinepickaxe.name=Adamantine Pickaxe
+item.gadgetron:adamantineaxe.name=Adamantine Axe
+item.gadgetron:adamantinesword.name=Adamantine Sword
+item.gadgetron:adamantinehoe.name=Adamantine Hoe
+item.gadgetron:adamantineshovel.name=Adamantine Shovel
+item.gadgetron:carbonoxpickaxe.name=Carbonox Pickaxe
+item.gadgetron:carbonoxaxe.name=Carbonox Axe
+item.gadgetron:carbonoxsword.name=Carbonox Sword
+item.gadgetron:carbonoxhoe.name=Carbonox Hoe
+item.gadgetron:carbonoxshovel.name=Carbonox Shovel
+item.gadgetron:trilliumpickaxe.name=Trillium Pickaxe
+item.gadgetron:trilliumaxe.name=Trillium Axe
+item.gadgetron:trilliumsword.name=Trillium Sword
+item.gadgetron:trilliumhoe.name=Trillium Hoe
+item.gadgetron:trilliumshovel.name=Trillium Shovel
+item.gadgetron:titaniumpickaxe.name=Titanium Pickaxe
+item.gadgetron:titaniumaxe.name=Titanium Axe
+item.gadgetron:titaniumsword.name=Titanium Sword
+item.gadgetron:titaniumhoe.name=Titanium Hoe
+item.gadgetron:titaniumshovel.name=Titanium Shovel
+
+//Info Items
+
+//Blocks
+tile.gadgetron:blockraritaniumore.name=Raritanium Ore
+tile.gadgetron:blockadamantineore.name=Adamantine Ore
+tile.gadgetron:blockcarbonoxore.name=Carbonox Ore
+tile.gadgetron:blocktrilliumore.name=Trillium Ore
+tile.gadgetron:blocktitaniumore.name=Titanium Ore
+
+//Entities
+
+//Container
+
+//Misc
+itemGroup.gadgetron=Gadgetron
+
+//Configs
+
+//Keys
+
+//MSG
