@@ -2,7 +2,7 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-            "all": "gadgetron:blocks/blockadamantineore"
+            "all": "gadgetron:blocks/trilliumore"
         },
         "model": "cube_all",
         "uvlock": true

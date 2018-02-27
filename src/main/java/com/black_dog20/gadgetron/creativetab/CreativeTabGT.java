@@ -1,7 +1,6 @@
 package com.black_dog20.gadgetron.creativetab;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.black_dog20.gadgetron.init.ModBlocks;
@@ -13,7 +12,7 @@ public class CreativeTabGT{
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(ModBlocks.blockAdamantineOre);
+			return new ItemStack(ModBlocks.AdamantineOre);
 		}
 
 		@Override

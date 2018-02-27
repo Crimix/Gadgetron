@@ -1,49 +1,65 @@
 package com.black_dog20.gadgetron.handler;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.black_dog20.gadgetron.api.IElementType;
+import com.black_dog20.gadgetron.init.ModBlocks;
 
 
 public class EventHandler {
 
+	
 	@SubscribeEvent
 	public void Tool(ItemTooltipEvent event) {
+		if(event.getItemStack().getItem() instanceof IElementType){
+			switch (((IElementType) event.getItemStack().getItem()).getElementType()) {
+			case POSION:
+				TextComponentTranslation component = new TextComponentTranslation("tooltip.gadgetron:poisonous");
+				component.getStyle().setColor(TextFormatting.GREEN);
+				event.getToolTip().add(1,component.getFormattedText());
+				break;
 
+			default:
+				break;
+			}
+		}
 	}
 	
+	@SubscribeEvent
+	public void onHurt(LivingAttackEvent event){
+		if(event.getSource().getTrueSource() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
+			if(player.getHeldItemMainhand().getItem() instanceof IElementType){
+				switch (((IElementType) player.getHeldItemMainhand().getItem()).getElementType()) {
+				case POSION:
+					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 600));
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+	}
 	
+	@SubscribeEvent
+	public void onUpdate(LivingUpdateEvent event){
+		if(event.getEntity() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+			if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre))){
+				player.addPotionEffect(new PotionEffect(MobEffects.POISON, 40,1));
+			}
+		}
+	}
 	
-	/*@SubscribeEvent
-	public void PlayerJoin(PlayerLoggedInEvent event){
-		System.out.println("hey");
-		Field inventories = ReflectionHelper.findField(InventoryPlayer.class, "allInventories","field_184440_g");
-		inventories.setAccessible(true);
-		Object value = null;
-		try {
-			value = inventories.get(event.player.inventory);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(value != null){
-		List<NonNullList<ItemStack>> test = (List<NonNullList<ItemStack>>)value;
-		List<NonNullList<ItemStack>> newList = new ArrayList<NonNullList<ItemStack>>();
-		for(NonNullList<ItemStack> o : test)
-			newList.add(o);
-		newList.add(NonNullList.<ItemStack>withSize(4, new ItemStack(Items.ACACIA_BOAT,1)));
-		try {
-			inventories.set(event.player.inventory, newList);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
-	}*/
 	
 }

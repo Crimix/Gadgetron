@@ -2,19 +2,10 @@ package com.black_dog20.gadgetron.block;
 
 import java.util.Random;
 
-import com.black_dog20.gadgetron.client.render.IItemModelRegister;
-import com.black_dog20.gadgetron.client.render.ModelHandler;
-import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
-import com.black_dog20.gadgetron.init.ModBlocks;
-import com.black_dog20.gadgetron.init.ModItems;
-import com.black_dog20.gadgetron.reference.Reference;
-
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -24,8 +15,21 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.black_dog20.gadgetron.client.render.IItemModelRegister;
+import com.black_dog20.gadgetron.client.render.ModelHandler;
+import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
+import com.black_dog20.gadgetron.init.ModBlocks;
+import com.black_dog20.gadgetron.init.ModItems;
+import com.black_dog20.gadgetron.reference.Reference;
+
 public class BlockModOre extends BlockOre implements IItemModelRegister{
 
+	
+	public BlockModOre(String name, int toolLevel) {
+		this(name);
+		this.setHarvestLevel("pickaxe", toolLevel);
+	}
+	
 	public BlockModOre(String name) {
 		super();
 		setDefaultState(pickDefaultState());
@@ -56,7 +60,7 @@ public class BlockModOre extends BlockOre implements IItemModelRegister{
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return this == ModBlocks.blockRaritaniumOre ? ModItems.RaritaniumCrystal : Item.getItemFromBlock(this);
+        return this == ModBlocks.RaritaniumOre ? ModItems.RaritaniumCrystal : Item.getItemFromBlock(this);
     }
 	
 	   @Override
@@ -67,7 +71,7 @@ public class BlockModOre extends BlockOre implements IItemModelRegister{
 	        {
 	            int i = 0;
 
-	            if (this == ModBlocks.blockRaritaniumOre)
+	            if (this == ModBlocks.RaritaniumOre)
 	            {
 	                i = MathHelper.getInt(rand, 3, 7);
 	            }

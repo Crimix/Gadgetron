@@ -1,10 +1,5 @@
 package com.black_dog20.gadgetron.block;
 
-import com.black_dog20.gadgetron.client.render.IItemModelRegister;
-import com.black_dog20.gadgetron.client.render.ModelHandler;
-import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
-import com.black_dog20.gadgetron.reference.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.black_dog20.gadgetron.client.render.IItemModelRegister;
+import com.black_dog20.gadgetron.client.render.ModelHandler;
+import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
+import com.black_dog20.gadgetron.reference.Reference;
 
 public class BlockBase extends Block implements IItemModelRegister{
 

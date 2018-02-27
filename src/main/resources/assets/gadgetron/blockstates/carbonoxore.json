@@ -2,7 +2,7 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-            "all": "gadgetron:blocks/blocktitaniumore"
+            "all": "gadgetron:blocks/carbonoxore"
         },
         "model": "cube_all",
         "uvlock": true

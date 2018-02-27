@@ -11,6 +11,9 @@ import mezz.jei.api.ingredients.IModIngredientRegistration;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
+import com.black_dog20.gadgetron.init.ModBlocks;
+import com.black_dog20.gadgetron.init.ModItems;
+
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin extends BlankModPlugin{
 
@@ -29,6 +32,13 @@ public class JEIPlugin extends BlankModPlugin{
 	@Override
 	public void register(IModRegistry registry) {
 		List<ItemStack> list = new ArrayList<ItemStack>();
+		
+		list.add(new ItemStack(ModBlocks.TrilliumOre));
+		list.add(new ItemStack(ModItems.TrilliumAxe));
+		list.add(new ItemStack(ModItems.TrilliumHoe));
+		list.add(new ItemStack(ModItems.TrilliumPickaxe));
+		list.add(new ItemStack(ModItems.TrilliumShovel));
+		list.add(new ItemStack(ModItems.TrilliumSword));
 		
 		for(ItemStack stack : list)
 				registry.addIngredientInfo(stack, ItemStack.class, I18n.format(stack.getItem().getUnlocalizedName()+".info"));

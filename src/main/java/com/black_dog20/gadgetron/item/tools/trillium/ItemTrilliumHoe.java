@@ -5,10 +5,7 @@ import java.util.List;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 //import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,7 +15,6 @@ import com.black_dog20.gadgetron.api.IElementType;
 import com.black_dog20.gadgetron.client.render.IItemModelRegister;
 import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
 import com.black_dog20.gadgetron.item.tools.ItemHoeBase;
-import com.black_dog20.gadgetron.item.tools.ItemSwordBase;
 import com.black_dog20.gadgetron.reference.Reference;
 
 public class ItemTrilliumHoe extends ItemHoeBase implements IItemModelRegister, IElementType{

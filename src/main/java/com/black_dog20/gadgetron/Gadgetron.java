@@ -12,7 +12,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Logger;
 
 import com.black_dog20.gadgetron.handler.EventHandler;
-import com.black_dog20.gadgetron.handler.PlayerEventHandler;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
 import com.black_dog20.gadgetron.init.Recipes;
@@ -34,7 +33,6 @@ public class Gadgetron {
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
-		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		registerOreDict();
 		
 		logger.info("Pre Initialization Complete!");
@@ -68,11 +66,11 @@ public class Gadgetron {
 		
 		OreDictionary.registerOre("crystalRaritanium", ModItems.RaritaniumCrystal);
 		
-		OreDictionary.registerOre("oreAdamantine", ModBlocks.blockAdamantineOre);
-		OreDictionary.registerOre("oreCarbonox", ModBlocks.blockCarbonoxOre);
-		OreDictionary.registerOre("oreRaritanium", ModBlocks.blockRaritaniumOre);
-		OreDictionary.registerOre("oreTitanium", ModBlocks.blockTitaniumOre);
-		OreDictionary.registerOre("oreTrillium", ModBlocks.blockTrilliumOre);
+		OreDictionary.registerOre("oreAdamantine", ModBlocks.AdamantineOre);
+		OreDictionary.registerOre("oreCarbonox", ModBlocks.CarbonoxOre);
+		OreDictionary.registerOre("oreRaritanium", ModBlocks.RaritaniumOre);
+		OreDictionary.registerOre("oreTitanium", ModBlocks.TitaniumOre);
+		OreDictionary.registerOre("oreTrillium", ModBlocks.TrilliumOre);
 		logger.info("OreDictionary register complete!");
 	}
 }

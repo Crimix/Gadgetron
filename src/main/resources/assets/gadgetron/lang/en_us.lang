@@ -38,13 +38,19 @@ item.gadgetron:titaniumhoe.name=Titanium Hoe
 item.gadgetron:titaniumshovel.name=Titanium Shovel
 
 //Info Items
+item.gadgetron:trilliumpickaxe.info=On contact with the pickaxe head applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumaxe.info=On contact with the axe head applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumsword.info=On contact with the sword blade applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumhoe.info=On contact with the hoe head applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumshovel.info=On contact with the shovel head applies §2Poison II§r for 30 seconds
+tile.gadgetron:trilliumore.info=Carrying this ore will apply the §2Poison I§r effect
 
 //Blocks
-tile.gadgetron:blockraritaniumore.name=Raritanium Ore
-tile.gadgetron:blockadamantineore.name=Adamantine Ore
-tile.gadgetron:blockcarbonoxore.name=Carbonox Ore
-tile.gadgetron:blocktrilliumore.name=Trillium Ore
-tile.gadgetron:blocktitaniumore.name=Titanium Ore
+tile.gadgetron:raritaniumore.name=Raritanium Ore
+tile.gadgetron:adamantineore.name=Adamantine Ore
+tile.gadgetron:carbonoxore.name=Carbonox Ore
+tile.gadgetron:trilliumore.name=Trillium Ore
+tile.gadgetron:titaniumore.name=Titanium Ore
 
 //Entities
 
@@ -52,6 +58,7 @@ tile.gadgetron:blocktitaniumore.name=Titanium Ore
 
 //Misc
 itemGroup.gadgetron=Gadgetron
+tooltip.gadgetron:poisonous=Poisonous
 
 //Configs
 
