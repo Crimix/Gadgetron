@@ -39,11 +39,29 @@ public class JEIPlugin extends BlankModPlugin{
 		list.add(new ItemStack(ModItems.TrilliumPickaxe));
 		list.add(new ItemStack(ModItems.TrilliumShovel));
 		list.add(new ItemStack(ModItems.TrilliumSword));
+		list.add(new ItemStack(ModItems.RaritaniumCrystal));
+		list.add(new ItemStack(ModItems.AdamantineIngot));
+		list.add(new ItemStack(ModItems.CarbonoxIngot));
+		list.add(new ItemStack(ModItems.TrilliumIngot));
 		
-		for(ItemStack stack : list)
-				registry.addIngredientInfo(stack, ItemStack.class, I18n.format(stack.getItem().getUnlocalizedName()+".info"));
-		
+		for(ItemStack stack : list){
+			String info = getFormattedString(stack);
+			if(info != null){
+				registry.addIngredientInfo(stack, ItemStack.class, info);
+			}
+		}
 	}
+	
+	private String getFormattedString(ItemStack stack){
+		String res = I18n.format(stack.getItem().getUnlocalizedName()+".info");
+		if(res.contains(stack.getItem().getUnlocalizedName())){
+			return null;
+		}
+		else{
+			return res;
+		}
+	}
+		
 
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {

@@ -12,6 +12,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.black_dog20.gadgetron.api.IElementType;
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.init.ModBlocks;
 
 
@@ -53,10 +54,12 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	public void onUpdate(LivingUpdateEvent event){
-		if(event.getEntity() instanceof EntityPlayer){
-			EntityPlayer player = (EntityPlayer) event.getEntity();
-			if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre))){
-				player.addPotionEffect(new PotionEffect(MobEffects.POISON, 40,1));
+		if(ModConfig.doesTrilliumCausePoison){
+			if(event.getEntity() instanceof EntityPlayer){
+				EntityPlayer player = (EntityPlayer) event.getEntity();
+				if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre))){
+					player.addPotionEffect(new PotionEffect(MobEffects.POISON, 40,1));
+				}
 			}
 		}
 	}

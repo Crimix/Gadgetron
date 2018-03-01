@@ -25,11 +25,11 @@ import com.black_dog20.gadgetron.reference.Reference;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ModItems {
 	
+	public static ToolMaterial Carbonox = EnumHelper.addToolMaterial("carbonox", 3, 4000, 10.0F, 6.0F, 22).setRepairItem(new ItemStack(ModItems.CarbonoxIngot));
+	public static ToolMaterial Trillium = EnumHelper.addToolMaterial("trillium", 3, 3000, 8.0F, 4.0F, 14).setRepairItem(new ItemStack(ModItems.TrilliumIngot));
 	public static ToolMaterial Raritanium = EnumHelper.addToolMaterial("raritanium", 3, 2000, 10.0F, 5.0F, 22).setRepairItem(new ItemStack(ModItems.RaritaniumCrystal));
-	public static ToolMaterial Adamantine = EnumHelper.addToolMaterial("adamantine", 3, 1000, 8.0F, 4.0F, 15).setRepairItem(new ItemStack(ModItems.AdamantineIngot));
-	public static ToolMaterial Carbonox = EnumHelper.addToolMaterial("carbonox", 3, 700, 6.0F, 3.0F, 14).setRepairItem(new ItemStack(ModItems.CarbonoxIngot));
-	public static ToolMaterial Trillium = EnumHelper.addToolMaterial("trillium", 3, 600, 6.0F, 2.0F, 14).setRepairItem(new ItemStack(ModItems.TrilliumIngot));
-	public static ToolMaterial Titanium = EnumHelper.addToolMaterial("titanium", 3, 500, 6.0F, 2.0F, 14).setRepairItem(new ItemStack(ModItems.TitaniumIngot));
+	public static ToolMaterial Adamantine = EnumHelper.addToolMaterial("adamantine", 3, 2000, 8.0F, 4.0F, 15).setRepairItem(new ItemStack(ModItems.AdamantineIngot));
+	public static ToolMaterial Titanium = EnumHelper.addToolMaterial("titanium", 3, 750, 6.0F, 3.0F, 14).setRepairItem(new ItemStack(ModItems.TitaniumIngot));
 	
 	
 	public static ItemBase RaritaniumCrystal = new ItemBase("raritaniumCrystal");
@@ -43,27 +43,27 @@ public class ModItems {
 	public static ItemBase TitaniumDust = new ItemBase("titaniumDust");
 	public static ItemBase RaritaniumRod = new ItemBase("raritaniumRod");
 	
-	public static ItemAxeBase RaritaniumAxe = new ItemAxeBase("raritaniumAxe", Raritanium, 5.0F, -2.0F);
+	public static ItemAxeBase RaritaniumAxe = new ItemAxeBase("raritaniumAxe", Raritanium, Raritanium.getDamageVsEntity(), -2.5F);
 	public static ItemHoeBase RaritaniumHoe = new ItemHoeBase("raritaniumHoe", Raritanium);
 	public static ItemPickaxeBase RaritaniumPickaxe = new ItemPickaxeBase("raritaniumPickaxe", Raritanium);
 	public static ItemShovelBase RaritaniumShovel = new ItemShovelBase("raritaniumShovel", Raritanium);
 	public static ItemSwordBase RaritaniumSword = new ItemSwordBase("raritaniumSword", Raritanium);
-	public static ItemAxeBase AdamantineAxe = new ItemAxeBase("adamantineAxe", Adamantine, 4.0F, -2.5F);
+	public static ItemAxeBase AdamantineAxe = new ItemAxeBase("adamantineAxe", Adamantine, Adamantine.getDamageVsEntity(), -3.1F);
 	public static ItemHoeBase AdamantineHoe = new ItemHoeBase("adamantineHoe", Adamantine);
 	public static ItemPickaxeBase AdamantinePickaxe = new ItemPickaxeBase("adamantinePickaxe", Adamantine);
 	public static ItemShovelBase AdamantineShovel = new ItemShovelBase("adamantineShovel", Adamantine);
 	public static ItemSwordBase AdamantineSword = new ItemSwordBase("adamantineSword", Adamantine);
-	public static ItemAxeBase CarbonoxAxe = new ItemAxeBase("carbonoxAxe", Carbonox, 3.0F, -3.0F);
+	public static ItemAxeBase CarbonoxAxe = new ItemAxeBase("carbonoxAxe", Carbonox, Carbonox.getDamageVsEntity(), -2.0F);
 	public static ItemHoeBase CarbonoxHoe = new ItemHoeBase("carbonoxHoe", Carbonox);
 	public static ItemPickaxeBase CarbonoxPickaxe = new ItemPickaxeBase("carbonoxPickaxe", Carbonox);
 	public static ItemShovelBase CarbonoxShovel = new ItemShovelBase("carbonoxShovel", Carbonox);
 	public static ItemSwordBase CarbonoxSword = new ItemSwordBase("carbonoxSword", Carbonox);
-	public static ItemTrilliumAxe TrilliumAxe = new ItemTrilliumAxe("trilliumAxe", Trillium, 2.0F, -3.1F);
+	public static ItemTrilliumAxe TrilliumAxe = new ItemTrilliumAxe("trilliumAxe", Trillium, Trillium.getDamageVsEntity(), -3.0F);
 	public static ItemTrilliumHoe TrilliumHoe = new ItemTrilliumHoe("trilliumHoe", Trillium);
 	public static ItemTrilliumPickaxe TrilliumPickaxe = new ItemTrilliumPickaxe("trilliumPickaxe", Trillium);
 	public static ItemTrilliumShovel TrilliumShovel = new ItemTrilliumShovel("trilliumShovel", Trillium);
 	public static ItemTrilliumSword TrilliumSword = new ItemTrilliumSword("trilliumSword", Trillium);
-	public static ItemAxeBase TitaniumAxe = new ItemAxeBase("titaniumAxe", Titanium, 2.0F, -3.2F);
+	public static ItemAxeBase TitaniumAxe = new ItemAxeBase("titaniumAxe", Titanium, Titanium.getDamageVsEntity(), -3.2F);
 	public static ItemHoeBase TitaniumHoe = new ItemHoeBase("titaniumHoe", Titanium);
 	public static ItemPickaxeBase TitaniumPickaxe = new ItemPickaxeBase("titaniumPickaxe", Titanium);
 	public static ItemShovelBase TitaniumShovel = new ItemShovelBase("titaniumShovel", Titanium);

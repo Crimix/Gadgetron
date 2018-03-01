@@ -13,18 +13,23 @@ import com.black_dog20.gadgetron.reference.Reference;
 public class ModConfig {
 	
 	@Config.LangKey("gadgetron.config.RaritaniumPerChunk")
-	public static int RaritaniumPerChunk = 3;
+	public static int RaritaniumPerChunk = 2;
 	
 	@Config.LangKey("gadgetron.config.AdamantinePerChunk")
-	public static int AdamantinePerChunk = 5;
+	public static int AdamantinePerChunk = 4;
 	
 	@Config.LangKey("gadgetron.config.CarbonoxPerChunk")
-	public static int CarbonoxPerChunk = 6;
+	public static int CarbonoxPerChunk = 3;
 	
 	@Config.LangKey("gadgetron.config.TrilliumPerChunk")
-	public static int TrilliumPerChunk = 8;
+	public static int TrilliumPerChunk = 5;
+	
+	@Config.LangKey("gadgetron.config.TitaniumPerChunk")
+	public static int TitaniumPerChunk = 8;
 	
 	
+	@Config.LangKey("gadgetron.config.TrilliumCausePoison")
+	public static boolean doesTrilliumCausePoison = true;
 	
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 	private static class EventHandler {
