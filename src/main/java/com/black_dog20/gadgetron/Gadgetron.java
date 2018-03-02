@@ -19,7 +19,7 @@ import com.black_dog20.gadgetron.proxies.IProxy;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.worldgen.OreGenerator;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.MC_VERSIONS)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.MC_VERSIONS, dependencies = Reference.DEPENDENCIES)
 public class Gadgetron {
 
 	@Mod.Instance(Reference.MOD_ID)

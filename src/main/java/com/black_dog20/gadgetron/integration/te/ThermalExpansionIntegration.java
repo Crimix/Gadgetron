@@ -2,6 +2,7 @@ package com.black_dog20.gadgetron.integration.te;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class ThermalExpansionIntegration {
@@ -22,6 +23,7 @@ public class ThermalExpansionIntegration {
 			secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"));
 			toSend.setInteger("secondaryChance", secondaryChance);
 		}
-		FMLInterModComms.sendMessage("ThermalExpansion", "PulverizerRecipe", toSend);
+		if(Loader.isModLoaded("thermalexpansion"))
+			FMLInterModComms.sendMessage("thermalexpansion", "addpulverizerrecipe", toSend);
 	}
 }

@@ -22,6 +22,7 @@ public class Recipes {
 		GameRegistry.addSmelting(ModBlocks.CarbonoxOre, new ItemStack(ModItems.CarbonoxIngot), 3F);
 		GameRegistry.addSmelting(ModBlocks.TitaniumOre, new ItemStack(ModItems.TitaniumIngot), 3F);
 		GameRegistry.addSmelting(ModBlocks.TrilliumOre, new ItemStack(ModItems.TrilliumIngot), 3F);
+		
 		RegisterIntegrationRecipes(new ItemStack(ModBlocks.AdamantineOre), new ItemStack(ModItems.AdamantineDust,2));
 		RegisterIntegrationRecipes(new ItemStack(ModBlocks.CarbonoxOre), new ItemStack(ModItems.CarbonoxDust,2));
 		RegisterIntegrationRecipes(new ItemStack(ModBlocks.TitaniumOre), new ItemStack(ModItems.TitaniumDust,2));
@@ -60,7 +61,8 @@ public class Recipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumSword, new Object[]{" i "," i "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 	}
 	
-	public static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){
+	
+	private static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){
 		ThermalExpansionIntegration.addPulverizerRecipe(4000, in, out, null, 0);
 		if(in.getItem() instanceof ItemBlock){
 			MekanismIntegration.AddRecipeToEnrichmentChamber(in, out);
