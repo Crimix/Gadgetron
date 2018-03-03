@@ -17,7 +17,7 @@ public class OreGenConfig {
 	public boolean generate = true;
 
 	@Config.LangKey("gadgetron.config.worldgen.perChunk")
-	@Config.RangeInt(min = 1, max = 16)
+	@Config.RangeInt(min = 1, max = 30)
 	public int perChunk = 6;
 
 	@Config.LangKey("gadgetron.config.worldgen.veinMin")
