@@ -21,13 +21,13 @@ public class ModConfig {
 	public static class Worldgen {
 	
 		@Config.LangKey("gadgetron.config.worldgen.raritanium")
-		public OreGenConfig raritanium = new OreGenConfig(true, 10, 2, 6, 1, 20);
+		public OreGenConfig raritanium = new OreGenConfig(true, 12, 2, 8, 1, 20);
 		
 		@Config.LangKey("gadgetron.config.worldgen.adamantine")
 		public OreGenConfig adamantine = new OreGenConfig(true, 12, 4, 10, 1, 40);
 		
 		@Config.LangKey("gadgetron.config.worldgen.carbonox")
-		public OreGenConfig carbonox = new OreGenConfig(true, 10, 4, 8, 1, 20);
+		public OreGenConfig carbonox = new OreGenConfig(true, 10, 4, 8, 1, 30);
 		
 		@Config.LangKey("gadgetron.config.worldgen.trillium")
 		public OreGenConfig trillium = new OreGenConfig(true, 10, 4, 10, 1, 60);
