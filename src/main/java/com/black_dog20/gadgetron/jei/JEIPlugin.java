@@ -39,7 +39,7 @@ public class JEIPlugin extends BlankModPlugin{
 		list.add(new ItemStack(ModItems.TrilliumPickaxe));
 		list.add(new ItemStack(ModItems.TrilliumShovel));
 		list.add(new ItemStack(ModItems.TrilliumSword));
-		list.add(new ItemStack(ModItems.RaritaniumCrystal));
+		list.add(new ItemStack(ModBlocks.RaritaniumCrystal));
 		list.add(new ItemStack(ModItems.AdamantineIngot));
 		list.add(new ItemStack(ModItems.CarbonoxIngot));
 		list.add(new ItemStack(ModItems.TrilliumIngot));

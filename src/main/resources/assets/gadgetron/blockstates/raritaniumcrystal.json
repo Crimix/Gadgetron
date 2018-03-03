@@ -1,0 +1,41 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "gadgetron:raritaniumcrystal.obj",
+        "uvlock": true
+    },
+    "variants": {
+        "normal": {
+            "model": "gadgetron:raritaniumcrystal.obj",
+            "transform": { 
+            	"scale": 0.16,
+            	"translation": [0.1,-0.36,0]
+            }
+        },
+        "inventory": {
+            "model": "gadgetron:raritaniumcrystal.obj",
+            "transform": { 
+            	"thirdperson": {
+            		"scale": 0.09,
+            		"translation": [0,-0.1,0]
+            	},
+            	"thirdperson_lefthand": {
+            		"scale": 0.09,
+            		"translation": [0,-0.1,0]
+            	},
+            	"firstperson": {
+            		"scale": 0.09,
+            		"translation": [0,-0.1,0]
+            	},
+            	"firstperson_lefthand": {
+            		"scale": 0.09,
+            		"translation": [0,-0.1,0]
+            	},
+            	"gui":{
+            		"scale": 0.13,
+            		"translation": [0.09,-0.35,0]
+            	}
+            }
+        }
+    }
+}

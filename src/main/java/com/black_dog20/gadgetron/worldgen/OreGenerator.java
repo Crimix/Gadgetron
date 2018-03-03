@@ -24,7 +24,7 @@ public class OreGenerator implements IWorldGenerator{
 			for(int i = 0; i < ModConfig.RaritaniumPerChunk; i++)
 			{
 				BlockPos pos = new BlockPos(chunkX*16 + random.nextInt(16), Helper.GetRandonBetween(random, 1, 20), (chunkZ*16) + random.nextInt(16));
-				new WorldGenMinable(ModBlocks.RaritaniumOre.getDefaultState(), Helper.GetRandonBetween(random, 1, 4), BlockMatcher.forBlock(Blocks.STONE)).generate(world, random, pos);
+				new WorldGenMinable(ModBlocks.RaritaniumCrystal.getDefaultState(), Helper.GetRandonBetween(random, 1, 4), BlockMatcher.forBlock(Blocks.STONE)).generate(world, random, pos);
 			}
 
 			for(int i = 0; i < ModConfig.AdamantinePerChunk; i++)

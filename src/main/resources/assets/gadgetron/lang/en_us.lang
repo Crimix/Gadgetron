@@ -1,5 +1,4 @@
 //Items
-item.gadgetron:raritaniumcrystal.name=Raritanium Crystal
 item.gadgetron:adamantineingot.name=Adamantine Ingot
 item.gadgetron:carbonoxingot.name=Carbonox Ingot
 item.gadgetron:trilliumingot.name=Trillium Ingot
@@ -44,14 +43,14 @@ item.gadgetron:trilliumsword.info=On contact with the sword blade applies §2Poi
 item.gadgetron:trilliumhoe.info=On contact with the hoe head applies §2Poison II§r for 30 seconds
 item.gadgetron:trilliumshovel.info=On contact with the shovel head applies §2Poison II§r for 30 seconds
 tile.gadgetron:trilliumore.info=Carrying this ore will apply the §2Poison I§r effect
-item.gadgetron:raritaniumcrystal.info=A rare hard crystal has the same durability as Adamantine
+tile.gadgetron:raritaniumcrystal.info=A rare hard crystal has the same durability as Adamantine
 item.gadgetron:adamantineingot.info=A hard metal has the same durability as Raritanium
 item.gadgetron:carbonoxingot.info=A very hard metal, its durability is far superior to Adamantine, Raritanium and Trillium
 item.gadgetron:trilliumingot.info=A hard poisonous metal, its durability is superior to Adamantine, but inferior to Carbonox
 
 
 //Blocks
-tile.gadgetron:raritaniumore.name=Raritanium Ore
+tile.gadgetron:raritaniumcrystal.name=Raritanium Crystal
 tile.gadgetron:adamantineore.name=Adamantine Ore
 tile.gadgetron:carbonoxore.name=Carbonox Ore
 tile.gadgetron:trilliumore.name=Trillium Ore

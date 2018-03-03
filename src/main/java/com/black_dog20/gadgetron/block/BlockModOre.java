@@ -57,31 +57,5 @@ public class BlockModOre extends BlockOre implements IItemModelRegister{
 		}
 	}
 	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return this == ModBlocks.RaritaniumOre ? ModItems.RaritaniumCrystal : Item.getItemFromBlock(this);
-    }
-	
-	   @Override
-	    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
-	    {
-	        Random rand = world instanceof World ? ((World)world).rand : new Random();
-	        if (this.getItemDropped(state, rand, fortune) != Item.getItemFromBlock(this))
-	        {
-	            int i = 0;
-
-	            if (this == ModBlocks.RaritaniumOre)
-	            {
-	                i = MathHelper.getInt(rand, 3, 7);
-	            }
-
-	            return i;
-	        }
-	        return 0;
-	    }
-	
-	
-	
 
 }

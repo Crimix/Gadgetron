@@ -27,7 +27,6 @@ public class Recipes {
 		RegisterIntegrationRecipes(new ItemStack(ModBlocks.CarbonoxOre), new ItemStack(ModItems.CarbonoxDust,2));
 		RegisterIntegrationRecipes(new ItemStack(ModBlocks.TitaniumOre), new ItemStack(ModItems.TitaniumDust,2));
 		RegisterIntegrationRecipes(new ItemStack(ModBlocks.TrilliumOre), new ItemStack(ModItems.TrilliumDust,2));
-		RegisterIntegrationRecipes(new ItemStack(ModBlocks.RaritaniumOre), new ItemStack(ModItems.RaritaniumCrystal,2));
 		RegisterIntegrationRecipes(new ItemStack(ModItems.AdamantineIngot), new ItemStack(ModItems.AdamantineDust));
 		RegisterIntegrationRecipes(new ItemStack(ModItems.CarbonoxIngot), new ItemStack(ModItems.CarbonoxDust));
 		RegisterIntegrationRecipes(new ItemStack(ModItems.TitaniumIngot), new ItemStack(ModItems.TitaniumDust));
