@@ -12,24 +12,30 @@ import com.black_dog20.gadgetron.reference.Reference;
 @Config.LangKey("gadgetron.config.title")
 public class ModConfig {
 	
-	@Config.LangKey("gadgetron.config.RaritaniumPerChunk")
-	public static int RaritaniumPerChunk = 2;
-	
-	@Config.LangKey("gadgetron.config.AdamantinePerChunk")
-	public static int AdamantinePerChunk = 4;
-	
-	@Config.LangKey("gadgetron.config.CarbonoxPerChunk")
-	public static int CarbonoxPerChunk = 3;
-	
-	@Config.LangKey("gadgetron.config.TrilliumPerChunk")
-	public static int TrilliumPerChunk = 5;
-	
-	@Config.LangKey("gadgetron.config.TitaniumPerChunk")
-	public static int TitaniumPerChunk = 8;
-	
-	
-	@Config.LangKey("gadgetron.config.TrilliumCausePoison")
+	@Config.LangKey("gadgetron.config.trilliumCausePoison")
 	public static boolean doesTrilliumCausePoison = true;
+	
+	@Config.LangKey("gadgetron.config.worldgen")
+	public static Worldgen worldgen = new Worldgen();
+	
+	public static class Worldgen {
+	
+		@Config.LangKey("gadgetron.config.worldgen.raritanium")
+		public OreGenConfig raritanium = new OreGenConfig(true, 6, 2, 4, 1, 20);
+		
+		@Config.LangKey("gadgetron.config.worldgen.adamantine")
+		public OreGenConfig adamantine = new OreGenConfig(true, 12, 4, 8, 1, 40);
+		
+		@Config.LangKey("gadgetron.config.worldgen.carbonox")
+		public OreGenConfig carbonox = new OreGenConfig(true, 8, 4, 8, 1, 20);
+		
+		@Config.LangKey("gadgetron.config.worldgen.trillium")
+		public OreGenConfig trillium = new OreGenConfig(true, 10, 4, 8, 1, 60);
+		
+		@Config.LangKey("gadgetron.config.worldgen.titanium")
+		public OreGenConfig titanium = new OreGenConfig(true, 14, 4, 8, 1, 60);
+				
+	}
 	
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 	private static class EventHandler {

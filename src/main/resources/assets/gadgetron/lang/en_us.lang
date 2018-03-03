@@ -66,12 +66,22 @@ tooltip.gadgetron:poisonous=Poisonous
 
 //Configs
 gadgetron.config.title=Gadgetron
-gadgetron.config.RaritaniumPerChunk=Raritanium ore per chunk
-gadgetron.config.AdamantinePerChunk=Adamantine ore per chunk
-gadgetron.config.CarbonoxPerChunk=Carbonox ore per chunk
-gadgetron.config.TrilliumPerChunk=Trillium ore per chunk
-gadgetron.config.TitaniumPerChunk=Titanium ore per chunk
-gadgetron.config.TrilliumCausePoison=Trillium ore cause poison
+gadgetron.config.trilliumCausePoison=Trillium ore cause poison
+gadgetron.config.worldgen=Worldgen
+gadgetron.config.worldgen.raritanium=Raritanium
+gadgetron.config.worldgen.adamantine=Adamantine
+gadgetron.config.worldgen.carbonox=Carbonox
+gadgetron.config.worldgen.trillium=Trillium
+gadgetron.config.worldgen.titanium=Titanium
+
+gadgetron.config.worldgen.generate=Generate ore
+gadgetron.config.worldgen.perChunk=Ore veins per chunk
+gadgetron.config.worldgen.veinMin=Minimum ores in a vein 
+gadgetron.config.worldgen.veinMax=Maximum ores in a vein
+gadgetron.config.worldgen.heightMin=Minimum height a vein can spawn
+gadgetron.config.worldgen.heightMax=Maximum height a vein can spawn
+
+
 
 //Keys
 

@@ -1,7 +1,5 @@
 package com.black_dog20.gadgetron.block;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -10,16 +8,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.black_dog20.gadgetron.client.render.IItemModelRegister;
 import com.black_dog20.gadgetron.client.render.ModelHandler;
 import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
-import com.black_dog20.gadgetron.init.ModBlocks;
-import com.black_dog20.gadgetron.init.ModItems;
 import com.black_dog20.gadgetron.reference.Reference;
 
 public class BlockModOre extends BlockOre implements IItemModelRegister{

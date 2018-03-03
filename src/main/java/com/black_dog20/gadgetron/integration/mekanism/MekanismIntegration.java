@@ -1,7 +1,5 @@
 package com.black_dog20.gadgetron.integration.mekanism;
 
-import com.black_dog20.gadgetron.Gadgetron;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
