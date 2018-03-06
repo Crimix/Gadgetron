@@ -42,7 +42,9 @@ public class Gadgetron {
 	public void init(FMLInitializationEvent event) {
 
 		Recipes.init();
-		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
+		OreGenerator oreGen = new OreGenerator();
+		GameRegistry.registerWorldGenerator(oreGen, 0);
+		MinecraftForge.EVENT_BUS.register(oreGen);
 		logger.info("Initialization Complete!");
 }
 

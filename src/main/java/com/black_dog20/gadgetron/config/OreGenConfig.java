@@ -4,10 +4,9 @@ import net.minecraftforge.common.config.Config;
 
 public class OreGenConfig {
 
-	public OreGenConfig(boolean generate, int perChunk, int veinMin, int veinMax, int hightMin, int hightMax) {
+	public OreGenConfig(boolean generate, int perChunk, int veinMax, int hightMin, int hightMax) {
 		this.generate = generate;
 		this.perChunk = perChunk;
-		this.veinMin = veinMin;
 		this.veinMax = veinMax;
 		this.heightMin = hightMin;
 		this.heightMax = hightMax;
@@ -20,10 +19,6 @@ public class OreGenConfig {
 	@Config.RangeInt(min = 1, max = 30)
 	public int perChunk = 6;
 
-	@Config.LangKey("gadgetron.config.worldgen.veinMin")
-	@Config.RangeInt(min = 2, max = 20)
-	public int veinMin = 2;
-
 	@Config.LangKey("gadgetron.config.worldgen.veinMax")
 	@Config.RangeInt(min = 2, max = 20)
 	public int veinMax = 4;
@@ -35,4 +30,7 @@ public class OreGenConfig {
 	@Config.LangKey("gadgetron.config.worldgen.heightMax")
 	@Config.RangeInt(min = 1, max = 150)
 	public int heightMax = 20;
+	
+	@Config.LangKey("gadgetron.config.worldgen.blacklist")
+	public int[] dimBlacklist = new int[]{-1,1};
 }
