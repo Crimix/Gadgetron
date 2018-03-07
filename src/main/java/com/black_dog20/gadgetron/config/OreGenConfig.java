@@ -20,7 +20,7 @@ public class OreGenConfig {
 	public int perChunk = 6;
 
 	@Config.LangKey("gadgetron.config.worldgen.veinMax")
-	@Config.RangeInt(min = 2, max = 20)
+	@Config.RangeInt(min = 3, max = 20)
 	public int veinMax = 4;
 
 	@Config.LangKey("gadgetron.config.worldgen.heightMin")

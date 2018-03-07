@@ -24,19 +24,19 @@ public class ModConfig {
 	public static class Worldgen {
 	
 		@Config.LangKey("gadgetron.config.worldgen.raritanium")
-		public OreGenConfig raritanium = new OreGenConfig(true, 4, 1, 1, 20);
+		public OreGenConfig raritanium = new OreGenConfig(true, 8, 3, 1, 20);
 		
 		@Config.LangKey("gadgetron.config.worldgen.adamantine")
-		public OreGenConfig adamantine = new OreGenConfig(true, 6, 10, 1, 40);
+		public OreGenConfig adamantine = new OreGenConfig(true, 12, 8, 1, 60);
 		
 		@Config.LangKey("gadgetron.config.worldgen.carbonox")
-		public OreGenConfig carbonox = new OreGenConfig(true, 6, 4, 1, 30);
+		public OreGenConfig carbonox = new OreGenConfig(true, 10, 6, 1, 30);
 		
 		@Config.LangKey("gadgetron.config.worldgen.trillium")
-		public OreGenConfig trillium = new OreGenConfig(true, 6, 4, 1, 60);
+		public OreGenConfig trillium = new OreGenConfig(true, 12, 6, 1, 40);
 		
 		@Config.LangKey("gadgetron.config.worldgen.titanium")
-		public OreGenConfig titanium = new OreGenConfig(true, 10, 4, 1, 60);
+		public OreGenConfig titanium = new OreGenConfig(true, 12, 10, 20, 60);
 		
 		@Config.LangKey("gadgetron.config.worldgen.retrogen")
 		public boolean retrogen = false;

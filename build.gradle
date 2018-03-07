@@ -34,6 +34,10 @@ minecraft {
 	}
 	
     mappings = mcp_mappings
+    
+    
+    replace "@VERSION@", project.version
+    replaceIn "src/main/java/com/black_dog20/gadgetron/reference/Reference.java"
 }
 
 repositories {
