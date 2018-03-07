@@ -2,9 +2,7 @@ package com.black_dog20.gadgetron.worldgen;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 
-import scala.actors.threadpool.Arrays;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,8 +11,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderEnd;
-import net.minecraft.world.gen.ChunkProviderHell;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.fml.common.IWorldGenerator;

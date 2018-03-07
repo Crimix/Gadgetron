@@ -5,8 +5,6 @@ import java.util.stream.IntStream;
 
 import net.minecraft.util.math.ChunkPos;
 
-import com.black_dog20.gadgetron.config.ModConfig;
-
 public class Helper {
 
 	public static int GetRandonBetween(Random random, int min, int max){
