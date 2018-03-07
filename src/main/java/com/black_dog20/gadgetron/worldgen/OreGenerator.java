@@ -84,7 +84,7 @@ public class OreGenerator implements IWorldGenerator{
 	}
 
 	@SubscribeEvent
-	public void chunkLoad(ChunkDataEvent.Load event)
+	public void onChunkLoad(ChunkDataEvent.Load event)
 	{
 		int dimension = event.getWorld().provider.getDimension();
 		if((!event.getData().getCompoundTag(Reference.MOD_NAME).hasKey("Gen")) && ModConfig.worldgen.retrogen){
@@ -95,7 +95,7 @@ public class OreGenerator implements IWorldGenerator{
 	}
 
 	@SubscribeEvent
-	public void serverWorldTick(TickEvent.WorldTickEvent event)
+	public void onServerWorldTick(TickEvent.WorldTickEvent event)
 	{
 		if(event.side==Side.CLIENT || event.phase==TickEvent.Phase.START)
 			return;
