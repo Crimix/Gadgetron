@@ -18,15 +18,17 @@ import com.black_dog20.gadgetron.init.ModBlocks;
 
 public class EventHandler {
 
-	
+
 	@SubscribeEvent
 	public void Tool(ItemTooltipEvent event) {
 		if(event.getItemStack().getItem() instanceof IElementType){
 			switch (((IElementType) event.getItemStack().getItem()).getElementType()) {
 			case POSION:
-				TextComponentTranslation component = new TextComponentTranslation("tooltip.gadgetron:poisonous");
-				component.getStyle().setColor(TextFormatting.GREEN);
-				event.getToolTip().add(1,component.getFormattedText());
+				if(ModConfig.doesTrilliumWeaponsCausePoison){
+					TextComponentTranslation component = new TextComponentTranslation("tooltip.gadgetron:poisonous");
+					component.getStyle().setColor(TextFormatting.GREEN);
+					event.getToolTip().add(1,component.getFormattedText());
+				}
 				break;
 
 			default:
@@ -34,24 +36,26 @@ public class EventHandler {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onHurt(LivingAttackEvent event){
-		if(event.getSource().getTrueSource() instanceof EntityPlayer){
-			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-			if(player.getHeldItemMainhand().getItem() instanceof IElementType){
-				switch (((IElementType) player.getHeldItemMainhand().getItem()).getElementType()) {
-				case POSION:
-					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 600));
-					break;
+		if(ModConfig.doesTrilliumWeaponsCausePoison){
+			if(event.getSource().getTrueSource() instanceof EntityPlayer){
+				EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
+				if(player.getHeldItemMainhand().getItem() instanceof IElementType){
+					switch (((IElementType) player.getHeldItemMainhand().getItem()).getElementType()) {
+					case POSION:
+						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 600));
+						break;
 
-				default:
-					break;
+					default:
+						break;
+					}
 				}
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onUpdate(LivingUpdateEvent event){
 		if(ModConfig.doesTrilliumCausePoison){
@@ -63,6 +67,6 @@ public class EventHandler {
 			}
 		}
 	}
-	
-	
+
+
 }

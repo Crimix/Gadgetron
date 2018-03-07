@@ -15,6 +15,9 @@ public class ModConfig {
 	@Config.LangKey("gadgetron.config.trilliumCausePoison")
 	public static boolean doesTrilliumCausePoison = true;
 	
+	@Config.LangKey("gadgetron.config.trilliumWeaponsCausePoison")
+	public static boolean doesTrilliumWeaponsCausePoison = true;
+	
 	@Config.LangKey("gadgetron.config.worldgen")
 	public static Worldgen worldgen = new Worldgen();
 	

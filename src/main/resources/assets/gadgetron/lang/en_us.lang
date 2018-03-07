@@ -37,12 +37,12 @@ item.gadgetron:titaniumhoe.name=Titanium Hoe
 item.gadgetron:titaniumshovel.name=Titanium Shovel
 
 //Info Items
-item.gadgetron:trilliumpickaxe.info=On contact with the pickaxe head applies §2Poison II§r for 30 seconds
-item.gadgetron:trilliumaxe.info=On contact with the axe head applies §2Poison II§r for 30 seconds
-item.gadgetron:trilliumsword.info=On contact with the sword blade applies §2Poison II§r for 30 seconds
-item.gadgetron:trilliumhoe.info=On contact with the hoe head applies §2Poison II§r for 30 seconds
-item.gadgetron:trilliumshovel.info=On contact with the shovel head applies §2Poison II§r for 30 seconds
-tile.gadgetron:trilliumore.info=Carrying this ore will apply the §2Poison I§r effect
+item.gadgetron:trilliumpickaxe.poison=On contact with the pickaxe head applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumaxe.poison=On contact with the axe head applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumsword.poison=On contact with the sword blade applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumhoe.poison=On contact with the hoe head applies §2Poison II§r for 30 seconds
+item.gadgetron:trilliumshovel.poison=On contact with the shovel head applies §2Poison II§r for 30 seconds
+tile.gadgetron:trilliumore.poisonous=Carrying this ore will apply the §2Poison I§r effect
 tile.gadgetron:raritaniumcrystal.info=A rare hard crystal has the same durability as Adamantine
 item.gadgetron:adamantineingot.info=A hard metal has the same durability as Raritanium
 item.gadgetron:carbonoxingot.info=A very hard metal, its durability is far superior to Adamantine, Raritanium and Trillium
@@ -67,12 +67,16 @@ tooltip.gadgetron:poisonous=Poisonous
 //Configs
 gadgetron.config.title=Gadgetron
 gadgetron.config.trilliumCausePoison=Trillium ore cause poison
+gadgetron.config.trilliumWeaponsCausePoison=Trillium tools cause poison
 gadgetron.config.worldgen=Worldgen
 gadgetron.config.worldgen.raritanium=Raritanium
 gadgetron.config.worldgen.adamantine=Adamantine
 gadgetron.config.worldgen.carbonox=Carbonox
 gadgetron.config.worldgen.trillium=Trillium
 gadgetron.config.worldgen.titanium=Titanium
+gadgetron.config.worldgen.retrogen=Retrogen ores
+gadgetron.config.worldgen.retrogen.tooltip=Only works once for every chunk
+gadgetron.config.worldgen.logretrogen=Log retrogen messages
 
 gadgetron.config.worldgen.generate=Generate ore
 gadgetron.config.worldgen.perChunk=Ore veins per chunk

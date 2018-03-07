@@ -11,6 +11,7 @@ import mezz.jei.api.ingredients.IModIngredientRegistration;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
 
@@ -44,16 +45,27 @@ public class JEIPlugin extends BlankModPlugin{
 		list.add(new ItemStack(ModItems.CarbonoxIngot));
 		list.add(new ItemStack(ModItems.TrilliumIngot));
 		
+		RegisterInfo(registry, list, ".info");
+		if(ModConfig.doesTrilliumWeaponsCausePoison){
+			RegisterInfo(registry, list, ".poison");
+		}
+		if(ModConfig.doesTrilliumCausePoison){
+			RegisterInfo(registry, list, ".poisonous");
+		}
+		
+	}
+	
+	private void RegisterInfo(IModRegistry registry, List<ItemStack> list, String postfix){
 		for(ItemStack stack : list){
-			String info = getFormattedString(stack);
+			String info = getFormattedString(stack, postfix);
 			if(info != null){
 				registry.addIngredientInfo(stack, ItemStack.class, info);
 			}
 		}
 	}
 	
-	private String getFormattedString(ItemStack stack){
-		String res = I18n.format(stack.getItem().getUnlocalizedName()+".info");
+	private String getFormattedString(ItemStack stack, String postfix){
+		String res = I18n.format(stack.getItem().getUnlocalizedName()+ postfix);
 		if(res.contains(stack.getItem().getUnlocalizedName())){
 			return null;
 		}
