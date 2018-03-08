@@ -6,6 +6,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.reference.Reference;
 
 @Config(modid = Reference.MOD_ID)
@@ -57,6 +58,7 @@ public class ModConfig {
 		public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
 			if (event.getModID().equals(Reference.MOD_ID)) {
 				ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
+				Gadgetron.instance.CheckOreReplaceBlocksAreCorrect();
 			}
 		}
 	}

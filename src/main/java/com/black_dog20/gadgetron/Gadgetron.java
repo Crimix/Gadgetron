@@ -56,30 +56,30 @@ public class Gadgetron {
 	}
 	
 	
-	private void CheckOreReplaceBlocksAreCorrect(){
+	public void CheckOreReplaceBlocksAreCorrect(){
 		boolean result = true;
 		if((Block.getBlockFromName(ModConfig.worldgen.raritanium.replaceBlock) == null)){
 			result = false;
-			logger.error("Replace block for raritanium ore is invaild");
+			logger.error("Replace block (" + ModConfig.worldgen.raritanium.replaceBlock + ") for raritanium ore does not exist");
 		}
 		if((Block.getBlockFromName(ModConfig.worldgen.adamantine.replaceBlock) == null)){
 			result = false;
-			logger.error("Replace block for adamantine ore is invaild");
+			logger.error("Replace block (" + ModConfig.worldgen.adamantine.replaceBlock + ") for adamantine ore does not exist");
 		}
 		if((Block.getBlockFromName(ModConfig.worldgen.carbonox.replaceBlock) == null)){
 			result = false;
-			logger.error("Replace block for carbonox ore is invaild");
+			logger.error("Replace block (" + ModConfig.worldgen.carbonox.replaceBlock + ") for carbonox ore does not exist");
 		}
 		if((Block.getBlockFromName(ModConfig.worldgen.trillium.replaceBlock) == null)){
 			result = false;
-			logger.error("Replace block for trillium ore is invaild");
+			logger.error("Replace block (" + ModConfig.worldgen.trillium.replaceBlock + ") for trillium ore does not exist");
 		}
 		if((Block.getBlockFromName(ModConfig.worldgen.titanium.replaceBlock) == null)){
 			result = false;
-			logger.error("Replace block for titanium ore is invaild");
+			logger.error("Replace block (" + ModConfig.worldgen.titanium.replaceBlock + ") for titanium ore does not exist");
 		}
 		if(!result){
-			logger.error("One ore more replace blocks are invaild, worldgen will not be done for Gadgetron");
+			logger.error("One or more replace blocks are invaild, worldgen will not be done for Gadgetron");
 		}
 		OreGenerator.correctReplaceBlocks = result;
 	}
