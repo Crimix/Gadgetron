@@ -84,7 +84,10 @@ gadgetron.config.worldgen.veinMin=Minimum ores in a vein
 gadgetron.config.worldgen.veinMax=Maximum ores in a vein
 gadgetron.config.worldgen.heightMin=Minimum height a vein can spawn
 gadgetron.config.worldgen.heightMax=Maximum height a vein can spawn
-
+gadgetron.config.worldgen.blacklist=Dimension blacklist
+gadgetron.config.worldgen.blacklist.tooltip=Input dimension ids 
+gadgetron.config.worldgen.replaceBlock=Ore replaces block type
+gadgetron.config.worldgen.replaceBlock.tooltip=Input only one block, using mod_id:name or minecraft:name
 
 
 //Keys

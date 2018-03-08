@@ -1,5 +1,6 @@
 package com.black_dog20.gadgetron;
 
+import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -11,6 +12,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Logger;
 
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.handler.EventHandler;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
@@ -40,7 +42,6 @@ public class Gadgetron {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-
 		Recipes.init();
 		OreGenerator oreGen = new OreGenerator();
 		GameRegistry.registerWorldGenerator(oreGen, 0);
@@ -50,10 +51,38 @@ public class Gadgetron {
 
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
+		CheckOreReplaceBlocksAreCorrect();
 		logger.info("Post Initialization Complete!");
 	}
 	
+	
+	private void CheckOreReplaceBlocksAreCorrect(){
+		boolean result = true;
+		if((Block.getBlockFromName(ModConfig.worldgen.raritanium.replaceBlock) == null)){
+			result = false;
+			logger.error("Replace block for raritanium ore is invaild");
+		}
+		if((Block.getBlockFromName(ModConfig.worldgen.adamantine.replaceBlock) == null)){
+			result = false;
+			logger.error("Replace block for adamantine ore is invaild");
+		}
+		if((Block.getBlockFromName(ModConfig.worldgen.carbonox.replaceBlock) == null)){
+			result = false;
+			logger.error("Replace block for carbonox ore is invaild");
+		}
+		if((Block.getBlockFromName(ModConfig.worldgen.trillium.replaceBlock) == null)){
+			result = false;
+			logger.error("Replace block for trillium ore is invaild");
+		}
+		if((Block.getBlockFromName(ModConfig.worldgen.titanium.replaceBlock) == null)){
+			result = false;
+			logger.error("Replace block for titanium ore is invaild");
+		}
+		if(!result){
+			logger.error("One ore more replace blocks are invaild, worldgen will not be done for Gadgetron");
+		}
+		OreGenerator.correctReplaceBlocks = result;
+	}
 	
 	private void registerOreDict(){
 		OreDictionary.registerOre("dustAdamantine", ModItems.AdamantineDust);

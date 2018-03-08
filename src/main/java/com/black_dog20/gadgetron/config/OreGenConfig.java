@@ -33,4 +33,7 @@ public class OreGenConfig {
 	
 	@Config.LangKey("gadgetron.config.worldgen.blacklist")
 	public int[] dimBlacklist = new int[]{-1,1};
+	
+	@Config.LangKey("gadgetron.config.worldgen.replaceBlock")
+	public String replaceBlock = "minecraft:stone";
 }
