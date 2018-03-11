@@ -3,21 +3,6 @@ package com.black_dog20.gadgetron.worldgen;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraftforge.event.world.ChunkDataEvent;
-import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-
 import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.config.OreGenConfig;
@@ -25,6 +10,21 @@ import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.utility.Helper;
 import com.google.common.collect.ArrayListMultimap;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.event.world.ChunkDataEvent;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class OreGenerator implements IWorldGenerator{
 

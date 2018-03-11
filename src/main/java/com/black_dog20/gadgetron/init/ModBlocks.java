@@ -1,14 +1,17 @@
 package com.black_dog20.gadgetron.init;
 
-import net.minecraft.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
-
 import com.black_dog20.gadgetron.block.BlockModOre;
 import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
 import com.black_dog20.gadgetron.reference.Reference;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ModBlocks {
@@ -30,5 +33,25 @@ public class ModBlocks {
 		r.register(TitaniumOre);
 		
 
+	}
+	
+	@SubscribeEvent
+	public static void registerItemBlocks(RegistryEvent.Register<Item> evt) {
+		IForgeRegistry<Item> r = evt.getRegistry();
+		r.register(new ItemBlock(RaritaniumCrystal).setRegistryName(RaritaniumCrystal.getRegistryName()));
+		r.register(new ItemBlock(AdamantineOre).setRegistryName(AdamantineOre.getRegistryName()));
+		r.register(new ItemBlock(CarbonoxOre).setRegistryName(CarbonoxOre.getRegistryName()));
+		r.register(new ItemBlock(TrilliumOre).setRegistryName(TrilliumOre.getRegistryName()));
+		r.register(new ItemBlock(TitaniumOre).setRegistryName(TitaniumOre.getRegistryName()));
+		
+		registerOreDict();
+	}
+
+	private static void registerOreDict() {
+		OreDictionary.registerOre("crystalRaritanium", ModBlocks.RaritaniumCrystal);		
+		OreDictionary.registerOre("oreAdamantine", ModBlocks.AdamantineOre);
+		OreDictionary.registerOre("oreCarbonox", ModBlocks.CarbonoxOre);
+		OreDictionary.registerOre("oreTitanium", ModBlocks.TitaniumOre);
+		OreDictionary.registerOre("oreTrillium", ModBlocks.TrilliumOre);
 	}
 }

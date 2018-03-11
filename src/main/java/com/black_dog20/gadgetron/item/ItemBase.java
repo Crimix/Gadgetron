@@ -2,19 +2,21 @@ package com.black_dog20.gadgetron.item;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-//import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import javax.annotation.Nullable;
 
 import com.black_dog20.gadgetron.client.render.IItemModelRegister;
 import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
 import com.black_dog20.gadgetron.reference.Reference;
+
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBase extends Item implements IItemModelRegister{
 
@@ -33,9 +35,8 @@ public class ItemBase extends Item implements IItemModelRegister{
     }
 
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack item, EntityPlayer player, List<String> list, boolean bool, String text) {
-		super.addInformation(item, player, list, bool);
-		list.add(text);
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn, String text) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		tooltip.add(text);
 	}
-
 }

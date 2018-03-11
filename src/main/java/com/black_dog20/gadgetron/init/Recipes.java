@@ -1,13 +1,12 @@
 package com.black_dog20.gadgetron.init;
 
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import com.black_dog20.gadgetron.integration.mekanism.MekanismIntegration;
 import com.black_dog20.gadgetron.integration.te.ThermalExpansionIntegration;
 import com.black_dog20.gadgetron.reference.Reference;
+
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class Recipes {
@@ -32,7 +31,7 @@ public class Recipes {
 		RegisterIntegrationRecipes(new ItemStack(ModItems.TitaniumIngot), new ItemStack(ModItems.TitaniumDust));
 		RegisterIntegrationRecipes(new ItemStack(ModItems.TrilliumIngot), new ItemStack(ModItems.TrilliumDust));
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumRod, new Object[]{"c","c", 'c', "crystalRaritanium"}));
+		/*GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumRod, new Object[]{"c","c", 'c', "crystalRaritanium"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumAxe, new Object[]{"ii ","is "," s ", 'i', "crystalRaritanium", 's', ModItems.RaritaniumRod}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumHoe, new Object[]{"ii "," s "," s ", 'i', "crystalRaritanium", 's', ModItems.RaritaniumRod}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumPickaxe, new Object[]{"iii"," s "," s ", 'i', "crystalRaritanium", 's', ModItems.RaritaniumRod}));
@@ -58,6 +57,7 @@ public class Recipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumPickaxe, new Object[]{"iii"," s "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumShovel, new Object[]{" i "," s "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumSword, new Object[]{" i "," i "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
+	*/
 	}
 	
 	

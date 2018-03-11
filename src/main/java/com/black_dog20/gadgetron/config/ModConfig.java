@@ -1,13 +1,13 @@
 package com.black_dog20.gadgetron.config;
 
+import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.reference.Reference;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.black_dog20.gadgetron.Gadgetron;
-import com.black_dog20.gadgetron.reference.Reference;
 
 @Config(modid = Reference.MOD_ID)
 @Config.LangKey("gadgetron.config.title")
