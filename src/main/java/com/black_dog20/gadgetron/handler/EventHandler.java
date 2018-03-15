@@ -10,6 +10,8 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.black_dog20.gadgetron.api.IElementType;
 import com.black_dog20.gadgetron.config.ModConfig;
@@ -19,6 +21,7 @@ import com.black_dog20.gadgetron.init.ModBlocks;
 public class EventHandler {
 
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void Tool(ItemTooltipEvent event) {
 		if(event.getItemStack().getItem() instanceof IElementType){
@@ -45,7 +48,7 @@ public class EventHandler {
 				if(player.getHeldItemMainhand().getItem() instanceof IElementType){
 					switch (((IElementType) player.getHeldItemMainhand().getItem()).getElementType()) {
 					case POSION:
-						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 600));
+						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 600,1));
 						break;
 
 					default:
@@ -62,7 +65,7 @@ public class EventHandler {
 			if(event.getEntity() instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer) event.getEntity();
 				if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre))){
-					player.addPotionEffect(new PotionEffect(MobEffects.POISON, 40,1));
+					player.addPotionEffect(new PotionEffect(MobEffects.POISON, 40));
 				}
 			}
 		}
