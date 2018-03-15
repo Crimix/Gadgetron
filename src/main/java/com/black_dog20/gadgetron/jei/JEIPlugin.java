@@ -7,28 +7,17 @@ import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
 
-import mezz.jei.api.BlankModPlugin;
 import mezz.jei.api.IJeiRuntime;
+import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 @mezz.jei.api.JEIPlugin
-public class JEIPlugin extends BlankModPlugin{
-
-	@Override
-	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void registerIngredients(IModIngredientRegistration registry) {
-		// TODO Auto-generated method stub
-		
-	}
+public class JEIPlugin implements IModPlugin {
 
 	@Override
 	public void register(IModRegistry registry) {
@@ -73,8 +62,22 @@ public class JEIPlugin extends BlankModPlugin{
 			return res;
 		}
 	}
+	
+	@Override
+	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
+		// TODO Auto-generated method stub
 		
-
+	}
+	@Override
+	public void registerIngredients(IModIngredientRegistration registry) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registry) {
+		// TODO Auto-generated method stub
+		
+	}
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
 		// TODO Auto-generated method stub
