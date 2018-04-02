@@ -17,10 +17,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModBlocks {
 
 	public static BlockModOre RaritaniumCrystal = (BlockModOre) new BlockRaritaniumCrystal().setHardness(4.0F);
-	public static BlockModOre AdamantineOre = (BlockModOre) new BlockModOre("adamantineOre").setHardness(3.0F);
-	public static BlockModOre CarbonoxOre = (BlockModOre) new BlockModOre("carbonoxOre").setHardness(3.0F);
-	public static BlockModOre TrilliumOre = (BlockModOre) new BlockModOre("trilliumOre").setHardness(3.0F);
-	public static BlockModOre TitaniumOre = (BlockModOre) new BlockModOre("titaniumOre").setHardness(3.0F);
+	public static BlockModOre AdamantineOre = (BlockModOre) new BlockModOre("adamantineOre",2).setHardness(3.0F);
+	public static BlockModOre CarbonoxOre = (BlockModOre) new BlockModOre("carbonoxOre",2).setHardness(3.0F);
+	public static BlockModOre TrilliumOre = (BlockModOre) new BlockModOre("trilliumOre",2).setHardness(3.0F);
+	public static BlockModOre TitaniumOre = (BlockModOre) new BlockModOre("titaniumOre",2).setHardness(3.0F);
 	
 	
 	@SubscribeEvent

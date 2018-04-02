@@ -65,7 +65,7 @@ public class EventHandler {
 			if(event.getEntity() instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer) event.getEntity();
 				if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre))){
-					player.addPotionEffect(new PotionEffect(MobEffects.POISON, 40));
+					//player.addPotionEffect(new PotionEffect(MobEffects.POISON, 100));
 				}
 			}
 		}
