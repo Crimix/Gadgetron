@@ -25,9 +25,9 @@ import com.black_dog20.gadgetron.reference.Reference;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ModItems {
 	
-	public static ToolMaterial Carbonox = EnumHelper.addToolMaterial("carbonox", 3, 4000, 10.0F, 6.0F, 22).setRepairItem(new ItemStack(ModItems.CarbonoxIngot));
-	public static ToolMaterial Trillium = EnumHelper.addToolMaterial("trillium", 3, 3000, 8.0F, 4.0F, 14).setRepairItem(new ItemStack(ModItems.TrilliumIngot));
-	public static ToolMaterial Raritanium = EnumHelper.addToolMaterial("raritanium", 3, 2000, 10.0F, 5.0F, 22).setRepairItem(new ItemStack(ModBlocks.RaritaniumCrystal));
+	public static ToolMaterial Carbonox = EnumHelper.addToolMaterial("carbonox", 3, 3000, 10.0F, 6.0F, 22).setRepairItem(new ItemStack(ModItems.CarbonoxIngot));
+	public static ToolMaterial Trillium = EnumHelper.addToolMaterial("trillium", 3, 2500, 8.0F, 4.0F, 14).setRepairItem(new ItemStack(ModItems.TrilliumIngot));
+	public static ToolMaterial Raritanium = EnumHelper.addToolMaterial("raritanium", 3, 2000, 12.0F, 5.0F, 22).setRepairItem(new ItemStack(ModBlocks.RaritaniumCrystal));
 	public static ToolMaterial Adamantine = EnumHelper.addToolMaterial("adamantine", 3, 2000, 8.0F, 4.0F, 15).setRepairItem(new ItemStack(ModItems.AdamantineIngot));
 	public static ToolMaterial Titanium = EnumHelper.addToolMaterial("titanium", 3, 750, 6.0F, 3.0F, 14).setRepairItem(new ItemStack(ModItems.TitaniumIngot));
 	
