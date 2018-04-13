@@ -1,11 +1,13 @@
 package com.black_dog20.gadgetron.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
+import com.black_dog20.gadgetron.block.BlockBase;
 import com.black_dog20.gadgetron.block.BlockModOre;
 import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
 import com.black_dog20.gadgetron.reference.Reference;
@@ -19,6 +21,11 @@ public class ModBlocks {
 	public static BlockModOre TrilliumOre = (BlockModOre) new BlockModOre("trilliumOre",2).setHardness(3.0F);
 	public static BlockModOre TitaniumOre = (BlockModOre) new BlockModOre("titaniumOre",2).setHardness(3.0F);
 	
+	public static BlockBase AdamantineBlock = new BlockBase(Material.IRON, "adamantineBlock");
+	public static BlockBase CarbonoxBlock = new BlockBase(Material.IRON, "carbonoxBlock");
+	public static BlockBase TrilliumBlock = new BlockBase(Material.IRON, "trilliumBlock");
+	public static BlockBase TitaniumBlock = new BlockBase(Material.IRON, "titaniumBlock");
+	
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -28,6 +35,10 @@ public class ModBlocks {
 		r.register(CarbonoxOre);
 		r.register(TrilliumOre);
 		r.register(TitaniumOre);
+		r.register(AdamantineBlock);
+		r.register(CarbonoxBlock);
+		r.register(TrilliumBlock);
+		r.register(TitaniumBlock);
 		
 
 	}
