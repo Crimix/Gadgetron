@@ -1,10 +1,12 @@
 package com.black_dog20.gadgetron.init;
 
+import com.black_dog20.gadgetron.block.BlockBase;
 import com.black_dog20.gadgetron.block.BlockModOre;
 import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
 import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -22,6 +24,11 @@ public class ModBlocks {
 	public static BlockModOre TrilliumOre = (BlockModOre) new BlockModOre("trilliumOre",2).setHardness(3.0F);
 	public static BlockModOre TitaniumOre = (BlockModOre) new BlockModOre("titaniumOre",2).setHardness(3.0F);
 	
+	public static BlockBase AdamantineBlock = (BlockBase) new BlockBase(Material.IRON, "adamantineBlock").setHardness(1.0F);
+	public static BlockBase CarbonoxBlock = (BlockBase) new BlockBase(Material.IRON,"carbonoxBlock").setHardness(1.0F);
+	public static BlockBase TrilliumBlock = (BlockBase) new BlockBase(Material.IRON,"trilliumBlock").setHardness(1.0F);
+	public static BlockBase TitaniumBlock = (BlockBase) new BlockBase(Material.IRON,"titaniumBlock").setHardness(1.0F);
+	
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -32,7 +39,10 @@ public class ModBlocks {
 		r.register(TrilliumOre);
 		r.register(TitaniumOre);
 		
-
+		r.register(AdamantineBlock);
+		r.register(CarbonoxBlock);
+		r.register(TrilliumBlock);
+		r.register(TitaniumBlock);
 	}
 	
 	@SubscribeEvent
@@ -44,6 +54,11 @@ public class ModBlocks {
 		r.register(new ItemBlock(TrilliumOre).setRegistryName(TrilliumOre.getRegistryName()));
 		r.register(new ItemBlock(TitaniumOre).setRegistryName(TitaniumOre.getRegistryName()));
 		
+		r.register(new ItemBlock(AdamantineBlock).setRegistryName(AdamantineBlock.getRegistryName()));
+		r.register(new ItemBlock(CarbonoxBlock).setRegistryName(CarbonoxBlock.getRegistryName()));
+		r.register(new ItemBlock(TrilliumBlock).setRegistryName(TrilliumBlock.getRegistryName()));
+		r.register(new ItemBlock(TitaniumBlock).setRegistryName(TitaniumBlock.getRegistryName()));
+		
 		registerOreDict();
 	}
 
@@ -53,5 +68,10 @@ public class ModBlocks {
 		OreDictionary.registerOre("oreCarbonox", ModBlocks.CarbonoxOre);
 		OreDictionary.registerOre("oreTitanium", ModBlocks.TitaniumOre);
 		OreDictionary.registerOre("oreTrillium", ModBlocks.TrilliumOre);
+		
+		OreDictionary.registerOre("blockAdamantine", ModBlocks.AdamantineBlock);
+		OreDictionary.registerOre("blockCarbonox", ModBlocks.CarbonoxBlock);
+		OreDictionary.registerOre("blockTitanium", ModBlocks.TrilliumBlock);
+		OreDictionary.registerOre("blockTrillium", ModBlocks.TitaniumBlock);
 	}
 }

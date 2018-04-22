@@ -1,0 +1,12 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "gadgetron:trilliumblock"
+		}
+	],
+	"result": {
+		"item": "gadgetron:trilliumingot",
+		"count": 9
+	}
+}

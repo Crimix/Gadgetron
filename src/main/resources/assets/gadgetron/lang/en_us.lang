@@ -55,6 +55,10 @@ tile.gadgetron:adamantineore.name=Adamantine Ore
 tile.gadgetron:carbonoxore.name=Carbonox Ore
 tile.gadgetron:trilliumore.name=Trillium Ore
 tile.gadgetron:titaniumore.name=Titanium Ore
+tile.gadgetron:adamantineblock.name=Adamantine Block
+tile.gadgetron:carbonoxblock.name=Carbonox Block
+tile.gadgetron:trilliumblock.name=Trillium Block
+tile.gadgetron:titaniumblock.name=Titanium Block
 
 //Entities
 

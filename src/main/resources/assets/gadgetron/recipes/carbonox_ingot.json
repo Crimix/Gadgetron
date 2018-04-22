@@ -1,0 +1,12 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "gadgetron:carbonoxblock"
+		}
+	],
+	"result": {
+		"item": "gadgetron:carbonoxingot",
+		"count": 9
+	}
+}
