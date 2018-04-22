@@ -21,10 +21,10 @@ public class ModBlocks {
 	public static BlockModOre TrilliumOre = (BlockModOre) new BlockModOre("trilliumOre",2).setHardness(3.0F);
 	public static BlockModOre TitaniumOre = (BlockModOre) new BlockModOre("titaniumOre",2).setHardness(3.0F);
 	
-	public static BlockBase AdamantineBlock = new BlockBase(Material.IRON, "adamantineBlock");
-	public static BlockBase CarbonoxBlock = new BlockBase(Material.IRON, "carbonoxBlock");
-	public static BlockBase TrilliumBlock = new BlockBase(Material.IRON, "trilliumBlock");
-	public static BlockBase TitaniumBlock = new BlockBase(Material.IRON, "titaniumBlock");
+	public static BlockBase AdamantineBlock = new BlockBase(Material.ROCK, "adamantineBlock");
+	public static BlockBase CarbonoxBlock = new BlockBase(Material.ROCK, "carbonoxBlock");
+	public static BlockBase TrilliumBlock = new BlockBase(Material.ROCK, "trilliumBlock");
+	public static BlockBase TitaniumBlock = new BlockBase(Material.ROCK, "titaniumBlock");
 	
 	
 	@SubscribeEvent
