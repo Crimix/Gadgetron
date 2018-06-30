@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -14,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.handler.EventHandler;
+import com.black_dog20.gadgetron.handler.GuiHandler;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
 import com.black_dog20.gadgetron.init.Recipes;
@@ -30,7 +32,7 @@ public class Gadgetron {
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static IProxy Proxy;
-
+	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
@@ -42,6 +44,7 @@ public class Gadgetron {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		Recipes.init();
 		OreGenerator oreGen = new OreGenerator();
 		GameRegistry.registerWorldGenerator(oreGen, 0);
