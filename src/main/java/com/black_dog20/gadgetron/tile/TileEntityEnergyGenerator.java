@@ -11,6 +11,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -18,7 +22,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyFluidBase {
 
 	
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), 10000, true);
+		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), new FluidTank(new FluidStack(FluidRegistry.WATER, 1000) ,10000), true);
 	}
 	
 	@Override
@@ -50,5 +54,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyFluidBase {
 	public Container getContainer(InventoryPlayer inventory) {
 		return new ContainerEnergyGenerator(inventory, this);
 	}
+	
+
 
 }

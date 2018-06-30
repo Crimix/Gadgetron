@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fluids.FluidStack;
 
 public abstract class TileEntityEnergyBase extends TileEntityBase {
 
@@ -41,5 +42,18 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		this.energyContainer.writeToNBT(nbt);
 		return super.writeToNBT(nbt);
+	}
+	
+	public int getStoredEnergy() {
+		return energyContainer.getEnergyStored();
+	}
+	
+	public int getStoredEnergyPercentage() {
+		double t = (((double) energyContainer.getEnergyStored()) / energyContainer.getMaxEnergyStored()) *100;
+		return (int) Math.ceil(t);
+	}
+	
+	public int getEnergyCapacity() {
+		return energyContainer.getMaxEnergyStored();
 	}
 }

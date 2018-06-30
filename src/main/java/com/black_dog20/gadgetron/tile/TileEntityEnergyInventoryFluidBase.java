@@ -10,6 +10,7 @@ import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
@@ -50,4 +51,20 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
         exposeTank = nbt.getBoolean("exposeTank");
     }
 
+	public FluidStack getFluid() {
+		return tank.getFluid();
+	}
+	
+	public int getStoredFluid() {
+		return tank.getFluidAmount();
+	}
+	
+	public int getStoredFluidPercentage() {
+		double t = (((double) tank.getFluidAmount()) / tank.getCapacity()) *100;
+		return (int) Math.ceil(t);
+	}
+	
+	public int getFluidCapacity() {
+		return tank.getCapacity();
+	}
 }
