@@ -71,11 +71,6 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		drawProgressVertical(4, flame); //Flame
 		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
-		FluidStack fluid = tile.getFluid();
-	    if( fluid != null && fluid.amount != 0 ) {
-	    	ResourceLocation location = tile.getFluid().getFluid().getStill();
-	        TextureAtlasSprite sprite = mc.getTextureMapBlocks().getAtlasSprite( location.toString() );
-			drawFluid(fluid.amount, tile.getFluidCapacity(), sprite, tank);
-	    }
+		drawFluid(tile.getFluid(), tile.getFluidCapacity(), tank);
 	}	
 }

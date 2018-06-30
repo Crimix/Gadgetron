@@ -22,7 +22,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyFluidBase {
 
 	
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), new FluidTank(new FluidStack(FluidRegistry.WATER, 1000) ,10000), true);
+		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), new FluidTank(new FluidStack(FluidRegistry.LAVA, 1000) ,10000), true);
 	}
 	
 	@Override
