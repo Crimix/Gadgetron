@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public abstract class GuiContainerBase extends GuiContainer{
@@ -40,16 +39,15 @@ public abstract class GuiContainerBase extends GuiContainer{
 			this.drawTexturedModalRect(k + e.x, l + e.y, e.textureX, e.textureY, p + 1, e.height);
 	}
 	
-	protected void drawFluid(FluidStack fluid, int cap, GuiElement e) {
+	protected void drawFluid(FluidStack fluid, int percentage, GuiElement e) {
 		if( fluid != null && fluid.amount != 0 ) {
-			int fluidAmount = fluid.amount;
 			int k = (this.width - this.xSize) / 2;
 			int l = (this.height - this.ySize) / 2;
 	    	ResourceLocation location = fluid.getFluid().getStill();
 	        TextureAtlasSprite sprite = mc.getTextureMapBlocks().getAtlasSprite( location.toString() );
 			mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			double oneP = e.height / 100.0;
-			int p = (int) Math.ceil(oneP * (cap / fluidAmount));
+			int p = (int) Math.ceil(oneP * percentage);
 			drawTexturedModalRect(k + e.x+1, l + e.y+e.height+1 - p, sprite, 16, p);
 		}
 	}

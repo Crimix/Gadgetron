@@ -1,12 +1,19 @@
 package com.black_dog20.gadgetron.tile;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
+import com.black_dog20.gadgetron.tile.base.TileEntityEnergyFluidBase;
+import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
 import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -18,16 +25,41 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityEnergyGenerator extends TileEntityEnergyFluidBase {
+public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
+	private int burnTime = 0;
+	private double ticksToBurnfuel = 60.0;
+	private int energyPerTick = 100;
+	private int fuelUse = 10;
 	
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), new FluidTank(new FluidStack(FluidRegistry.LAVA, 1000) ,10000), true);
+		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), 2, false, new FluidTank(new FluidStack(FluidRegistry.LAVA, 1000) ,10000), true);
 	}
 	
 	@Override
 	public void update() {
-		this.energyContainer.receiveEnergyInternal(300, false);
+		if(!this.energyContainer.isFull()) {
+			if(burnTime == 0) {
+				FluidStack fluid = this.tank.drain(fuelUse, false);
+				if(fluid != null && fluid.amount == fuelUse) {
+					this.tank.drain(fuelUse, true);
+					burnTime++;
+					this.energyContainer.receiveEnergyInternal(energyPerTick, false);
+				}
+			}else {
+				if(burnTime % ticksToBurnfuel  == 0) {
+					burnTime = 0;
+				}else {
+					this.energyContainer.receiveEnergyInternal(energyPerTick, false);
+					burnTime++;
+				}
+			}
+			
+		}
+		else {
+			burnTime=0;
+		}
+		
 		if (energyContainer.isEmpty()) {
 			return;
 		}
@@ -55,6 +87,40 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyFluidBase {
 		return new ContainerEnergyGenerator(inventory, this);
 	}
 	
+	public int getProgress() {
+		double t = (burnTime / ticksToBurnfuel) *100;
+		return (int) Math.ceil(t);
+	}
+	
+	public String getRemainingTime() {
+		if(burnTime != 0) {
+			double ticksLeft = ticksToBurnfuel - burnTime;
+			double secs = ticksLeft / 20;
+			int secI = (int) Math.ceil(secs);
+			return Integer.toString(secI) + "s";
+		}else {
+			return null;
+		}
+	}
 
+	public int getEnergyPerTick() {
+		return energyPerTick;
+	}
+	
+	public double getFuelUsePerTick() {
+		return new BigDecimal(fuelUse / ticksToBurnfuel).setScale(2, RoundingMode.HALF_UP).doubleValue();
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		burnTime = nbt.getInteger("burnTime");
+		super.readFromNBT(nbt);
+	}
 
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setInteger("burnTime", burnTime);
+		return super.writeToNBT(nbt);
+	}
+	
 }

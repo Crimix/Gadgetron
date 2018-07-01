@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.tile;
+package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
@@ -9,6 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase {
@@ -47,5 +48,9 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
         super.readFromNBT(nbt);
         inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
         exposeInventory = nbt.getBoolean("exposeInventory");
+    }
+    
+    public ItemStackHandler getInventory() {
+    	return this.inventory;
     }
 }

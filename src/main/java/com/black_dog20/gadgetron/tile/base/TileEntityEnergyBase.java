@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.tile;
+package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
@@ -50,7 +50,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	
 	public int getStoredEnergyPercentage() {
 		double t = (((double) energyContainer.getEnergyStored()) / energyContainer.getMaxEnergyStored()) *100;
-		return (int) Math.ceil(t);
+		return (int) Math.floor(t);
 	}
 	
 	public int getEnergyCapacity() {

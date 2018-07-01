@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.tile;
+package com.black_dog20.gadgetron.tile.base;
 
 
 import javax.annotation.Nullable;

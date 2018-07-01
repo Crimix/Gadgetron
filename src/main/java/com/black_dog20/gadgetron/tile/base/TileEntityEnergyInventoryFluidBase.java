@@ -1,4 +1,7 @@
-package com.black_dog20.gadgetron.tile;
+package com.black_dog20.gadgetron.tile.base;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
@@ -11,23 +14,23 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
-public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
-
+public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnergyInventoryBase{
+	
 	protected FluidTank tank;
 	private boolean exposeTank = true;
-	
-	public TileEntityEnergyFluidBase(CustomEnergyStorage storage, int sizeMB, boolean exposeTank) {
-		super(storage);
+
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int size, boolean exposeInventory, int sizeMB, boolean exposeTank) {
+		super(storage, size, exposeInventory);
 		tank = new FluidTank(sizeMB);
 		this.exposeTank = exposeTank;
 	}
 	
-	public TileEntityEnergyFluidBase(CustomEnergyStorage storage, FluidTank tank, boolean exposeTank) {
-		super(storage);
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int size, boolean exposeInventory, FluidTank tank, boolean exposeTank) {
+		super(storage,size, exposeInventory);
 		this.tank = tank;
 		this.exposeTank = exposeTank;
 	}
-	
+
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
@@ -62,10 +65,14 @@ public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
 	
 	public int getStoredFluidPercentage() {
 		double t = (((double) tank.getFluidAmount()) / tank.getCapacity()) *100;
-		return (int) Math.ceil(t);
+		return (int) Math.floor(t);
 	}
 	
 	public int getFluidCapacity() {
 		return tank.getCapacity();
+	}
+	
+	public FluidTank getTank() {
+		return tank;
 	}
 }

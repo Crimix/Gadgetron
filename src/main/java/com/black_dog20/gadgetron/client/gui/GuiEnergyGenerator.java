@@ -10,6 +10,7 @@ import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +23,8 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/generator.png");
 	private TileEntityEnergyGenerator tile;
 	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
-	private GuiElement flame = new GuiElement("flame", 81, 36, 12, 14, 176, 12);
+	private final InventoryPlayer playerInventory;
+	private GuiElement flame = new GuiElement("flame", 81, 36, 12, 14, 176, 12,"Progress");
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, "Energy Stored");
 	private GuiElement tank = new GuiElement("fluid", 30, 10, 62, 16, 0, 0);
 	
@@ -32,6 +34,7 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		elements.add(flame);
 		elements.add(power);
 		elements.add(tank);
+		playerInventory = IPlayer;
 	}
 
 	
@@ -43,6 +46,11 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		
 		power.updateDynamicList(Integer.toString(tile.getStoredEnergy()) + "RF", Integer.toString(tile.getStoredEnergyPercentage()) + "%");
 		tank.updateDynamicList(tile.getFluid().getLocalizedName(), Integer.toString(tile.getStoredFluid())+"mB", Integer.toString(tile.getStoredFluidPercentage()) + "%" );
+		String t = tile.getRemainingTime();
+		if(t != null)
+			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%", t);
+		else
+			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%");
 		
 		for(GuiElement e : elements) {
 			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
@@ -53,13 +61,18 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-		// String s = this.tileAirMaker.hasCustomInventoryName() ?
-		// this.tileAirMaker.getInventoryName() :
-		// I18n.format(this.tileAirMaker.getInventoryName(), new Object[0]);
-		// this.fontRendererObj.drawString(s, this.xSize / 2 -
-		// this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		// this.fontRendererObj.drawString(I18n.format("Inventory", new
-		// Object[0]), 8, this.ySize - 96 + 2, 4210752);
+        String s = "Generator";
+        this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+        GlStateManager.pushMatrix();
+        this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
+        int k = 20;
+        int l = 97;
+        this.fontRenderer.drawString("Output: \u221ERF/t", l, k, 4210752);
+        k += this.fontRenderer.FONT_HEIGHT;
+        this.fontRenderer.drawString("Rate: +" + Integer.toString(tile.getEnergyPerTick())+"RF/t", l, k, 4210752);
+        k += this.fontRenderer.FONT_HEIGHT;
+        this.fontRenderer.drawString("Fuel: -" + Double.toString(tile.getFuelUsePerTick())+"mB/t", l, k, 4210752);
+        GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -69,8 +82,8 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		drawProgressVertical(4, flame); //Flame
+		drawProgressVertical(tile.getProgress(), flame); //Flame
 		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
-		drawFluid(tile.getFluid(), tile.getFluidCapacity(), tank);
+		drawFluid(tile.getFluid(), tile.getStoredFluidPercentage(), tank);
 	}	
 }

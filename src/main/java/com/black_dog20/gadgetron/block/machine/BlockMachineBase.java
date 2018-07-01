@@ -2,7 +2,8 @@ package com.black_dog20.gadgetron.block.machine;
 
 import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.block.BlockBase;
-import com.black_dog20.gadgetron.tile.TileEntityBase;
+import com.black_dog20.gadgetron.tile.base.TileEntityBase;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +36,7 @@ public class BlockMachineBase extends BlockBase {
 		else {
 			if(te instanceof TileEntityBase) {
 				playerIn.openGui(Gadgetron.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+				return true;
 			}
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

@@ -1,6 +1,6 @@
 package com.black_dog20.gadgetron.handler;
 
-import com.black_dog20.gadgetron.tile.TileEntityBase;
+import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
