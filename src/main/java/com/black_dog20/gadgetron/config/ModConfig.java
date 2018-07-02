@@ -1,6 +1,7 @@
 package com.black_dog20.gadgetron.config;
 
 import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.config.objects.BatteryConfig;
 import com.black_dog20.gadgetron.config.objects.EnergyMachineConfig;
 import com.black_dog20.gadgetron.config.objects.GeneratorFluidMachineConfig;
 import com.black_dog20.gadgetron.config.objects.GeneratorMachineConfig;
@@ -60,6 +61,9 @@ public class ModConfig {
 		
 		@Config.LangKey("gadgetron.config.machines.fuelGenerator")
 		public GeneratorFluidMachineConfig fuelGenerator = new GeneratorFluidMachineConfig(100, 100000, 60, 10, 10000);
+		
+		@Config.LangKey("gadgetron.config.machines.battery_t1")
+		public BatteryConfig battery_t1 = new BatteryConfig(2000, 1500, 1000000);
 	
 	}
 	

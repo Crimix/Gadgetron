@@ -111,9 +111,12 @@ gadgetron.config.machine.speed=Tick per operation
 gadgetron.config.machine.consumeMb=mB/T consumption
 gadgetron.config.machine.consumeMbOperation=Consume mB/T per operation
 gadgetron.config.machine.generateRf=RF/t generation
+gadgetron.config.machine.outputRF=Output RF/t
+gadgetron.config.machine.inputRF=Input RF/t
 
 gadgetron.config.machines.coalGenerator=Coal Generator
 gadgetron.config.machines.fuelGenerator=Fuel Generator
+gadgetron.config.machines.battery_t1=Basic Battery
 
 //Keys
 

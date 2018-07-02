@@ -29,70 +29,72 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	private int ticksToBurnfuel = ModConfig.machines.fuelGenerator.speed;
 	private int energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
 	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
-	
+
 	public TileEntityEnergyGenerator() {
 		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 2, false, new FluidTank(ModConfig.machines.fuelGenerator.capacityTank) {
-		    
+
 			@Override
 			public boolean canFillFluidType(FluidStack fluid)
-		    {
-		        return fluid.getFluid() == ModFluids.fluidTrillium;
-		    }
+			{
+				return fluid.getFluid() == ModFluids.fluidTrillium;
+			}
 		} , true);
 	}
-	
+
 	public TileEntityEnergyGenerator(String name) {
 		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 2, false, new FluidTank(ModConfig.machines.fuelGenerator.capacityTank) {
-		    
+
 			@Override
 			public boolean canFillFluidType(FluidStack fluid)
-		    {
-		        return fluid.getFluid() == ModFluids.fluidTrillium;
-		    }
+			{
+				return fluid.getFluid() == ModFluids.fluidTrillium;
+			}
 		} , true);
 		this.name = name;
 	}
-	
+
 	@Override
 	public void update() {
-		if(!this.energyContainer.isFull()) {
-			if(burnTime == 0) {
-				on = false;
-				FluidStack fluid = this.tank.drain(fuelUse, false);
-				if(fluid != null && fluid.amount == fuelUse) {
-					this.tank.drain(fuelUse, true);
-					on = true;
-					burnTime++;
-					this.energyContainer.receiveEnergyInternal(energyPerTick, false);
-				}
-			}else {
-				if(burnTime % ticksToBurnfuel  == 0) {
-					burnTime = 0;
+		if(!world.isRemote) {
+			if(!this.energyContainer.isFull()) {
+				if(burnTime == 0) {
 					on = false;
+					FluidStack fluid = this.tank.drain(fuelUse, false);
+					if(fluid != null && fluid.amount == fuelUse) {
+						this.tank.drain(fuelUse, true);
+						on = true;
+						burnTime++;
+						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
+					}
 				}else {
-					this.energyContainer.receiveEnergyInternal(energyPerTick, false);
-					burnTime++;
-					on = true;
+					if(burnTime % ticksToBurnfuel  == 0) {
+						burnTime = 0;
+						on = false;
+					}else {
+						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
+						burnTime++;
+						on = true;
+					}
 				}
+
 			}
-			
-		}
-		else {
-			burnTime=0;
-			on = false;
-		}
-		
-		if (energyContainer.isEmpty()) {
-			return;
-		}
-		for (EnumFacing f : EnumFacing.VALUES) {
-			TileEntity te = world.getTileEntity(pos.offset(f));
-			if (te != null) {
-				IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, f.getOpposite());
-				if (energyStorage != null) {
-					energyContainer.transferEnergy(energyStorage);
-					te.markDirty();
-					this.markDirty();
+			else {
+				burnTime=0;
+				on = false;
+			}
+
+			if (energyContainer.isEmpty()) {
+				return;
+			}
+			for (EnumFacing f : EnumFacing.VALUES) {
+				TileEntity te = world.getTileEntity(pos.offset(f));
+				if (te != null) {
+					IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, f.getOpposite());
+					if (energyStorage != null) {
+						energyContainer.transferEnergy(energyStorage);
+						te.markDirty();
+						this.markDirty();
+					}
 				}
 			}
 		}
@@ -108,12 +110,12 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	public Container getContainer(InventoryPlayer inventory) {
 		return new ContainerEnergyGenerator(inventory, this);
 	}
-	
+
 	public int getProgress() {
 		double t = ((double)burnTime / ticksToBurnfuel) *100;
 		return (int) Math.ceil(t);
 	}
-	
+
 	public String getRemainingTime() {
 		if(burnTime != 0) {
 			double ticksLeft = ticksToBurnfuel - burnTime;
@@ -128,11 +130,11 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	public int getEnergyPerTick() {
 		return energyPerTick;
 	}
-	
+
 	public double getFuelUsePerTick() {
 		return new BigDecimal((double)fuelUse / ticksToBurnfuel).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		burnTime = nbt.getInteger("burnTime");
@@ -144,5 +146,5 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 		nbt.setInteger("burnTime", burnTime);
 		return super.writeToNBT(nbt);
 	}
-	
+
 }
