@@ -1,13 +1,5 @@
 package com.black_dog20.gadgetron.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
-
 import com.black_dog20.gadgetron.block.BlockBase;
 import com.black_dog20.gadgetron.block.BlockModOre;
 import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
@@ -16,9 +8,17 @@ import com.black_dog20.gadgetron.block.machine.BlockMachineBase;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
+
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ModBlocks {
-
+	
 	public static BlockModOre RaritaniumCrystal = (BlockModOre) new BlockRaritaniumCrystal().setHardness(4.0F);
 	public static BlockModOre AdamantineOre = (BlockModOre) new BlockModOre("adamantineOre",2).setHardness(3.0F);
 	public static BlockModOre CarbonoxOre = (BlockModOre) new BlockModOre("carbonoxOre",2).setHardness(3.0F);

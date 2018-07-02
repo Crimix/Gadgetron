@@ -1,13 +1,13 @@
 package com.black_dog20.gadgetron.init;
 
+import com.black_dog20.gadgetron.integration.mekanism.MekanismIntegration;
+import com.black_dog20.gadgetron.integration.te.ThermalExpansionIntegration;
+import com.black_dog20.gadgetron.reference.Reference;
+
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import com.black_dog20.gadgetron.integration.mekanism.MekanismIntegration;
-import com.black_dog20.gadgetron.integration.te.ThermalExpansionIntegration;
-import com.black_dog20.gadgetron.reference.Reference;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class Recipes {

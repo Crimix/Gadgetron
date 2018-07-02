@@ -7,9 +7,7 @@ import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase {

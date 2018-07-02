@@ -1,7 +1,6 @@
 package com.black_dog20.gadgetron.client.gui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,11 +8,10 @@ import com.black_dog20.gadgetron.client.gui.Utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,7 +43,9 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		int l = (this.height - this.ySize) / 2;
 		
 		power.updateDynamicList(Integer.toString(tile.getStoredEnergy()) + "RF", Integer.toString(tile.getStoredEnergyPercentage()) + "%");
-		tank.updateDynamicList(tile.getFluid().getLocalizedName(), Integer.toString(tile.getStoredFluid())+"mB", Integer.toString(tile.getStoredFluidPercentage()) + "%" );
+		FluidStack fluid = tile.getFluid();
+		if(fluid != null)
+			tank.updateDynamicList(fluid.getLocalizedName(), Integer.toString(tile.getStoredFluid())+"mB", Integer.toString(tile.getStoredFluidPercentage()) + "%" );
 		String t = tile.getRemainingTime();
 		if(t != null)
 			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%", t);

@@ -1,5 +1,9 @@
 package com.black_dog20.gadgetron.handler;
 
+import com.black_dog20.gadgetron.api.IElementType;
+import com.black_dog20.gadgetron.config.ModConfig;
+import com.black_dog20.gadgetron.init.ModBlocks;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -12,10 +16,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.black_dog20.gadgetron.api.IElementType;
-import com.black_dog20.gadgetron.config.ModConfig;
-import com.black_dog20.gadgetron.init.ModBlocks;
 
 
 public class EventHandler {

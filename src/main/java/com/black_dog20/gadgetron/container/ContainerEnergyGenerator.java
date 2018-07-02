@@ -11,7 +11,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.UniversalBucket;
 
 public class ContainerEnergyGenerator extends Container{
 
@@ -25,8 +24,13 @@ public class ContainerEnergyGenerator extends Container{
 			public void onSlotChanged() {
 				if(isItemValid(getStack())) {
 					if(tile.getTank().fill(getFluid(), false) >= Fluid.BUCKET_VOLUME) {
-						FluidStack t = new FluidStack(tile.getFluid(), tile.getFluid().amount+getFluid().amount);
-						tile.getTank().setFluid(t);
+						if(tile.getTank().getFluidAmount() != 0) {
+							FluidStack t = new FluidStack(tile.getFluid(), tile.getFluid().amount+getFluid().amount);
+							tile.getTank().setFluid(t);
+						}
+						else {
+							tile.getTank().setFluid(getFluid());
+						}
 						if(output.getHasStack()) {
 							ItemStack temp = output.getStack();
 							temp.setCount(output.getStack().getCount()+1);

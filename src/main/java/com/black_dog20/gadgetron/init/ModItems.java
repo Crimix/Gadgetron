@@ -1,14 +1,5 @@
 package com.black_dog20.gadgetron.init;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
-
 import com.black_dog20.gadgetron.item.ItemBase;
 import com.black_dog20.gadgetron.item.tools.ItemAxeBase;
 import com.black_dog20.gadgetron.item.tools.ItemHoeBase;
@@ -21,6 +12,15 @@ import com.black_dog20.gadgetron.item.tools.trillium.ItemTrilliumPickaxe;
 import com.black_dog20.gadgetron.item.tools.trillium.ItemTrilliumShovel;
 import com.black_dog20.gadgetron.item.tools.trillium.ItemTrilliumSword;
 import com.black_dog20.gadgetron.reference.Reference;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class ModItems {

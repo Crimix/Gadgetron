@@ -2,6 +2,10 @@ package com.black_dog20.gadgetron.item.tools;
 
 import java.util.List;
 
+import com.black_dog20.gadgetron.client.render.IItemModelRegister;
+import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
+import com.black_dog20.gadgetron.reference.Reference;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 //import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.black_dog20.gadgetron.client.render.IItemModelRegister;
-import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
-import com.black_dog20.gadgetron.reference.Reference;
 
 public class ItemPickaxeBase extends ItemPickaxe implements IItemModelRegister{
 

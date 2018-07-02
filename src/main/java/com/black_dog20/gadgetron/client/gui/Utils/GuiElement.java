@@ -2,8 +2,8 @@ package com.black_dog20.gadgetron.client.gui.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

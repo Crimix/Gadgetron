@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.client.render;
 
+import com.black_dog20.gadgetron.reference.Reference;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -9,8 +11,6 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-
-import com.black_dog20.gadgetron.reference.Reference;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Reference.MOD_ID)
 public final class ModelHandler {

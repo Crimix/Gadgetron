@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.container.slot;
 
+import com.black_dog20.gadgetron.init.ModFluids;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeModContainer;
@@ -24,7 +26,7 @@ public class BucketSlot extends SlotItemHandler {
 		if(!input)
 			return false;
 		else
-			return ItemStack.areItemsEqual(stack, UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, FluidRegistry.LAVA));
+			return ItemStack.areItemsEqual(stack, UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.fluidTrillium));
 	}
 	
 	public FluidStack getFluid() {

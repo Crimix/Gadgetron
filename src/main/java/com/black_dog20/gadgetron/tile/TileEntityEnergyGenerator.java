@@ -2,11 +2,10 @@ package com.black_dog20.gadgetron.tile;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
-import com.black_dog20.gadgetron.tile.base.TileEntityEnergyFluidBase;
+import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
 import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
 
@@ -18,7 +17,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -33,7 +31,14 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	private int fuelUse = 10;
 	
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), 2, false, new FluidTank(new FluidStack(FluidRegistry.LAVA, 1000) ,10000), true);
+		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), 2, false, new FluidTank(10000) {
+		    
+			@Override
+			public boolean canFillFluidType(FluidStack fluid)
+		    {
+		        return fluid.getFluid() == ModFluids.fluidTrillium;
+		    }
+		} , true);
 	}
 	
 	@Override

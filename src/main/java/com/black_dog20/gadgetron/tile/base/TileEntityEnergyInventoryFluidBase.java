@@ -1,8 +1,5 @@
 package com.black_dog20.gadgetron.tile.base;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import javax.annotation.Nullable;
 
 import com.black_dog20.gadgetron.utility.CustomEnergyStorage;

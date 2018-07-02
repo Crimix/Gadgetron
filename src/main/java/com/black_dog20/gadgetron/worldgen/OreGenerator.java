@@ -3,6 +3,14 @@ package com.black_dog20.gadgetron.worldgen;
 import java.util.List;
 import java.util.Random;
 
+import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.config.ModConfig;
+import com.black_dog20.gadgetron.config.OreGenConfig;
+import com.black_dog20.gadgetron.init.ModBlocks;
+import com.black_dog20.gadgetron.reference.Reference;
+import com.black_dog20.gadgetron.utility.Helper;
+import com.google.common.collect.ArrayListMultimap;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,14 +25,6 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-
-import com.black_dog20.gadgetron.Gadgetron;
-import com.black_dog20.gadgetron.config.ModConfig;
-import com.black_dog20.gadgetron.config.OreGenConfig;
-import com.black_dog20.gadgetron.init.ModBlocks;
-import com.black_dog20.gadgetron.reference.Reference;
-import com.black_dog20.gadgetron.utility.Helper;
-import com.google.common.collect.ArrayListMultimap;
 
 public class OreGenerator implements IWorldGenerator{
 

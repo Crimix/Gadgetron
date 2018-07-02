@@ -1,8 +1,8 @@
 package com.black_dog20.gadgetron.block;
 
-import net.minecraft.block.state.IBlockState;
-
 import com.black_dog20.gadgetron.client.render.ISpecialModel;
+
+import net.minecraft.block.state.IBlockState;
 
 public class BlockRaritaniumCrystal extends BlockModOre implements ISpecialModel {
 
