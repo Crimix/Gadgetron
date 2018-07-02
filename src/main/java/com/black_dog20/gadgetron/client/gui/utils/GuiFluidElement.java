@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.client.gui.Utils;
+package com.black_dog20.gadgetron.client.gui.utils;
 
 public class GuiFluidElement extends GuiElement {
 

@@ -1,6 +1,6 @@
 package com.black_dog20.gadgetron.client.gui;
 
-import com.black_dog20.gadgetron.client.gui.Utils.GuiElement;
+import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

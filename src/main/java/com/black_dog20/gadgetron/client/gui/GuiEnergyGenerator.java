@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import com.black_dog20.gadgetron.client.gui.Utils.GuiElement;
+import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
