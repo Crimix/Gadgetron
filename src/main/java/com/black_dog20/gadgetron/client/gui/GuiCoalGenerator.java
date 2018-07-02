@@ -6,7 +6,9 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
+import com.black_dog20.gadgetron.container.ContainerCoalGenerator;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
+import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.client.resources.I18n;
@@ -19,22 +21,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiEnergyGenerator extends GuiContainerBase {
-	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/generator.png");
-	private TileEntityEnergyGenerator tile;
+public class GuiCoalGenerator extends GuiContainerBase {
+	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/coal_generator.png");
+	private TileEntityCoalGenerator tile;
 	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
 	private final InventoryPlayer playerInventory;
-	private GuiElement flame = new GuiElement("flame", 80, 36, 12, 14, 176, 12, I18n.format("gadgetron.container.progress"));
+	private GuiElement flame = new GuiElement("flame", 80, 23, 12, 14, 176, 12,I18n.format("gadgetron.container.progress"));
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
-	private GuiElement tank = new GuiElement("fluid", 30, 10, 62, 16, 0, 0);
-	private String empty = I18n.format("gadgetron.tank.empty");
 	
-	public GuiEnergyGenerator(InventoryPlayer IPlayer, TileEntityEnergyGenerator tileEntity) {
-		super(new ContainerEnergyGenerator(IPlayer, tileEntity));
+	public GuiCoalGenerator(InventoryPlayer IPlayer, TileEntityCoalGenerator tileEntity) {
+		super(new ContainerCoalGenerator(IPlayer, tileEntity));
 		tile = tileEntity;
 		elements.add(flame);
 		elements.add(power);
-		elements.add(tank);
 		playerInventory = IPlayer;
 	}
 
@@ -46,7 +45,6 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		int l = (this.height - this.ySize) / 2;
 		
 		power.updateDynamicList(getPowerTipList());
-		tank.updateDynamicList(getTankTipList());
 		String t = tile.getRemainingTime();
 		if(t != null)
 			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%", t);
@@ -77,7 +75,6 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		if(tile.isOn())
 			drawProgressVertical(100-tile.getProgress(), flame); //Flame
 		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
-		drawFluid(tile.getFluid(), tile.getStoredFluidPercentage(), tank);
 	}	
 	
 	private List<String> getPowerTipList(){
@@ -94,19 +91,5 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 			powerList.add(text.getFormattedText());
 		}
 		return powerList;
-	}
-	
-	private List<String> getTankTipList(){
-		List<String> tankList = new ArrayList<String>();
-		if(tile.getTank().getFluid() == null) {
-			tankList.add(empty);
-		}
-		else {
-			tankList.add(tile.getTank().getFluid().getLocalizedName());
-		}
-		tankList.add(Integer.toString(tile.getStoredFluid())+"mB");
-		tankList.add(Integer.toString(tile.getStoredFluidPercentage()) + "%");
-		tankList.add("-" + Double.toString(tile.getFuelUsePerTick())+"mB");
-		return tankList;
 	}
 }

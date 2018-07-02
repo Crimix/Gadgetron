@@ -1,6 +1,10 @@
 package com.black_dog20.gadgetron.config;
 
 import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.config.objects.EnergyMachineConfig;
+import com.black_dog20.gadgetron.config.objects.GeneratorFluidMachineConfig;
+import com.black_dog20.gadgetron.config.objects.GeneratorMachineConfig;
+import com.black_dog20.gadgetron.config.objects.OreGenConfig;
 import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraftforge.common.config.Config;
@@ -21,6 +25,9 @@ public class ModConfig {
 	
 	@Config.LangKey("gadgetron.config.worldgen")
 	public static Worldgen worldgen = new Worldgen();
+	
+	@Config.LangKey("gadgetron.config.machines")
+	public static Machines machines = new Machines();
 	
 	public static class Worldgen {
 	
@@ -44,6 +51,16 @@ public class ModConfig {
 		
 		@Config.LangKey("gadgetron.config.worldgen.logretrogen")
 		public boolean logretrogen = false;
+	}
+	
+	public static class Machines {
+		
+		@Config.LangKey("gadgetron.config.machines.coalGenerator")
+		public GeneratorMachineConfig coalGenerator = new GeneratorMachineConfig(30, 100000);
+		
+		@Config.LangKey("gadgetron.config.machines.fuelGenerator")
+		public GeneratorFluidMachineConfig fuelGenerator = new GeneratorFluidMachineConfig(100, 100000, 60, 10, 10000);
+	
 	}
 	
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)

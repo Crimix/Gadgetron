@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
@@ -17,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,12 +26,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
 	private int burnTime = 0;
-	private double ticksToBurnfuel = 60.0;
-	private int energyPerTick = 100;
-	private int fuelUse = 10;
+	private int ticksToBurnfuel = ModConfig.machines.fuelGenerator.speed;
+	private int energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
+	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
+	
+	public TileEntityEnergyGenerator() {
+		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 2, false, new FluidTank(ModConfig.machines.fuelGenerator.capacityTank) {
+		    
+			@Override
+			public boolean canFillFluidType(FluidStack fluid)
+		    {
+		        return fluid.getFluid() == ModFluids.fluidTrillium;
+		    }
+		} , true);
+	}
 	
 	public TileEntityEnergyGenerator(String name) {
-		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), 2, false, new FluidTank(10000) {
+		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 2, false, new FluidTank(ModConfig.machines.fuelGenerator.capacityTank) {
 		    
 			@Override
 			public boolean canFillFluidType(FluidStack fluid)
@@ -99,7 +110,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	}
 	
 	public int getProgress() {
-		double t = (burnTime / ticksToBurnfuel) *100;
+		double t = ((double)burnTime / ticksToBurnfuel) *100;
 		return (int) Math.ceil(t);
 	}
 	
@@ -119,7 +130,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	}
 	
 	public double getFuelUsePerTick() {
-		return new BigDecimal(fuelUse / ticksToBurnfuel).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		return new BigDecimal((double)fuelUse / ticksToBurnfuel).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 	
 	@Override

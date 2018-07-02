@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.tile.base;
 import javax.annotation.Nullable;
 
 import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
+import com.black_dog20.gadgetron.utility.CustomItemHandler;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -17,12 +18,13 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, int size, boolean exposeInventory) {
 		super(storage);
-		inventory = new ItemStackHandler(size) {
-			@Override
-			protected void onContentsChanged(int slot) {
-				sendUpdates();
-			}
-		};
+		inventory = new CustomItemHandler(size);
+		this.exposeInventory = exposeInventory;
+	}
+	
+	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, ItemStackHandler inventory, boolean exposeInventory) {
+		super(storage);
+		this.inventory = inventory;
 		this.exposeInventory = exposeInventory;
 	}
 

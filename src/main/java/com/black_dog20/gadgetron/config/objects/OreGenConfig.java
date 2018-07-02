@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.config;
+package com.black_dog20.gadgetron.config.objects;
 
 import net.minecraftforge.common.config.Config;
 

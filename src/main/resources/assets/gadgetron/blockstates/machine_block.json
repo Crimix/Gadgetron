@@ -1,0 +1,21 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "gadgetron:blocks/machine_top",
+			"front": "gadgetron:blocks/machine_side",
+			"side": "gadgetron:blocks/machine_side",
+			"buttom": "gadgetron:blocks/machine_buttom"
+		},
+		"model": "orientable",
+		"uvlock": true
+	},
+	"variants": {
+        "normal": {
+            "model": "orientable"
+        },
+        "inventory": {
+            "model": "orientable"
+        }
+	}
+}

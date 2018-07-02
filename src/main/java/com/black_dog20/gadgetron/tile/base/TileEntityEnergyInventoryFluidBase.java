@@ -10,6 +10,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnergyInventoryBase{
 	
@@ -24,6 +25,18 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int size, boolean exposeInventory, FluidTank tank, boolean exposeTank) {
 		super(storage,size, exposeInventory);
+		this.tank = tank;
+		this.exposeTank = exposeTank;
+	}
+	
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, ItemStackHandler inventory, boolean exposeInventory, int sizeMB, boolean exposeTank) {
+		super(storage, inventory, exposeInventory);
+		tank = new FluidTank(sizeMB);
+		this.exposeTank = exposeTank;
+	}
+	
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, ItemStackHandler inventory, boolean exposeInventory, FluidTank tank, boolean exposeTank) {
+		super(storage,inventory, exposeInventory);
 		this.tank = tank;
 		this.exposeTank = exposeTank;
 	}

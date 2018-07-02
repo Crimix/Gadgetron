@@ -3,9 +3,11 @@ package com.black_dog20.gadgetron.init;
 import com.black_dog20.gadgetron.block.BlockBase;
 import com.black_dog20.gadgetron.block.BlockModOre;
 import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
+import com.black_dog20.gadgetron.block.machine.BlockCoalGenerator;
 import com.black_dog20.gadgetron.block.machine.BlockEnergyGenerator;
 import com.black_dog20.gadgetron.block.machine.BlockMachineBase;
 import com.black_dog20.gadgetron.reference.Reference;
+import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.block.Block;
@@ -25,12 +27,14 @@ public class ModBlocks {
 	public static BlockModOre TrilliumOre = (BlockModOre) new BlockModOre("trilliumOre",2).setHardness(3.0F);
 	public static BlockModOre TitaniumOre = (BlockModOre) new BlockModOre("titaniumOre",2).setHardness(3.0F);
 	
-	public static BlockBase AdamantineBlock = new BlockBase(Material.ROCK, "adamantineBlock");
-	public static BlockBase CarbonoxBlock = new BlockBase(Material.ROCK, "carbonoxBlock");
-	public static BlockBase TrilliumBlock = new BlockBase(Material.ROCK, "trilliumBlock");
-	public static BlockBase TitaniumBlock = new BlockBase(Material.ROCK, "titaniumBlock");
+	public static BlockBase AdamantineBlock = (BlockBase) new BlockBase(Material.ROCK, "adamantineBlock").setHardness(1.0F);
+	public static BlockBase CarbonoxBlock = (BlockBase) new BlockBase(Material.ROCK, "carbonoxBlock").setHardness(1.0F);
+	public static BlockBase TrilliumBlock = (BlockBase) new BlockBase(Material.ROCK, "trilliumBlock").setHardness(1.0F);
+	public static BlockBase TitaniumBlock = (BlockBase) new BlockBase(Material.ROCK, "titaniumBlock").setHardness(1.0F);
+	public static BlockBase Machine_block = (BlockBase) new BlockBase(Material.IRON, "machine_block").setHardness(1.0F);
 	
 	public static BlockMachineBase Generator = new BlockEnergyGenerator();
+	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator();
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -44,8 +48,11 @@ public class ModBlocks {
 		r.register(CarbonoxBlock);
 		r.register(TrilliumBlock);
 		r.register(TitaniumBlock);
+		r.register(Machine_block);
 		
 		r.register(Generator);
 		GameRegistry.registerTileEntity(TileEntityEnergyGenerator.class, Reference.MOD_ID+":"+"generator");
+		r.register(CoalGenerator);
+		GameRegistry.registerTileEntity(TileEntityCoalGenerator.class, Reference.MOD_ID+":"+"coalGenerator");
 	}
 }

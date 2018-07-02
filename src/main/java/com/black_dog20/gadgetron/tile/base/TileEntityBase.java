@@ -24,7 +24,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 	
 	protected String name ="NoName";
 	
-	protected void sendUpdates() {
+	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
@@ -75,4 +75,16 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
     public String getName() {
     	return name;
     }
+    
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		this.name = nbt.getString("name");
+		super.readFromNBT(nbt);
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setString(name, "name");
+		return super.writeToNBT(nbt);
+	}
 }

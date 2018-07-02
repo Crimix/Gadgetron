@@ -61,6 +61,7 @@ tile.gadgetron:trilliumblock.name=Trillium Block
 tile.gadgetron:titaniumblock.name=Titanium Block
 tile.gadgetron:trillium.name=Trillium
 tile.gadgetron:energy_generator.name=Fuel Generator
+tile.gadgetron:coal_generator.name=Coal Generator
 
 //Fluids
 fluid.trillium=Trillium
@@ -69,6 +70,8 @@ fluid.trillium=Trillium
 
 //Container
 gadgetron.tank.empty=Empty
+gadgetron.container.progress=Progress
+gadgetron.container.energystored=Energy Stored
 
 //Misc
 itemGroup.gadgetron=Gadgetron
@@ -100,6 +103,17 @@ gadgetron.config.worldgen.blacklist.tooltip=Input dimension ids
 gadgetron.config.worldgen.replaceBlock=Ore replaces block type
 gadgetron.config.worldgen.replaceBlock.tooltip=Input only one block, using mod_id:name or minecraft:name
 
+gadgetron.config.machine.consumeRf=RF/t consumption
+gadgetron.config.machine.capacityRf=RF capacity
+gadgetron.config.machine.createMb=Generate mB per operation
+gadgetron.config.machine.capacityTank=Tank capacity
+gadgetron.config.machine.speed=Tick per operation
+gadgetron.config.machine.consumeMb=mB/T consumption
+gadgetron.config.machine.consumeMbOperation=Consume mB/T per operation
+gadgetron.config.machine.generateRf=RF/t generation
+
+gadgetron.config.machines.coalGenerator=Coal Generator
+gadgetron.config.machines.fuelGenerator=Fuel Generator
 
 //Keys
 
