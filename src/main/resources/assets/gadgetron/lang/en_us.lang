@@ -60,6 +60,7 @@ tile.gadgetron:carbonoxblock.name=Carbonox Block
 tile.gadgetron:trilliumblock.name=Trillium Block
 tile.gadgetron:titaniumblock.name=Titanium Block
 tile.gadgetron:trillium.name=Trillium
+tile.gadgetron:energy_generator.name=Fuel Generator
 
 //Fluids
 fluid.trillium=Trillium
@@ -67,10 +68,12 @@ fluid.trillium=Trillium
 //Entities
 
 //Container
+gadgetron.tank.empty=Empty
 
 //Misc
 itemGroup.gadgetron=Gadgetron
 tooltip.gadgetron:poisonous=Poisonous
+itemGroup.tabmachines=Gadgetron Machines
 
 //Configs
 gadgetron.config.title=Gadgetron

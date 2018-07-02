@@ -11,6 +11,8 @@ import net.minecraftforge.energy.CapabilityEnergy;
 
 public abstract class TileEntityEnergyBase extends TileEntityBase {
 
+	protected Boolean on = false;
+	
 	public TileEntityEnergyBase(CustomEnergyStorage storage) {
 		this.energyContainer = storage;
 	}
@@ -51,5 +53,9 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	
 	public int getEnergyCapacity() {
 		return energyContainer.getMaxEnergyStored();
+	}
+	
+	public boolean isOn() {
+		return on;
 	}
 }

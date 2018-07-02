@@ -1,6 +1,7 @@
 package com.black_dog20.gadgetron.client.gui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -11,6 +12,9 @@ import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,6 +29,7 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	private GuiElement flame = new GuiElement("flame", 81, 36, 12, 14, 176, 12,"Progress");
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, "Energy Stored");
 	private GuiElement tank = new GuiElement("fluid", 30, 10, 62, 16, 0, 0);
+	private TextComponentTranslation empty = new TextComponentTranslation("gadgetron.tank.empty");
 	
 	public GuiEnergyGenerator(InventoryPlayer IPlayer, TileEntityEnergyGenerator tileEntity) {
 		super(new ContainerEnergyGenerator(IPlayer, tileEntity));
@@ -42,10 +47,8 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		
-		power.updateDynamicList(Integer.toString(tile.getStoredEnergy()) + "RF", Integer.toString(tile.getStoredEnergyPercentage()) + "%");
-		FluidStack fluid = tile.getFluid();
-		if(fluid != null)
-			tank.updateDynamicList(fluid.getLocalizedName(), Integer.toString(tile.getStoredFluid())+"mB", Integer.toString(tile.getStoredFluidPercentage()) + "%" );
+		power.updateDynamicList(getPowerTipList());
+		tank.updateDynamicList(getTankTipList());
 		String t = tile.getRemainingTime();
 		if(t != null)
 			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%", t);
@@ -61,18 +64,9 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = "Generator";
+        String s = tile.getName();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-        GlStateManager.pushMatrix();
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
-        int k = 20;
-        int l = 97;
-        this.fontRenderer.drawString("Output: \u221ERF/t", l, k, 4210752);
-        k += this.fontRenderer.FONT_HEIGHT;
-        this.fontRenderer.drawString("Rate: +" + Integer.toString(tile.getEnergyPerTick())+"RF/t", l, k, 4210752);
-        k += this.fontRenderer.FONT_HEIGHT;
-        this.fontRenderer.drawString("Fuel: -" + Double.toString(tile.getFuelUsePerTick())+"mB/t", l, k, 4210752);
-        GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -86,4 +80,37 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
 		drawFluid(tile.getFluid(), tile.getStoredFluidPercentage(), tank);
 	}	
+	
+	private List<String> getPowerTipList(){
+		List<String> powerList = new ArrayList<String>();
+		powerList.add(Integer.toString(tile.getStoredEnergy()) + "RF");
+		powerList.add(Integer.toString(tile.getStoredEnergyPercentage()) + "%");
+		if(tile.isOn()) {
+			TextComponentString text = new TextComponentString("+" + Integer.toString(tile.getEnergyPerTick())+"RF/t");
+			text.getStyle().setColor(TextFormatting.GREEN);
+			powerList.add(text.getFormattedText());
+		}else {
+			TextComponentString text = new TextComponentString("+0RF/t");
+			text.getStyle().setColor(TextFormatting.RED);
+			powerList.add(text.getFormattedText());
+		}
+		return powerList;
+	}
+	
+	private List<String> getTankTipList(){
+		List<String> tankList = new ArrayList<String>();
+		if(tile.getTank().getFluid() == null) {
+			tankList.add(empty.getFormattedText());
+		}
+		else {
+			tankList.add(tile.getTank().getFluid().getLocalizedName());
+		}
+		tankList.add(Integer.toString(tile.getStoredFluid())+"mB");
+		tankList.add(Integer.toString(tile.getStoredFluidPercentage()) + "%");
+		if(tile.isOn())
+			tankList.add("-" + Double.toString(tile.getFuelUsePerTick())+"mB/t");
+		else
+			tankList.add("-0mB/t");
+		return tankList;
+	}
 }

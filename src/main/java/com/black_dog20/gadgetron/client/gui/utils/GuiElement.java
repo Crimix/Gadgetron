@@ -40,6 +40,10 @@ public class GuiElement {
 		}
 	}
 	
+	public void updateDynamicList(List<String> list) {
+		dynamicText = list;
+	}
+	
 	public List<String> getHoverText(){
 		ArrayList<String> temp = new ArrayList<String>(staticText);
 		temp.addAll(dynamicText);

@@ -22,6 +22,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class TileEntityBase extends TileEntity implements ITickable{
 
 	
+	protected String name ="NoName";
+	
 	protected void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
@@ -68,5 +70,9 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
         return oldState.getBlock() != newState.getBlock();
+    }
+    
+    public String getName() {
+    	return name;
     }
 }

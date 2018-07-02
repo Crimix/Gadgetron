@@ -30,7 +30,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	private int energyPerTick = 100;
 	private int fuelUse = 10;
 	
-	public TileEntityEnergyGenerator() {
+	public TileEntityEnergyGenerator(String name) {
 		super(new CustomEnergyStorage(100000, 0, Integer.MAX_VALUE), 2, false, new FluidTank(10000) {
 		    
 			@Override
@@ -39,30 +39,36 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 		        return fluid.getFluid() == ModFluids.fluidTrillium;
 		    }
 		} , true);
+		this.name = name;
 	}
 	
 	@Override
 	public void update() {
 		if(!this.energyContainer.isFull()) {
 			if(burnTime == 0) {
+				on = false;
 				FluidStack fluid = this.tank.drain(fuelUse, false);
 				if(fluid != null && fluid.amount == fuelUse) {
 					this.tank.drain(fuelUse, true);
+					on = true;
 					burnTime++;
 					this.energyContainer.receiveEnergyInternal(energyPerTick, false);
 				}
 			}else {
 				if(burnTime % ticksToBurnfuel  == 0) {
 					burnTime = 0;
+					on = false;
 				}else {
 					this.energyContainer.receiveEnergyInternal(energyPerTick, false);
 					burnTime++;
+					on = true;
 				}
 			}
 			
 		}
 		else {
 			burnTime=0;
+			on = false;
 		}
 		
 		if (energyContainer.isEmpty()) {
