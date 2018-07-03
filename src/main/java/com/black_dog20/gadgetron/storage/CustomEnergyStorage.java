@@ -73,4 +73,12 @@ public class CustomEnergyStorage extends EnergyStorage {
 		int inserted = target.receiveEnergy(toExtract, false);
 		this.extractEnergy(inserted, false);
 	}
+	
+	public int getMaxReceive() {
+		return maxReceive;
+	}
+	
+	public int getMaxExtract() {
+		return maxExtract;
+	}
 }

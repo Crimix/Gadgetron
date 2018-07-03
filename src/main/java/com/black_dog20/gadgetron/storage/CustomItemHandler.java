@@ -5,8 +5,6 @@ import javax.annotation.Nonnull;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class CustomItemHandler extends ItemStackHandler{

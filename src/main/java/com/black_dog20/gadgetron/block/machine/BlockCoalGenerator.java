@@ -1,7 +1,6 @@
 package com.black_dog20.gadgetron.block.machine;
 
 import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
-import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

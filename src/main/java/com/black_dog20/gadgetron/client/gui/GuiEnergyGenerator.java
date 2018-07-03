@@ -13,7 +13,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -82,10 +81,10 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	
 	private List<String> getPowerTipList(){
 		List<String> powerList = new ArrayList<String>();
-		powerList.add(Integer.toString(tile.getStoredEnergy()) + "RF");
+		powerList.add(getFormattedInt(tile.getStoredEnergy()) + "RF");
 		powerList.add(Integer.toString(tile.getStoredEnergyPercentage()) + "%");
 		if(tile.isOn()) {
-			TextComponentString text = new TextComponentString("+" + Integer.toString(tile.getEnergyPerTick())+"RF/t");
+			TextComponentString text = new TextComponentString("+" + getFormattedInt(tile.getEnergyPerTick())+"RF/t");
 			text.getStyle().setColor(TextFormatting.GREEN);
 			powerList.add(text.getFormattedText());
 		}else {
@@ -104,7 +103,7 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		else {
 			tankList.add(tile.getTank().getFluid().getLocalizedName());
 		}
-		tankList.add(Integer.toString(tile.getStoredFluid())+"mB");
+		tankList.add(getFormattedInt(tile.getStoredFluid())+"mB");
 		tankList.add(Integer.toString(tile.getStoredFluidPercentage()) + "%");
 		tankList.add("-" + Double.toString(tile.getFuelUsePerTick())+"mB");
 		return tankList;

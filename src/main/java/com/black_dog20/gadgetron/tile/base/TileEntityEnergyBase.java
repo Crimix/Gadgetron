@@ -18,7 +18,8 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 		this.energyContainer = storage;
 	}
 	
-	
+	public TileEntityEnergyBase() {
+	}
 
 	@Nullable
 	@Override
@@ -41,7 +42,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		this.energyContainer.writeToNBT(nbt);
-		on = nbt.getBoolean("on");
+		nbt.setBoolean("on",on);
 		return super.writeToNBT(nbt);
 	}
 	
@@ -58,10 +59,15 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 		return energyContainer.getMaxEnergyStored();
 	}
 	
+	public CustomEnergyStorage getEnergyStorage() {
+		return this.energyContainer;
+	}
+	
 	public boolean isOn() {
 		return on;
 	}
 	
+	@Override
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
@@ -70,12 +76,12 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
+	@Override
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			super.readFromCustomInfoNBT(nbt);
 			this.energyContainer.readFromNBT(nbt);
 			nbt.setBoolean("on", on);
-			sendUpdates();
+			super.readFromCustomInfoNBT(nbt);
 		}
 	}
 }

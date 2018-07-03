@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import com.black_dog20.gadgetron.container.slot.CustomSlotItemHandler;
 import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

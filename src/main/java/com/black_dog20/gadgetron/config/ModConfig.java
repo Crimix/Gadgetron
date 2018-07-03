@@ -2,7 +2,6 @@ package com.black_dog20.gadgetron.config;
 
 import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.config.objects.BatteryConfig;
-import com.black_dog20.gadgetron.config.objects.EnergyMachineConfig;
 import com.black_dog20.gadgetron.config.objects.GeneratorFluidMachineConfig;
 import com.black_dog20.gadgetron.config.objects.GeneratorMachineConfig;
 import com.black_dog20.gadgetron.config.objects.OreGenConfig;

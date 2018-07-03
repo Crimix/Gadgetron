@@ -1,6 +1,6 @@
 package com.black_dog20.gadgetron.container;
 
-import com.black_dog20.gadgetron.tile.TileEntityBattery;
+import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -8,11 +8,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerBattery extends Container{
+public class ContainerIOConfig extends Container {
 
 
-	public ContainerBattery(InventoryPlayer playerInventory, TileEntityBattery tile){
-		
+	public ContainerIOConfig(InventoryPlayer playerInventory, TileEntityBase tile){
+	
 		for(int i = 0; i < 3; ++i){
 			for(int j = 0; j < 9; ++j){
 				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
@@ -62,5 +62,4 @@ public class ContainerBattery extends Container{
 
         return itemstack;
     }
-
 }

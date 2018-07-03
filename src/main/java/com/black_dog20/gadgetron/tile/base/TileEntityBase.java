@@ -3,7 +3,6 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -102,6 +101,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 		if(nbt != null) {
 			this.name = nbt.getString("name");
 		}
+		sendUpdates();
 	}
 
 	public void setFront(String facing) {

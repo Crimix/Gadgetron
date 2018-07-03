@@ -81,6 +81,7 @@ public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
 		return tank;
 	}
 	
+	@Override
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
@@ -89,11 +90,12 @@ public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
+	@Override
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			super.readFromCustomInfoNBT(nbt);
 			this.tank.readFromNBT(nbt);
 			tankFaces.readFromNBT(nbt);
+			super.readFromCustomInfoNBT(nbt);
 		}
 	}
 }

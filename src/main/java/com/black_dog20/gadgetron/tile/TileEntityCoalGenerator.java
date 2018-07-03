@@ -70,15 +70,15 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	@Override
 	public void update() {
 		if(!world.isRemote) {
+			sendUpdates();
 			if(!this.energyContainer.isFull()) {
 				if(burnTime == 0) {
 					on = false;
 					ItemStack stack = inventory.getStackInSlot(0);
 					if(isItemFuel(stack)) {
-						inventory.extractItem(0, 1, false);
+						inventory.extractItemInternal(0, 1, false);
 						currentItemBurnTime = getItemBurnTime(stack);
 						on = true;
-						sendUpdates();
 						burnTime++;
 						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
 					}
@@ -108,11 +108,11 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 					if (energyStorage != null) {
 						energyContainer.transferEnergy(energyStorage);
 						te.markDirty();
-						this.markDirty();
 					}
 				}
 			}
 			sendUpdates();
+			this.markDirty();
 		}
 	}
 
@@ -152,9 +152,9 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 		burnTime = nbt.getInteger("burnTime");
 		currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
-		super.readFromNBT(nbt);
 	}
 
 	@Override
@@ -162,6 +162,24 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 		nbt.setInteger("burnTime", burnTime);
 		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
 		return super.writeToNBT(nbt);
+	}
+	
+	@Override
+	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setInteger("burnTime", burnTime);
+		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
+		return super.writeCustomInfoToNBT(nbt);
+	}
+	
+	@Override
+	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
+		if(nbt != null) {
+			burnTime = nbt.getInteger("burnTime");
+			currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
+			super.readFromCustomInfoNBT(nbt);
+		}
 	}
 
 }

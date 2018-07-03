@@ -62,6 +62,7 @@ tile.gadgetron:titaniumblock.name=Titanium Block
 tile.gadgetron:trillium.name=Trillium
 tile.gadgetron:energy_generator.name=Fuel Generator
 tile.gadgetron:coal_generator.name=Coal Generator
+tile.gadgetron:battery_t1.name=Basic Battery
 
 //Fluids
 fluid.trillium=Trillium
@@ -72,6 +73,9 @@ fluid.trillium=Trillium
 gadgetron.tank.empty=Empty
 gadgetron.container.progress=Progress
 gadgetron.container.energystored=Energy Stored
+gadgetron.container.output=Output
+gadgetron.container.input=Input
+gadgetron.container.capacity=Capacity
 
 //Misc
 itemGroup.gadgetron=Gadgetron

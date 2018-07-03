@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.client.gui;
 
+import java.text.NumberFormat;
+
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -50,5 +52,9 @@ public abstract class GuiContainerBase extends GuiContainer{
 			int p = (int) Math.ceil(oneP * percentage);
 			drawTexturedModalRect(k + e.x+1, l + e.y+e.height+1 - p, sprite, 16, p);
 		}
+	}
+	
+	protected String getFormattedInt(int number) {
+		return NumberFormat.getIntegerInstance().format(number);
 	}
 }

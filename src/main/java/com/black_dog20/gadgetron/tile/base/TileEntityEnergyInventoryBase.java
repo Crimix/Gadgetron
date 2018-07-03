@@ -62,6 +62,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
     	return this.inventory;
     }
     
+    @Override
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
@@ -70,11 +71,12 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
+	@Override
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			super.readFromCustomInfoNBT(nbt);
 	        inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
 	        inventoryFaces.readFromNBT(nbt);
+	        super.readFromCustomInfoNBT(nbt);
 		}
 	}
 }

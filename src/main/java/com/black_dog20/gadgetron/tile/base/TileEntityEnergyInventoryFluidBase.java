@@ -15,7 +15,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnergyInventoryBase{
 	
@@ -95,6 +94,7 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 		return tank;
 	}
 	
+	@Override
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
@@ -103,11 +103,12 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
+	@Override
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			super.readFromCustomInfoNBT(nbt);
 	        tank.readFromNBT(nbt);
 	        tankFaces.readFromNBT(nbt);
+	        super.readFromCustomInfoNBT(nbt);
 		}
 	}
 }

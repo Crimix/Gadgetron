@@ -7,8 +7,9 @@ import com.black_dog20.gadgetron.block.machine.BlockBattery;
 import com.black_dog20.gadgetron.block.machine.BlockCoalGenerator;
 import com.black_dog20.gadgetron.block.machine.BlockEnergyGenerator;
 import com.black_dog20.gadgetron.block.machine.BlockMachineBase;
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.reference.Reference;
-import com.black_dog20.gadgetron.tile.TileEntityBatteryT1;
+import com.black_dog20.gadgetron.tile.TileEntityBattery;
 import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
@@ -37,7 +38,7 @@ public class ModBlocks {
 	
 	public static BlockMachineBase Generator = new BlockEnergyGenerator();
 	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator();
-	public static BlockMachineBase Battery_T1 = new BlockBattery();
+	public static BlockMachineBase Battery_T1 = new BlockBattery("Battery_T1", ModConfig.machines.battery_t1.capacity, ModConfig.machines.battery_t1.rfInputPerTick, ModConfig.machines.battery_t1.rfOutputPerTick);
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -58,7 +59,7 @@ public class ModBlocks {
 		r.register(CoalGenerator);
 		GameRegistry.registerTileEntity(TileEntityCoalGenerator.class, Reference.MOD_ID+":"+"coalGenerator");
 		r.register(Battery_T1);
-		GameRegistry.registerTileEntity(TileEntityBatteryT1.class, Reference.MOD_ID+":"+"batteryT1");
+		GameRegistry.registerTileEntity(TileEntityBattery.class, Reference.MOD_ID+":"+"batteryT1");
 		
 	}
 }

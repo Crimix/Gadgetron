@@ -7,30 +7,23 @@ import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerBattery;
-import com.black_dog20.gadgetron.container.ContainerCoalGenerator;
-import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
-import com.black_dog20.gadgetron.tile.TileEntityBatteryT1;
-import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
-import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
+import com.black_dog20.gadgetron.tile.TileEntityBattery;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiBattery extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
-	private TileEntityBatteryT1 tile;
+	private TileEntityBattery tile;
 	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
 	private final InventoryPlayer playerInventory;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
-	public GuiBattery(InventoryPlayer IPlayer, TileEntityBatteryT1 tileEntity) {
+	public GuiBattery(InventoryPlayer IPlayer, TileEntityBattery tileEntity) {
 		super(new ContainerBattery(IPlayer, tileEntity));
 		tile = tileEntity;
 		elements.add(power);
@@ -56,8 +49,20 @@ public class GuiBattery extends GuiContainerBase {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String s = tile.getName();
+        int k = (this.width - this.xSize) / 2;
+		int l = (this.height - this.ySize) / 2;
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
+        String capacity = I18n.format("%s: %s RF",I18n.format("gadgetron.container.capacity"), getFormattedInt(tile.getEnergyCapacity()));
+        String input = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.input"), getFormattedInt(tile.getEnergyStorage().getMaxReceive()));
+        String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.output"), getFormattedInt(tile.getEnergyStorage().getMaxExtract()));
+        l-=10;
+        k-=80;
+        this.fontRenderer.drawString(capacity, k, l, 4210752);
+        l+=fontRenderer.FONT_HEIGHT;
+        this.fontRenderer.drawString(input, k, l, 4210752);
+        l+=fontRenderer.FONT_HEIGHT;
+        this.fontRenderer.drawString(output, k, l, 4210752);
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class GuiBattery extends GuiContainerBase {
 	
 	private List<String> getPowerTipList(){
 		List<String> powerList = new ArrayList<String>();
-		powerList.add(Integer.toString(tile.getStoredEnergy()) + "RF");
+		powerList.add(getFormattedInt(tile.getStoredEnergy()) + "RF");
 		powerList.add(Integer.toString(tile.getStoredEnergyPercentage()) + "%");
 		return powerList;
 	}

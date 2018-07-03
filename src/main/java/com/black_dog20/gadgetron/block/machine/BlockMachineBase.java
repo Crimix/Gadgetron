@@ -8,9 +8,7 @@ import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.block.BlockBase;
 import com.black_dog20.gadgetron.client.render.IItemModelRegister;
 import com.black_dog20.gadgetron.creativetab.CreativeTabGT;
-import com.black_dog20.gadgetron.tile.TileEntityBatteryT1;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
-import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -18,7 +16,6 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

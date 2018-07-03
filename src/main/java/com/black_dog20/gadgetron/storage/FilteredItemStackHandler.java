@@ -5,8 +5,6 @@ import java.util.function.Function;
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 public class FilteredItemStackHandler extends CustomItemHandler{
 	

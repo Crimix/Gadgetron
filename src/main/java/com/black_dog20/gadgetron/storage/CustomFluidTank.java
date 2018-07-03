@@ -2,9 +2,6 @@ package com.black_dog20.gadgetron.storage;
 
 import java.util.function.Function;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 

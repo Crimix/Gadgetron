@@ -3,12 +3,9 @@ package com.black_dog20.gadgetron.storage;
 import javax.annotation.Nullable;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class OutputTankWrapper extends FluidTank {
