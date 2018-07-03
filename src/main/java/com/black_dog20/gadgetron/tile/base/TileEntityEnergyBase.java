@@ -2,7 +2,7 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
-import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -11,13 +11,14 @@ import net.minecraftforge.energy.CapabilityEnergy;
 
 public abstract class TileEntityEnergyBase extends TileEntityBase {
 
-	protected Boolean on = false;
+	protected boolean on = false;
+	protected CustomEnergyStorage energyContainer = null;
 	
 	public TileEntityEnergyBase(CustomEnergyStorage storage) {
 		this.energyContainer = storage;
 	}
 	
-	protected CustomEnergyStorage energyContainer = null;
+	
 
 	@Nullable
 	@Override
@@ -33,12 +34,14 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		this.energyContainer.readFromNBT(nbt);
+		on = nbt.getBoolean("on");
 		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		this.energyContainer.writeToNBT(nbt);
+		on = nbt.getBoolean("on");
 		return super.writeToNBT(nbt);
 	}
 	
@@ -57,5 +60,22 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	
 	public boolean isOn() {
 		return on;
+	}
+	
+	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		this.energyContainer.writeToNBT(nbt);
+		on = nbt.getBoolean("on");
+		return super.writeCustomInfoToNBT(nbt);
+	}
+	
+	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
+		if(nbt != null) {
+			super.readFromCustomInfoNBT(nbt);
+			this.energyContainer.readFromNBT(nbt);
+			nbt.setBoolean("on", on);
+			sendUpdates();
+		}
 	}
 }

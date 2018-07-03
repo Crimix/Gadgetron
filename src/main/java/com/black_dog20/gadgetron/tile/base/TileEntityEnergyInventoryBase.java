@@ -2,8 +2,11 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
-import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
-import com.black_dog20.gadgetron.utility.CustomItemHandler;
+import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
+import com.black_dog20.gadgetron.storage.InputItemHandlerWrapper;
+import com.black_dog20.gadgetron.storage.OutputItemHandlerWrapper;
+import com.black_dog20.gadgetron.utility.MachineFaces;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -13,33 +16,38 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase {
 	
-	protected ItemStackHandler inventory = null;
-	private boolean exposeInventory = true;
+	protected CustomItemHandler inventory = null;
+	protected MachineFaces inventoryFaces;
 
-	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, int size, boolean exposeInventory) {
+	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, int inputSlots, int outputSlots) {
 		super(storage);
-		inventory = new CustomItemHandler(size);
-		this.exposeInventory = exposeInventory;
+		inventory = new CustomItemHandler(inputSlots,outputSlots);
+		inventoryFaces = new MachineFaces();
 	}
 	
-	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, ItemStackHandler inventory, boolean exposeInventory) {
+	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, CustomItemHandler inventory) {
 		super(storage);
 		this.inventory = inventory;
-		this.exposeInventory = exposeInventory;
+		inventoryFaces = new MachineFaces();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && exposeInventory) 
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryFaces.isFaceInput(facing) && inventoryFaces.isFaceOutput(facing)) 
 			return (T) this.inventory;
+		else if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryFaces.isFaceInput(facing) && !inventoryFaces.isFaceOutput(facing))
+			return (T) new InputItemHandlerWrapper(inventory);
+		else if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !inventoryFaces.isFaceInput(facing) && inventoryFaces.isFaceOutput(facing))
+			return (T) new OutputItemHandlerWrapper(inventory);
 		return super.getCapability(capability, facing);
 	}
 	
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     	nbt.setTag("inventory", inventory.serializeNBT());
-    	nbt.setBoolean("exposeInventory", exposeInventory);
+    	inventoryFaces.writeToNBT(nbt);
         return super.writeToNBT(nbt);
     }
 
@@ -47,10 +55,26 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
-        exposeInventory = nbt.getBoolean("exposeInventory");
+        inventoryFaces.readFromNBT(nbt);
     }
     
     public ItemStackHandler getInventory() {
     	return this.inventory;
     }
+    
+	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setTag("inventory", inventory.serializeNBT());
+		inventoryFaces.writeToNBT(nbt);
+		return super.writeCustomInfoToNBT(nbt);
+	}
+	
+	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
+		if(nbt != null) {
+			super.readFromCustomInfoNBT(nbt);
+	        inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
+	        inventoryFaces.readFromNBT(nbt);
+		}
+	}
 }

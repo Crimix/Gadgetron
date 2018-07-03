@@ -7,8 +7,9 @@ import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.init.ModFluids;
+import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
-import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -31,26 +32,16 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
 
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 2, false, new FluidTank(ModConfig.machines.fuelGenerator.capacityTank) {
-
-			@Override
-			public boolean canFillFluidType(FluidStack fluid)
-			{
-				return fluid.getFluid() == ModFluids.fluidTrillium;
-			}
-		} , true);
+		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
 	}
 
 	public TileEntityEnergyGenerator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 2, false, new FluidTank(ModConfig.machines.fuelGenerator.capacityTank) {
-
-			@Override
-			public boolean canFillFluidType(FluidStack fluid)
-			{
-				return fluid.getFluid() == ModFluids.fluidTrillium;
-			}
-		} , true);
+		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
 		this.name = name;
+	}
+	
+	private static boolean isFuel(FluidStack fluid) {
+		return fluid.getFluid() == ModFluids.fluidTrillium;
 	}
 
 	@Override
@@ -97,6 +88,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 					}
 				}
 			}
+			sendUpdates();
 		}
 	}
 

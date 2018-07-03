@@ -2,7 +2,12 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
-import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.CustomFluidTank;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
+import com.black_dog20.gadgetron.storage.InputTankWrapper;
+import com.black_dog20.gadgetron.storage.OutputTankWrapper;
+import com.black_dog20.gadgetron.utility.MachineFaces;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -14,39 +19,43 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnergyInventoryBase{
 	
-	protected FluidTank tank;
-	private boolean exposeTank = true;
+	protected CustomFluidTank tank;
+	protected MachineFaces tankFaces;
 
-	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int size, boolean exposeInventory, int sizeMB, boolean exposeTank) {
-		super(storage, size, exposeInventory);
-		tank = new FluidTank(sizeMB);
-		this.exposeTank = exposeTank;
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, int sizeMB) {
+		super(storage, intputSlots,outputSlots);
+		tank = new CustomFluidTank(sizeMB);
+		tankFaces = new MachineFaces();
 	}
 	
-	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int size, boolean exposeInventory, FluidTank tank, boolean exposeTank) {
-		super(storage,size, exposeInventory);
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, CustomFluidTank tank) {
+		super(storage,intputSlots,outputSlots);
 		this.tank = tank;
-		this.exposeTank = exposeTank;
+		tankFaces = new MachineFaces();
 	}
 	
-	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, ItemStackHandler inventory, boolean exposeInventory, int sizeMB, boolean exposeTank) {
-		super(storage, inventory, exposeInventory);
-		tank = new FluidTank(sizeMB);
-		this.exposeTank = exposeTank;
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, int sizeMB) {
+		super(storage, inventory);
+		tank = new CustomFluidTank(sizeMB);
+		tankFaces = new MachineFaces();
 	}
 	
-	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, ItemStackHandler inventory, boolean exposeInventory, FluidTank tank, boolean exposeTank) {
-		super(storage,inventory, exposeInventory);
+	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, CustomFluidTank tank) {
+		super(storage,inventory);
 		this.tank = tank;
-		this.exposeTank = exposeTank;
+		tankFaces = new MachineFaces();
 	}
 
-    @Nullable
+    @SuppressWarnings("unchecked")
+	@Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && exposeTank) {
+        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && tankFaces.isFaceInput(facing) && tankFaces.isFaceOutput(facing))
         	return (T) tank;
-        }
+        else if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && tankFaces.isFaceInput(facing) && !tankFaces.isFaceOutput(facing))
+        	return (T) new InputTankWrapper(0, tank);
+        else if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && !tankFaces.isFaceInput(facing) && tankFaces.isFaceOutput(facing))
+        	return (T) new OutputTankWrapper(0, tank);
         return super.getCapability(capability, facing);
     }
 	
@@ -54,7 +63,7 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     	tank.writeToNBT(nbt);
-    	nbt.setBoolean("exposeTank", exposeTank);
+    	tankFaces.writeToNBT(nbt);
         return super.writeToNBT(nbt);
     }
 
@@ -62,7 +71,7 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         tank.readFromNBT(nbt);
-        exposeTank = nbt.getBoolean("exposeTank");
+        tankFaces.readFromNBT(nbt);
     }
 
 	public FluidStack getFluid() {
@@ -84,5 +93,21 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 	
 	public FluidTank getTank() {
 		return tank;
+	}
+	
+	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+    	tank.writeToNBT(nbt);
+    	tankFaces.writeToNBT(nbt);
+		return super.writeCustomInfoToNBT(nbt);
+	}
+	
+	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
+		if(nbt != null) {
+			super.readFromCustomInfoNBT(nbt);
+	        tank.readFromNBT(nbt);
+	        tankFaces.readFromNBT(nbt);
+		}
 	}
 }

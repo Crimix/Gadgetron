@@ -1,6 +1,7 @@
 package com.black_dog20.gadgetron.container;
 
 import com.black_dog20.gadgetron.container.slot.BucketSlot;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,15 +12,16 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerEnergyGenerator extends Container{
 
 	private BucketSlot input;
-	private BucketSlot output;
+	private SlotItemHandler output;
 
 	public ContainerEnergyGenerator(InventoryPlayer playerInventory, TileEntityEnergyGenerator tile){
-		output = new BucketSlot(false, tile.getInventory(), 1, 54, 53);
-		input = new BucketSlot(true, tile.getInventory(), 0, 54, 17) {
+		output = new SlotItemHandler(tile.getInventory(), 1, 54, 53);
+		input = new BucketSlot(true, (CustomItemHandler) tile.getInventory(), 0, 54, 17) {
 			@Override
 			public void onSlotChanged() {
 				if(isItemValid(getStack())) {

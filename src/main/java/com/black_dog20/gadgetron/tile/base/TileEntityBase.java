@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,8 +22,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class TileEntityBase extends TileEntity implements ITickable{
 
-	
 	protected String name ="NoName";
+	private String faceing = "north";
 	
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
@@ -79,12 +80,31 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		this.name = nbt.getString("name");
+		this.faceing = nbt.getString("faceing");
 		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setString(name, "name");
+		nbt.setString("name", name);
+		nbt.setString("faceing", faceing);
 		return super.writeToNBT(nbt);
+	}
+	
+	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
+		if(nbt == null)
+			nbt = new NBTTagCompound();
+		nbt.setString("name", name);
+		return nbt;
+	}
+	
+	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
+		if(nbt != null) {
+			this.name = nbt.getString("name");
+		}
+	}
+
+	public void setFront(String facing) {
+		this.faceing = facing;
 	}
 }

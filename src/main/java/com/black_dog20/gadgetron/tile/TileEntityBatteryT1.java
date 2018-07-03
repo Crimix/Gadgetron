@@ -5,10 +5,10 @@ import com.black_dog20.gadgetron.client.gui.GuiCoalGenerator;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerBattery;
 import com.black_dog20.gadgetron.container.ContainerCoalGenerator;
+import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.FilteredItemStackHandler;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
-import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
-import com.black_dog20.gadgetron.utility.FilteredItemStackHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -61,6 +61,7 @@ public class TileEntityBatteryT1 extends TileEntityEnergyBase {
 				} 
 				continue;
 			}
+			sendUpdates();
 		}
 	}
 

@@ -3,9 +3,9 @@ package com.black_dog20.gadgetron.tile;
 import com.black_dog20.gadgetron.client.gui.GuiCoalGenerator;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerCoalGenerator;
+import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
+import com.black_dog20.gadgetron.storage.FilteredItemStackHandler;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
-import com.black_dog20.gadgetron.utility.CustomEnergyStorage;
-import com.black_dog20.gadgetron.utility.FilteredItemStackHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -36,11 +36,11 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	private int currentItemBurnTime = 1;
 
 	public TileEntityCoalGenerator() {
-		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1, (i) -> isItemFuel(i)), true);
+		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
 	}
 
 	public TileEntityCoalGenerator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1, (i) -> isItemFuel(i)), true);
+		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
 		this.name = name;
 	}
 
@@ -77,8 +77,8 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 					if(isItemFuel(stack)) {
 						inventory.extractItem(0, 1, false);
 						currentItemBurnTime = getItemBurnTime(stack);
-
 						on = true;
+						sendUpdates();
 						burnTime++;
 						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
 					}
@@ -112,6 +112,7 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 					}
 				}
 			}
+			sendUpdates();
 		}
 	}
 

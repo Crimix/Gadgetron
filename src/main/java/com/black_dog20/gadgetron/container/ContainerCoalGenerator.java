@@ -2,6 +2,8 @@ package com.black_dog20.gadgetron.container;
 
 import javax.annotation.Nonnull;
 
+import com.black_dog20.gadgetron.container.slot.CustomSlotItemHandler;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,7 +17,7 @@ public class ContainerCoalGenerator extends Container{
 	private SlotItemHandler input;
 
 	public ContainerCoalGenerator(InventoryPlayer playerInventory, TileEntityCoalGenerator tile){
-		input = new SlotItemHandler(tile.getInventory(), 0, 80, 41) {
+		input = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 0, 80, 41) {
 		    @Override
 		    public boolean isItemValid(@Nonnull ItemStack stack)
 		    {
