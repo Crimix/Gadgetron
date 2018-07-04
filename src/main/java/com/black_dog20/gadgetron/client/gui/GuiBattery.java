@@ -10,6 +10,7 @@ import com.black_dog20.gadgetron.container.ContainerBattery;
 import com.black_dog20.gadgetron.tile.TileEntityBattery;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,14 +21,14 @@ public class GuiBattery extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
 	private TileEntityBattery tile;
 	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
-	private final InventoryPlayer playerInventory;
+	private final EntityPlayer player;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
-	public GuiBattery(InventoryPlayer IPlayer, TileEntityBattery tileEntity) {
-		super(new ContainerBattery(IPlayer, tileEntity));
+	public GuiBattery(EntityPlayer player, TileEntityBattery tileEntity) {
+		super(new ContainerBattery(player.inventory, tileEntity));
 		tile = tileEntity;
 		elements.add(power);
-		playerInventory = IPlayer;
+		this.player = player;
 	}
 
 	
@@ -52,7 +53,7 @@ public class GuiBattery extends GuiContainerBase {
         int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
+        this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
         String capacity = I18n.format("%s: %s RF",I18n.format("gadgetron.container.capacity"), getFormattedInt(tile.getEnergyCapacity()));
         String input = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.input"), getFormattedInt(tile.getEnergyStorage().getMaxReceive()));
         String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.output"), getFormattedInt(tile.getEnergyStorage().getMaxExtract()));

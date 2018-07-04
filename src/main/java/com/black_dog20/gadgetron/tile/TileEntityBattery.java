@@ -6,6 +6,7 @@ import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyBase;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
@@ -51,13 +52,13 @@ public class TileEntityBattery extends TileEntityEnergyBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public GuiContainer getGUI(InventoryPlayer inventory) {
-		return new GuiBattery(inventory, this);
+	public GuiContainer getGUI(EntityPlayer player) {
+		return new GuiBattery(player, this);
 	}
 
 	@Override
-	public Container getContainer(InventoryPlayer inventory) {
-		return new ContainerBattery(inventory, this);
+	public Container getContainer(EntityPlayer player) {
+		return new ContainerBattery(player.inventory, this);
 	}
 
 }

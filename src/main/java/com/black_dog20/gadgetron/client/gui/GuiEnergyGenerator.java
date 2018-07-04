@@ -10,6 +10,7 @@ import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
@@ -22,19 +23,19 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/generator.png");
 	private TileEntityEnergyGenerator tile;
 	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
-	private final InventoryPlayer playerInventory;
+	private final EntityPlayer player;
 	private GuiElement flame = new GuiElement("flame", 80, 36, 12, 14, 176, 12, I18n.format("gadgetron.container.progress"));
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	private GuiElement tank = new GuiElement("fluid", 30, 10, 62, 16, 0, 0);
 	private String empty = I18n.format("gadgetron.tank.empty");
 	
-	public GuiEnergyGenerator(InventoryPlayer IPlayer, TileEntityEnergyGenerator tileEntity) {
-		super(new ContainerEnergyGenerator(IPlayer, tileEntity));
+	public GuiEnergyGenerator(EntityPlayer player, TileEntityEnergyGenerator tileEntity) {
+		super(new ContainerEnergyGenerator(player.inventory, tileEntity));
 		tile = tileEntity;
 		elements.add(flame);
 		elements.add(power);
 		elements.add(tank);
-		playerInventory = IPlayer;
+		this.player = player;
 	}
 
 	
@@ -63,7 +64,7 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String s = tile.getName();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
+        this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
 	}
 
 	@Override

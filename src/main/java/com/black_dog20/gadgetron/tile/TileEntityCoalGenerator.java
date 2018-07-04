@@ -10,6 +10,7 @@ import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -118,13 +119,13 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public GuiContainer getGUI(InventoryPlayer inventory) {
-		return new GuiCoalGenerator(inventory, this);
+	public GuiContainer getGUI(EntityPlayer player) {
+		return new GuiCoalGenerator(player, this);
 	}
 
 	@Override
-	public Container getContainer(InventoryPlayer inventory) {
-		return new ContainerCoalGenerator(inventory, this);
+	public Container getContainer(EntityPlayer player) {
+		return new ContainerCoalGenerator(player.inventory, this);
 	}
 
 	public int getProgress() {

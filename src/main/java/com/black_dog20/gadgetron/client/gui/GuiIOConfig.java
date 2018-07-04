@@ -9,6 +9,7 @@ import com.black_dog20.gadgetron.container.ContainerIOConfig;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,14 +20,14 @@ public class GuiIOConfig extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
 	private TileEntityBase tile;
 	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
-	private final InventoryPlayer playerInventory;
+	private final EntityPlayer player;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
-	public GuiIOConfig(InventoryPlayer IPlayer, TileEntityBase tileEntity) {
-		super(new ContainerIOConfig(IPlayer, tileEntity));
+	public GuiIOConfig(EntityPlayer player, TileEntityBase tileEntity) {
+		super(new ContainerIOConfig(player.inventory, tileEntity));
 		tile = tileEntity;
 		elements.add(power);
-		playerInventory = IPlayer;
+		this.player = player;
 	}
 
 	
@@ -47,7 +48,7 @@ public class GuiIOConfig extends GuiContainerBase {
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String s = tile.getName();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
+        this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
 	}
 
 	@Override

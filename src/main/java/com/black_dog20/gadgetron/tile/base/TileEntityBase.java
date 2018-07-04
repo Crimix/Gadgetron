@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,9 +37,9 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public abstract GuiContainer getGUI(InventoryPlayer inventory);
+	public abstract GuiContainer getGUI(EntityPlayer player);
 	
-	public abstract Container getContainer(InventoryPlayer inventory);
+	public abstract Container getContainer(EntityPlayer player);
 	
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
@@ -106,5 +107,17 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 
 	public void setFront(String facing) {
 		this.faceing = facing;
+	}
+	
+	public boolean hasConfig() {
+		return false;
+	}
+	
+	public boolean hasInventory() {
+		return false;
+	}
+	
+	public boolean hasTank() {
+		return false;
 	}
 }

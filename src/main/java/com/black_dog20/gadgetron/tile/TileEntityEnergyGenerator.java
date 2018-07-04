@@ -12,6 +12,7 @@ import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
@@ -93,13 +94,13 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public GuiContainer getGUI(InventoryPlayer inventory) {
-		return new GuiEnergyGenerator(inventory, this);
+	public GuiContainer getGUI(EntityPlayer player) {
+		return new GuiEnergyGenerator(player, this);
 	}
 
 	@Override
-	public Container getContainer(InventoryPlayer inventory) {
-		return new ContainerEnergyGenerator(inventory, this);
+	public Container getContainer(EntityPlayer player) {
+		return new ContainerEnergyGenerator(player.inventory, this);
 	}
 
 	public int getProgress() {

@@ -111,4 +111,19 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 	        super.readFromCustomInfoNBT(nbt);
 		}
 	}
+	
+	@Override
+	public boolean hasConfig() {
+		return true;
+	}
+	
+	@Override
+	public boolean hasInventory() {
+		return true;
+	}
+	
+	@Override
+	public boolean hasTank() {
+		return true;
+	}
 }
