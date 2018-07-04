@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
+import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerIOConfig;
+import com.black_dog20.gadgetron.network.PacketHandler;
+import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,9 +21,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiIOConfig extends GuiContainerBase {
-	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
+	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/empty.png");
 	private final EntityPlayer player;
-	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
+	private GuiCustomButton inventoryTop = new GuiCustomButton(1, "", 150, 0,null);
+	private GuiCustomButton inventoryFront = new GuiCustomButton(2, "", 150, 0,null);
+	private GuiCustomButton inventoryLeft = new GuiCustomButton(3, "", 150, 0,null);
+	private GuiCustomButton inventoryRight = new GuiCustomButton(4, "", 150, 0,null);
+	private GuiCustomButton inventoryBack = new GuiCustomButton(5, "", 150, 0,null);
+	private GuiCustomButton inventoryAutoI = new GuiCustomButton(4, "", 150, 0,null);
+	private GuiCustomButton inventoryAutoO = new GuiCustomButton(5, "", 150, 0,null);
+	
+	private GuiCustomButton tankTop = new GuiCustomButton(6, "", 150, 0,null);
+	private GuiCustomButton tankFront = new GuiCustomButton(7, "", 150, 0,null);
+	private GuiCustomButton tankLeft = new GuiCustomButton(8, "", 150, 0,null);
+	private GuiCustomButton tankRight = new GuiCustomButton(9, "", 150, 0,null);
+	private GuiCustomButton tankBack = new GuiCustomButton(10, "", 150, 0,null);
+	private GuiCustomButton tankAutoI = new GuiCustomButton(11, "", 150, 0,null);
+	private GuiCustomButton tankAutoO = new GuiCustomButton(12, "", 150, 0,null);
+	
 	
 	public GuiIOConfig(EntityPlayer player, TileEntityBase tileEntity) {
 		super(new ContainerIOConfig(player.inventory, tileEntity), tileEntity, player);
@@ -27,6 +46,40 @@ public class GuiIOConfig extends GuiContainerBase {
 		this.player = player;
 	}
 
+	@Override
+	public void initGui()
+	{
+		super.initGui();
+			int x = tile.getPos().getX();
+			int y = tile.getPos().getY();
+			int z = tile.getPos().getZ();
+			elements.add(new GuiCustomButton(0, "x", 150, 0, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(0,x,y,z))));
+			elements.add(inventoryTop);
+			elements.add(inventoryFront);
+			elements.add(inventoryLeft);
+			elements.add(inventoryRight);
+			elements.add(inventoryBack);
+			elements.add(inventoryAutoI);
+			elements.add(inventoryAutoO);
+			elements.add(tankTop);
+			elements.add(tankFront);
+			elements.add(tankLeft);
+			elements.add(tankRight);
+			elements.add(tankBack);
+			elements.add(tankAutoI);
+			elements.add(tankAutoO);
+
+		int k = (this.width - xSizeOfTexture) / 2;
+		int l = (this.height - ySizeOfTexture) / 2;
+
+		for(GuiElement e : elements) {
+			if(e instanceof GuiCustomButton) {
+				GuiCustomButton b = (GuiCustomButton)e;
+				this.buttonList.add(new GuiButton(b.getId(), k + b.x, l + b.y, b.width, b.height, b.getName()));
+			}
+		}
+		
+	}
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {

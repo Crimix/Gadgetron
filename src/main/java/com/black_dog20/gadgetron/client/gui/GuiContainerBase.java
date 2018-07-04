@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.network.PacketHandler;
-import com.black_dog20.gadgetron.network.message.MessageOpenIOConfig;
+import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.client.gui.GuiButton;
@@ -41,7 +41,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 			int x = tile.getPos().getX();
 			int y = tile.getPos().getY();
 			int z = tile.getPos().getZ();
-			elements.add(new GuiCustomButton(0, "I/O", 150, 0, ()-> PacketHandler.network.sendToServer(new MessageOpenIOConfig(x,y,z))));
+			elements.add(new GuiCustomButton(0, "I/O", 150, 0, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(1,x,y,z))));
 		}
 		this.buttonList.clear();
 
