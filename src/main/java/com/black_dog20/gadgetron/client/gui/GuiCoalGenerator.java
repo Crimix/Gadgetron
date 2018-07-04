@@ -21,15 +21,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiCoalGenerator extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/coal_generator.png");
-	private TileEntityCoalGenerator tile;
-	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
+	private TileEntityCoalGenerator te;
 	private final EntityPlayer player;
 	private GuiElement flame = new GuiElement("flame", 80, 23, 12, 14, 176, 12,I18n.format("gadgetron.container.progress"));
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
 	public GuiCoalGenerator(EntityPlayer player, TileEntityCoalGenerator tileEntity) {
-		super(new ContainerCoalGenerator(player.inventory, tileEntity));
-		tile = tileEntity;
+		super(new ContainerCoalGenerator(player.inventory, tileEntity), tileEntity, player);
+		te = (TileEntityCoalGenerator) tile;
 		elements.add(flame);
 		elements.add(power);
 		this.player = player;
@@ -38,27 +37,19 @@ public class GuiCoalGenerator extends GuiContainerBase {
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
-		super.drawScreen(mouseX, mouseY, par3);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		
 		power.updateDynamicList(getPowerTipList());
-		String t = tile.getRemainingTime();
+		String t = te.getRemainingTime();
 		if(t != null)
-			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%", t);
+			flame.updateDynamicList(Integer.toString(te.getProgress()) + "%", t);
 		else
-			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%");
+			flame.updateDynamicList(Integer.toString(te.getProgress()) + "%");
 		
-		for(GuiElement e : elements) {
-			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
-				drawHoveringText(e.getHoverText(), mouseX, mouseY);
-			}
-		}
+		super.drawScreen(mouseX, mouseY, par3);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = tile.getName();
+        String s = te.getName();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
 	}
@@ -70,17 +61,17 @@ public class GuiCoalGenerator extends GuiContainerBase {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		if(tile.isOn())
-			drawProgressVertical(100-tile.getProgress(), flame); //Flame
-		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
+		if(te.isOn())
+			drawProgressVertical(100-te.getProgress(), flame); //Flame
+		drawProgressVertical(te.getStoredEnergyPercentage(), power); //Powerbar
 	}	
 	
 	private List<String> getPowerTipList(){
 		List<String> powerList = new ArrayList<String>();
-		powerList.add(getFormattedInt(tile.getStoredEnergy()) + "RF");
-		powerList.add(Integer.toString(tile.getStoredEnergyPercentage()) + "%");
-		if(tile.isOn()) {
-			TextComponentString text = new TextComponentString("+" + getFormattedInt(tile.getEnergyPerTick())+"RF/t");
+		powerList.add(getFormattedInt(te.getStoredEnergy()) + "RF");
+		powerList.add(Integer.toString(te.getStoredEnergyPercentage()) + "%");
+		if(te.isOn()) {
+			TextComponentString text = new TextComponentString("+" + getFormattedInt(te.getEnergyPerTick())+"RF/t");
 			text.getStyle().setColor(TextFormatting.GREEN);
 			powerList.add(text.getFormattedText());
 		}else {

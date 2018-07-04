@@ -18,15 +18,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiIOConfig extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
-	private TileEntityBase tile;
-	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
 	private final EntityPlayer player;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
 	public GuiIOConfig(EntityPlayer player, TileEntityBase tileEntity) {
-		super(new ContainerIOConfig(player.inventory, tileEntity));
-		tile = tileEntity;
-		elements.add(power);
+		super(new ContainerIOConfig(player.inventory, tileEntity), tileEntity, player);
+		overrideTile = true;
 		this.player = player;
 	}
 

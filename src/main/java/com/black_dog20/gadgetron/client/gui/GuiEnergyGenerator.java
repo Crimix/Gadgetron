@@ -21,8 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiEnergyGenerator extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/generator.png");
-	private TileEntityEnergyGenerator tile;
-	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
+	private TileEntityEnergyGenerator te;
 	private final EntityPlayer player;
 	private GuiElement flame = new GuiElement("flame", 80, 36, 12, 14, 176, 12, I18n.format("gadgetron.container.progress"));
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
@@ -30,8 +29,8 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	private String empty = I18n.format("gadgetron.tank.empty");
 	
 	public GuiEnergyGenerator(EntityPlayer player, TileEntityEnergyGenerator tileEntity) {
-		super(new ContainerEnergyGenerator(player.inventory, tileEntity));
-		tile = tileEntity;
+		super(new ContainerEnergyGenerator(player.inventory, tileEntity), tileEntity, player);
+		te = (TileEntityEnergyGenerator) tile;
 		elements.add(flame);
 		elements.add(power);
 		elements.add(tank);
@@ -41,28 +40,19 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
-		super.drawScreen(mouseX, mouseY, par3);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		
 		power.updateDynamicList(getPowerTipList());
 		tank.updateDynamicList(getTankTipList());
-		String t = tile.getRemainingTime();
+		String t = te.getRemainingTime();
 		if(t != null)
-			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%", t);
+			flame.updateDynamicList(Integer.toString(te.getProgress()) + "%", t);
 		else
-			flame.updateDynamicList(Integer.toString(tile.getProgress()) + "%");
-		
-		for(GuiElement e : elements) {
-			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
-				drawHoveringText(e.getHoverText(), mouseX, mouseY);
-			}
-		}
+			flame.updateDynamicList(Integer.toString(te.getProgress()) + "%");
+		super.drawScreen(mouseX, mouseY, par3);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = tile.getName();
+        String s = te.getName();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
 	}
@@ -74,18 +64,18 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		if(tile.isOn())
-			drawProgressVertical(100-tile.getProgress(), flame); //Flame
-		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
-		drawFluid(tile.getFluid(), tile.getStoredFluidPercentage(), tank);
+		if(te.isOn())
+			drawProgressVertical(100-te.getProgress(), flame); //Flame
+		drawProgressVertical(te.getStoredEnergyPercentage(), power); //Powerbar
+		drawFluid(te.getFluid(), te.getStoredFluidPercentage(), tank);
 	}	
 	
 	private List<String> getPowerTipList(){
 		List<String> powerList = new ArrayList<String>();
-		powerList.add(getFormattedInt(tile.getStoredEnergy()) + "RF");
-		powerList.add(Integer.toString(tile.getStoredEnergyPercentage()) + "%");
-		if(tile.isOn()) {
-			TextComponentString text = new TextComponentString("+" + getFormattedInt(tile.getEnergyPerTick())+"RF/t");
+		powerList.add(getFormattedInt(te.getStoredEnergy()) + "RF");
+		powerList.add(Integer.toString(te.getStoredEnergyPercentage()) + "%");
+		if(te.isOn()) {
+			TextComponentString text = new TextComponentString("+" + getFormattedInt(te.getEnergyPerTick())+"RF/t");
 			text.getStyle().setColor(TextFormatting.GREEN);
 			powerList.add(text.getFormattedText());
 		}else {
@@ -98,15 +88,15 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 	
 	private List<String> getTankTipList(){
 		List<String> tankList = new ArrayList<String>();
-		if(tile.getTank().getFluid() == null) {
+		if(te.getTank().getFluid() == null) {
 			tankList.add(empty);
 		}
 		else {
-			tankList.add(tile.getTank().getFluid().getLocalizedName());
+			tankList.add(te.getTank().getFluid().getLocalizedName());
 		}
-		tankList.add(getFormattedInt(tile.getStoredFluid())+"mB");
-		tankList.add(Integer.toString(tile.getStoredFluidPercentage()) + "%");
-		tankList.add("-" + Double.toString(tile.getFuelUsePerTick())+"mB");
+		tankList.add(getFormattedInt(te.getStoredFluid())+"mB");
+		tankList.add(Integer.toString(te.getStoredFluidPercentage()) + "%");
+		tankList.add("-" + Double.toString(te.getFuelUsePerTick())+"mB");
 		return tankList;
 	}
 }

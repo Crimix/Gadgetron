@@ -1,20 +1,86 @@
 package com.black_dog20.gadgetron.client.gui;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
+import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
+import com.black_dog20.gadgetron.network.PacketHandler;
+import com.black_dog20.gadgetron.network.message.MessageOpenIOConfig;
+import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public abstract class GuiContainerBase extends GuiContainer{
 
-	public GuiContainerBase(Container inventorySlotsIn) {
+	protected ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
+	protected final int xSizeOfTexture = 192 , ySizeOfTexture = 135;
+	protected TileEntityBase tile;
+	protected boolean overrideTile = false;
+	
+	public GuiContainerBase(Container inventorySlotsIn, TileEntityBase tile, EntityPlayer player) {
 		super(inventorySlotsIn);
+		this.tile = tile;
+	}
+
+	@Override
+	public void initGui()
+	{
+		super.initGui();
+		if(!overrideTile && tile.hasConfig()) {
+			int x = tile.getPos().getX();
+			int y = tile.getPos().getY();
+			int z = tile.getPos().getZ();
+			elements.add(new GuiCustomButton(0, "I/O", 150, 0, ()-> PacketHandler.network.sendToServer(new MessageOpenIOConfig(x,y,z))));
+		}
+		this.buttonList.clear();
+
+		int k = (this.width - xSizeOfTexture) / 2;
+		int l = (this.height - ySizeOfTexture) / 2;
+
+		for(GuiElement e : elements) {
+			if(e instanceof GuiCustomButton) {
+				GuiCustomButton b = (GuiCustomButton)e;
+				this.buttonList.add(new GuiButton(b.getId(), k + b.x, l + b.y, b.width, b.height, b.getName()));
+			}
+		}
+		
+	}
+	
+	@Override
+	public void actionPerformed(GuiButton button)
+	{
+		for(GuiElement e : elements) {
+			if(e instanceof GuiCustomButton) {
+				GuiCustomButton b = (GuiCustomButton)e;
+				b.execute(button.id);
+			}
+		}
+	}
+
+	
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float par3) {
+		int k = (this.width - this.xSize) / 2;
+		int l = (this.height - this.ySize) / 2;
+		
+		for(GuiElement e : elements) {
+			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
+				drawHoveringText(e.getHoverText(), mouseX, mouseY);
+			}
+		}
+		super.drawScreen(mouseX, mouseY, par3);
 	}
 	
 	@Override

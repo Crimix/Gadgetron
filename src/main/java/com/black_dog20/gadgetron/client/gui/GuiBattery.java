@@ -19,44 +19,34 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiBattery extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
-	private TileEntityBattery tile;
-	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
+	private TileEntityBattery te;
 	private final EntityPlayer player;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
 	public GuiBattery(EntityPlayer player, TileEntityBattery tileEntity) {
-		super(new ContainerBattery(player.inventory, tileEntity));
-		tile = tileEntity;
+		super(new ContainerBattery(player.inventory, tileEntity), tileEntity, player);
 		elements.add(power);
+		this.te = (TileEntityBattery) tile;
 		this.player = player;
 	}
 
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
+		power.updateDynamicList(getPowerTipList());	
 		super.drawScreen(mouseX, mouseY, par3);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		
-		power.updateDynamicList(getPowerTipList());
-		
-		for(GuiElement e : elements) {
-			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
-				drawHoveringText(e.getHoverText(), mouseX, mouseY);
-			}
-		}
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = tile.getName();
+        String s = te.getName();
         int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
-        String capacity = I18n.format("%s: %s RF",I18n.format("gadgetron.container.capacity"), getFormattedInt(tile.getEnergyCapacity()));
-        String input = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.input"), getFormattedInt(tile.getEnergyStorage().getMaxReceive()));
-        String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.output"), getFormattedInt(tile.getEnergyStorage().getMaxExtract()));
+        String capacity = I18n.format("%s: %s RF",I18n.format("gadgetron.container.capacity"), getFormattedInt(te.getEnergyCapacity()));
+        String input = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.input"), getFormattedInt(te.getEnergyStorage().getMaxReceive()));
+        String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.output"), getFormattedInt(te.getEnergyStorage().getMaxExtract()));
         l-=10;
         k-=80;
         this.fontRenderer.drawString(capacity, k, l, 4210752);
@@ -73,13 +63,13 @@ public class GuiBattery extends GuiContainerBase {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		drawProgressVertical(tile.getStoredEnergyPercentage(), power); //Powerbar
+		drawProgressVertical(te.getStoredEnergyPercentage(), power); //Powerbar
 	}	
 	
 	private List<String> getPowerTipList(){
 		List<String> powerList = new ArrayList<String>();
-		powerList.add(getFormattedInt(tile.getStoredEnergy()) + "RF");
-		powerList.add(Integer.toString(tile.getStoredEnergyPercentage()) + "%");
+		powerList.add(getFormattedInt(te.getStoredEnergy()) + "RF");
+		powerList.add(Integer.toString(te.getStoredEnergyPercentage()) + "%");
 		return powerList;
 	}
 }

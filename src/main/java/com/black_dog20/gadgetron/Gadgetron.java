@@ -9,6 +9,7 @@ import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.init.ModItems;
 import com.black_dog20.gadgetron.init.Recipes;
+import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.proxies.IProxy;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.worldgen.OreGenerator;
@@ -45,6 +46,7 @@ public class Gadgetron {
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 		registerOreDict();
 		ModFluids.registerFluids();
+		PacketHandler.init();
 		Proxy.preInit(event);
 		logger.info("Pre Initialization Complete!");
 	}
