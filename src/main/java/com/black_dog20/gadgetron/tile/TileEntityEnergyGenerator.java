@@ -13,7 +13,6 @@ import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -137,6 +136,11 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("burnTime", burnTime);
 		return super.writeToNBT(nbt);
+	}
+	
+	@Override
+	public boolean hasInventory(){
+		return false;
 	}
 
 }

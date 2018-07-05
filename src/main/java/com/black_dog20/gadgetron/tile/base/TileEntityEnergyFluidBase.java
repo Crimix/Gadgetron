@@ -7,7 +7,7 @@ import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.storage.InputTankWrapper;
 import com.black_dog20.gadgetron.storage.OutputTankWrapper;
 import com.black_dog20.gadgetron.utility.MachineFaces;
-import com.black_dog20.gadgetron.utility.MachineFaces.Varient;
+import com.black_dog20.gadgetron.utility.Varient;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -24,13 +24,13 @@ public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
 	public TileEntityEnergyFluidBase(CustomEnergyStorage storage, int sizeMB) {
 		super(storage);
 		tank = new CustomFluidTank(sizeMB);
-		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
+		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
 	}
 	
 	public TileEntityEnergyFluidBase(CustomEnergyStorage storage, CustomFluidTank tank) {
 		super(storage);
 		this.tank = tank;
-		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
+		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
 	}
 	
     @SuppressWarnings("unchecked")

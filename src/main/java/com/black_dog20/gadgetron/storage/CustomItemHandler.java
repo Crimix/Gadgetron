@@ -63,7 +63,13 @@ public class CustomItemHandler extends ItemStackHandler{
     	return super.extractItem(slot, amount, simulate);
     }
 	
+	public int getNumberOfOutputSlots() {
+		return outputSlots;
+	}
 	
+	public int getNumberOfInputSlots() {
+		return inputSlots;
+	}
 	
 	protected boolean isSlotOutput(int slot) {
 		if(slot+1 > inputSlots)

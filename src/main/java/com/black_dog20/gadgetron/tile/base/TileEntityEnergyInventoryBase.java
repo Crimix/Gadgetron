@@ -7,6 +7,7 @@ import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.storage.InputItemHandlerWrapper;
 import com.black_dog20.gadgetron.storage.OutputItemHandlerWrapper;
 import com.black_dog20.gadgetron.utility.MachineFaces;
+import com.black_dog20.gadgetron.utility.Varient;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -22,13 +23,28 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, int inputSlots, int outputSlots) {
 		super(storage);
 		inventory = new CustomItemHandler(inputSlots,outputSlots);
-		inventoryFaces = new MachineFaces(this, MachineFaces.Varient.IVENTORY);
+		boolean hasInput = false;
+		boolean hasOutput = false;
+		
+		if(inputSlots > 0)
+			hasInput = true;
+		if(outputSlots > 0)
+			hasOutput = true;
+		
+		inventoryFaces = new MachineFaces(this, Varient.IVENTORY,hasInput,hasOutput);
 	}
 	
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, CustomItemHandler inventory) {
 		super(storage);
 		this.inventory = inventory;
-		inventoryFaces = new MachineFaces(this, MachineFaces.Varient.IVENTORY);
+		boolean hasInput = false;
+		boolean hasOutput = false;
+		
+		if(inventory.getNumberOfInputSlots() > 0)
+			hasInput = true;
+		if(inventory.getNumberOfOutputSlots() > 0)
+			hasOutput = true;
+		inventoryFaces = new MachineFaces(this, Varient.IVENTORY,hasInput,hasOutput);
 	}
 
 	@SuppressWarnings("unchecked")

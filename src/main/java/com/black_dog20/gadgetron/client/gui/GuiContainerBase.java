@@ -48,7 +48,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 			int x = tile.getPos().getX();
 			int y = tile.getPos().getY();
 			int z = tile.getPos().getZ();
-			this.buttonList.add(new GuiCustomButton(0, "I/O", k+150, l+0, 20, 0.80, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(Gadgetron.guiIOConfig,x,y,z))));
+			this.buttonList.add(new GuiCustomButton(0, "I/O", k+160, l-10, 20, 0.80, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(Gadgetron.guiIOConfig,x,y,z))));
 			
 		}
 		

@@ -8,6 +8,7 @@ import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.storage.InputTankWrapper;
 import com.black_dog20.gadgetron.storage.OutputTankWrapper;
 import com.black_dog20.gadgetron.utility.MachineFaces;
+import com.black_dog20.gadgetron.utility.Varient;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -24,25 +25,25 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, int sizeMB) {
 		super(storage, intputSlots,outputSlots);
 		tank = new CustomFluidTank(sizeMB);
-		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
+		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, CustomFluidTank tank) {
 		super(storage,intputSlots,outputSlots);
 		this.tank = tank;
-		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
+		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, int sizeMB) {
 		super(storage, inventory);
 		tank = new CustomFluidTank(sizeMB);
-		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
+		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, CustomFluidTank tank) {
 		super(storage,inventory);
 		this.tank = tank;
-		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
+		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
 	}
 
     @SuppressWarnings("unchecked")

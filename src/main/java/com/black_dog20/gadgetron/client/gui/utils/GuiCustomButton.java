@@ -1,7 +1,6 @@
 package com.black_dog20.gadgetron.client.gui.utils;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 
