@@ -1,17 +1,29 @@
 package com.black_dog20.gadgetron.utility;
 
+import com.black_dog20.gadgetron.config.ModConfig.Machines;
+import com.black_dog20.gadgetron.tile.base.TileEntityBase;
+
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 public class MachineFaces {
 
+	public enum Id{
+		FRONT, TOP, LEFT, RIGHT, BACK, BOTTOM, AUTO;
+	}
+	
+	public enum Varient{
+		IVENTORY, TANK;
+	}
+	
 	private String facing = "north";
 	private boolean frontInput = false;
 	private boolean frontOutput = false;
 	private boolean topInput = false;
 	private boolean topOutput = false;
-	private boolean buttomInput = false;
-	private boolean buttomOutput = false;
+	private boolean bottomInput = false;
+	private boolean bottomOutput = false;
 	private boolean backInput = false;
 	private boolean backOutput = false;
 	private boolean leftInput = false;
@@ -19,38 +31,112 @@ public class MachineFaces {
 	private boolean rightInput = false;
 	private boolean rightOutput = false;
 	
+	private boolean autoInput = false;
+	private boolean autoOutput = false;
+	
+	private TileEntityBase tile;
+	private Varient varient;
+	
+	public MachineFaces(TileEntityBase tile, MachineFaces.Varient varient) {
+		this.tile = tile;
+		this.varient = varient;
+	}
+	
 	public void setFaceing(String facing) {
 		this.facing = facing;
 	}
 	
-	public void setFrontIO(boolean input, boolean output) {
-		frontInput = input;
-		frontOutput = output;
+	public void update(MachineFaces.Id id, boolean input, boolean output) {
+		switch (id) {
+		case FRONT:
+			frontInput = input;
+			frontOutput = output;
+			break;
+		case TOP:
+			topInput = input;
+			topOutput = output;
+			break;
+		case LEFT:
+			leftInput = input;
+			leftOutput = output;
+			break;
+		case RIGHT:
+			rightInput = input;
+			rightOutput = output;
+			break;
+		case BACK:
+			backInput = input;
+			backOutput = output;
+			break;
+		case BOTTOM:
+			bottomInput = input;
+			bottomOutput = output;
+			break;
+		case AUTO:
+			autoInput = input;
+			autoOutput = output;
+			break;
+
+		default:
+			break;
+		}
+		tile.sendUpdates();
 	}
 	
-	public void setTopIO(boolean input, boolean output) {
-		topInput = input;
-		topOutput = output;
-	}
-	
-	public void setButtomIO(boolean input, boolean output) {
-		buttomInput = input;
-		buttomOutput = output;
-	}
-	
-	public void setBackIO(boolean input, boolean output) {
-		backInput = input;
-		backOutput = output;
-	}
-	
-	public void setLeftIO(boolean input, boolean output) {
-		leftInput = input;
-		leftOutput = output;
-	}
-	
-	public void setRightIO(boolean input, boolean output) {
-		rightInput = input;
-		rightOutput = output;
+	public String getButtonState(MachineFaces.Id id) {
+		switch (id) {
+		case FRONT:
+			if(frontInput && frontOutput)
+				return "I/O";
+			else if(frontInput)
+				return "I";
+			else if(frontOutput)
+				return "O";
+		case TOP:
+			if(topInput && topOutput)
+				return "I/O";
+			else if(topInput)
+				return "I";
+			else if(topOutput)
+				return "O";
+		case LEFT:
+			if(leftInput && leftOutput)
+				return "I/O";
+			else if(leftInput)
+				return "I";
+			else if(leftOutput)
+				return "O";
+		case RIGHT:
+			if(rightInput && rightOutput)
+				return "I/O";
+			else if(rightInput)
+				return "I";
+			else if(rightOutput)
+				return "O";
+		case BACK:
+			if(backInput && backOutput)
+				return "I/O";
+			else if(backInput)
+				return "I";
+			else if(backOutput)
+				return "O";
+		case BOTTOM:
+			if(bottomInput && bottomOutput)
+				return "I/O";
+			else if(bottomInput)
+				return "I";
+			else if(bottomOutput)
+				return "O";
+		case AUTO:
+			if(autoInput && autoOutput)
+				return "I/O";
+			else if(autoInput)
+				return "I";
+			else if(autoOutput)
+				return "O";
+		default:
+			return "";
+		}
 	}
 	
 	public boolean isFaceInput(EnumFacing facing) {
@@ -58,7 +144,7 @@ public class MachineFaces {
 		if(facing == EnumFacing.UP) 
 			return frontInput;
 		else if(facing == EnumFacing.DOWN)
-			return buttomInput;
+			return bottomInput;
 		else if(facing == front)
 			return frontInput;
 		else if(facing == front.getOpposite())
@@ -76,7 +162,7 @@ public class MachineFaces {
 		if(facing == EnumFacing.UP) 
 			return frontOutput;
 		else if(facing == EnumFacing.DOWN)
-			return buttomOutput;
+			return bottomOutput;
 		else if(facing == front)
 			return frontOutput;
 		else if(facing == front.getOpposite())
@@ -89,37 +175,49 @@ public class MachineFaces {
 		return false;
 	}
 	
+	public boolean isAutoOutput() {
+		return autoOutput;
+	}
+	
+	public boolean isAutoInput() {
+		return autoInput;
+	}
+	
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setString("facing", facing);
-		nbt.setBoolean("frontInput", frontInput);
-		nbt.setBoolean("frontOutput", frontOutput);
-		nbt.setBoolean("topInput", topInput);
-		nbt.setBoolean("topOutput", topOutput);
-		nbt.setBoolean("buttomInput", buttomInput);
-		nbt.setBoolean("buttomOutput", buttomOutput);
-		nbt.setBoolean("backInput", backInput);
-		nbt.setBoolean("backOutput", backOutput);
-		nbt.setBoolean("leftInput", leftInput);
-		nbt.setBoolean("leftOutput", leftOutput);
-		nbt.setBoolean("rightInput", rightInput);
-		nbt.setBoolean("rightOutput", rightOutput);
+		nbt.setString(varient.toString()+"facing", facing);
+		nbt.setBoolean(varient.toString()+"frontInput", frontInput);
+		nbt.setBoolean(varient.toString()+"frontOutput", frontOutput);
+		nbt.setBoolean(varient.toString()+"topInput", topInput);
+		nbt.setBoolean(varient.toString()+"topOutput", topOutput);
+		nbt.setBoolean(varient.toString()+"bottomInput", bottomInput);
+		nbt.setBoolean(varient.toString()+"bottomOutput", bottomOutput);
+		nbt.setBoolean(varient.toString()+"backInput", backInput);
+		nbt.setBoolean(varient.toString()+"backOutput", backOutput);
+		nbt.setBoolean(varient.toString()+"leftInput", leftInput);
+		nbt.setBoolean(varient.toString()+"leftOutput", leftOutput);
+		nbt.setBoolean(varient.toString()+"rightInput", rightInput);
+		nbt.setBoolean(varient.toString()+"rightOutput", rightOutput);
+		nbt.setBoolean(varient.toString()+"autoInput", autoInput);
+		nbt.setBoolean(varient.toString()+"autoOutput", autoOutput);
 		return nbt;
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt) {
-		facing = nbt.getString("facing");
-		frontInput = nbt.getBoolean("frontInput");
-		frontOutput = nbt.getBoolean("frontOutput");
-		topInput= nbt.getBoolean("topInput");
-		topOutput = nbt.getBoolean("topOutput");
-		buttomInput = nbt.getBoolean("buttomInput");
-		buttomOutput = nbt.getBoolean("buttomOutput");
-		backInput = nbt.getBoolean("backInput");
-		backOutput = nbt.getBoolean("backOutput");
-		leftInput = nbt.getBoolean("leftInput");
-		leftOutput = nbt.getBoolean("leftOutput");
-		rightInput = nbt.getBoolean("rightInput");
-		rightOutput = nbt.getBoolean("rightOutput");
+		facing = nbt.getString(varient.toString()+"facing");
+		frontInput = nbt.getBoolean(varient.toString()+"frontInput");
+		frontOutput = nbt.getBoolean(varient.toString()+"frontOutput");
+		topInput= nbt.getBoolean(varient.toString()+"topInput");
+		topOutput = nbt.getBoolean(varient.toString()+"topOutput");
+		bottomInput = nbt.getBoolean(varient.toString()+"bottomInput");
+		bottomOutput = nbt.getBoolean(varient.toString()+"bottomOutput");
+		backInput = nbt.getBoolean(varient.toString()+"backInput");
+		backOutput = nbt.getBoolean(varient.toString()+"backOutput");
+		leftInput = nbt.getBoolean(varient.toString()+"leftInput");
+		leftOutput = nbt.getBoolean(varient.toString()+"leftOutput");
+		rightInput = nbt.getBoolean(varient.toString()+"rightInput");
+		rightOutput = nbt.getBoolean(varient.toString()+"rightOutput");
+		autoInput = nbt.getBoolean(varient.toString()+"autoInput");
+		autoOutput = nbt.getBoolean(varient.toString()+"autoOutput");
 	}
 	
 	

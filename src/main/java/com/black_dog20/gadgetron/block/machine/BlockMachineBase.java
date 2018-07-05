@@ -53,7 +53,7 @@ public class BlockMachineBase extends BlockBase implements IItemModelRegister {
 		}
 		else {
 			if(te instanceof TileEntityBase) {
-				playerIn.openGui(Gadgetron.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+				playerIn.openGui(Gadgetron.instance, Gadgetron.guiAutoTileEntityID, worldIn, pos.getX(), pos.getY(), pos.getZ());
 				return true;
 			}
 		}

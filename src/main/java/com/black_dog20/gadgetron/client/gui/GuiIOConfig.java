@@ -1,7 +1,5 @@
 package com.black_dog20.gadgetron.client.gui;
 
-import java.util.ArrayList;
-
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
@@ -10,11 +8,12 @@ import com.black_dog20.gadgetron.container.ContainerIOConfig;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
+import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
+import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
+import com.black_dog20.gadgetron.utility.MachineFaces;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,21 +22,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiIOConfig extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/empty.png");
 	private final EntityPlayer player;
-	private GuiCustomButton inventoryTop = new GuiCustomButton(1, "", 150, 0,null);
-	private GuiCustomButton inventoryFront = new GuiCustomButton(2, "", 150, 0,null);
-	private GuiCustomButton inventoryLeft = new GuiCustomButton(3, "", 150, 0,null);
-	private GuiCustomButton inventoryRight = new GuiCustomButton(4, "", 150, 0,null);
-	private GuiCustomButton inventoryBack = new GuiCustomButton(5, "", 150, 0,null);
-	private GuiCustomButton inventoryAutoI = new GuiCustomButton(4, "", 150, 0,null);
-	private GuiCustomButton inventoryAutoO = new GuiCustomButton(5, "", 150, 0,null);
 	
-	private GuiCustomButton tankTop = new GuiCustomButton(6, "", 150, 0,null);
-	private GuiCustomButton tankFront = new GuiCustomButton(7, "", 150, 0,null);
-	private GuiCustomButton tankLeft = new GuiCustomButton(8, "", 150, 0,null);
-	private GuiCustomButton tankRight = new GuiCustomButton(9, "", 150, 0,null);
-	private GuiCustomButton tankBack = new GuiCustomButton(10, "", 150, 0,null);
-	private GuiCustomButton tankAutoI = new GuiCustomButton(11, "", 150, 0,null);
-	private GuiCustomButton tankAutoO = new GuiCustomButton(12, "", 150, 0,null);
+	private GuiButton inventoryTop; 
+	private GuiButton inventoryFront;
+	private GuiButton inventoryLeft;
+	private GuiButton inventoryRight; 
+	private GuiButton inventoryBack; 
+	private GuiButton inventoryAutoI;
+	private GuiButton inventoryAutoO;
+	
+/*	private final GuiButton tankTop = new GuiCustomButton(6, "", 150, 0,null);
+	private final GuiButton tankFront = new GuiCustomButtonElement(7, "", 150, 0,null);
+	private final GuiButton tankLeft = new GuiCustomButtonElement(8, "", 150, 0,null);
+	private final GuiButton tankRight = new GuiCustomButtonElement(9, "", 150, 0,null);
+	private final GuiButton tankBack = new GuiCustomButtonElement(10, "", 150, 0,null);
+	private final GuiButton tankAutoI = new GuiCustomButtonElement(11, "", 150, 0,null);
+	private final GuiButton tankAutoO = new GuiCustomButtonElement(12, "", 150, 0,null);*/
 	
 	
 	public GuiIOConfig(EntityPlayer player, TileEntityBase tileEntity) {
@@ -50,48 +50,45 @@ public class GuiIOConfig extends GuiContainerBase {
 	public void initGui()
 	{
 		super.initGui();
-			int x = tile.getPos().getX();
-			int y = tile.getPos().getY();
-			int z = tile.getPos().getZ();
-			elements.add(new GuiCustomButton(0, "x", 150, 0, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(0,x,y,z))));
-			elements.add(inventoryTop);
-			elements.add(inventoryFront);
-			elements.add(inventoryLeft);
-			elements.add(inventoryRight);
-			elements.add(inventoryBack);
-			elements.add(inventoryAutoI);
-			elements.add(inventoryAutoO);
-			elements.add(tankTop);
-			elements.add(tankFront);
-			elements.add(tankLeft);
-			elements.add(tankRight);
-			elements.add(tankBack);
-			elements.add(tankAutoI);
-			elements.add(tankAutoO);
+
+		this.buttonList.clear();
 
 		int k = (this.width - xSizeOfTexture) / 2;
 		int l = (this.height - ySizeOfTexture) / 2;
 
-		for(GuiElement e : elements) {
-			if(e instanceof GuiCustomButton) {
-				GuiCustomButton b = (GuiCustomButton)e;
-				this.buttonList.add(new GuiButton(b.getId(), k + b.x, l + b.y, b.width, b.height, b.getName()));
-			}
-		}
+		int x = tile.getPos().getX();
+		int y = tile.getPos().getY();
+		int z = tile.getPos().getZ();
+		this.buttonList.add(new GuiCustomButton(0, "x", k+150, l+0, 20,0.8, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(0,x,y,z))));
+
+		int standardX = 50;
+		int standardY = 0;
+		int heightButton = 20;
+		int widthButton = 20;
+		int buttonOffset = 4;
+		double scale = 0.75;
 		
+		inventoryTop = new GuiCustomButton(1, "", k+standardX, l+standardY, widthButton, scale, null);
+		inventoryFront = new GuiCustomButton(2, "", k+standardX, l+standardY+(heightButton-buttonOffset), widthButton,  scale,null);
+		inventoryLeft = new GuiCustomButton(3, "", k+standardX-(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale,null);
+		inventoryRight = new GuiCustomButton(4, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale,null);
+		inventoryBack = new GuiCustomButton(5, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale,null);
+		inventoryAutoI = new GuiCustomButton(6, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null);
+		inventoryAutoO = new GuiCustomButton(7, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null);
+		
+		this.buttonList.add(inventoryTop);
+		this.buttonList.add(inventoryFront);
+		this.buttonList.add(inventoryLeft);
+		this.buttonList.add(inventoryRight);
+		this.buttonList.add(inventoryBack);
+		this.buttonList.add(inventoryAutoI);
+		this.buttonList.add(inventoryAutoO);
 	}
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
+		updateTextOnButtons();
 		super.drawScreen(mouseX, mouseY, par3);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		
-		for(GuiElement e : elements) {
-			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
-				drawHoveringText(e.getHoverText(), mouseX, mouseY);
-			}
-		}
 	}
 	
 	@Override
@@ -108,5 +105,16 @@ public class GuiIOConfig extends GuiContainerBase {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-	}	
+	}
+	
+	private void updateTextOnButtons() {
+		if(tile instanceof TileEntityEnergyInventoryBase || tile instanceof TileEntityEnergyInventoryFluidBase) {
+			TileEntityEnergyInventoryBase te = (TileEntityEnergyInventoryBase) tile;
+			inventoryTop.displayString = te.inventoryFaces.getButtonState(MachineFaces.Id.TOP);
+			inventoryFront.displayString = te.inventoryFaces.getButtonState(MachineFaces.Id.FRONT);
+			inventoryLeft.displayString = te.inventoryFaces.getButtonState(MachineFaces.Id.LEFT);
+			inventoryRight.displayString = te.inventoryFaces.getButtonState(MachineFaces.Id.RIGHT);
+			inventoryBack.displayString = te.inventoryFaces.getButtonState(MachineFaces.Id.BACK);
+		}
+	}
 }

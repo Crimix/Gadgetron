@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.client.gui;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.network.PacketHandler;
@@ -37,22 +38,18 @@ public abstract class GuiContainerBase extends GuiContainer{
 	public void initGui()
 	{
 		super.initGui();
-		if(!overrideTile && tile.hasConfig()) {
-			int x = tile.getPos().getX();
-			int y = tile.getPos().getY();
-			int z = tile.getPos().getZ();
-			elements.add(new GuiCustomButton(0, "I/O", 150, 0, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(1,x,y,z))));
-		}
+
 		this.buttonList.clear();
 
 		int k = (this.width - xSizeOfTexture) / 2;
 		int l = (this.height - ySizeOfTexture) / 2;
 
-		for(GuiElement e : elements) {
-			if(e instanceof GuiCustomButton) {
-				GuiCustomButton b = (GuiCustomButton)e;
-				this.buttonList.add(new GuiButton(b.getId(), k + b.x, l + b.y, b.width, b.height, b.getName()));
-			}
+		if(!overrideTile && tile.hasConfig()) {
+			int x = tile.getPos().getX();
+			int y = tile.getPos().getY();
+			int z = tile.getPos().getZ();
+			this.buttonList.add(new GuiCustomButton(0, "I/O", k+150, l+0, 20, 0.80, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(Gadgetron.guiIOConfig,x,y,z))));
+			
 		}
 		
 	}
@@ -60,7 +57,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 	@Override
 	public void actionPerformed(GuiButton button)
 	{
-		for(GuiElement e : elements) {
+		for(GuiButton e : buttonList) {
 			if(e instanceof GuiCustomButton) {
 				GuiCustomButton b = (GuiCustomButton)e;
 				b.execute(button.id);

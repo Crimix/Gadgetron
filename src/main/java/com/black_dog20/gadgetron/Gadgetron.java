@@ -35,6 +35,8 @@ public class Gadgetron {
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static IProxy Proxy;
+	public static final int guiAutoTileEntityID = 0;
+	public static final int guiIOConfig = 1;
 	
 	static {
 	    FluidRegistry.enableUniversalBucket();

@@ -19,30 +19,30 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnergyInventoryBase{
 	
 	protected CustomFluidTank tank;
-	protected MachineFaces tankFaces;
+	public MachineFaces tankFaces;
 
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, int sizeMB) {
 		super(storage, intputSlots,outputSlots);
 		tank = new CustomFluidTank(sizeMB);
-		tankFaces = new MachineFaces();
+		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, CustomFluidTank tank) {
 		super(storage,intputSlots,outputSlots);
 		this.tank = tank;
-		tankFaces = new MachineFaces();
+		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, int sizeMB) {
 		super(storage, inventory);
 		tank = new CustomFluidTank(sizeMB);
-		tankFaces = new MachineFaces();
+		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, CustomFluidTank tank) {
 		super(storage,inventory);
 		this.tank = tank;
-		tankFaces = new MachineFaces();
+		tankFaces = new MachineFaces(this, MachineFaces.Varient.TANK);
 	}
 
     @SuppressWarnings("unchecked")

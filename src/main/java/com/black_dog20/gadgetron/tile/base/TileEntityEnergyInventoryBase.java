@@ -17,18 +17,18 @@ import net.minecraftforge.items.ItemStackHandler;
 public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase {
 	
 	protected CustomItemHandler inventory = null;
-	protected MachineFaces inventoryFaces;
+	public MachineFaces inventoryFaces;
 
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, int inputSlots, int outputSlots) {
 		super(storage);
 		inventory = new CustomItemHandler(inputSlots,outputSlots);
-		inventoryFaces = new MachineFaces();
+		inventoryFaces = new MachineFaces(this, MachineFaces.Varient.IVENTORY);
 	}
 	
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, CustomItemHandler inventory) {
 		super(storage);
 		this.inventory = inventory;
-		inventoryFaces = new MachineFaces();
+		inventoryFaces = new MachineFaces(this, MachineFaces.Varient.IVENTORY);
 	}
 
 	@SuppressWarnings("unchecked")
