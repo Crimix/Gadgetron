@@ -38,6 +38,23 @@ public class MachineFaces {
 		this.facing = facing;
 	}
 	
+	
+	public void changeIO(Automation id) {
+		if(id == Automation.INPUT) {
+			if(autoInput)
+				autoInput = false;
+			else
+				autoInput = true;
+		}else if(id == Automation.OUTPUT) {
+			if(autoOutput)
+				autoOutput = false;
+			else
+				autoOutput = true;
+		}
+		
+		tile.sendUpdates();
+	}
+	
 	public void update(FaceId id) {
 		for(Face s : faces) {
 			if(s.getFace() == id)
@@ -82,17 +99,17 @@ public class MachineFaces {
 		EnumFacing front = EnumFacing.byName(this.facing);
 		switch (id) {
 		case FRONT:
-			return front;
+			return front.getOpposite();
 		case TOP:
 			return EnumFacing.UP;
 		case BOTTOM:
 			return EnumFacing.DOWN;
 		case LEFT:
-			return front.rotateY();
-		case RIGHT:
 			return front.rotateY().getOpposite();
+		case RIGHT:
+			return front.rotateY();
 		case BACK:
-			return front.getOpposite();
+			return front;
 		}
 		return null;
 	}
@@ -103,6 +120,14 @@ public class MachineFaces {
 	
 	public boolean isAutoInput() {
 		return autoInput;
+	}
+	
+	public boolean hasInputSlots() {
+		return hasInput;
+	}
+	
+	public boolean hasOutputSlots() {
+		return hasOutput;
 	}
 	
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {

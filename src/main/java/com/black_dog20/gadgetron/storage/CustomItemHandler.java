@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class CustomItemHandler extends ItemStackHandler{
@@ -83,5 +84,34 @@ public class CustomItemHandler extends ItemStackHandler{
 			return true;
 		else 
 			return false;
-	}	
+	}
+	
+	public void transfer(IItemHandler target) {
+		for(int i = 0; i < outputSlots; i++) {
+			ItemStack stack = this.extractItem(i, 1, true);
+			if(stack != null && !stack.isEmpty()) {
+				for(int k = 0; k < target.getSlots(); k++) {
+					ItemStack returnedStack = target.insertItem(k, stack, false);
+					if(returnedStack.isEmpty()) {
+						this.extractItem(i, 1, false);
+					}
+				}
+			}
+		}
+	}
+	
+	public void tryExtract(IItemHandler target) {
+		for(int k = 0; k < target.getSlots(); k++) {
+			ItemStack stack = target.extractItem(k, 1, true);
+			if(stack != null && !stack.isEmpty()) {
+				for(int i = 0; i < inputSlots; i++) {
+					ItemStack returnedStack = this.insertItem(i, stack, false);
+					if(returnedStack.isEmpty()) {
+						target.extractItem(k, 1, false);
+					}
+				}
+			}
+		}
+	}
+	
 }

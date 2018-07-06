@@ -4,6 +4,7 @@ import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyFluidBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
+import com.black_dog20.gadgetron.utility.Automation;
 import com.black_dog20.gadgetron.utility.FaceId;
 import com.black_dog20.gadgetron.utility.Varient;
 
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageUpdateFaceConfig implements IMessage, IMessageHandler<MessageUpdateFaceConfig, IMessage>{
+public class MessageUpdateAutoIO implements IMessage, IMessageHandler<MessageUpdateAutoIO, IMessage>{
 
 	private String id;
 	private String varient;
@@ -23,9 +24,9 @@ public class MessageUpdateFaceConfig implements IMessage, IMessageHandler<Messag
 	private int y; 
 	private int z;
 
-	public MessageUpdateFaceConfig() {}
+	public MessageUpdateAutoIO() {}
 
-	public MessageUpdateFaceConfig(FaceId id, Varient varient, BlockPos pos) {
+	public MessageUpdateAutoIO(Automation id, Varient varient, BlockPos pos) {
 		this.id = id.toString();
 		this.varient = varient.toString();
 		this.x = pos.getX();
@@ -35,21 +36,21 @@ public class MessageUpdateFaceConfig implements IMessage, IMessageHandler<Messag
 
 
 	@Override
-	public IMessage onMessage(MessageUpdateFaceConfig message, MessageContext ctx) {
+	public IMessage onMessage(MessageUpdateAutoIO message, MessageContext ctx) {
 		EntityPlayer player = ctx.getServerHandler().player;
 		player.getServer().addScheduledTask(() -> {
 			TileEntityBase te = (TileEntityBase) player.world.getTileEntity(new BlockPos(message.x, message.y, message.z));
 			if((te instanceof TileEntityEnergyInventoryBase) && Varient.IVENTORY == Varient.valueOf(message.varient)) {
 				TileEntityEnergyInventoryBase tile = (TileEntityEnergyInventoryBase)te;
-				tile.inventoryFaces.update(FaceId.valueOf(message.id));
+				tile.inventoryFaces.changeIO(Automation.valueOf(message.id));
 			}
 			else if((te instanceof TileEntityEnergyInventoryFluidBase || te instanceof TileEntityEnergyFluidBase) && Varient.TANK == Varient.valueOf(message.varient)) {
 				if(te instanceof TileEntityEnergyInventoryFluidBase) {
 					TileEntityEnergyInventoryFluidBase tile = (TileEntityEnergyInventoryFluidBase)te;
-					tile.tankFaces.update(FaceId.valueOf(message.id));
+					tile.tankFaces.changeIO(Automation.valueOf(message.id));
 				} else {
 					TileEntityEnergyFluidBase tile = (TileEntityEnergyFluidBase)te;
-					tile.tankFaces.update(FaceId.valueOf(message.id));
+					tile.tankFaces.changeIO(Automation.valueOf(message.id));
 				}
 			}
 		});

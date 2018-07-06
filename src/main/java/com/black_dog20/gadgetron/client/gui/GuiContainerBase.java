@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
+import com.black_dog20.gadgetron.client.gui.utils.GuiCustomCheckBox;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
@@ -57,11 +58,13 @@ public abstract class GuiContainerBase extends GuiContainer{
 	@Override
 	public void actionPerformed(GuiButton button)
 	{
-		for(GuiButton e : buttonList) {
-			if(e instanceof GuiCustomButton) {
-				GuiCustomButton b = (GuiCustomButton)e;
-				b.execute(button.id);
-			}
+		if(button instanceof GuiCustomButton) {
+			GuiCustomButton b = (GuiCustomButton)button;
+			b.execute(button.id);
+		}
+		if(button instanceof GuiCustomCheckBox) {
+			GuiCustomCheckBox b = (GuiCustomCheckBox)button;
+			b.execute(button.id);
 		}
 	}
 
@@ -72,13 +75,13 @@ public abstract class GuiContainerBase extends GuiContainer{
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		
+		super.drawScreen(mouseX, mouseY, par3);
 		for(GuiElement e : elements) {
 			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
 				drawHoveringText(e.getHoverText(), mouseX, mouseY);
 			}
 		}
 		
-		super.drawScreen(mouseX, mouseY, par3);
 	}
 	
 	@Override

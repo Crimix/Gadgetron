@@ -70,7 +70,6 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	@Override
 	public void update() {
 		if(!world.isRemote) {
-			sendUpdates();
 			if(!this.energyContainer.isFull()) {
 				if(burnTime == 0) {
 					on = false;
@@ -111,8 +110,7 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 					}
 				}
 			}
-			sendUpdates();
-			this.markDirty();
+			super.update();
 		}
 	}
 

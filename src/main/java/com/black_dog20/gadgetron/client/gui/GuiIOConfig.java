@@ -3,15 +3,18 @@ package com.black_dog20.gadgetron.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
+import com.black_dog20.gadgetron.client.gui.utils.GuiCustomCheckBox;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerIOConfig;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
+import com.black_dog20.gadgetron.network.message.MessageUpdateAutoIO;
 import com.black_dog20.gadgetron.network.message.MessageUpdateFaceConfig;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyFluidBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
+import com.black_dog20.gadgetron.utility.Automation;
 import com.black_dog20.gadgetron.utility.FaceId;
 import com.black_dog20.gadgetron.utility.Varient;
 
@@ -88,8 +91,8 @@ public class GuiIOConfig extends GuiContainerBase {
 		inventoryRight = new GuiCustomButton(4, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.RIGHT, Varient.IVENTORY), I18n.format("gadgetron.container.right"));
 		inventoryBack = new GuiCustomButton(5, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BACK, Varient.IVENTORY), I18n.format("gadgetron.container.back"));
 		inventoryBottom = new GuiCustomButton(6, "", k+standardX, l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BOTTOM, Varient.IVENTORY), I18n.format("gadgetron.container.bottom")); 
-		inventoryAutoI = new GuiCustomButton(7, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autoinput"));
-		inventoryAutoO = new GuiCustomButton(8, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autooutput"));
+		inventoryAutoI = new GuiCustomCheckBox(7, I18n.format("gadgetron.container.input"), k+standardX-(int)Math.ceil(widthButton*1.5), l+standardY+((int)Math.ceil(heightButton*1.4)-buttonOffset)-(heightButton/2), scale, sendAuto(Automation.INPUT, Varient.IVENTORY), true, I18n.format("gadgetron.container.autoinput"));
+		inventoryAutoO = new GuiCustomCheckBox(8, I18n.format("gadgetron.container.output"), k+standardX-(int)Math.ceil(widthButton*1.5), l+standardY+(heightButton-buttonOffset)+(heightButton/2), scale, sendAuto(Automation.OUTPUT, Varient.IVENTORY), false, I18n.format("gadgetron.container.autooutput"));
 		
 		standardX = 130;
 		tankTop = new GuiCustomButton(8, "", k+standardX, l+standardY, widthButton, scale, sendUpdate(FaceId.TOP, Varient.TANK), I18n.format("gadgetron.container.top"));
@@ -98,8 +101,8 @@ public class GuiIOConfig extends GuiContainerBase {
 		tankRight = new GuiCustomButton(11, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.RIGHT, Varient.TANK), I18n.format("gadgetron.container.right"));
 		tankBack = new GuiCustomButton(12, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BACK, Varient.TANK), I18n.format("gadgetron.container.back"));
 		tankBottom = new GuiCustomButton(13, "", k+standardX, l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BOTTOM, Varient.TANK), I18n.format("gadgetron.container.bottom")); 
-		tankAutoI = new GuiCustomButton(14, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autoinput"));
-		tankAutoO = new GuiCustomButton(15, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autooutput"));
+		tankAutoI = new GuiCustomCheckBox(14, I18n.format("gadgetron.container.input"), k+standardX-(int)Math.ceil(widthButton*1.5), l+standardY+((int)Math.ceil(heightButton*1.4)-buttonOffset)-(heightButton/2), scale, sendAuto(Automation.INPUT, Varient.TANK), true, I18n.format("gadgetron.container.autoinput"));
+		tankAutoO = new GuiCustomCheckBox(15, I18n.format("gadgetron.container.output"), k+standardX-(int)Math.ceil(widthButton*1.5), l+standardY+(heightButton-buttonOffset)+(heightButton/2), scale,sendAuto(Automation.OUTPUT, Varient.TANK), false, I18n.format("gadgetron.container.autooutput"));
 		
 		if(tile.hasInventory()) {
 			this.buttonList.add(inventoryTop);
@@ -126,7 +129,11 @@ public class GuiIOConfig extends GuiContainerBase {
 	}
 	
 	private Runnable sendUpdate(FaceId id, Varient varient) {
-		return ()-> PacketHandler.network.sendToServer(new MessageUpdateFaceConfig(id.toString(), varient.toString(), tile.getPos()));
+		return ()-> PacketHandler.network.sendToServer(new MessageUpdateFaceConfig(id, varient, tile.getPos()));
+	}
+	
+	private Runnable sendAuto(Automation id, Varient varient) {
+		return ()-> PacketHandler.network.sendToServer(new MessageUpdateAutoIO(id, varient, tile.getPos()));
 	}
 	
 	@Override
@@ -136,6 +143,11 @@ public class GuiIOConfig extends GuiContainerBase {
 		for(GuiButton e : buttonList) {
 			if(e instanceof GuiCustomButton) {
 				GuiCustomButton b = (GuiCustomButton)e;
+				if(b.isMouseOver()) {
+					drawHoveringText(b.getHoverText(), mouseX, mouseY);
+				}
+			} else if(e instanceof GuiCustomCheckBox) {
+				GuiCustomCheckBox b = (GuiCustomCheckBox)e;
 				if(b.isMouseOver()) {
 					drawHoveringText(b.getHoverText(), mouseX, mouseY);
 				}
@@ -173,6 +185,10 @@ public class GuiIOConfig extends GuiContainerBase {
 			inventoryRight.displayString = te.inventoryFaces.getButtonState(FaceId.RIGHT);
 			inventoryBack.displayString = te.inventoryFaces.getButtonState(FaceId.BACK);
 			inventoryBottom.displayString = te.inventoryFaces.getButtonState(FaceId.BOTTOM);
+			((GuiCustomCheckBox)inventoryAutoI).visible = te.inventoryFaces.hasInputSlots();
+			((GuiCustomCheckBox)inventoryAutoI).setIsChecked(te.inventoryFaces.isAutoInput());
+			((GuiCustomCheckBox)inventoryAutoO).visible = te.inventoryFaces.hasOutputSlots();
+			((GuiCustomCheckBox)inventoryAutoO).setIsChecked(te.inventoryFaces.isAutoOutput());
 		}
 		if(tile instanceof TileEntityEnergyFluidBase) {
 			TileEntityEnergyFluidBase te = (TileEntityEnergyFluidBase) tile;
@@ -182,6 +198,8 @@ public class GuiIOConfig extends GuiContainerBase {
 			tankRight.displayString = te.tankFaces.getButtonState(FaceId.RIGHT);
 			tankBack.displayString = te.tankFaces.getButtonState(FaceId.BACK);
 			tankBottom.displayString = te.tankFaces.getButtonState(FaceId.BOTTOM);
+			((GuiCustomCheckBox)tankAutoI).setIsChecked(te.tankFaces.isAutoInput());
+			((GuiCustomCheckBox)tankAutoO).setIsChecked(te.tankFaces.isAutoOutput());
 		}else if(tile instanceof TileEntityEnergyInventoryFluidBase) {
 			TileEntityEnergyInventoryFluidBase te = (TileEntityEnergyInventoryFluidBase) tile;
 			tankTop.displayString = te.tankFaces.getButtonState(FaceId.TOP);
@@ -190,6 +208,8 @@ public class GuiIOConfig extends GuiContainerBase {
 			tankRight.displayString = te.tankFaces.getButtonState(FaceId.RIGHT);
 			tankBack.displayString = te.tankFaces.getButtonState(FaceId.BACK);
 			tankBottom.displayString = te.tankFaces.getButtonState(FaceId.BOTTOM);
+			((GuiCustomCheckBox)tankAutoI).setIsChecked(te.tankFaces.isAutoInput());
+			((GuiCustomCheckBox)tankAutoO).setIsChecked(te.tankFaces.isAutoOutput());
 		}
 	}
 }

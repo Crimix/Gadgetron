@@ -87,7 +87,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 					}
 				}
 			}
-			sendUpdates();
+			super.update();
 		}
 	}
 

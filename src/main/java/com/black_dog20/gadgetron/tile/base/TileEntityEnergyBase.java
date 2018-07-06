@@ -13,6 +13,8 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 
 	protected boolean on = false;
 	protected CustomEnergyStorage energyContainer = null;
+	protected int ticksBetweenAutoIO = 20;
+	protected int currentTickBewteen = 0;
 	
 	public TileEntityEnergyBase(CustomEnergyStorage storage) {
 		this.energyContainer = storage;
@@ -30,7 +32,14 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	}
 
 	@Override
-	public abstract void update();
+	public void update() {
+		if(!world.isRemote) {
+			if(currentTickBewteen % ticksBetweenAutoIO == 0)
+				currentTickBewteen = 0;
+			currentTickBewteen++;
+			sendUpdates();
+		}
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {

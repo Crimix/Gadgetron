@@ -10,9 +10,13 @@ import com.black_dog20.gadgetron.utility.MachineFaces;
 import com.black_dog20.gadgetron.utility.Varient;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase {
@@ -109,5 +113,49 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	@Override
 	public boolean hasTank() {
 		return false;
+	}
+
+	@Override
+	public void update() {
+		if(!world.isRemote) {
+			if(currentTickBewteen % ticksBetweenAutoIO == 0) {
+			if(inventoryFaces.isAutoOutput()) {
+				for (EnumFacing f : EnumFacing.VALUES) {
+					if(inventoryFaces.isFaceOutput(f)) {
+						TileEntity te = world.getTileEntity(pos.offset(f));
+						if (te != null && !te.isInvalid()) {
+							IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, f.getOpposite());
+							if (handler != null) {
+								inventory.transfer(handler);
+								te.markDirty();
+								this.markDirty();
+							}
+						}
+					}
+
+					continue;
+				}
+			}
+
+			if(inventoryFaces.isAutoInput()) {
+				for (EnumFacing f : EnumFacing.VALUES) {
+					if(inventoryFaces.isFaceInput(f)) {
+						TileEntity te = world.getTileEntity(pos.offset(f));
+						if (te != null && !te.isInvalid()) {
+							IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, f.getOpposite());
+							if (handler != null) {
+								inventory.tryExtract(handler);
+								te.markDirty();
+								this.markDirty();
+							}
+						}
+					}
+
+					continue;
+				}
+			}
+			}
+			super.update();
+		}
 	}
 }

@@ -45,7 +45,7 @@ public class TileEntityBattery extends TileEntityEnergyBase {
 				} 
 				continue;
 			}
-			sendUpdates();
+			super.update();
 		}
 	}
 
