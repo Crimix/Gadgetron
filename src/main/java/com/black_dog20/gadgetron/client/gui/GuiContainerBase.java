@@ -77,6 +77,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 				drawHoveringText(e.getHoverText(), mouseX, mouseY);
 			}
 		}
+		
 		super.drawScreen(mouseX, mouseY, par3);
 	}
 	

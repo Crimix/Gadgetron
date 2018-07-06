@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
+import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerIOConfig;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
@@ -15,6 +16,7 @@ import com.black_dog20.gadgetron.utility.FaceId;
 import com.black_dog20.gadgetron.utility.Varient;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -71,7 +73,7 @@ public class GuiIOConfig extends GuiContainerBase {
 		int x = tile.getPos().getX();
 		int y = tile.getPos().getY();
 		int z = tile.getPos().getZ();
-		this.buttonList.add(new GuiCustomButton(0, "x", k+160, l-10, 20,0.8, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(0,x,y,z))));
+		this.buttonList.add(new GuiCustomButton(0, "x", k+160, l-10, 20,0.8, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(0,x,y,z)), I18n.format("gadgetron.container.close")));
 
 		int standardX = 50;
 		int standardY = 0;
@@ -80,24 +82,24 @@ public class GuiIOConfig extends GuiContainerBase {
 		int buttonOffset = 4;
 		double scale = 0.75;
 		
-		inventoryTop = new GuiCustomButton(1, "", k+standardX, l+standardY, widthButton, scale, sendUpdate(FaceId.TOP, Varient.IVENTORY));
-		inventoryFront = new GuiCustomButton(2, "", k+standardX, l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.FRONT, Varient.IVENTORY));
-		inventoryLeft = new GuiCustomButton(3, "", k+standardX-(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.LEFT, Varient.IVENTORY));
-		inventoryRight = new GuiCustomButton(4, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.RIGHT, Varient.IVENTORY));
-		inventoryBack = new GuiCustomButton(5, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BACK, Varient.IVENTORY));
-		inventoryBottom = new GuiCustomButton(6, "", k+standardX, l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BOTTOM, Varient.IVENTORY)); 
-		inventoryAutoI = new GuiCustomButton(7, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null);
-		inventoryAutoO = new GuiCustomButton(8, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null);
+		inventoryTop = new GuiCustomButton(1, "", k+standardX, l+standardY, widthButton, scale, sendUpdate(FaceId.TOP, Varient.IVENTORY), I18n.format("gadgetron.container.top"));
+		inventoryFront = new GuiCustomButton(2, "", k+standardX, l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.FRONT, Varient.IVENTORY), I18n.format("gadgetron.container.front"));
+		inventoryLeft = new GuiCustomButton(3, "", k+standardX-(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.LEFT, Varient.IVENTORY), I18n.format("gadgetron.container.left"));
+		inventoryRight = new GuiCustomButton(4, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.RIGHT, Varient.IVENTORY), I18n.format("gadgetron.container.right"));
+		inventoryBack = new GuiCustomButton(5, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BACK, Varient.IVENTORY), I18n.format("gadgetron.container.back"));
+		inventoryBottom = new GuiCustomButton(6, "", k+standardX, l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BOTTOM, Varient.IVENTORY), I18n.format("gadgetron.container.bottom")); 
+		inventoryAutoI = new GuiCustomButton(7, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autoinput"));
+		inventoryAutoO = new GuiCustomButton(8, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autooutput"));
 		
 		standardX = 130;
-		tankTop = new GuiCustomButton(8, "", k+standardX, l+standardY, widthButton, scale, sendUpdate(FaceId.TOP, Varient.TANK));
-		tankFront = new GuiCustomButton(9, "", k+standardX, l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.FRONT, Varient.TANK));
-		tankLeft = new GuiCustomButton(10, "", k+standardX-(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.LEFT, Varient.TANK));
-		tankRight = new GuiCustomButton(11, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.RIGHT, Varient.TANK));
-		tankBack = new GuiCustomButton(12, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BACK, Varient.TANK));
-		tankBottom = new GuiCustomButton(13, "", k+standardX, l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BOTTOM, Varient.TANK)); 
-		tankAutoI = new GuiCustomButton(14, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null);
-		tankAutoO = new GuiCustomButton(15, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null);
+		tankTop = new GuiCustomButton(8, "", k+standardX, l+standardY, widthButton, scale, sendUpdate(FaceId.TOP, Varient.TANK), I18n.format("gadgetron.container.top"));
+		tankFront = new GuiCustomButton(9, "", k+standardX, l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.FRONT, Varient.TANK), I18n.format("gadgetron.container.front"));
+		tankLeft = new GuiCustomButton(10, "", k+standardX-(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.LEFT, Varient.TANK), I18n.format("gadgetron.container.left"));
+		tankRight = new GuiCustomButton(11, "", k+standardX+(widthButton-buttonOffset), l+standardY+(heightButton-buttonOffset), widthButton, scale, sendUpdate(FaceId.RIGHT, Varient.TANK), I18n.format("gadgetron.container.right"));
+		tankBack = new GuiCustomButton(12, "", k+standardX+(widthButton-buttonOffset), l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BACK, Varient.TANK), I18n.format("gadgetron.container.back"));
+		tankBottom = new GuiCustomButton(13, "", k+standardX, l+standardY+(2*(heightButton-buttonOffset)), widthButton, scale, sendUpdate(FaceId.BOTTOM, Varient.TANK), I18n.format("gadgetron.container.bottom")); 
+		tankAutoI = new GuiCustomButton(14, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)-(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autoinput"));
+		tankAutoO = new GuiCustomButton(15, "", k+standardX-(int)Math.ceil(widthButton*1.7), l+standardY+(heightButton-buttonOffset)+(heightButton/2), widthButton, scale,null, I18n.format("gadgetron.container.autooutput"));
 		
 		if(tile.hasInventory()) {
 			this.buttonList.add(inventoryTop);
@@ -131,17 +133,26 @@ public class GuiIOConfig extends GuiContainerBase {
 	public void drawScreen(int mouseX, int mouseY, float par3) {
 		updateTextOnButtons();
 		super.drawScreen(mouseX, mouseY, par3);
+		for(GuiButton e : buttonList) {
+			if(e instanceof GuiCustomButton) {
+				GuiCustomButton b = (GuiCustomButton)e;
+				if(b.isMouseOver()) {
+					drawHoveringText(b.getHoverText(), mouseX, mouseY);
+				}
+			}
+		}
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = "Slots";
-        String ss = "Tank";
+        String s = I18n.format("gadgetron.container.items");
+        String ss = I18n.format("gadgetron.container.fluid");
         if(tile.hasInventory())
         	this.fontRenderer.drawString(s, (this.xSize / 3)-10- this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         if(tile.hasTank())
         	this.fontRenderer.drawString(ss, (2*(this.xSize / 3))+12- this.fontRenderer.getStringWidth(ss) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
+        
 	}
 
 	@Override

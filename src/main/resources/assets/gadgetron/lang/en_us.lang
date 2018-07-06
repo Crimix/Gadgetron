@@ -76,6 +76,17 @@ gadgetron.container.energystored=Energy Stored
 gadgetron.container.output=Output
 gadgetron.container.input=Input
 gadgetron.container.capacity=Capacity
+gadgetron.container.top=Top
+gadgetron.container.front=Front
+gadgetron.container.left=Left
+gadgetron.container.right=Right
+gadgetron.container.back=Back
+gadgetron.container.bottom=Bottom
+gadgetron.container.autoinput=Auto Input
+gadgetron.container.autooutput=Auto Output
+gadgetron.container.items=Items
+gadgetron.container.fluid=Fluid
+gadgetron.container.close=Close
 
 //Misc
 itemGroup.gadgetron=Gadgetron

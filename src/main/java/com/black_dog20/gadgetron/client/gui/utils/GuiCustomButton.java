@@ -1,5 +1,8 @@
 package com.black_dog20.gadgetron.client.gui.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,13 +13,16 @@ public class GuiCustomButton extends GuiButton {
 	private int myX;
 	private int myY;
 	private Runnable onClick;
+	private List<String> tips = new ArrayList<String>();
 	
-	public GuiCustomButton(int buttonId, String buttonText, int x, int y, int widthIn, double scale, Runnable onClick) {
+	public GuiCustomButton(int buttonId, String buttonText, int x, int y, int widthIn, double scale, Runnable onClick, String... info) {
 		super(buttonId, x, y, widthIn, 20, buttonText);
 		this.scale = scale;
 		myX = x;
 		myY = y;
 		this.onClick = onClick;
+		for(String s : info)
+			tips.add(s);
 	}
 
 	@Override
@@ -44,6 +50,10 @@ public class GuiCustomButton extends GuiButton {
 		if(this.id == id)
 			if(onClick != null)
 				onClick.run();
+	}
+	
+	public List<String> getHoverText(){
+		return tips;
 	}
 
 }
