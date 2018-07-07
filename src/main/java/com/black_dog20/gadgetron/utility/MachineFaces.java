@@ -99,17 +99,17 @@ public class MachineFaces {
 		EnumFacing front = EnumFacing.byName(this.facing);
 		switch (id) {
 		case FRONT:
-			return front.getOpposite();
+			return front;
 		case TOP:
 			return EnumFacing.UP;
 		case BOTTOM:
 			return EnumFacing.DOWN;
 		case LEFT:
-			return front.rotateY().getOpposite();
-		case RIGHT:
 			return front.rotateY();
+		case RIGHT:
+			return front.rotateY().getOpposite();
 		case BACK:
-			return front;
+			return front.getOpposite();
 		}
 		return null;
 	}

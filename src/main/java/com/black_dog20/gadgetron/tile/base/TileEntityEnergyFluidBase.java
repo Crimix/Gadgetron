@@ -163,4 +163,10 @@ public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
 		}
 	}
 	
+	@Override
+	public void setFront(String facing) {
+		super.setFront(facing);
+		tankFaces.setFaceing(facing);
+	}
+	
 }

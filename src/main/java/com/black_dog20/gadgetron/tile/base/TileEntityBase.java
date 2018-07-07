@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class TileEntityBase extends TileEntity implements ITickable{
 
 	protected String name ="NoName";
-	private String faceing = "north";
+	protected String faceing = "north";
 	
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
@@ -106,6 +106,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 
 	public void setFront(String facing) {
 		this.faceing = facing;
+		sendUpdates();
 	}
 	
 	public boolean hasConfig() {

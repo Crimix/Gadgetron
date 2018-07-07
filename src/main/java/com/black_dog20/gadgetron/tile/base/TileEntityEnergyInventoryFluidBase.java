@@ -28,24 +28,28 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 		super(storage, intputSlots,outputSlots);
 		tank = new CustomFluidTank(sizeMB);
 		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
+		tankFaces.setFaceing(faceing);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, CustomFluidTank tank) {
 		super(storage,intputSlots,outputSlots);
 		this.tank = tank;
 		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
+		tankFaces.setFaceing(faceing);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, int sizeMB) {
 		super(storage, inventory);
 		tank = new CustomFluidTank(sizeMB);
 		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
+		tankFaces.setFaceing(faceing);
 	}
 	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, CustomItemHandler inventory, CustomFluidTank tank) {
 		super(storage,inventory);
 		this.tank = tank;
 		tankFaces = new MachineFaces(this, Varient.TANK,true,true);
+		tankFaces.setFaceing(faceing);
 	}
 
     @SuppressWarnings("unchecked")
@@ -171,5 +175,11 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 			}
 			super.update();
 		}
+	}
+	
+	@Override
+	public void setFront(String facing) {
+		super.setFront(facing);
+		tankFaces.setFaceing(facing);
 	}
 }

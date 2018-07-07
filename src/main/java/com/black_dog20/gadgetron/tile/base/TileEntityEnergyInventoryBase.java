@@ -36,6 +36,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 			hasOutput = true;
 		
 		inventoryFaces = new MachineFaces(this, Varient.IVENTORY,hasInput,hasOutput);
+		inventoryFaces.setFaceing(faceing);
 	}
 	
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, CustomItemHandler inventory) {
@@ -49,6 +50,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 		if(inventory.getNumberOfOutputSlots() > 0)
 			hasOutput = true;
 		inventoryFaces = new MachineFaces(this, Varient.IVENTORY,hasInput,hasOutput);
+		inventoryFaces.setFaceing(faceing);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -157,5 +159,11 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 			}
 			super.update();
 		}
+	}
+	
+	@Override
+	public void setFront(String facing) {
+		super.setFront(facing);
+		inventoryFaces.setFaceing(facing);
 	}
 }

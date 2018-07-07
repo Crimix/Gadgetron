@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.init;
 import com.black_dog20.gadgetron.item.ItemBase;
 import com.black_dog20.gadgetron.item.tools.ItemAxeBase;
 import com.black_dog20.gadgetron.item.tools.ItemHoeBase;
+import com.black_dog20.gadgetron.item.tools.ItemPDA;
 import com.black_dog20.gadgetron.item.tools.ItemPickaxeBase;
 import com.black_dog20.gadgetron.item.tools.ItemShovelBase;
 import com.black_dog20.gadgetron.item.tools.ItemSwordBase;
@@ -68,6 +69,8 @@ public class ModItems {
 	public static ItemShovelBase TitaniumShovel = new ItemShovelBase("titaniumShovel", Titanium);
 	public static ItemSwordBase TitaniumSword = new ItemSwordBase("titaniumSword", Titanium);
 	
+	public static ItemPDA pda = new ItemPDA();
+	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
 		IForgeRegistry<Item> r = evt.getRegistry();
@@ -108,5 +111,7 @@ public class ModItems {
 		r.register(TitaniumPickaxe);
 		r.register(TitaniumShovel);
 		r.register(TitaniumSword);
+		
+		r.register(pda);
 	}
 }
