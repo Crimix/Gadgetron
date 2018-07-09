@@ -36,9 +36,9 @@ public class ModBlocks {
 	public static BlockBase TitaniumBlock = (BlockBase) new BlockBase(Material.ROCK, "titaniumBlock").setHardness(1.0F);
 	public static BlockBase Machine_block = (BlockBase) new BlockBase(Material.IRON, "machine_block").setHardness(1.0F);
 	
-	public static BlockMachineBase Generator = new BlockEnergyGenerator("energy_generator_T1", ModConfig.machines.fuelGenerator.capacity, ModConfig.machines.fuelGenerator.capacityTank, ModConfig.machines.fuelGenerator.speed, ModConfig.machines.fuelGenerator.generateRfPerTick, ModConfig.machines.fuelGenerator.cosumeMbPerOperation);
-	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator("coal_generator_T1", ModConfig.machines.coalGenerator.capacity, ModConfig.machines.coalGenerator.generateRfPerTick);
-	public static BlockMachineBase Battery_T1 = new BlockBattery("Battery_T1", ModConfig.machines.battery_t1.capacity, ModConfig.machines.battery_t1.rfInputPerTick, ModConfig.machines.battery_t1.rfOutputPerTick);
+	public static BlockMachineBase Generator = new BlockEnergyGenerator();
+	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator();
+	public static BlockMachineBase Battery_T1 = new BlockBattery("Battery_T1");
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {

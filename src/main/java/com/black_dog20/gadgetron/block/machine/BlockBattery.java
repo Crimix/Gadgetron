@@ -8,20 +8,13 @@ import net.minecraft.world.World;
 
 public class BlockBattery extends BlockMachineBase {
 	
-	private int capacity;
-	private int inputRate;
-	private int outputRate;
-	
-	public BlockBattery(String name, int capacity, int inputRate, int outputRate) {
+	public BlockBattery(String name) {
 		super(name);
-		this.capacity = capacity;
-		this.inputRate = inputRate;
-		this.outputRate = outputRate;
 	}
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityBattery(this.getLocalizedName(), capacity, inputRate, outputRate);
+		return new TileEntityBattery(this.getLocalizedName());
 	}
 	
 	@Override

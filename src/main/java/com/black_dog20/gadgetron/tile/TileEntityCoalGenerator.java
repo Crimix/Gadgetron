@@ -1,6 +1,7 @@
 package com.black_dog20.gadgetron.tile;
 
 import com.black_dog20.gadgetron.client.gui.GuiCoalGenerator;
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerCoalGenerator;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 import com.black_dog20.gadgetron.storage.FilteredItemStackHandler;
@@ -31,17 +32,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 
 	private int burnTime = 0;
-	private int energyPerTick = 0;
+	private int energyPerTick = ModConfig.machines.coalGenerator.generateRfPerTick;
 	private int currentItemBurnTime = 1;
 
 	public TileEntityCoalGenerator() {
-		super();
+		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
 	}
 
-	public TileEntityCoalGenerator(String name, int capacity, int energyPerTick) {
-		super(new CustomEnergyStorage(capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
+	public TileEntityCoalGenerator(String name) {
+		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
 		this.name = name;
-		this.energyPerTick = energyPerTick;
 	}
 
 	public static int getItemBurnTime(ItemStack stack)
@@ -152,14 +152,12 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		burnTime = nbt.getInteger("burnTime");
-		energyPerTick = nbt.getInteger("energyPerTick");
 		currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("energyPerTick", energyPerTick);
 		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
 		return super.writeToNBT(nbt);
 	}

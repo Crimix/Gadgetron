@@ -44,12 +44,6 @@ public class BlockMachineBase extends BlockBase implements IItemModelRegister {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if(playerIn.isSneaking()) {
-			if(!worldIn.isRemote) {
-				if(te.hasCapability(CapabilityEnergy.ENERGY, null)) {
-					IEnergyStorage es = te.getCapability(CapabilityEnergy.ENERGY, null);
-					playerIn.sendMessage(new TextComponentString(Integer.toString(es.getEnergyStored())));
-				}
-			}
 		}
 		else {
 			if(te instanceof TileEntityBase) {

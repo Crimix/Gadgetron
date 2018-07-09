@@ -53,7 +53,7 @@ public class BlockRenderHelper {
 	            float z = coordinate.getZ();
 
 	            if(p.getPosition().getDistance((int)x, (int)y, (int)z) <= 50)
-	            	renderBlock(buffer, x, y, z, r / 255.0f, g / 255.0f, b / 255.0f, 1.0f); // .02f
+	            	renderBlock(buffer, x, y, z, r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
 	        }
 	        tessellator.draw();
 	    }
@@ -87,6 +87,46 @@ public class BlockRenderHelper {
 	        buffer.pos(mx, my, mz+1).color(r, g, b, a).endVertex();
 	        buffer.pos(mx, my+1, mz+1).color(r, g, b, a).endVertex();
 	    }
+	    
+		 public static void renderOutlines(RenderWorldLastEvent evt, EntityPlayerSP p, BlockPos coordinate, int r, int g, int b, int thickness) {
+		        double doubleX = p.lastTickPosX + (p.posX - p.lastTickPosX) * evt.getPartialTicks();
+		        double doubleY = p.lastTickPosY + (p.posY - p.lastTickPosY) * evt.getPartialTicks();
+		        double doubleZ = p.lastTickPosZ + (p.posZ - p.lastTickPosZ) * evt.getPartialTicks();
+
+		        RenderHelper.disableStandardItemLighting();
+		        Minecraft.getMinecraft().entityRenderer.disableLightmap();
+		        GlStateManager.disableDepth();
+		        GlStateManager.disableTexture2D();
+		        GlStateManager.disableLighting();
+		        GlStateManager.disableAlpha();
+		        GlStateManager.depthMask(false);
+
+		        GlStateManager.pushMatrix();
+		        GlStateManager.translate(-doubleX, -doubleY, -doubleZ);
+
+		        renderOutlines(p, coordinate, r, g, b, thickness);
+
+		        GlStateManager.popMatrix();
+
+		        Minecraft.getMinecraft().entityRenderer.enableLightmap();
+		        GlStateManager.enableTexture2D();
+		    }
+		 
+		    private static void renderOutlines(EntityPlayerSP p, BlockPos coordinate, int r, int g, int b, int thickness) {
+		        Tessellator tessellator = Tessellator.getInstance();
+
+		        VertexBuffer buffer = tessellator.getBuffer();
+		        buffer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
+		        GL11.glLineWidth(thickness);
+
+		        int x = coordinate.getX();
+		        int y = coordinate.getY();
+		        int z = coordinate.getZ();
+		        
+		        if(p.getPosition().getDistance((int)x, (int)y, (int)z) <= 50)
+		            renderBlock(buffer, x, y, z, r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
+		        tessellator.draw();
+		    }
 
 
 }
