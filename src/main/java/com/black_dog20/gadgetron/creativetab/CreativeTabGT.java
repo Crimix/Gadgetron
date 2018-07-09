@@ -31,7 +31,7 @@ public class CreativeTabGT{
 
 		@Override
 		public String getTranslatedTabLabel() {
-			return I18n.format("itemGroup.tabmachines");
+			return I18n.format("itemGroup.gadgetron:tabmachines");
 		}
 	};
 

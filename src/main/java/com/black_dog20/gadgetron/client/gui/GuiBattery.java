@@ -45,9 +45,9 @@ public class GuiBattery extends GuiContainerBase {
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
         String capacity = I18n.format("%s: %s RF",I18n.format("gadgetron.container.capacity"), getFormattedInt(te.getEnergyCapacity()));
         String input = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.input"), getFormattedInt(te.getEnergyStorage().getMaxReceive()));
-        String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.output"), getFormattedInt(te.getEnergyStorage().getMaxExtract()));
+        String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.outputperblock"), getFormattedInt(te.getEnergyStorage().getMaxExtract()));
         l-=10;
-        k-=80;
+        k-=90;
         this.fontRenderer.drawString(capacity, k, l, 4210752);
         l+=fontRenderer.FONT_HEIGHT;
         this.fontRenderer.drawString(input, k, l, 4210752);

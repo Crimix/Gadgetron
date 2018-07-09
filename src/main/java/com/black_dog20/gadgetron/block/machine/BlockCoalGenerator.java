@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 public class BlockCoalGenerator extends BlockMachineBase {
 
-	public BlockCoalGenerator() {
-		super("coal_generator");
+	public BlockCoalGenerator(String name) {
+		super(name);
 	}
 	
 	@Override

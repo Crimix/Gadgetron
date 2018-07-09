@@ -62,7 +62,7 @@ public class ModConfig {
 		public GeneratorFluidMachineConfig fuelGenerator = new GeneratorFluidMachineConfig(100, 100000, 60, 10, 10000);
 		
 		@Config.LangKey("gadgetron.config.machines.battery_t1")
-		public BatteryConfig battery_t1 = new BatteryConfig(2000, 1500, 1000000);
+		public BatteryConfig battery_t1 = new BatteryConfig(20000, 1500, 1000000);
 	
 	}
 	

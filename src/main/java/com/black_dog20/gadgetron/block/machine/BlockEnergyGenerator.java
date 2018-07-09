@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 public class BlockEnergyGenerator extends BlockMachineBase {
 
-	public BlockEnergyGenerator() {
-		super("energy_generator");
+	public BlockEnergyGenerator(String name) {
+		super(name);
 	}
 	
 	@Override

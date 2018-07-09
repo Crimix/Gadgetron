@@ -36,8 +36,8 @@ public class ModBlocks {
 	public static BlockBase TitaniumBlock = (BlockBase) new BlockBase(Material.ROCK, "titaniumBlock").setHardness(1.0F);
 	public static BlockBase Machine_block = (BlockBase) new BlockBase(Material.IRON, "machine_block").setHardness(1.0F);
 	
-	public static BlockMachineBase Generator = new BlockEnergyGenerator();
-	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator();
+	public static BlockMachineBase Generator = new BlockEnergyGenerator("energy_generator_t1");
+	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator("coal_generator_t1");
 	public static BlockMachineBase Battery_T1 = new BlockBattery("Battery_T1");
 	
 	@SubscribeEvent
