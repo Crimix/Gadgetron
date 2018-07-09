@@ -48,7 +48,7 @@ public class GuiCoalGenerator extends GuiContainerBase {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = te.getName();
+		String s = I18n.format("gadgetron.container.coal_generator");
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
 	}

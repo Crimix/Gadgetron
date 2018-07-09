@@ -38,7 +38,7 @@ public class GuiBattery extends GuiContainerBase {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        String s = te.getName();
+        String s = I18n.format("gadgetron.container.battery");
         int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);

@@ -13,11 +13,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -25,6 +22,10 @@ public abstract class TileEntityEnergyFluidBase extends TileEntityEnergyBase{
 
 	protected CustomFluidTank tank;
 	public MachineFaces tankFaces;
+	
+	public TileEntityEnergyFluidBase() {
+		super();
+	}
 	
 	public TileEntityEnergyFluidBase(CustomEnergyStorage storage, int sizeMB) {
 		super(storage);

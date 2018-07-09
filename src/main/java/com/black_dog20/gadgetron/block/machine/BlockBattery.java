@@ -10,8 +10,8 @@ public class BlockBattery extends BlockMachineBase {
 	
 	private int capacity;
 	private int inputRate;
-	private int outputRate
-	;
+	private int outputRate;
+	
 	public BlockBattery(String name, int capacity, int inputRate, int outputRate) {
 		super(name);
 		this.capacity = capacity;

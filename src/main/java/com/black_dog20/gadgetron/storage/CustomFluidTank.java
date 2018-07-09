@@ -2,7 +2,6 @@ package com.black_dog20.gadgetron.storage;
 
 import java.util.function.Function;
 
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;

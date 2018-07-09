@@ -8,13 +8,24 @@ import net.minecraft.world.World;
 
 public class BlockEnergyGenerator extends BlockMachineBase {
 
-	public BlockEnergyGenerator() {
-		super("energy_generator");
+	private int capacity;
+	private int capacityTank;
+	private int speed;
+	private int generate;
+	private int consume;
+	
+	public BlockEnergyGenerator(String name, int capacity, int capacityTank, int speed, int generate, int consume) {
+		super(name);
+		this.capacity = capacity;
+		this.capacityTank = capacityTank;
+		this.speed = speed;
+		this.generate = generate;
+		this.consume = consume;
 	}
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityEnergyGenerator(this.getLocalizedName());
+		return new TileEntityEnergyGenerator(this.getLocalizedName(), capacity, capacityTank, speed, generate, consume);
 	}
 	
 	@Override

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
-import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
 import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
@@ -26,17 +25,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
 	private int burnTime = 0;
-	private int ticksToBurnfuel = ModConfig.machines.fuelGenerator.speed;
-	private int energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
-	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
+	private int ticksToBurnfuel;
+	private int energyPerTick;
+	private int fuelUse;
 
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
+		super();
 	}
 
-	public TileEntityEnergyGenerator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
+	public TileEntityEnergyGenerator(String name, int capacity, int capacityTank, int speed, int generate, int consume) {
+		super(new CustomEnergyStorage(capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(capacityTank, (f) -> isFuel(f)));
 		this.name = name;
+		this.ticksToBurnfuel = speed;
+		this.energyPerTick = generate;
+		this.fuelUse = consume;
 	}
 	
 	private static boolean isFuel(FluidStack fluid) {
@@ -129,12 +131,18 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		burnTime = nbt.getInteger("burnTime");
+		ticksToBurnfuel = nbt.getInteger("ticksToBurnfuel");
+		energyPerTick = nbt.getInteger("energyPerTick");
+		ticksToBurnfuel = nbt.getInteger("ticksToBurnfuel");
 		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("burnTime", burnTime);
+		nbt.setInteger("ticksToBurnfuel", ticksToBurnfuel);
+		nbt.setInteger("energyPerTick", energyPerTick);
+		nbt.setInteger("fuelUse", fuelUse);
 		return super.writeToNBT(nbt);
 	}
 	

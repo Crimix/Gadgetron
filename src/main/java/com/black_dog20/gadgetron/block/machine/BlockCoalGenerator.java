@@ -8,13 +8,18 @@ import net.minecraft.world.World;
 
 public class BlockCoalGenerator extends BlockMachineBase {
 
-	public BlockCoalGenerator() {
-		super("coal_generator");
+	private int capacity;
+	private int generatePerTick;
+	
+	public BlockCoalGenerator(String name, int capacity, int generatePerTick) {
+		super(name);
+		this.capacity = capacity;
+		this.generatePerTick = generatePerTick;
 	}
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityCoalGenerator(this.getLocalizedName());
+		return new TileEntityCoalGenerator(this.getLocalizedName(),capacity,generatePerTick);
 	}
 	
 	@Override

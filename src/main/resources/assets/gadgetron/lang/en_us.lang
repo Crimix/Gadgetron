@@ -60,8 +60,8 @@ tile.gadgetron:carbonoxblock.name=Carbonox Block
 tile.gadgetron:trilliumblock.name=Trillium Block
 tile.gadgetron:titaniumblock.name=Titanium Block
 tile.gadgetron:trillium.name=Trillium
-tile.gadgetron:energy_generator.name=Fuel Generator
-tile.gadgetron:coal_generator.name=Coal Generator
+tile.gadgetron:energy_generator_t1.name=Basic Fuel Generator
+tile.gadgetron:coal_generator_t1.name=Basic Coal Generator
 tile.gadgetron:battery_t1.name=Basic Battery
 
 //Fluids
@@ -87,6 +87,9 @@ gadgetron.container.autooutput=Auto Output
 gadgetron.container.items=Items
 gadgetron.container.fluid=Fluid
 gadgetron.container.close=Close
+gadgetron.container.battery=Battery
+gadgetron.container.coal_generator=Coal Generator
+gadgetron.container.energy_generator=Fuel Generator
 
 //Misc
 itemGroup.gadgetron=Gadgetron

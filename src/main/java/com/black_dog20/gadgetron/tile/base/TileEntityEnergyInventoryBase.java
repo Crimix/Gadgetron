@@ -13,8 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -24,6 +22,10 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	protected CustomItemHandler inventory = null;
 	public MachineFaces inventoryFaces;
 
+	public TileEntityEnergyInventoryBase() {
+		super();
+	}
+	
 	public TileEntityEnergyInventoryBase(CustomEnergyStorage storage, int inputSlots, int outputSlots) {
 		super(storage);
 		inventory = new CustomItemHandler(inputSlots,outputSlots);

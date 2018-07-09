@@ -24,6 +24,11 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 	protected CustomFluidTank tank;
 	public MachineFaces tankFaces;
 
+	
+	public TileEntityEnergyInventoryFluidBase() {
+		super();
+	}
+	
 	public TileEntityEnergyInventoryFluidBase(CustomEnergyStorage storage, int intputSlots, int outputSlots, int sizeMB) {
 		super(storage, intputSlots,outputSlots);
 		tank = new CustomFluidTank(sizeMB);

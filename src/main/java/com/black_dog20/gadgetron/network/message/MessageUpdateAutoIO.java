@@ -5,7 +5,6 @@ import com.black_dog20.gadgetron.tile.base.TileEntityEnergyFluidBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
 import com.black_dog20.gadgetron.utility.Automation;
-import com.black_dog20.gadgetron.utility.FaceId;
 import com.black_dog20.gadgetron.utility.Varient;
 
 import io.netty.buffer.ByteBuf;

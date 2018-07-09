@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomCheckBox;
-import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
 import com.black_dog20.gadgetron.container.ContainerIOConfig;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
