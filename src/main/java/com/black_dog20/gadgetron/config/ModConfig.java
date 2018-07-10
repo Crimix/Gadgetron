@@ -2,6 +2,8 @@ package com.black_dog20.gadgetron.config;
 
 import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.config.objects.BatteryConfig;
+import com.black_dog20.gadgetron.config.objects.EnergyFluidGeneratorMachineConfig;
+import com.black_dog20.gadgetron.config.objects.EnergyMachineConfig;
 import com.black_dog20.gadgetron.config.objects.GeneratorFluidMachineConfig;
 import com.black_dog20.gadgetron.config.objects.GeneratorMachineConfig;
 import com.black_dog20.gadgetron.config.objects.OreGenConfig;
@@ -63,6 +65,18 @@ public class ModConfig {
 		
 		@Config.LangKey("gadgetron.config.machines.battery_t1")
 		public BatteryConfig battery_t1 = new BatteryConfig(20000, 1500, 1000000);
+		
+		@Config.LangKey("gadgetron.config.machines.smelter")
+		public EnergyFluidGeneratorMachineConfig smelter = new EnergyFluidGeneratorMachineConfig(1000, 100000, 60, 1000, 10000);
+		
+		@Config.LangKey("gadgetron.config.machines.fabricator")
+		public EnergyMachineConfig fabricator = new EnergyMachineConfig(100,100000,60);
+		
+		@Config.LangKey("gadgetron.config.machines.extractor")
+		public EnergyMachineConfig extractor = new EnergyMachineConfig(100,100000,60);
+		
+		@Config.LangKey("gadgetron.config.machines.processor")
+		public EnergyMachineConfig processor = new EnergyMachineConfig(100,100000,60);
 	
 	}
 	
