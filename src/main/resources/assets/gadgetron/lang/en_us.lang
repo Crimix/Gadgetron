@@ -96,10 +96,14 @@ gadgetron.container.autooutput=Auto Output
 gadgetron.container.items=Items
 gadgetron.container.fluid=Fluid
 gadgetron.container.close=Close
+gadgetron.container.outputperblock=Output/B
+
 gadgetron.container.battery=Battery
 gadgetron.container.coal_generator=Coal Generator
 gadgetron.container.energy_generator=Fuel Generator
-gadgetron.container.outputperblock=Output/B
+gadgetron.container.smelter=Smelter
+gadgetron.container.extractor=Extractor
+
 
 //Misc
 itemGroup.gadgetron=Gadgetron

@@ -140,4 +140,9 @@ public class CustomItemHandler extends ItemStackHandler {
             throw new RuntimeException("Slot " + slot + " not in valid range - [0," + stacks.size() + ")");
     }
 	
+	
+	public boolean canMerge(int slot, ItemStack stack) {
+		return (slot < 0 || slot >= stacks.size()) && ItemStack.areItemsEqual(stacks.get(slot), stack) && stacks.get(slot).getMaxStackSize() >= (stacks.get(slot).getCount()+stack.getCount());
+	}
+	
 }

@@ -19,14 +19,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiFabricator extends GuiContainerBase {
 	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
 	private TileEntityFabricator te;
-	private final EntityPlayer player;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
 	
 	public GuiFabricator(EntityPlayer player, TileEntityFabricator tileEntity) {
 		super(new ContainerFabricator(player.inventory, tileEntity), tileEntity, player);
 		elements.add(power);
 		this.te = (TileEntityFabricator) tile;
-		this.player = player;
 	}
 
 	

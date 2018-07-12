@@ -21,6 +21,10 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	
 	protected CustomItemHandler inventory = null;
 	public MachineFaces inventoryFaces;
+	
+	protected int burnTime = 0;
+	protected int currentUsedTime = 1;
+	protected int energyPerTick = 1;
 
 	public TileEntityEnergyInventoryBase() {
 		super();
@@ -167,5 +171,28 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	public void setFront(String facing) {
 		super.setFront(facing);
 		inventoryFaces.setFaceing(facing);
+	}
+	
+	public int getProgress() {
+		if(currentUsedTime == 0) {
+			return 0;
+		}
+		double t = ((double)burnTime / currentUsedTime) *100;
+		return (int) Math.ceil(t);
+	}
+
+	public String getRemainingTime() {
+		if(burnTime != 0) {
+			double ticksLeft = currentUsedTime - burnTime;
+			double secs = ticksLeft / 20;
+			int secI = (int) Math.ceil(secs);
+			return Integer.toString(secI) + "s";
+		}else {
+			return null;
+		}
+	}
+	
+	public String getName() {
+		return "";
 	}
 }

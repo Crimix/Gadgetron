@@ -1,5 +1,9 @@
 package com.black_dog20.gadgetron.container;
 
+import javax.annotation.Nonnull;
+
+import com.black_dog20.gadgetron.container.slot.CustomSlotItemHandler;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +14,24 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerMachine extends Container{
 
-
+	private CustomSlotItemHandler output;
+	private CustomSlotItemHandler input;
+	
 	public ContainerMachine(InventoryPlayer playerInventory, TileEntityEnergyInventoryBase tile){
+		
+		
+		
+		input = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 0, 56, 35);
+		output = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 1, 116, 35) {
+		    @Override
+		    public boolean isItemValid(@Nonnull ItemStack stack)
+		    {
+		        	return false;
+		    }
+		};
+		
+		this.addSlotToContainer(input);
+		this.addSlotToContainer(output);
 		
 		for(int i = 0; i < 3; ++i){
 			for(int j = 0; j < 9; ++j){

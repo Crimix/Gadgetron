@@ -24,6 +24,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	public TileEntityEnergyBase() {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {

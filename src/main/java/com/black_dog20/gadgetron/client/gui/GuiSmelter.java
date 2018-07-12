@@ -49,6 +49,9 @@ public class GuiSmelter extends GuiContainerBase {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+		String s = I18n.format("gadgetron.container.smelter");
+        this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+        this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
 	}
 
 	@Override
