@@ -2,6 +2,7 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +14,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 
 	protected boolean on = false;
 	protected CustomEnergyStorage energyContainer = null;
-	protected int ticksBetweenAutoIO = 20;
+	protected int ticksBetweenAutoIO = ModConfig.machines.automation_ticks;
 	protected int currentTickBewteen = 0;
 	
 	public TileEntityEnergyBase(CustomEnergyStorage storage) {
@@ -92,5 +93,9 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 			nbt.setBoolean("on", on);
 			super.readFromCustomInfoNBT(nbt);
 		}
+	}
+	
+	public void notifyContainers() {
+		
 	}
 }

@@ -4,11 +4,10 @@ import net.minecraftforge.common.config.Config;
 
 public class EnergyFluidGeneratorMachineConfig {
 
-	public EnergyFluidGeneratorMachineConfig(int consumeRfPertick, int capacityRF, int speed, int createMbPerOperation, int capacityTank) {
+	public EnergyFluidGeneratorMachineConfig(int consumeRfPertick, int capacityRF, double speed, int capacityTank) {
 		this.consumeRfPertick = consumeRfPertick;
 		this.capacity = capacityRF;
 		this.speed=speed;
-		this.createMbPerOperation = createMbPerOperation;
 		this.capacityTank = capacityTank;
 	}
 	
@@ -21,12 +20,8 @@ public class EnergyFluidGeneratorMachineConfig {
 	public int capacity = 100000;
 	
 	@Config.LangKey("gadgetron.config.machine.speed")
-	@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)
-	public int speed = 60;
-	
-	@Config.LangKey("gadgetron.config.machine.createMb")
-	@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)
-	public int createMbPerOperation = 10;
+	@Config.RangeDouble(min = 0.001, max = 10)
+	public double speed = 60;
 
 	@Config.LangKey("gadgetron.config.machine.capacityTank")
 	@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)

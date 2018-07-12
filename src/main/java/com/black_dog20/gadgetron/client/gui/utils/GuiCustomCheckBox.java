@@ -16,6 +16,7 @@ public class GuiCustomCheckBox extends GuiCheckBox {
 	private Runnable onClick;
 	private List<String> tips = new ArrayList<String>();
 	private boolean input;
+	private int boxwidth = 11;
 	
 	public GuiCustomCheckBox(int buttonId, String buttonText, int x, int y, double scale, Runnable onClick, boolean input, String... info) {
 		super(buttonId, x, y, buttonText, false);
@@ -73,7 +74,13 @@ public class GuiCustomCheckBox extends GuiCheckBox {
     {
 		int mouseXC = (int) Math.ceil((double)mouseX / scale);
 		int mouseYC = (int) Math.ceil((double)mouseY / scale);
-		return super.mousePressed(mc,mouseXC, mouseYC);
+        if (this.enabled && this.visible && mouseXC >= this.x && mouseYC >= this.y && mouseXC < this.x + this.boxwidth  && mouseYC < this.y + this.height)
+        {
+            setIsChecked(!isChecked());
+            return true;
+        }
+
+        return false;
     }
 	
 	public void execute(int id) {

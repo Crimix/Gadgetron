@@ -1,7 +1,5 @@
 package com.black_dog20.gadgetron.storage;
 
-import com.black_dog20.gadgetron.config.ModConfig;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;

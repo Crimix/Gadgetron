@@ -4,7 +4,7 @@ import net.minecraftforge.common.config.Config;
 
 public class EnergyMachineConfig {
 
-	public EnergyMachineConfig(int consumeRfPertick, int capacityRF, int speed) {
+	public EnergyMachineConfig(int consumeRfPertick, int capacityRF, double speed) {
 		this.consumeRfPertick = consumeRfPertick;
 		this.capacity = capacityRF;
 		this.speed = speed;
@@ -19,6 +19,6 @@ public class EnergyMachineConfig {
 	public int capacity = 100000;
 	
 	@Config.LangKey("gadgetron.config.machine.speed")
-	@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)
-	public int speed = 60;
+	@Config.RangeDouble(min = 0.001, max = 10)
+	public double speed = 60;
 }

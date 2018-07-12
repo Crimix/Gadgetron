@@ -47,14 +47,6 @@ public class GuiIOConfig extends GuiContainerBase {
 	private GuiButton tankAutoI;
 	private GuiButton tankAutoO;
 	
-/*	private final GuiButton tankTop = new GuiCustomButton(6, "", 150, 0,null);
-	private final GuiButton tankFront = new GuiCustomButtonElement(7, "", 150, 0,null);
-	private final GuiButton tankLeft = new GuiCustomButtonElement(8, "", 150, 0,null);
-	private final GuiButton tankRight = new GuiCustomButtonElement(9, "", 150, 0,null);
-	private final GuiButton tankBack = new GuiCustomButtonElement(10, "", 150, 0,null);
-	private final GuiButton tankAutoI = new GuiCustomButtonElement(11, "", 150, 0,null);
-	private final GuiButton tankAutoO = new GuiCustomButtonElement(12, "", 150, 0,null);*/
-	
 	
 	public GuiIOConfig(EntityPlayer player, TileEntityBase tileEntity) {
 		super(new ContainerIOConfig(player.inventory, tileEntity), tileEntity, player);

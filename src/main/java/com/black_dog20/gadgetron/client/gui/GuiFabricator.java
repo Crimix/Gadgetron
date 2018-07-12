@@ -6,9 +6,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
-import com.black_dog20.gadgetron.container.ContainerBattery;
 import com.black_dog20.gadgetron.container.ContainerFabricator;
-import com.black_dog20.gadgetron.tile.TileEntityBattery;
 import com.black_dog20.gadgetron.tile.TileEntityFabricator;
 
 import net.minecraft.client.resources.I18n;

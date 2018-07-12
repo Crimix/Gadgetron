@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
 	private int burnTime = 0;
-	private int ticksToBurnfuel = ModConfig.machines.fuelGenerator.speed;
+	private int ticksToBurnfuel = (int) Math.ceil(1000*ModConfig.machines.fuelGenerator.speed);
 	private int energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
 	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
 
@@ -40,7 +40,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	}
 	
 	private static boolean isFuel(FluidStack fluid) {
-		return fluid.getFluid() == ModFluids.fluidTrillium;
+		return fluid != null && fluid.getFluid() == ModFluids.fluidTrillium;
 	}
 
 	@Override
@@ -54,14 +54,14 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 						this.tank.drain(fuelUse, true);
 						on = true;
 						burnTime++;
-						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
+						addEnergy();
 					}
 				}else {
 					if(burnTime % ticksToBurnfuel  == 0) {
 						burnTime = 0;
 						on = false;
 					}else {
-						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
+						addEnergy();
 						burnTime++;
 						on = true;
 					}
@@ -91,6 +91,15 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 		}
 	}
 
+	private void addEnergy() {
+		int energy = getEnergyPerTick();
+		this.energyContainer.receiveEnergyInternal(energy, false);
+	}
+	
+	public String getGeneratePerTick() {
+		return Integer.toString(getEnergyPerTick());
+	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public GuiContainer getGUI(EntityPlayer player) {
@@ -119,7 +128,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	}
 
 	public int getEnergyPerTick() {
-		return energyPerTick;
+		return Math.max(10,(int)Math.ceil(((double)getStoredFluidPercentage() /100) * energyPerTick));
 	}
 
 	public double getFuelUsePerTick() {

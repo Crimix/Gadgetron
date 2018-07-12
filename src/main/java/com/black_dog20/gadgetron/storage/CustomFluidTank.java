@@ -28,16 +28,28 @@ public class CustomFluidTank extends FluidTank{
         return super.canFillFluidType(fluid);
     }
 	
-	public void transfer(IFluidHandler target) {
-		FluidStack toExtract = this.drain(20, true);
-		int inserted = target.fill(toExtract, false);
-		this.drain(inserted, false);
+	public void transfer(IFluidHandler target, int amount) {
+		FluidStack toExtract = this.drain(amount, false);
+		int inserted = target.fill(toExtract, true);
+		this.drain(inserted, true);
 	}
 	
-	public void tryExtract(IFluidHandler target) {
-		FluidStack toExtract = target.drain(20, true);
-		int inserted = this.fill(toExtract, false);
-		target.drain(inserted, false);
+	public void tryExtract(IFluidHandler target, int amount) {
+		FluidStack toExtract = target.drain(amount, false);
+		int inserted = this.fill(toExtract, true);
+		target.drain(inserted, true);
+	}
+	
+	public boolean isFull() {
+		return this.getFluidAmount() == this.capacity;
+	}
+	
+	public boolean isEmpty() {
+		return this.getFluidAmount() == 0;
+	}
+	
+	public boolean hasSpacefor(FluidStack stack) {
+		return this.canFillFluidType(stack) && this.fillInternal(stack, false) == stack.amount;
 	}
 
 }

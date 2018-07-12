@@ -77,6 +77,10 @@ public class CustomSlotItemHandler extends SlotItemHandler{
             return current + added;
         }
     }
+    
+    public boolean canMerge(ItemStack in, ItemStack with) {
+    	return ItemStack.areItemsEqual(in, with) && in.getMaxStackSize() >= in.getCount()+with.getCount();
+    }
 
     @Override
     public boolean canTakeStack(EntityPlayer playerIn)
@@ -89,6 +93,11 @@ public class CustomSlotItemHandler extends SlotItemHandler{
     public ItemStack decrStackSize(int amount)
     {
         return itemHandler.extractItemInternal(index, amount, false);
+    }
+    
+    public void putStackNoNotify(@Nonnull ItemStack stack)
+    {
+        ((IItemHandlerModifiable) this.getItemHandler()).setStackInSlot(index, stack);
     }
 
 }

@@ -2,10 +2,14 @@ package com.black_dog20.gadgetron.init;
 
 import com.black_dog20.gadgetron.integration.mekanism.MekanismIntegration;
 import com.black_dog20.gadgetron.integration.te.ThermalExpansionIntegration;
+import com.black_dog20.gadgetron.recipehandler.SmelterRecipes;
 import com.black_dog20.gadgetron.reference.Reference;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -58,7 +62,19 @@ public class Recipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumPickaxe, new Object[]{"iii"," s "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumShovel, new Object[]{" i "," s "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumSword, new Object[]{" i "," i "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
+		
+		RegisterSmelterRecipes();
 	}
+	
+	
+	private static void RegisterSmelterRecipes() {
+		SmelterRecipes.instance().addRecipeForBlock(ModBlocks.TrilliumOre, 500, new FluidStack(ModFluids.fluidTrillium, 1000));
+		SmelterRecipes.instance().addRecipe(new ItemStack(ModItems.TrilliumIngot), 250, new FluidStack(ModFluids.fluidTrillium, 500));
+		SmelterRecipes.instance().addRecipeForBlock(ModBlocks.TrilliumBlock, 1000, new FluidStack(ModFluids.fluidTrillium, 4500));
+		SmelterRecipes.instance().addRecipeForBlock(Blocks.COBBLESTONE, 100, new FluidStack(FluidRegistry.LAVA, 50));
+		SmelterRecipes.instance().addRecipeForBlock(Blocks.STONE, 100, new FluidStack(FluidRegistry.LAVA, 100));
+	}
+	
 	
 	
 	private static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){

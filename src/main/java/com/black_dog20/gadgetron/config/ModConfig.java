@@ -57,26 +57,34 @@ public class ModConfig {
 	
 	public static class Machines {
 		
+		@Config.LangKey("gadgetron.config.machine.automationticks")
+		@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)
+		public int automation_ticks = 20;
+
+		@Config.LangKey("gadgetron.config.machine.automationmb")
+		@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)
+		public int automation_mb = 250;
+		
 		@Config.LangKey("gadgetron.config.machines.coalGenerator")
 		public GeneratorMachineConfig coalGenerator = new GeneratorMachineConfig(30, 100000);
 		
 		@Config.LangKey("gadgetron.config.machines.fuelGenerator")
-		public GeneratorFluidMachineConfig fuelGenerator = new GeneratorFluidMachineConfig(100, 100000, 60, 10, 10000);
+		public GeneratorFluidMachineConfig fuelGenerator = new GeneratorFluidMachineConfig(100, 100000, 1, 10, 10000);
 		
 		@Config.LangKey("gadgetron.config.machines.battery_t1")
-		public BatteryConfig battery_t1 = new BatteryConfig(20000, 1500, 1000000);
+		public BatteryConfig battery_t1 = new BatteryConfig(1500, Integer.MAX_VALUE, 1000000);
 		
 		@Config.LangKey("gadgetron.config.machines.smelter")
-		public EnergyFluidGeneratorMachineConfig smelter = new EnergyFluidGeneratorMachineConfig(1000, 100000, 60, 1000, 10000);
+		public EnergyFluidGeneratorMachineConfig smelter = new EnergyFluidGeneratorMachineConfig(100, 100000, 1, 10000);
 		
 		@Config.LangKey("gadgetron.config.machines.fabricator")
-		public EnergyMachineConfig fabricator = new EnergyMachineConfig(100,100000,60);
+		public EnergyMachineConfig fabricator = new EnergyMachineConfig(100,100000,1);
 		
 		@Config.LangKey("gadgetron.config.machines.extractor")
-		public EnergyMachineConfig extractor = new EnergyMachineConfig(100,100000,60);
+		public EnergyMachineConfig extractor = new EnergyMachineConfig(100,100000,1);
 		
 		@Config.LangKey("gadgetron.config.machines.processor")
-		public EnergyMachineConfig processor = new EnergyMachineConfig(100,100000,60);
+		public EnergyMachineConfig processor = new EnergyMachineConfig(100,100000,1);
 	
 	}
 	

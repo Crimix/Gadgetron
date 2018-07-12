@@ -1,6 +1,5 @@
 package com.black_dog20.gadgetron.container;
 
-import com.black_dog20.gadgetron.tile.TileEntityBattery;
 import com.black_dog20.gadgetron.tile.TileEntityFabricator;
 
 import net.minecraft.entity.player.EntityPlayer;

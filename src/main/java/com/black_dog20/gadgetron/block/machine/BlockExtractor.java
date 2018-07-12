@@ -1,6 +1,6 @@
 package com.black_dog20.gadgetron.block.machine;
 
-import com.black_dog20.gadgetron.tile.TileEntityBattery;
+import com.black_dog20.gadgetron.tile.TileEntityExtractor;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +14,7 @@ public class BlockExtractor extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityBattery(this.getLocalizedName());
+		return new TileEntityExtractor(this.getLocalizedName());
 	}
 	
 	@Override

@@ -1,6 +1,9 @@
 package com.black_dog20.gadgetron.container;
 
-import com.black_dog20.gadgetron.tile.TileEntityBattery;
+import com.black_dog20.gadgetron.container.slot.BucketSlot;
+import com.black_dog20.gadgetron.container.slot.CustomSlotItemHandler;
+import com.black_dog20.gadgetron.storage.CustomFluidTank;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntitySmelter;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,11 +11,56 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 public class ContainerSmelter extends Container{
 
-
+	private BucketSlot bucketInput;
+	private CustomSlotItemHandler bucketoutput;
+	private CustomSlotItemHandler input;
+	
 	public ContainerSmelter(InventoryPlayer playerInventory, TileEntitySmelter tile){
+		
+		
+		input = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 0, 42, 34);
+		bucketoutput = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 2, 106, 53)
+		{
+			@Override
+			public void onSlotChanged() {
+				bucketInput.onSlotChanged();
+				super.onSlotChanged();
+			}
+		};
+		
+		bucketInput = new BucketSlot(true, null, (CustomItemHandler) tile.getInventory(), 1, 106, 17, (CustomFluidTank) tile.getTank()) {
+			@Override
+			public void onSlotChanged() {
+				if(isItemValid(getStack()) && !bucketoutput.getHasStack()) {
+					ItemStack copy = getStack().copy();
+					ItemStack s = decrStackSize(1);
+					IFluidHandlerItem handler = FluidUtil.getFluidHandler(s);
+					if(handler != null)
+						if(handler.fill(tile.getFluid(), false) > 0) {
+							int drain = handler.fill(tile.getFluid(), false);
+							FluidStack fluid = tile.getTank().drain(drain, false);
+							if(fluid.amount == drain) {
+								handler.fill(fluid, true);
+								tile.getTank().drain(drain, true);
+								bucketoutput.putStack(handler.getContainer());
+							}
+						}
+						else
+							putStackNoNotify(copy);
+				}
+				super.onSlotChanged();
+			}
+		};
+		
+		this.addSlotToContainer(input);
+		this.addSlotToContainer(bucketInput);
+		this.addSlotToContainer(bucketoutput);
 		
 		for(int i = 0; i < 3; ++i){
 			for(int j = 0; j < 9; ++j){
@@ -26,7 +74,7 @@ public class ContainerSmelter extends Container{
 	}
 
 	
-
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn){
 		return true;
@@ -62,6 +110,13 @@ public class ContainerSmelter extends Container{
         }
 
         return itemstack;
+    }
+	
+	@Override
+	public void detectAndSendChanges()
+    {
+		super.detectAndSendChanges();
+		bucketInput.onSlotChanged();
     }
 
 }

@@ -6,12 +6,19 @@ import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
 import com.black_dog20.gadgetron.block.machine.BlockBattery;
 import com.black_dog20.gadgetron.block.machine.BlockCoalGenerator;
 import com.black_dog20.gadgetron.block.machine.BlockEnergyGenerator;
+import com.black_dog20.gadgetron.block.machine.BlockExtractor;
+import com.black_dog20.gadgetron.block.machine.BlockFabricator;
 import com.black_dog20.gadgetron.block.machine.BlockMachineBase;
-import com.black_dog20.gadgetron.config.ModConfig;
+import com.black_dog20.gadgetron.block.machine.BlockProcessor;
+import com.black_dog20.gadgetron.block.machine.BlockSmelter;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.tile.TileEntityBattery;
 import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
+import com.black_dog20.gadgetron.tile.TileEntityExtractor;
+import com.black_dog20.gadgetron.tile.TileEntityFabricator;
+import com.black_dog20.gadgetron.tile.TileEntityProcessor;
+import com.black_dog20.gadgetron.tile.TileEntitySmelter;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -38,7 +45,12 @@ public class ModBlocks {
 	
 	public static BlockMachineBase Generator = new BlockEnergyGenerator("energy_generator_t1");
 	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator("coal_generator_t1");
-	public static BlockMachineBase Battery_T1 = new BlockBattery("Battery_T1");
+	public static BlockMachineBase Battery_T1 = new BlockBattery("battery_t1");
+	
+	public static BlockMachineBase Fabricator = new BlockFabricator("fabricator_t1");
+	public static BlockMachineBase Extractor = new BlockExtractor("extractor_t1");
+	public static BlockMachineBase Processor = new BlockProcessor("processor_t1");
+	public static BlockMachineBase Smelter = new BlockSmelter("smelter_t1");
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -61,5 +73,13 @@ public class ModBlocks {
 		r.register(Battery_T1);
 		GameRegistry.registerTileEntity(TileEntityBattery.class, Reference.MOD_ID+":"+"batteryT1");
 		
+		r.register(Fabricator);
+		GameRegistry.registerTileEntity(TileEntityFabricator.class, Reference.MOD_ID+":"+"fabricator");
+		r.register(Extractor);
+		GameRegistry.registerTileEntity(TileEntityExtractor.class, Reference.MOD_ID+":"+"extractor");
+		r.register(Processor);
+		GameRegistry.registerTileEntity(TileEntityProcessor.class, Reference.MOD_ID+":"+"processor");
+		r.register(Smelter);
+		GameRegistry.registerTileEntity(TileEntitySmelter.class, Reference.MOD_ID+":"+"smelter");
 	}
 }

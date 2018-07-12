@@ -1,17 +1,19 @@
 package com.black_dog20.gadgetron.container;
 
 import com.black_dog20.gadgetron.container.slot.BucketSlot;
+import com.black_dog20.gadgetron.init.ModFluids;
+import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerEnergyGenerator extends Container{
@@ -20,29 +22,40 @@ public class ContainerEnergyGenerator extends Container{
 	private SlotItemHandler output;
 
 	public ContainerEnergyGenerator(InventoryPlayer playerInventory, TileEntityEnergyGenerator tile){
-		output = new SlotItemHandler(tile.getInventory(), 1, 54, 53);
-		input = new BucketSlot(true, (CustomItemHandler) tile.getInventory(), 0, 54, 17) {
+		output = new SlotItemHandler(tile.getInventory(), 1, 54, 53) {
 			@Override
 			public void onSlotChanged() {
-				if(isItemValid(getStack())) {
-					if(tile.getTank().fill(getFluid(), false) >= Fluid.BUCKET_VOLUME) {
-						if(tile.getTank().getFluidAmount() != 0) {
-							FluidStack t = new FluidStack(tile.getFluid(), tile.getFluid().amount+getFluid().amount);
-							tile.getTank().setFluid(t);
+				input.onSlotChanged();
+				super.onSlotChanged();
+			}
+			
+		};
+		input = new BucketSlot(true, ModFluids.fluidTrillium, (CustomItemHandler) tile.getInventory(), 0, 54, 17, (CustomFluidTank) tile.getTank()) {
+			@Override
+			public void onSlotChanged() {
+				if(isItemValid(getStack()) && !output.getHasStack()) {
+					ItemStack copy = getStack().copy();
+					ItemStack s = decrStackSize(1);
+					IFluidHandlerItem handler = FluidUtil.getFluidHandler(s);
+					if(handler != null)
+						if(tile.getTank().fill(FluidUtil.getFluidContained(s), false) > 0) {
+							int drain = tile.getTank().fill(FluidUtil.getFluidContained(s), false);
+							FluidStack fluid = handler.drain(drain, false);
+							if(fluid != null && fluid.amount == drain) {
+								tile.getTank().fill(fluid, true);
+								handler.drain(drain, true);
+								ItemStack b = handler.getContainer();
+								if(FluidUtil.getFluidContained(b) == null || FluidUtil.getFluidContained(b).amount == 0)
+									output.putStack(handler.getContainer());
+							}
+							else 
+								putStackNoNotify(copy);
 						}
-						else {
-							tile.getTank().setFluid(getFluid());
-						}
-						if(output.getHasStack()) {
-							ItemStack temp = output.getStack();
-							temp.setCount(output.getStack().getCount()+1);
-							output.putStack(temp);
-						}else {
-							output.putStack(new ItemStack(Items.BUCKET));
-						}
-						putStack(ItemStack.EMPTY);
-					}
-				}
+						else 
+							putStackNoNotify(copy);
+					else 
+						putStackNoNotify(copy);
+				}		
 				super.onSlotChanged();
 			}
 		};
@@ -97,6 +110,13 @@ public class ContainerEnergyGenerator extends Container{
         }
 
         return itemstack;
+    }
+	
+	@Override
+	public void detectAndSendChanges()
+    {
+		super.detectAndSendChanges();
+		input.onSlotChanged();
     }
 
 }

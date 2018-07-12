@@ -6,9 +6,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
-import com.black_dog20.gadgetron.container.ContainerBattery;
 import com.black_dog20.gadgetron.container.ContainerSmelter;
-import com.black_dog20.gadgetron.tile.TileEntityBattery;
 import com.black_dog20.gadgetron.tile.TileEntitySmelter;
 
 import net.minecraft.client.resources.I18n;
@@ -19,17 +17,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiSmelter extends GuiContainerBase {
-	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/battery.png");
+	private static final ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/smelter.png");
 	private TileEntitySmelter te;
 	private final EntityPlayer player;
 	private GuiElement power = new GuiElement("powerbar", 6, 10, 62, 19, 176, 95, I18n.format("gadgetron.container.energystored"));
-	private GuiElement tank = new GuiElement("fluid", 30, 10, 62, 16, 0, 0);
+	private GuiElement arrow = new GuiElement("arrow", 68, 34, 17, 24, 176, 14);
+	private GuiElement tank = new GuiElement("fluid", 131, 9, 63, 16, 0, 0);
 	private String empty = I18n.format("gadgetron.tank.empty");
 	
 	public GuiSmelter(EntityPlayer player, TileEntitySmelter tileEntity) {
 		super(new ContainerSmelter(player.inventory, tileEntity), tileEntity, player);
 		elements.add(power);
 		elements.add(tank);
+		elements.add(arrow);
 		this.te = (TileEntitySmelter) tile;
 		this.player = player;
 	}
@@ -39,6 +39,11 @@ public class GuiSmelter extends GuiContainerBase {
 	public void drawScreen(int mouseX, int mouseY, float par3) {
 		power.updateDynamicList(getPowerTipList());	
 		tank.updateDynamicList(getTankTipList());
+		String t = te.getRemainingTime();
+		if(t != null)
+			arrow.updateDynamicList(Integer.toString(te.getProgress()) + "%", t);
+		else
+			arrow.updateDynamicList(Integer.toString(te.getProgress()) + "%");
 		super.drawScreen(mouseX, mouseY, par3);
 	}
 	
@@ -54,6 +59,7 @@ public class GuiSmelter extends GuiContainerBase {
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		drawProgressVertical(te.getStoredEnergyPercentage(), power); //Powerbar
+		drawProgressHorizontal(te.getProgress(), arrow);
 		drawFluid(te.getFluid(), te.getStoredFluidPercentage(), tank);
 	}	
 	

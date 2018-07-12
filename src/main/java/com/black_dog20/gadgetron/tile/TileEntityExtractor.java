@@ -1,27 +1,15 @@
 package com.black_dog20.gadgetron.tile;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.black_dog20.gadgetron.client.gui.GuiBattery;
-import com.black_dog20.gadgetron.client.gui.GuiFabricator;
 import com.black_dog20.gadgetron.client.gui.GuiMachine;
 import com.black_dog20.gadgetron.config.ModConfig;
-import com.black_dog20.gadgetron.container.ContainerBattery;
 import com.black_dog20.gadgetron.container.ContainerMachine;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
-import com.black_dog20.gadgetron.tile.base.TileEntityEnergyBase;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

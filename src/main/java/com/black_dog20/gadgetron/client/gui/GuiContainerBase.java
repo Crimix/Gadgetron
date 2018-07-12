@@ -102,7 +102,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 	protected void drawProgressHorizontal(int progress, GuiElement e) {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
-		double oneP = e.height / 100.0;
+		double oneP = e.width / 100.0;
 		int p = (int) Math.ceil(oneP * progress);
 		if(p!= 0)
 			this.drawTexturedModalRect(k + e.x, l + e.y, e.textureX, e.textureY, p + 1, e.height);
@@ -122,6 +122,9 @@ public abstract class GuiContainerBase extends GuiContainer{
 	}
 	
 	protected String getFormattedInt(int number) {
+		if(number == Integer.MAX_VALUE) {
+			return "\u221e";
+		}
 		return NumberFormat.getIntegerInstance().format(number);
 	}
 }

@@ -1,16 +1,11 @@
 package com.black_dog20.gadgetron.item.tools;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.black_dog20.gadgetron.client.render.BlockRenderHelper;
 import com.black_dog20.gadgetron.item.ItemBase;
-import com.black_dog20.gadgetron.network.PacketHandler;
-import com.black_dog20.gadgetron.network.message.MessageAddPowerOutputToBattery;
 import com.black_dog20.gadgetron.tile.TileEntityBattery;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

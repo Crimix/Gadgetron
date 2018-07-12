@@ -5,20 +5,30 @@ import javax.annotation.Nonnull;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class CustomItemHandler extends ItemStackHandler{
+public class CustomItemHandler extends ItemStackHandler {
 
 	private TileEntityBase base;
 	private int inputSlots;
 	private int outputSlots;
+	private boolean[] auto = new boolean[0];
 
     public CustomItemHandler(int input, int output)
     {
-    	super(input+output);
+    	super(NonNullList.withSize((input+output), ItemStack.EMPTY));
     	this.inputSlots = input;
     	this.outputSlots = output;
+    }
+    
+    public CustomItemHandler(int input, int output, boolean[] auto)
+    {
+    	super(NonNullList.withSize((input+output), ItemStack.EMPTY));
+    	this.inputSlots = input;
+    	this.outputSlots = output;
+    	this.auto = auto;
     }
 	
 	public void setTileEntityBase(TileEntityBase base) {
@@ -73,17 +83,26 @@ public class CustomItemHandler extends ItemStackHandler{
 	}
 	
 	protected boolean isSlotOutput(int slot) {
-		if(slot+1 > inputSlots)
+		if(slot+1 > inputSlots && (!isArrayValid() || isAutomation(slot)))
 			return true;
 		else 
 			return false;
 	}
 	
 	protected boolean isSlotInput(int slot) {
-		if(slot+1 <= inputSlots)
+		if(slot+1 <= inputSlots && (!isArrayValid() || isAutomation(slot)))
 			return true;
 		else 
 			return false;
+	}
+	
+	protected boolean isArrayValid() {
+		return inputSlots+outputSlots == auto.length;
+	}
+	
+	protected boolean isAutomation(int slot) {
+		return isArrayValid() && auto[slot];
+			
 	}
 	
 	public void transfer(IItemHandler target) {
@@ -113,5 +132,12 @@ public class CustomItemHandler extends ItemStackHandler{
 			}
 		}
 	}
+	
+	@Override
+    protected void validateSlotIndex(int slot)
+    {
+        if (slot < 0 || slot >= stacks.size())
+            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + stacks.size() + ")");
+    }
 	
 }

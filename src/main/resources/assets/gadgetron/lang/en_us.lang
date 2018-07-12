@@ -130,20 +130,28 @@ gadgetron.config.worldgen.blacklist.tooltip=Input dimension ids
 gadgetron.config.worldgen.replaceBlock=Ore replaces block type
 gadgetron.config.worldgen.replaceBlock.tooltip=Input only one block, using mod_id:name or minecraft:name
 
+gadgetron.config.machines=Machines
 gadgetron.config.machine.consumeRf=RF/t consumption
 gadgetron.config.machine.capacityRf=RF capacity
 gadgetron.config.machine.createMb=Generate mB per operation
 gadgetron.config.machine.capacityTank=Tank capacity
-gadgetron.config.machine.speed=Tick per operation
+gadgetron.config.machine.speed=Speed modifier
 gadgetron.config.machine.consumeMb=mB/T consumption
 gadgetron.config.machine.consumeMbOperation=Consume mB/T per operation
 gadgetron.config.machine.generateRf=RF/t generation
 gadgetron.config.machine.outputRF=Output RF/t
 gadgetron.config.machine.inputRF=Input RF/t
+gadgetron.config.machine.automationticks=Ticks between auto I/O
+gadgetron.config.machine.automationmb=Max fluid auto I/O
 
-gadgetron.config.machines.coalGenerator=Coal Generator
-gadgetron.config.machines.fuelGenerator=Fuel Generator
+
+gadgetron.config.machines.coalGenerator=Basic Coal Generator
+gadgetron.config.machines.fuelGenerator=Basic Fuel Generator
 gadgetron.config.machines.battery_t1=Basic Battery
+gadgetron.config.machines.smelter=Basic Smelter
+gadgetron.config.machines.fabricator=Basic Fabricator
+gadgetron.config.machines.extractor=Basic Extractor
+gadgetron.config.machines.processor=Basic Processor
 
 //Keys
 

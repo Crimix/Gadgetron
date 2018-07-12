@@ -2,6 +2,7 @@ package com.black_dog20.gadgetron.tile.base;
 
 import javax.annotation.Nullable;
 
+import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.storage.CustomItemHandler;
@@ -150,7 +151,7 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 						if (te != null && !te.isInvalid()) {
 							IFluidHandler fluidStorage = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, f.getOpposite());
 							if (fluidStorage != null) {
-								tank.transfer(fluidStorage);
+								tank.transfer(fluidStorage, ModConfig.machines.automation_mb);
 								te.markDirty();
 								this.markDirty();
 							}
@@ -167,7 +168,7 @@ public abstract class TileEntityEnergyInventoryFluidBase extends TileEntityEnerg
 						if (te != null && !te.isInvalid()) {
 							IFluidHandler fluidStorage = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, f.getOpposite());
 							if (fluidStorage != null) {
-								tank.tryExtract(fluidStorage);
+								tank.tryExtract(fluidStorage, ModConfig.machines.automation_mb);
 								te.markDirty();
 								this.markDirty();
 							}

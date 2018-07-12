@@ -1,6 +1,5 @@
 package com.black_dog20.gadgetron.network.message;
 
-import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.tile.TileEntityBattery;
 
 import io.netty.buffer.ByteBuf;
