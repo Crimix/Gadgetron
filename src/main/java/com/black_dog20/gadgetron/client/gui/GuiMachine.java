@@ -12,6 +12,8 @@ import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -65,6 +67,11 @@ public class GuiMachine extends GuiContainerBase {
 		List<String> powerList = new ArrayList<String>();
 		powerList.add(getFormattedInt(te.getStoredEnergy()) + "RF");
 		powerList.add(Integer.toString(te.getStoredEnergyPercentage()) + "%");
+		if(te.isOn()) {
+			TextComponentString text = new TextComponentString("-" + getFormattedInt(te.getEnergyPerTick())+"RF/t");
+			text.getStyle().setColor(TextFormatting.RED);
+			powerList.add(text.getFormattedText());
+		}
 		return powerList;
 	}
 }

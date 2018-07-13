@@ -10,6 +10,8 @@ import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
+import com.black_dog20.gadgetron.utility.MachineFaces;
+import com.black_dog20.gadgetron.utility.Varient;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,18 +27,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
-	private int burnTime = 0;
 	private int ticksToBurnfuel = (int) Math.ceil(1000*ModConfig.machines.fuelGenerator.speed);
-	private int energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
 	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
 
 	public TileEntityEnergyGenerator() {
 		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
+		tankFaces = new MachineFaces(this, Varient.TANK, true, false);
+		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, false, false);
 	}
 
 	public TileEntityEnergyGenerator(String name) {
 		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
 		this.name = name;
+		tankFaces = new MachineFaces(this, Varient.TANK, true, false);
+		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, false, false);
 	}
 	
 	private static boolean isFuel(FluidStack fluid) {
@@ -46,6 +50,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	@Override
 	public void update() {
 		if(!world.isRemote) {
+			energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
 			if(!this.energyContainer.isFull()) {
 				if(burnTime == 0) {
 					on = false;
@@ -111,11 +116,13 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 		return new ContainerEnergyGenerator(player.inventory, this);
 	}
 
+	@Override
 	public int getProgress() {
 		double t = ((double)burnTime / ticksToBurnfuel) *100;
 		return (int) Math.ceil(t);
 	}
 
+	@Override
 	public String getRemainingTime() {
 		if(burnTime != 0) {
 			double ticksLeft = ticksToBurnfuel - burnTime;
@@ -127,6 +134,7 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 		}
 	}
 
+	@Override
 	public int getEnergyPerTick() {
 		return Math.max(10,(int)Math.ceil(((double)getStoredFluidPercentage() /100) * energyPerTick));
 	}
@@ -137,13 +145,11 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		burnTime = nbt.getInteger("burnTime");
 		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("burnTime", burnTime);
 		return super.writeToNBT(nbt);
 	}
 	

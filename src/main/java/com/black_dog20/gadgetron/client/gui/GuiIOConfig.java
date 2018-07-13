@@ -131,19 +131,6 @@ public class GuiIOConfig extends GuiContainerBase {
 	public void drawScreen(int mouseX, int mouseY, float par3) {
 		updateTextOnButtons();
 		super.drawScreen(mouseX, mouseY, par3);
-		for(GuiButton e : buttonList) {
-			if(e instanceof GuiCustomButton) {
-				GuiCustomButton b = (GuiCustomButton)e;
-				if(b.isMouseOver()) {
-					drawHoveringText(b.getHoverText(), mouseX, mouseY);
-				}
-			} else if(e instanceof GuiCustomCheckBox) {
-				GuiCustomCheckBox b = (GuiCustomCheckBox)e;
-				if(b.isMouseOver()) {
-					drawHoveringText(b.getHoverText(), mouseX, mouseY);
-				}
-			}
-		}
 	}
 
 	@Override
@@ -190,7 +177,9 @@ public class GuiIOConfig extends GuiContainerBase {
 			tankBack.displayString = te.tankFaces.getButtonState(FaceId.BACK);
 			tankBottom.displayString = te.tankFaces.getButtonState(FaceId.BOTTOM);
 			((GuiCustomCheckBox)tankAutoI).setIsChecked(te.tankFaces.isAutoInput());
+			((GuiCustomCheckBox)tankAutoI).visible = te.tankFaces.hasInputSlots();
 			((GuiCustomCheckBox)tankAutoO).setIsChecked(te.tankFaces.isAutoOutput());
+			((GuiCustomCheckBox)tankAutoO).visible = te.tankFaces.hasOutputSlots();
 		}else if(tile instanceof TileEntityEnergyInventoryFluidBase) {
 			TileEntityEnergyInventoryFluidBase te = (TileEntityEnergyInventoryFluidBase) tile;
 			tankTop.displayString = te.tankFaces.getButtonState(FaceId.TOP);
@@ -200,7 +189,9 @@ public class GuiIOConfig extends GuiContainerBase {
 			tankBack.displayString = te.tankFaces.getButtonState(FaceId.BACK);
 			tankBottom.displayString = te.tankFaces.getButtonState(FaceId.BOTTOM);
 			((GuiCustomCheckBox)tankAutoI).setIsChecked(te.tankFaces.isAutoInput());
+			((GuiCustomCheckBox)tankAutoI).visible = te.tankFaces.hasInputSlots();
 			((GuiCustomCheckBox)tankAutoO).setIsChecked(te.tankFaces.isAutoOutput());
+			((GuiCustomCheckBox)tankAutoO).visible = te.tankFaces.hasOutputSlots();
 		}
 	}
 }

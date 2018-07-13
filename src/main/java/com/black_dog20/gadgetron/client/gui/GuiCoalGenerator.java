@@ -73,10 +73,6 @@ public class GuiCoalGenerator extends GuiContainerBase {
 			TextComponentString text = new TextComponentString("+" + getFormattedInt(te.getEnergyPerTick())+"RF/t");
 			text.getStyle().setColor(TextFormatting.GREEN);
 			powerList.add(text.getFormattedText());
-		}else {
-			TextComponentString text = new TextComponentString("+0RF/t");
-			text.getStyle().setColor(TextFormatting.RED);
-			powerList.add(text.getFormattedText());
 		}
 		return powerList;
 	}

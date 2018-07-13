@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -49,7 +50,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 			int x = tile.getPos().getX();
 			int y = tile.getPos().getY();
 			int z = tile.getPos().getZ();
-			this.buttonList.add(new GuiCustomButton(0, "I/O", k+160, l-10, 20, 0.80, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(Gadgetron.guiIOConfig,x,y,z))));
+			this.buttonList.add(new GuiCustomButton(0, "I/O", k+160, l-10, 20, 0.80, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(Gadgetron.guiIOConfig,x,y,z)), I18n.format("gadgetron.container.io")));
 			
 		}
 		
@@ -79,6 +80,19 @@ public abstract class GuiContainerBase extends GuiContainer{
 		for(GuiElement e : elements) {
 			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
 				drawHoveringText(e.getHoverText(), mouseX, mouseY);
+			}
+		}
+		for(GuiButton e : buttonList) {
+			if(e instanceof GuiCustomButton) {
+				GuiCustomButton b = (GuiCustomButton)e;
+				if(b.isMouseOver()) {
+					drawHoveringText(b.getHoverText(), mouseX, mouseY);
+				}
+			} else if(e instanceof GuiCustomCheckBox) {
+				GuiCustomCheckBox b = (GuiCustomCheckBox)e;
+				if(b.isMouseOver()) {
+					drawHoveringText(b.getHoverText(), mouseX, mouseY);
+				}
 			}
 		}
 		

@@ -75,16 +75,16 @@ public class ModConfig {
 		public BatteryConfig battery_t1 = new BatteryConfig(1500, Integer.MAX_VALUE, 1000000);
 		
 		@Config.LangKey("gadgetron.config.machines.smelter")
-		public EnergyFluidGeneratorMachineConfig smelter = new EnergyFluidGeneratorMachineConfig(100, 100000, 1, 10000);
+		public EnergyFluidGeneratorMachineConfig smelter = new EnergyFluidGeneratorMachineConfig(60, 100000, 1, 10000);
 		
 		@Config.LangKey("gadgetron.config.machines.fabricator")
-		public EnergyMachineConfig fabricator = new EnergyMachineConfig(100,100000,1);
+		public EnergyMachineConfig fabricator = new EnergyMachineConfig(60, 100000, 1);
 		
 		@Config.LangKey("gadgetron.config.machines.extractor")
-		public EnergyMachineConfig extractor = new EnergyMachineConfig(100,100000,1);
+		public EnergyMachineConfig extractor = new EnergyMachineConfig(60, 100000, 1);
 		
 		@Config.LangKey("gadgetron.config.machines.processor")
-		public EnergyMachineConfig processor = new EnergyMachineConfig(100,100000,1);
+		public EnergyMachineConfig processor = new EnergyMachineConfig(60, 100000, 1);
 	
 	}
 	

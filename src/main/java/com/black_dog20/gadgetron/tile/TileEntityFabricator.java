@@ -17,11 +17,11 @@ public class TileEntityFabricator extends TileEntityEnergyInventoryBase {
 
 	
 	public TileEntityFabricator() {
-		super(new CustomEnergyStorage(ModConfig.machines.fabricator.capacity, Integer.MAX_VALUE, 0),3,1);
+		super(new CustomEnergyStorage(ModConfig.machines.fabricator.capacity, Integer.MAX_VALUE, 0),2,1);
 	}
 
 	public TileEntityFabricator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.fabricator.capacity, Integer.MAX_VALUE, 0),3,1);
+		super(new CustomEnergyStorage(ModConfig.machines.fabricator.capacity, Integer.MAX_VALUE, 0),2,1);
 		this.name = name;
 	}
 

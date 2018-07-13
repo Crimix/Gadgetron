@@ -72,6 +72,10 @@ tile.gadgetron:machine_block.name=Machine Block
 tile.gadgetron:energy_generator_t1.name=Basic Fuel Generator
 tile.gadgetron:coal_generator_t1.name=Basic Coal Generator
 tile.gadgetron:battery_t1.name=Basic Battery
+tile.gadgetron:smelter_t1.name=Basic Fluid Smelter
+tile.gadgetron:extractor_t1.name=Basic Extractor
+tile.gadgetron:processor_t1.name=Basic Processor
+tile.gadgetron:fabricator_t1.name=Basic Fabricator
 
 //Fluids
 fluid.trillium=Trillium
@@ -82,8 +86,8 @@ fluid.trillium=Trillium
 gadgetron.tank.empty=Empty
 gadgetron.container.progress=Progress
 gadgetron.container.energystored=Energy Stored
-gadgetron.container.output=Output
-gadgetron.container.input=Input
+gadgetron.container.output=Push
+gadgetron.container.input=Pull
 gadgetron.container.capacity=Capacity
 gadgetron.container.top=Top
 gadgetron.container.front=Front
@@ -96,13 +100,16 @@ gadgetron.container.autooutput=Auto Output
 gadgetron.container.items=Items
 gadgetron.container.fluid=Fluid
 gadgetron.container.close=Close
+gadgetron.container.io=I/O Config
 gadgetron.container.outputperblock=Output/B
 
 gadgetron.container.battery=Battery
 gadgetron.container.coal_generator=Coal Generator
 gadgetron.container.energy_generator=Fuel Generator
-gadgetron.container.smelter=Smelter
+gadgetron.container.smelter=Fluid Smelter
 gadgetron.container.extractor=Extractor
+gadgetron.container.processor=Processor
+gadgetron.container.fabricator=Fabricator
 
 
 //Misc
@@ -152,7 +159,7 @@ gadgetron.config.machine.automationmb=Max fluid auto I/O
 gadgetron.config.machines.coalGenerator=Basic Coal Generator
 gadgetron.config.machines.fuelGenerator=Basic Fuel Generator
 gadgetron.config.machines.battery_t1=Basic Battery
-gadgetron.config.machines.smelter=Basic Smelter
+gadgetron.config.machines.smelter=Basic Fluid Smelter
 gadgetron.config.machines.fabricator=Basic Fabricator
 gadgetron.config.machines.extractor=Basic Extractor
 gadgetron.config.machines.processor=Basic Processor

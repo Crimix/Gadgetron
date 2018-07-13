@@ -1,5 +1,9 @@
 package com.black_dog20.gadgetron.container;
 
+import javax.annotation.Nonnull;
+
+import com.black_dog20.gadgetron.container.slot.CustomSlotItemHandler;
+import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntityFabricator;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +14,25 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerFabricator extends Container{
 
+	private CustomSlotItemHandler output;
+	private CustomSlotItemHandler inputA;
+	private CustomSlotItemHandler inputB;
 
 	public ContainerFabricator(InventoryPlayer playerInventory, TileEntityFabricator tile){
+		
+		inputA = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 0, 33, 35);
+		inputB = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 1, 63, 35);
+		output = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 2, 123, 35) {
+		    @Override
+		    public boolean isItemValid(@Nonnull ItemStack stack)
+		    {
+		        	return false;
+		    }
+		};
+		
+		this.addSlotToContainer(inputA);
+		this.addSlotToContainer(inputB);
+		this.addSlotToContainer(output);
 		
 		for(int i = 0; i < 3; ++i){
 			for(int j = 0; j < 9; ++j){

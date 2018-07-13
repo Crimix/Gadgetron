@@ -31,10 +31,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 
-	private int burnTime = 0;
-	private int energyPerTick = ModConfig.machines.coalGenerator.generateRfPerTick;
-	private int currentItemBurnTime = 1;
-
 	public TileEntityCoalGenerator() {
 		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
 	}
@@ -71,19 +67,20 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	public void update() {
 		if(!world.isRemote) {
 			super.update();
+			energyPerTick = ModConfig.machines.coalGenerator.generateRfPerTick;
 			if(!this.energyContainer.isFull()) {
 				if(burnTime == 0) {
 					on = false;
 					ItemStack stack = inventory.getStackInSlot(0);
 					if(isItemFuel(stack)) {
 						inventory.extractItemInternal(0, 1, false);
-						currentItemBurnTime = getItemBurnTime(stack);
+						currentUsedTime = getItemBurnTime(stack);
 						on = true;
 						burnTime++;
 						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
 					}
 				}else {
-					if(burnTime % currentItemBurnTime  == 0) {
+					if(burnTime % currentUsedTime  == 0) {
 						burnTime = 0;
 						on = false;
 					}else {
@@ -125,25 +122,6 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 		return new ContainerCoalGenerator(player.inventory, this);
 	}
 
-	public int getProgress() {
-		if(currentItemBurnTime == 0) {
-			return 0;
-		}
-		double t = ((double)burnTime / currentItemBurnTime) *100;
-		return (int) Math.ceil(t);
-	}
-
-	public String getRemainingTime() {
-		if(burnTime != 0) {
-			double ticksLeft = currentItemBurnTime - burnTime;
-			double secs = ticksLeft / 20;
-			int secI = (int) Math.ceil(secs);
-			return Integer.toString(secI) + "s";
-		}else {
-			return null;
-		}
-	}
-
 	public int getEnergyPerTick() {
 		return energyPerTick;
 	}
@@ -151,14 +129,10 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		burnTime = nbt.getInteger("burnTime");
-		currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
 		return super.writeToNBT(nbt);
 	}
 	
@@ -166,16 +140,12 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
-		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
 	@Override
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			burnTime = nbt.getInteger("burnTime");
-			currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
 			super.readFromCustomInfoNBT(nbt);
 		}
 	}

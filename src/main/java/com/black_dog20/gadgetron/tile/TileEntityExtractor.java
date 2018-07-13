@@ -22,24 +22,27 @@ public class TileEntityExtractor extends TileEntityEnergyInventoryBase {
 	
 	public TileEntityExtractor() {
 		super(new CustomEnergyStorage(ModConfig.machines.extractor.capacity, Integer.MAX_VALUE, 0),1,1);
+		validatorItemInput = (i) -> ExtractorRecipes.instance().containsRecipe(i);
 	}
 
 	public TileEntityExtractor(String name) {
 		super(new CustomEnergyStorage(ModConfig.machines.extractor.capacity, Integer.MAX_VALUE, 0),1,1);
 		this.name = name;
+		validatorItemInput = (i) -> ExtractorRecipes.instance().containsRecipe(i);
 	}
 
 
 	@Override
 	public void update() {
 		if(!world.isRemote) {
+			energyPerTick = ModConfig.machines.extractor.consumeRfPertick;
 			if(!this.energyContainer.isEmpty()) {
 				if(burnTime == 0) {
 					on = false;
 					ItemStack s = inventory.extractItemInternal(0, 1, true);
-					if(s != null && !s.isEmpty()) {
+					if(s != null && !s.isEmpty() && ExtractorRecipes.instance().containsRecipe(s)) {
 						result = ExtractorRecipes.instance().getResult(s);
-						if(result != null && inventory.canMerge(1, result)) {
+						if(result != null && !result.isEmpty() && inventory.canMerge(1, result)) {
 							inventory.extractItemInternal(0, 1, false);
 							currentUsedTime = (int) Math.ceil(ExtractorRecipes.instance().getTime(s) * ModConfig.machines.extractor.speed);
 							burnTime++;
@@ -47,16 +50,16 @@ public class TileEntityExtractor extends TileEntityEnergyInventoryBase {
 						}
 					}
 				} else if(burnTime % currentUsedTime == 0 && on) {
-					if(result != null && inventory.canMerge(1, result)) {
-						inventory.insertItemInternal(1, result, false);
+					if(result != null && !result.isEmpty() && inventory.canMerge(1, result)) {
+						inventory.insertItemInternal(1, result.copy(), false);
 						result = null;
 						burnTime = 0;
 						currentUsedTime = 1;
 						on = false;
 					}
 				} else {
-					if(on && energyContainer.extractEnergyInternal(ModConfig.machines.extractor.consumeRfPertick, true) == ModConfig.machines.extractor.consumeRfPertick) {
-						energyContainer.extractEnergyInternal(ModConfig.machines.extractor.consumeRfPertick, false);
+					if(on && energyContainer.extractEnergyInternal(energyPerTick, true) == energyPerTick) {
+						energyContainer.extractEnergyInternal(energyPerTick, false);
 						burnTime++;
 					}
 				}

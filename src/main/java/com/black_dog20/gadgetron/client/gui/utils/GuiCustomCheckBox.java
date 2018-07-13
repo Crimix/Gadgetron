@@ -63,9 +63,9 @@ public class GuiCustomCheckBox extends GuiCheckBox {
                 this.drawCenteredString(mc.fontRenderer, "x", this.x + 11 / 2 + 1, this.y + 1, 14737632);
 
             if(!input)
-            	this.drawString(mc.fontRenderer, displayString, x-9, y + 11 + 2, color);
+            	this.drawString(mc.fontRenderer, displayString, x-7, y + 11 + 2, color);
             else
-            	this.drawString(mc.fontRenderer, displayString, x-9, y - 10, color);
+            	this.drawString(mc.fontRenderer, displayString, x-5, y - 10, color);
         }
 	}
 	

@@ -22,12 +22,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 	
-	private int burnTime = 0;
-	private int currentItemBurnTime = 1;
 	private FluidStack result;
 	
 	public TileEntitySmelter() {
 		super(new CustomEnergyStorage(ModConfig.machines.smelter.capacity, Integer.MAX_VALUE, 0), new CustomItemHandler(2, 1, new boolean[] {true,false,false}), new CustomFluidTank(ModConfig.machines.smelter.capacityTank, (f) -> false));
+		tankFaces = new MachineFaces(this, Varient.TANK, false, true);
+		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, true, false);
 	}
 
 	public TileEntitySmelter(String name) {
@@ -41,6 +41,7 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 	@Override
 	public void update() {
 		if(!world.isRemote) {
+			energyPerTick = ModConfig.machines.smelter.consumeRfPertick;
 			if(!this.energyContainer.isEmpty() && !this.tank.isFull()) {
 				if(burnTime == 0) {
 					on = false;
@@ -49,22 +50,22 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 						result = SmelterRecipes.instance().getResult(s);
 						if(result != null && tank.hasSpacefor(result)) {
 							inventory.extractItemInternal(0, 1, false);
-							currentItemBurnTime = (int) Math.ceil(SmelterRecipes.instance().getSmeltingTime(s) * ModConfig.machines.smelter.speed);
+							currentUsedTime = (int) Math.ceil(SmelterRecipes.instance().getSmeltingTime(s) * ModConfig.machines.smelter.speed);
 							burnTime++;
 							on = true;
 						}
 					}
-				} else if(burnTime % currentItemBurnTime == 0 && on) {
+				} else if(burnTime % currentUsedTime == 0 && on) {
 					if(result != null && tank.hasSpacefor(result)) {
 						tank.fillInternal(result, true);
 						result = null;
 						burnTime = 0;
-						currentItemBurnTime = 1;
+						currentUsedTime = 1;
 						on = false;
 					}
 				} else {
-					if(on && energyContainer.extractEnergyInternal(ModConfig.machines.smelter.consumeRfPertick, true) == ModConfig.machines.smelter.consumeRfPertick) {
-						energyContainer.extractEnergyInternal(ModConfig.machines.smelter.consumeRfPertick, false);
+					if(on && energyContainer.extractEnergyInternal(energyPerTick, true) == energyPerTick) {
+						energyContainer.extractEnergyInternal(energyPerTick, false);
 						burnTime++;
 					}
 				}
@@ -87,15 +88,11 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		burnTime = nbt.getInteger("burnTime");
-		currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
 		result = FluidStack.loadFluidStackFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
 		if(result != null)
 			result.writeToNBT(nbt);
 		return super.writeToNBT(nbt);
@@ -105,36 +102,16 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
-		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("currentItemBurnTime", currentItemBurnTime);
+		if(result != null)
+			result.writeToNBT(nbt);
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
 	@Override
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			burnTime = nbt.getInteger("burnTime");
-			currentItemBurnTime = nbt.getInteger("currentItemBurnTime");
+			result = FluidStack.loadFluidStackFromNBT(nbt);
 			super.readFromCustomInfoNBT(nbt);
-		}
-	}
-
-	public int getProgress() {
-		if(currentItemBurnTime == 0) {
-			return 0;
-		}
-		double t = ((double)burnTime / currentItemBurnTime) *100;
-		return (int) Math.ceil(t);
-	}
-
-	public String getRemainingTime() {
-		if(burnTime != 0) {
-			double ticksLeft = currentItemBurnTime - burnTime;
-			double secs = ticksLeft / 20;
-			int secI = (int) Math.ceil(secs);
-			return Integer.toString(secI) + "s";
-		}else {
-			return null;
 		}
 	}
 }

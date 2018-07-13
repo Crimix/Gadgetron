@@ -16,6 +16,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	protected CustomEnergyStorage energyContainer = null;
 	protected int ticksBetweenAutoIO = ModConfig.machines.automation_ticks;
 	protected int currentTickBewteen = 0;
+	protected int energyPerTick = 1;
 	
 	public TileEntityEnergyBase(CustomEnergyStorage storage) {
 		this.energyContainer = storage;
@@ -47,6 +48,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	public void readFromNBT(NBTTagCompound nbt) {
 		this.energyContainer.readFromNBT(nbt);
 		on = nbt.getBoolean("on");
+		energyPerTick = nbt.getInteger("energyPerTick");
 		super.readFromNBT(nbt);
 	}
 
@@ -54,6 +56,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		this.energyContainer.writeToNBT(nbt);
 		nbt.setBoolean("on",on);
+		nbt.setInteger("energyPerTick", energyPerTick);
 		return super.writeToNBT(nbt);
 	}
 	
@@ -76,6 +79,10 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	
 	public boolean isOn() {
 		return on;
+	}
+	
+	public int getEnergyPerTick() {
+		return energyPerTick;
 	}
 	
 	@Override

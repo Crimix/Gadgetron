@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.tile.base;
 
+import java.util.function.Function;
+
 import javax.annotation.Nullable;
 
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
@@ -9,6 +11,7 @@ import com.black_dog20.gadgetron.storage.OutputItemHandlerWrapper;
 import com.black_dog20.gadgetron.utility.MachineFaces;
 import com.black_dog20.gadgetron.utility.Varient;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -21,10 +24,10 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	
 	protected CustomItemHandler inventory = null;
 	public MachineFaces inventoryFaces;
+	protected Function<ItemStack,Boolean> validatorItemInput;
 	
 	protected int burnTime = 0;
 	protected int currentUsedTime = 1;
-	protected int energyPerTick = 1;
 
 	public TileEntityEnergyInventoryBase() {
 		super();
@@ -76,6 +79,8 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
     	nbt.setTag("inventory", inventory.serializeNBT());
     	inventoryFaces.writeToNBT(nbt);
+    	nbt.setInteger("burnTime", burnTime);
+    	nbt.setInteger("currentUsedTime", currentUsedTime);
         return super.writeToNBT(nbt);
     }
 
@@ -84,6 +89,8 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
         super.readFromNBT(nbt);
         inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
         inventoryFaces.readFromNBT(nbt);
+        burnTime = nbt.getInteger("burnTime");
+        currentUsedTime = nbt.getInteger("currentUsedTime");
     }
     
     public ItemStackHandler getInventory() {
@@ -96,6 +103,8 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 			nbt = new NBTTagCompound();
 		nbt.setTag("inventory", inventory.serializeNBT());
 		inventoryFaces.writeToNBT(nbt);
+    	nbt.setInteger("burnTime", burnTime);
+    	nbt.setInteger("currentUsedTime", currentUsedTime);
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
@@ -104,6 +113,8 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 		if(nbt != null) {
 	        inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
 	        inventoryFaces.readFromNBT(nbt);
+	        burnTime = nbt.getInteger("burnTime");
+	        currentUsedTime = nbt.getInteger("currentUsedTime");
 	        super.readFromCustomInfoNBT(nbt);
 		}
 	}
@@ -152,7 +163,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 						if (te != null && !te.isInvalid()) {
 							IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, f.getOpposite());
 							if (handler != null) {
-								inventory.tryExtract(handler);
+								inventory.tryExtract(handler, validatorItemInput);
 								te.markDirty();
 								this.markDirty();
 							}

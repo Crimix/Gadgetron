@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.storage;
 
+import java.util.function.Function;
+
 import javax.annotation.Nonnull;
 
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
@@ -106,13 +108,28 @@ public class CustomItemHandler extends ItemStackHandler {
 	}
 	
 	public void transfer(IItemHandler target) {
-		for(int i = 0; i < outputSlots; i++) {
-			ItemStack stack = this.extractItem(i, 1, true);
+		for(int i = inputSlots; i < inputSlots+outputSlots; i++) {
+			ItemStack stack = this.extractItemInternal(i, 1, true);
 			if(stack != null && !stack.isEmpty()) {
 				for(int k = 0; k < target.getSlots(); k++) {
 					ItemStack returnedStack = target.insertItem(k, stack, false);
 					if(returnedStack.isEmpty()) {
-						this.extractItem(i, 1, false);
+						this.extractItemInternal(i, 1, false);
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	public void tryExtract(IItemHandler target, Function<ItemStack,Boolean> validator) {
+		for(int k = 0; k < target.getSlots(); k++) {
+			ItemStack stack = target.extractItem(k, 1, true);
+			if(stack != null && !stack.isEmpty() && (validator == null || validator.apply(stack))) {
+				for(int i = 0; i < inputSlots; i++) {
+					ItemStack returnedStack = this.insertItemInternal(i, stack, false);
+					if(returnedStack.isEmpty()) {
+						target.extractItem(k, 1, false);
 					}
 				}
 			}
@@ -120,17 +137,7 @@ public class CustomItemHandler extends ItemStackHandler {
 	}
 	
 	public void tryExtract(IItemHandler target) {
-		for(int k = 0; k < target.getSlots(); k++) {
-			ItemStack stack = target.extractItem(k, 1, true);
-			if(stack != null && !stack.isEmpty()) {
-				for(int i = 0; i < inputSlots; i++) {
-					ItemStack returnedStack = this.insertItem(i, stack, false);
-					if(returnedStack.isEmpty()) {
-						target.extractItem(k, 1, false);
-					}
-				}
-			}
-		}
+		tryExtract(target, null);
 	}
 	
 	@Override
@@ -142,7 +149,7 @@ public class CustomItemHandler extends ItemStackHandler {
 	
 	
 	public boolean canMerge(int slot, ItemStack stack) {
-		return (slot < 0 || slot >= stacks.size()) && ItemStack.areItemsEqual(stacks.get(slot), stack) && stacks.get(slot).getMaxStackSize() >= (stacks.get(slot).getCount()+stack.getCount());
+		return (slot >= 0 || slot < stacks.size()) && (stacks.get(slot).isEmpty() || (ItemStack.areItemsEqual(stacks.get(slot), stack) && stacks.get(slot).getMaxStackSize() >= (stacks.get(slot).getCount()+stack.getCount())));
 	}
 	
 }

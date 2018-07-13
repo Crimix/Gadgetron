@@ -11,10 +11,14 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ProcessorRecipes {
 	private static final ProcessorRecipes recipes = new ProcessorRecipes();
 	private final Map<ItemStack, ItemStack> recipeList = Maps.<ItemStack, ItemStack>newHashMap();
+	private final Map<ItemStack, Integer> timeList = Maps.<ItemStack, Integer>newHashMap();
+
 
 	public static ProcessorRecipes instance()
 	{
@@ -25,22 +29,49 @@ public class ProcessorRecipes {
 	{
 	}
 
-	public void addRecipeForBlock(Block input, ItemStack stack)
+	public void addRecipeForBlock(Block input, int time, ItemStack stack)
 	{
-		this.add(Item.getItemFromBlock(input), stack);
+		this.add(Item.getItemFromBlock(input), time, stack);
 	}
 
-	public void add(Item input, ItemStack stack)
+	public void add(Item input, int time, ItemStack stack)
 	{
-		this.addRecipe(new ItemStack(input, 1, 32767), stack);
+		this.addRecipe(new ItemStack(input, 1, 32767), time, stack);
 	}
 
-	public void addRecipe(ItemStack input, ItemStack stack)
+	public void addRecipe(ItemStack input, int time, ItemStack stack)
 	{
 		if (getResult(input) != ItemStack.EMPTY) { 
 			Gadgetron.logger.log(Level.INFO, "Ignored Processor recipe with conflicting input: {} = {}", input, stack); 
 			return; }
 		this.recipeList.put(input, stack);
+		this.timeList.put(input, time);
+	}
+	
+	public void addRecipe(String ore, int time, ItemStack out) {
+    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
+    	for (int i = 0; i < tList.size(); i++) {
+    	    ItemStack tStack = tList.get(i);
+    	    tStack = tStack.copy();
+    	    tStack.setCount(1);
+    	    this.addRecipe(OreDictionary.getOres(ore).get(i), time, out);
+    	}
+    }
+    
+	public void addRecipe(String ore, int time, String out, int amount) {
+    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
+    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
+    	if (tList2.size() > 0) {
+    		ItemStack tStack2 = tList2.get(0);
+    		tStack2 = tStack2.copy();
+    		tStack2.setCount(amount);
+    		for (int i = 0; i < tList.size(); i++) {
+    			ItemStack tStack = tList.get(i);
+    			tStack = tStack.copy();
+    			tStack.setCount(1);
+    			this.addRecipe(OreDictionary.getOres(ore).get(i), time, tStack2);
+    		}
+    	}
 	}
 
 	public ItemStack getResult(ItemStack stack)
@@ -55,14 +86,43 @@ public class ProcessorRecipes {
 
 		return ItemStack.EMPTY;
 	}
+	
+	public int getTime(ItemStack stack)
+	{
+		for (Entry<ItemStack, Integer> entry : this.timeList.entrySet())
+		{
+			if (this.compareItemStacks(stack, (ItemStack)entry.getKey()))
+			{
+				return (int)entry.getValue();
+			}
+		}
+
+		return 1;
+	}
 
 	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
 	{
 		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
 	}
+	
+	public boolean containsRecipe(ItemStack stack) {
+		for (Entry<ItemStack, Integer> entry : this.timeList.entrySet())
+		{
+			if (this.compareItemStacks(stack, (ItemStack)entry.getKey()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public Map<ItemStack, ItemStack> getRecipeList()
 	{
 		return this.recipeList;
+	}
+	
+	public Map<ItemStack, Integer> getTimeList()
+	{
+		return this.timeList;
 	}
 }
