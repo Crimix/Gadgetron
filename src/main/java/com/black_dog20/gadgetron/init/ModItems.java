@@ -43,6 +43,19 @@ public class ModItems {
 	public static ItemBase TitaniumDust = new ItemBase("titaniumDust");
 	public static ItemBase RaritaniumRod = new ItemBase("raritaniumRod");
 	
+	public static ItemBase RedGlowstoneDust = new ItemBase("redglowstone_dust");
+	public static ItemBase Silicon = new ItemBase("silicon");
+	public static ItemBase AdamantinePlate = new ItemBase("adamantine_plate");
+	public static ItemBase CarbonoxPlate = new ItemBase("carbonox_plate");
+	public static ItemBase TrilliumPlate = new ItemBase("trillium_plate");
+	public static ItemBase TitaniumPlate = new ItemBase("titanium_plate");
+	public static ItemBase RaritaniumShard = new ItemBase("raritanium_shard");
+	public static ItemBase ConductingIngot = new ItemBase("conducting_ingot");
+	public static ItemBase RaritaniumEnhancedPlate = new ItemBase("raritanium_enhanced_plate");
+	public static ItemBase ConductingWire = new ItemBase("conducting_wire");
+	public static ItemBase Circuit = new ItemBase("circuit");
+	public static ItemBase RaritaniumHammer = new ItemBase("raritanium_hammer");
+	
 	public static ItemAxeBase RaritaniumAxe = new ItemAxeBase("raritaniumAxe", Raritanium, Raritanium.getDamageVsEntity(), -2.5F);
 	public static ItemHoeBase RaritaniumHoe = new ItemHoeBase("raritaniumHoe", Raritanium);
 	public static ItemPickaxeBase RaritaniumPickaxe = new ItemPickaxeBase("raritaniumPickaxe", Raritanium);
@@ -75,7 +88,6 @@ public class ModItems {
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
 		IForgeRegistry<Item> r = evt.getRegistry();
 		
-		//r.register(RaritaniumCrystal);
 		r.register(AdamantineIngot);
 		r.register(CarbonoxIngot);
 		r.register(TrilliumIngot);
@@ -85,6 +97,19 @@ public class ModItems {
 		r.register(TrilliumDust);
 		r.register(TitaniumDust);
 		r.register(RaritaniumRod);
+		
+		r.register(RedGlowstoneDust);
+		r.register(Silicon);
+		r.register(AdamantinePlate);
+		r.register(CarbonoxPlate);
+		r.register(TrilliumPlate);
+		r.register(TitaniumPlate);
+		r.register(RaritaniumShard);
+		r.register(ConductingIngot);
+		r.register(RaritaniumEnhancedPlate );
+		r.register(ConductingWire);
+		r.register(Circuit);
+		r.register(RaritaniumHammer);
 		
 		r.register(RaritaniumAxe);
 		r.register(RaritaniumHoe);

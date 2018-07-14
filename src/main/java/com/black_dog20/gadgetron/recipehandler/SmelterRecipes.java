@@ -39,7 +39,7 @@ public class SmelterRecipes {
 		this.addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), smeltingTime, stack);
 	}
 
-	public void addRecipe(ItemStack input, int smeltingTime, FluidStack stack)
+	private void addRecipe(ItemStack input, int smeltingTime, FluidStack stack)
 	{
 		if (getResult(input) != null) { 
 			Gadgetron.logger.log(Level.INFO, "Ignored Smelter recipe with conflicting input: {} = {}", input, stack); 

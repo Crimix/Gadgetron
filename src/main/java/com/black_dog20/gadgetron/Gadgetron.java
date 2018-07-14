@@ -109,7 +109,13 @@ public class Gadgetron {
 		OreDictionary.registerOre("ingotTitanium", ModItems.TitaniumIngot);
 		OreDictionary.registerOre("ingotTrillium", ModItems.TrilliumIngot);
 		
+		OreDictionary.registerOre("plateAdamantine", ModItems.AdamantinePlate);
+		OreDictionary.registerOre("plateCarbonox", ModItems.CarbonoxPlate);
+		OreDictionary.registerOre("plateTitanium", ModItems.TitaniumPlate);
+		OreDictionary.registerOre("plateTrillium", ModItems.TrilliumPlate);
+		
 		OreDictionary.registerOre("crystalRaritanium", ModBlocks.RaritaniumCrystal);
+		OreDictionary.registerOre("silicon", ModItems.Silicon);
 		
 		OreDictionary.registerOre("oreAdamantine", ModBlocks.AdamantineOre);
 		OreDictionary.registerOre("oreCarbonox", ModBlocks.CarbonoxOre);

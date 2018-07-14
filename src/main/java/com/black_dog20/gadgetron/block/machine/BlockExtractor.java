@@ -14,7 +14,7 @@ public class BlockExtractor extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityExtractor(this.getLocalizedName());
+		return new TileEntityExtractor();
 	}
 	
 	@Override

@@ -14,7 +14,7 @@ public class BlockSmelter extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntitySmelter(this.getLocalizedName());
+		return new TileEntitySmelter();
 	}
 	
 	@Override

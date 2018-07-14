@@ -127,7 +127,7 @@ public class CustomItemHandler extends ItemStackHandler {
 			ItemStack stack = target.extractItem(k, 1, true);
 			if(stack != null && !stack.isEmpty() && (validator == null || validator.apply(stack))) {
 				for(int i = 0; i < inputSlots; i++) {
-					ItemStack returnedStack = this.insertItemInternal(i, stack, false);
+					ItemStack returnedStack = this.insertItem(i, stack, false);
 					if(returnedStack.isEmpty()) {
 						target.extractItem(k, 1, false);
 						break;

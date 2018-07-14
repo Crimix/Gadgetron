@@ -14,7 +14,7 @@ public class BlockEnergyGenerator extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityEnergyGenerator(this.getLocalizedName());
+		return new TileEntityEnergyGenerator();
 	}
 	
 	@Override

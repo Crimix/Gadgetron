@@ -49,34 +49,71 @@ public class FabricatorRecipes {
 		this.timeList.put(temp, time);
 	}
     
-	public void addRecipe(String oreA, String oreB, int time,  String out, int amount) {
+	public void addRecipe(String oreA, String oreB, int time, String out, int amount) {
+		addRecipe(oreA, 1, oreB, 1, time, out, amount);
+	}
+	
+	public void addRecipe(String oreA, String oreB, int time, ItemStack out) {
+		addRecipe(oreA,1,oreB,1,time,out);
+	}
+	
+	public void addRecipe(String oreA, int amountA, String oreB, int amountB, int time, String out, int amount) {
     	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
     	if (tList2.size() > 0) {
     		ItemStack tStack2 = tList2.get(0);
     		tStack2 = tStack2.copy();
     		tStack2.setCount(amount);
-    		this.addRecipe(oreA, oreB, time, tStack2);
+    		this.addRecipe(oreA, amountA, oreB, amountB, time, tStack2);
     	}
 	}
 	
-	public void addRecipe(String oreA, String oreB, int time,  ItemStack out) {
+	public void addRecipe(String oreA, int amountA, String oreB, int amountB, int time, ItemStack out) {
     	NonNullList<ItemStack> tList = OreDictionary.getOres(oreA);
     	NonNullList<ItemStack> tList2 = OreDictionary.getOres(oreB);
     		for (int i = 0; i < tList.size(); i++) {
     			ItemStack tStack = tList.get(i);
     			tStack = tStack.copy();
-    			tStack.setCount(1);
+    			tStack.setCount(amountA);
     			tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     			for (int j = 0; j < tList2.size(); j++) {
         			ItemStack tStack2 = tList2.get(j);
         			tStack2 = tStack2.copy();
-        			tStack2.setCount(1);
+        			tStack2.setCount(amountB);
         			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
         			this.addRecipe(tStack, tStack2, time, out);
         		}
     		}
 	}
+	
+	public void addRecipe(ItemStack inputA, String oreB, int amountB, int time, ItemStack out) {
+		NonNullList<ItemStack> tList2 = OreDictionary.getOres(oreB);
+		for (int j = 0; j < tList2.size(); j++) {
+			ItemStack tStack2 = tList2.get(j);
+			tStack2 = tStack2.copy();
+			tStack2.setCount(amountB);
+			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+			this.addRecipe(inputA, tStack2, time, out);
+		}
+	}
+	
+	public void addRecipe(String oreA, int amountA, ItemStack inputB, int time, ItemStack out) {
+		addRecipe(inputB, oreA, amountA, time, out);
+	}
     
+	
+	public void addRecipe(String oreA, int amountA, ItemStack inputB, int time, String out, int amount) {
+		addRecipe(inputB, oreA, amountA, time, out, amount);
+	}
+	
+	public void addRecipe(ItemStack inputA, String oreB, int amountB, int time, String out, int amount) {
+    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
+    	if (tList2.size() > 0) {
+    		ItemStack tStack2 = tList2.get(0);
+    		tStack2 = tStack2.copy();
+    		tStack2.setCount(amount);
+    		addRecipe(inputA, oreB, amountB, time, tStack2);
+    	}
+	}
 
 	public ItemStack getResult(Tuple<ItemStack, ItemStack> stack)
 	{
@@ -112,7 +149,8 @@ public class FabricatorRecipes {
 	
 	private boolean compareItemStacks(ItemStack stack1,ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == OreDictionary.WILDCARD_VALUE || stack2.getMetadata() == stack1.getMetadata());
+		System.out.println(stack2 + " "  + stack1);
+		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == OreDictionary.WILDCARD_VALUE || stack2.getMetadata() == stack1.getMetadata()) && stack2.getCount() == stack1.getCount();
 	}
 	
 	public boolean containsRecipe(Tuple<ItemStack, ItemStack> stack) {

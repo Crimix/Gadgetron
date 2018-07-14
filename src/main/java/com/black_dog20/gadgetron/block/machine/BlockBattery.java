@@ -14,7 +14,7 @@ public class BlockBattery extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityBattery(this.getLocalizedName());
+		return new TileEntityBattery();
 	}
 	
 	@Override

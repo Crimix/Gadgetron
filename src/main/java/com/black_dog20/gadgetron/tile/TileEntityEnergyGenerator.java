@@ -27,21 +27,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
-	private int ticksToBurnfuel = (int) Math.ceil(1000*ModConfig.machines.fuelGenerator.speed);
-	private int fuelUse = ModConfig.machines.fuelGenerator.cosumeMbPerOperation;
+	protected int ticksToBurnfuel = 1;
+	protected int fuelUse = 1; 
 
+	public TileEntityEnergyGenerator(int capacity, int capacityTank, int energyPerTick, double speed, int fuelUse) {
+		super(new CustomEnergyStorage(capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(capacityTank, (f) -> isFuel(f)));
+		tankFaces = new MachineFaces(this, Varient.TANK, true, false);
+		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, false, false);
+		this.energyPerTick = energyPerTick;
+		this.ticksToBurnfuel = (int)Math.ceil(1000*speed);
+		this.fuelUse = fuelUse;
+	}
+	
+	
 	public TileEntityEnergyGenerator() {
-		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
-		tankFaces = new MachineFaces(this, Varient.TANK, true, false);
-		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, false, false);
+		this(ModConfig.machines.fuelGenerator_t1.capacity ,ModConfig.machines.fuelGenerator_t1.capacityTank, ModConfig.machines.fuelGenerator_t1.generateRfPerTick, ModConfig.machines.fuelGenerator_t1.speed, ModConfig.machines.fuelGenerator_t1.cosumeMbPerOperation);
 	}
 
-	public TileEntityEnergyGenerator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.fuelGenerator.capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(ModConfig.machines.fuelGenerator.capacityTank, (f) -> isFuel(f)));
-		this.name = name;
-		tankFaces = new MachineFaces(this, Varient.TANK, true, false);
-		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, false, false);
-	}
 	
 	private static boolean isFuel(FluidStack fluid) {
 		return fluid != null && fluid.getFluid() == ModFluids.fluidTrillium;
@@ -50,7 +52,6 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	@Override
 	public void update() {
 		if(!world.isRemote) {
-			energyPerTick = ModConfig.machines.fuelGenerator.generateRfPerTick;
 			if(!this.energyContainer.isFull()) {
 				if(burnTime == 0) {
 					on = false;

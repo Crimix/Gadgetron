@@ -31,13 +31,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 
-	public TileEntityCoalGenerator() {
-		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
+	public TileEntityCoalGenerator(int energyCapcaity, int energyPerTick) {
+		super(new CustomEnergyStorage(energyCapcaity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1, 0, (i) -> isItemFuel(i)));
+		this.energyPerTick = energyPerTick;
 	}
 
-	public TileEntityCoalGenerator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.coalGenerator.capacity, 0, Integer.MAX_VALUE), new FilteredItemStackHandler(1,0, (i) -> isItemFuel(i)));
-		this.name = name;
+	public TileEntityCoalGenerator() {
+		this(ModConfig.machines.coalGenerator_t1.capacity, ModConfig.machines.coalGenerator_t1.generateRfPerTick);
 	}
 
 	public static int getItemBurnTime(ItemStack stack)
@@ -67,7 +67,6 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	public void update() {
 		if(!world.isRemote) {
 			super.update();
-			energyPerTick = ModConfig.machines.coalGenerator.generateRfPerTick;
 			if(!this.energyContainer.isFull()) {
 				if(burnTime == 0) {
 					on = false;
@@ -120,34 +119,6 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	@Override
 	public Container getContainer(EntityPlayer player) {
 		return new ContainerCoalGenerator(player.inventory, this);
-	}
-
-	public int getEnergyPerTick() {
-		return energyPerTick;
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-	}
-
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		return super.writeToNBT(nbt);
-	}
-	
-	@Override
-	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
-		if(nbt == null)
-			nbt = new NBTTagCompound();
-		return super.writeCustomInfoToNBT(nbt);
-	}
-	
-	@Override
-	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
-		if(nbt != null) {
-			super.readFromCustomInfoNBT(nbt);
-		}
 	}
 
 }

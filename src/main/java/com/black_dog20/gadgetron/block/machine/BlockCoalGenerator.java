@@ -14,7 +14,7 @@ public class BlockCoalGenerator extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityCoalGenerator(this.getLocalizedName());
+		return new TileEntityCoalGenerator();
 	}
 	
 	@Override

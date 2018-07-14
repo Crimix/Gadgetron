@@ -9,6 +9,19 @@ item.gadgetron:trilliumdust.name=Trillium Dust
 item.gadgetron:titaniumdust.name=Titanium Dust
 item.gadgetron:raritaniumrod.name=Raritanium Rod
 
+item.gadgetron:redglowstone_dust.name=Redstone-Glowstone Blend
+item.gadgetron:silicon.name=Silicon
+item.gadgetron:adamantine_plate.name=Adamantine Plate
+item.gadgetron:carbonox_plate.name=Carbonox Plate
+item.gadgetron:trillium_plate.name=Trillium Plate
+item.gadgetron:titanium_plate.name=Titanium Plate
+item.gadgetron:raritanium_shard.name=Raritanium Shard
+item.gadgetron:conducting_ingot.name=Conducting Ingot
+item.gadgetron:raritanium_enhanced_plate.name=Raritanium Enhanced Plate
+item.gadgetron:conducting_wire.name=Conducting Wire
+item.gadgetron:circuit.name=Circuit
+item.gadgetron:raritanium_hammer.name=Raritanium Hammer
+
 //Item tools
 item.gadgetron:raritaniumpickaxe.name=Raritanium Pickaxe
 item.gadgetron:raritaniumaxe.name=Raritanium Axe
@@ -76,6 +89,20 @@ tile.gadgetron:smelter_t1.name=Basic Fluid Smelter
 tile.gadgetron:extractor_t1.name=Basic Extractor
 tile.gadgetron:processor_t1.name=Basic Processor
 tile.gadgetron:fabricator_t1.name=Basic Fabricator
+tile.gadgetron:energy_generator_t2.name=Intermediate Fuel Generator
+tile.gadgetron:coal_generator_t2.name=Intermediate Coal Generator
+tile.gadgetron:battery_t2.name=Intermediate Battery
+tile.gadgetron:smelter_t2.name=Intermediate Fluid Smelter
+tile.gadgetron:extractor_t2.name=Intermediate Extractor
+tile.gadgetron:processor_t2.name=Intermediate Processor
+tile.gadgetron:fabricator_t2.name=Intermediate Fabricator
+tile.gadgetron:energy_generator_t3.name=Advanced Fuel Generator
+tile.gadgetron:coal_generator_t3.name=Advanced Coal Generator
+tile.gadgetron:battery_t3.name=Advanced Battery
+tile.gadgetron:smelter_t3.name=Advanced Fluid Smelter
+tile.gadgetron:extractor_t3.name=Advanced Extractor
+tile.gadgetron:processor_t3.name=Advanced Processor
+tile.gadgetron:fabricator_t3.name=Advanced Fabricator
 
 //Fluids
 fluid.trillium=Trillium
@@ -88,6 +115,7 @@ gadgetron.container.progress=Progress
 gadgetron.container.energystored=Energy Stored
 gadgetron.container.output=Push
 gadgetron.container.input=Pull
+gadgetron.container.inputRf=Input
 gadgetron.container.capacity=Capacity
 gadgetron.container.top=Top
 gadgetron.container.front=Front
@@ -155,14 +183,27 @@ gadgetron.config.machine.inputRF=Input RF/t
 gadgetron.config.machine.automationticks=Ticks between auto I/O
 gadgetron.config.machine.automationmb=Max fluid auto I/O
 
-
-gadgetron.config.machines.coalGenerator=Basic Coal Generator
-gadgetron.config.machines.fuelGenerator=Basic Fuel Generator
+gadgetron.config.machines.coalGenerator_t1=Basic Coal Generator
+gadgetron.config.machines.coalGenerator_t2=Intermediate Coal Generator
+gadgetron.config.machines.coalGenerator_t3=Advanced Coal Generator
+gadgetron.config.machines.fuelGenerator_t1=Basic Fuel Generator
+gadgetron.config.machines.fuelGenerator_t2=Intermediate Fuel Generator
+gadgetron.config.machines.fuelGenerator_t3=Advanced Fuel Generator
 gadgetron.config.machines.battery_t1=Basic Battery
-gadgetron.config.machines.smelter=Basic Fluid Smelter
-gadgetron.config.machines.fabricator=Basic Fabricator
-gadgetron.config.machines.extractor=Basic Extractor
-gadgetron.config.machines.processor=Basic Processor
+gadgetron.config.machines.battery_t2=Intermediate Battery
+gadgetron.config.machines.battery_t3=Advanced Battery
+gadgetron.config.machines.smelter_t1=Basic Fluid Smelter
+gadgetron.config.machines.smelter_t2=Intermediate Fluid Smelter
+gadgetron.config.machines.smelter_t3=Advanced Fluid Smelter
+gadgetron.config.machines.fabricator_t1=Basic Fabricator
+gadgetron.config.machines.fabricator_t2=Intermediate Fabricator
+gadgetron.config.machines.fabricator_t3=Advanced Fabricator
+gadgetron.config.machines.extractor_t1=Basic Extractor
+gadgetron.config.machines.extractor_t2=Intermediate Extractor
+gadgetron.config.machines.extractor_t3=Advanced Extractor
+gadgetron.config.machines.processor_t1=Basic Processor
+gadgetron.config.machines.processor_t2=Intermediate Processor
+gadgetron.config.machines.processor_t3=Advanced Processor
 
 //Keys
 

@@ -20,22 +20,21 @@ public class TileEntityExtractor extends TileEntityEnergyInventoryBase {
 
 	private ItemStack result;
 	
-	public TileEntityExtractor() {
-		super(new CustomEnergyStorage(ModConfig.machines.extractor.capacity, Integer.MAX_VALUE, 0),1,1);
+	public TileEntityExtractor(int capacity, int energyPerTick, double speed) {
+		super(new CustomEnergyStorage(capacity, Integer.MAX_VALUE, 0),1,1);
 		validatorItemInput = (i) -> ExtractorRecipes.instance().containsRecipe(i);
+		this.energyPerTick = energyPerTick;
+		this.speed = speed;
 	}
 
-	public TileEntityExtractor(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.extractor.capacity, Integer.MAX_VALUE, 0),1,1);
-		this.name = name;
-		validatorItemInput = (i) -> ExtractorRecipes.instance().containsRecipe(i);
+	public TileEntityExtractor() {
+		this(ModConfig.machines.extractor_t1.capacity, ModConfig.machines.extractor_t1.consumeRfPertick, ModConfig.machines.extractor_t1.speed);
 	}
 
 
 	@Override
 	public void update() {
 		if(!world.isRemote) {
-			energyPerTick = ModConfig.machines.extractor.consumeRfPertick;
 			if(!this.energyContainer.isEmpty()) {
 				if(burnTime == 0) {
 					on = false;
@@ -44,7 +43,7 @@ public class TileEntityExtractor extends TileEntityEnergyInventoryBase {
 						result = ExtractorRecipes.instance().getResult(s);
 						if(result != null && !result.isEmpty() && inventory.canMerge(1, result)) {
 							inventory.extractItemInternal(0, 1, false);
-							currentUsedTime = (int) Math.ceil(ExtractorRecipes.instance().getTime(s) * ModConfig.machines.extractor.speed);
+							currentUsedTime = (int) Math.ceil(ExtractorRecipes.instance().getTime(s) * speed);
 							burnTime++;
 							on = true;
 						}

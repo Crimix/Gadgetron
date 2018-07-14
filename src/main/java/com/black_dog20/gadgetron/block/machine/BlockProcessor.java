@@ -14,7 +14,7 @@ public class BlockProcessor extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityProcessor(this.getLocalizedName());
+		return new TileEntityProcessor();
 	}
 	
 	@Override

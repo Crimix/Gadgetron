@@ -17,6 +17,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	protected int ticksBetweenAutoIO = ModConfig.machines.automation_ticks;
 	protected int currentTickBewteen = 0;
 	protected int energyPerTick = 1;
+	protected double speed = 1;
 	
 	public TileEntityEnergyBase(CustomEnergyStorage storage) {
 		this.energyContainer = storage;

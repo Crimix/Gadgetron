@@ -39,7 +39,7 @@ public class ProcessorRecipes {
 		this.addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), time, stack);
 	}
 
-	public void addRecipe(ItemStack input, int time, ItemStack stack)
+	private void addRecipe(ItemStack input, int time, ItemStack stack)
 	{
 		if (getResult(input) != ItemStack.EMPTY) { 
 			Gadgetron.logger.log(Level.INFO, "Ignored Processor recipe with conflicting input: {} = {}", input, stack); 

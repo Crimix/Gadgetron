@@ -19,35 +19,45 @@ public class TileEntityFabricator extends TileEntityEnergyInventoryBase {
 
 	private ItemStack result;
 	
-	public TileEntityFabricator() {
-		super(new CustomEnergyStorage(ModConfig.machines.fabricator.capacity, Integer.MAX_VALUE, 0),2,1);
+	public TileEntityFabricator(int capacity, int energyPerTick, double speed) {
+		super(new CustomEnergyStorage(capacity, Integer.MAX_VALUE, 0),2,1);
+		this.energyPerTick = energyPerTick;
+		this.speed = speed;
 		inventoryFaces.SetCanAutoInput(false);
 	}
 
-	public TileEntityFabricator(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.fabricator.capacity, Integer.MAX_VALUE, 0),2,1);
-		this.name = name;
-		inventoryFaces.SetCanAutoInput(false);
+	public TileEntityFabricator() {
+		this(ModConfig.machines.fabricator_t1.capacity, ModConfig.machines.extractor_t1.consumeRfPertick, ModConfig.machines.fabricator_t1.speed);
 	}
 
 
 	@Override
 	public void update() {
 		if(!world.isRemote) {
-			energyPerTick = ModConfig.machines.extractor.consumeRfPertick;
 			if(!this.energyContainer.isEmpty()) {
 				if(burnTime == 0) {
 					on = false;
-					ItemStack s = inventory.extractItemInternal(0, 1, true);
-					ItemStack s2 = inventory.extractItemInternal(1, 1, true);
-					Tuple<ItemStack, ItemStack> temp = new Tuple<ItemStack, ItemStack>(s, s2);
-					//System.out.println(FabricatorRecipes.instance().containsRecipe(temp));
-					if(s != null && !s.isEmpty() && FabricatorRecipes.instance().containsRecipe(temp)) {
+					ItemStack s = null;
+					ItemStack s2 = null;
+					Tuple<ItemStack, ItemStack> temp = null;
+					for(int i = 1; i <= 64; i++) {
+						for(int j = 1; j <= 64; j++) {
+							s = inventory.extractItemInternal(0, i, true);
+							s2 = inventory.extractItemInternal(1, j, true);
+							
+							temp = new Tuple<ItemStack, ItemStack>(s, s2);
+							if(s != null && !s.isEmpty() && s2 != null && !s2.isEmpty() && temp != null && FabricatorRecipes.instance().containsRecipe(temp))
+								break;
+						}
+						if(s != null && !s.isEmpty() && s2 != null && !s2.isEmpty() && temp != null && FabricatorRecipes.instance().containsRecipe(temp))
+							break;
+					}
+					if(s != null && !s.isEmpty() && s2 != null && !s2.isEmpty() && temp != null && FabricatorRecipes.instance().containsRecipe(temp)) {
 						result = FabricatorRecipes.instance().getResult(temp);
 						if(result != null && !result.isEmpty() && inventory.canMerge(2, result)) {
 							inventory.extractItemInternal(0, s.getCount(), false);
 							inventory.extractItemInternal(1, s2.getCount(), false);
-							currentUsedTime = (int) Math.ceil(FabricatorRecipes.instance().getTime(temp) * ModConfig.machines.fabricator.speed);
+							currentUsedTime = (int) Math.ceil(FabricatorRecipes.instance().getTime(temp) * speed);
 							burnTime++;
 							on = true;
 						}

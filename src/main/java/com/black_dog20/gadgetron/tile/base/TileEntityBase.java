@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class TileEntityBase extends TileEntity implements ITickable{
 
-	protected String name ="NoName";
 	protected String faceing = "north";
 	
 	public void sendUpdates() {
@@ -72,20 +71,14 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
         return oldState.getBlock() != newState.getBlock();
     }
     
-    public String getName() {
-    	return name;
-    }
-    
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		this.name = nbt.getString("name");
 		this.faceing = nbt.getString("faceing");
 		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setString("name", name);
 		nbt.setString("faceing", faceing);
 		return super.writeToNBT(nbt);
 	}
@@ -93,13 +86,11 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 	public NBTTagCompound writeCustomInfoToNBT(NBTTagCompound nbt) {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
-		nbt.setString("name", name);
 		return nbt;
 	}
 	
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
-			this.name = nbt.getString("name");
 		}
 		sendUpdates();
 	}

@@ -4,13 +4,27 @@ import com.black_dog20.gadgetron.block.BlockBase;
 import com.black_dog20.gadgetron.block.BlockModOre;
 import com.black_dog20.gadgetron.block.BlockRaritaniumCrystal;
 import com.black_dog20.gadgetron.block.machine.BlockBattery;
+import com.black_dog20.gadgetron.block.machine.BlockBatteryT2;
+import com.black_dog20.gadgetron.block.machine.BlockBatteryT3;
 import com.black_dog20.gadgetron.block.machine.BlockCoalGenerator;
+import com.black_dog20.gadgetron.block.machine.BlockCoalGeneratorT2;
+import com.black_dog20.gadgetron.block.machine.BlockCoalGeneratorT3;
 import com.black_dog20.gadgetron.block.machine.BlockEnergyGenerator;
+import com.black_dog20.gadgetron.block.machine.BlockEnergyGeneratorT2;
+import com.black_dog20.gadgetron.block.machine.BlockEnergyGeneratorT3;
 import com.black_dog20.gadgetron.block.machine.BlockExtractor;
+import com.black_dog20.gadgetron.block.machine.BlockExtractorT2;
+import com.black_dog20.gadgetron.block.machine.BlockExtractorT3;
 import com.black_dog20.gadgetron.block.machine.BlockFabricator;
+import com.black_dog20.gadgetron.block.machine.BlockFabricatorT2;
+import com.black_dog20.gadgetron.block.machine.BlockFabricatorT3;
 import com.black_dog20.gadgetron.block.machine.BlockMachineBase;
 import com.black_dog20.gadgetron.block.machine.BlockProcessor;
+import com.black_dog20.gadgetron.block.machine.BlockProcessorT2;
+import com.black_dog20.gadgetron.block.machine.BlockProcessorT3;
 import com.black_dog20.gadgetron.block.machine.BlockSmelter;
+import com.black_dog20.gadgetron.block.machine.BlockSmelterT2;
+import com.black_dog20.gadgetron.block.machine.BlockSmelterT3;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.tile.TileEntityBattery;
 import com.black_dog20.gadgetron.tile.TileEntityCoalGenerator;
@@ -43,14 +57,28 @@ public class ModBlocks {
 	public static BlockBase TitaniumBlock = (BlockBase) new BlockBase(Material.ROCK, "titaniumBlock").setHardness(1.0F);
 	public static BlockBase Machine_block = (BlockBase) new BlockBase(Material.IRON, "machine_block").setHardness(1.0F);
 	
-	public static BlockMachineBase Generator = new BlockEnergyGenerator("energy_generator_t1");
-	public static BlockMachineBase CoalGenerator = new BlockCoalGenerator("coal_generator_t1");
+	public static BlockMachineBase Generator_T1 = new BlockEnergyGenerator("energy_generator_t1");
+	public static BlockMachineBase Generator_T2 = new BlockEnergyGeneratorT2("energy_generator_t2");
+	public static BlockMachineBase Generator_T3 = new BlockEnergyGeneratorT3("energy_generator_t3");
+	public static BlockMachineBase CoalGenerator_T1 = new BlockCoalGenerator("coal_generator_t1");
+	public static BlockMachineBase CoalGenerator_T2 = new BlockCoalGeneratorT2("coal_generator_t2");
+	public static BlockMachineBase CoalGenerator_T3 = new BlockCoalGeneratorT3("coal_generator_t3");
 	public static BlockMachineBase Battery_T1 = new BlockBattery("battery_t1");
+	public static BlockMachineBase Battery_T2 = new BlockBatteryT2("battery_t2");
+	public static BlockMachineBase Battery_T3 = new BlockBatteryT3("battery_t3");
 	
-	public static BlockMachineBase Fabricator = new BlockFabricator("fabricator_t1");
-	public static BlockMachineBase Extractor = new BlockExtractor("extractor_t1");
-	public static BlockMachineBase Processor = new BlockProcessor("processor_t1");
-	public static BlockMachineBase Smelter = new BlockSmelter("smelter_t1");
+	public static BlockMachineBase Fabricator_T1 = new BlockFabricator("fabricator_t1");
+	public static BlockMachineBase Fabricator_T2 = new BlockFabricatorT2("fabricator_t2");
+	public static BlockMachineBase Fabricator_T3 = new BlockFabricatorT3("fabricator_t3");
+	public static BlockMachineBase Extractor_T1 = new BlockExtractor("extractor_t1");
+	public static BlockMachineBase Extractor_T2 = new BlockExtractorT2("extractor_t2");
+	public static BlockMachineBase Extractor_T3 = new BlockExtractorT3("extractor_t3");
+	public static BlockMachineBase Processor_T1 = new BlockProcessor("processor_t1");
+	public static BlockMachineBase Processor_T2 = new BlockProcessorT2("processor_t2");
+	public static BlockMachineBase Processor_T3 = new BlockProcessorT3("processor_t3");
+	public static BlockMachineBase Smelter_T1 = new BlockSmelter("smelter_t1");
+	public static BlockMachineBase Smelter_T2 = new BlockSmelterT2("smelter_t2");
+	public static BlockMachineBase Smelter_T3 = new BlockSmelterT3("smelter_t3");
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
@@ -66,20 +94,34 @@ public class ModBlocks {
 		r.register(TitaniumBlock);
 		r.register(Machine_block);
 		
-		r.register(Generator);
+		r.register(Generator_T1);
+		r.register(Generator_T2);
+		r.register(Generator_T3);
 		GameRegistry.registerTileEntity(TileEntityEnergyGenerator.class, Reference.MOD_ID+":"+"generator");
-		r.register(CoalGenerator);
+		r.register(CoalGenerator_T1);
+		r.register(CoalGenerator_T2);
+		r.register(CoalGenerator_T3);
 		GameRegistry.registerTileEntity(TileEntityCoalGenerator.class, Reference.MOD_ID+":"+"coalGenerator");
 		r.register(Battery_T1);
-		GameRegistry.registerTileEntity(TileEntityBattery.class, Reference.MOD_ID+":"+"batteryT1");
+		r.register(Battery_T2);
+		r.register(Battery_T3);
+		GameRegistry.registerTileEntity(TileEntityBattery.class, Reference.MOD_ID+":"+"battery");
 		
-		r.register(Fabricator);
+		r.register(Fabricator_T1);
+		r.register(Fabricator_T2);
+		r.register(Fabricator_T3);
 		GameRegistry.registerTileEntity(TileEntityFabricator.class, Reference.MOD_ID+":"+"fabricator");
-		r.register(Extractor);
+		r.register(Extractor_T1);
+		r.register(Extractor_T2);
+		r.register(Extractor_T3);
 		GameRegistry.registerTileEntity(TileEntityExtractor.class, Reference.MOD_ID+":"+"extractor");
-		r.register(Processor);
+		r.register(Processor_T1);
+		r.register(Processor_T2);
+		r.register(Processor_T3);
 		GameRegistry.registerTileEntity(TileEntityProcessor.class, Reference.MOD_ID+":"+"processor");
-		r.register(Smelter);
+		r.register(Smelter_T1);
+		r.register(Smelter_T2);
+		r.register(Smelter_T3);
 		GameRegistry.registerTileEntity(TileEntitySmelter.class, Reference.MOD_ID+":"+"smelter");
 	}
 }

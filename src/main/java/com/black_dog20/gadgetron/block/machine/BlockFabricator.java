@@ -14,7 +14,7 @@ public class BlockFabricator extends BlockMachineBase {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityFabricator(this.getLocalizedName());
+		return new TileEntityFabricator();
 	}
 	
 	@Override

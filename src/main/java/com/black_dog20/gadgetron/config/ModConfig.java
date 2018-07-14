@@ -65,26 +65,68 @@ public class ModConfig {
 		@Config.RangeInt(min = 1, max = Integer.MAX_VALUE)
 		public int automation_mb = 250;
 		
-		@Config.LangKey("gadgetron.config.machines.coalGenerator")
-		public GeneratorMachineConfig coalGenerator = new GeneratorMachineConfig(30, 100000);
+		@Config.LangKey("gadgetron.config.machines.coalGenerator_t1")
+		public GeneratorMachineConfig coalGenerator_t1 = new GeneratorMachineConfig(30, 100000);
 		
-		@Config.LangKey("gadgetron.config.machines.fuelGenerator")
-		public GeneratorFluidMachineConfig fuelGenerator = new GeneratorFluidMachineConfig(100, 100000, 1, 10, 10000);
+		@Config.LangKey("gadgetron.config.machines.coalGenerator_t2")
+		public GeneratorMachineConfig coalGenerator_t2 = new GeneratorMachineConfig(60, 500000);
+		
+		@Config.LangKey("gadgetron.config.machines.coalGenerator_t3")
+		public GeneratorMachineConfig coalGenerator_t3 = new GeneratorMachineConfig(90, 1000000);
+		
+		@Config.LangKey("gadgetron.config.machines.fuelGenerator_t1")
+		public GeneratorFluidMachineConfig fuelGenerator_t1 = new GeneratorFluidMachineConfig(300, 100000, 1, 10, 10000);
+		
+		@Config.LangKey("gadgetron.config.machines.fuelGenerator_t2")
+		public GeneratorFluidMachineConfig fuelGenerator_t2 = new GeneratorFluidMachineConfig(600, 500000, 1.5, 10, 20000);
+		
+		@Config.LangKey("gadgetron.config.machines.fuelGenerator_t3")
+		public GeneratorFluidMachineConfig fuelGenerator_t3 = new GeneratorFluidMachineConfig(1000, 1000000, 2, 10, 30000);
 		
 		@Config.LangKey("gadgetron.config.machines.battery_t1")
 		public BatteryConfig battery_t1 = new BatteryConfig(1500, Integer.MAX_VALUE, 1000000);
 		
-		@Config.LangKey("gadgetron.config.machines.smelter")
-		public EnergyFluidGeneratorMachineConfig smelter = new EnergyFluidGeneratorMachineConfig(60, 100000, 1, 10000);
+		@Config.LangKey("gadgetron.config.machines.battery_t2")
+		public BatteryConfig battery_t2 = new BatteryConfig(20000, Integer.MAX_VALUE, 20000000);
 		
-		@Config.LangKey("gadgetron.config.machines.fabricator")
-		public EnergyMachineConfig fabricator = new EnergyMachineConfig(60, 100000, 1);
+		@Config.LangKey("gadgetron.config.machines.battery_t3")
+		public BatteryConfig battery_t3 = new BatteryConfig(200000, Integer.MAX_VALUE, 200000000);
 		
-		@Config.LangKey("gadgetron.config.machines.extractor")
-		public EnergyMachineConfig extractor = new EnergyMachineConfig(60, 100000, 1);
+		@Config.LangKey("gadgetron.config.machines.smelter_t1")
+		public EnergyFluidGeneratorMachineConfig smelter_t1 = new EnergyFluidGeneratorMachineConfig(60, 100000, 1, 10000);
 		
-		@Config.LangKey("gadgetron.config.machines.processor")
-		public EnergyMachineConfig processor = new EnergyMachineConfig(60, 100000, 1);
+		@Config.LangKey("gadgetron.config.machines.smelter_t2")
+		public EnergyFluidGeneratorMachineConfig smelter_t2 = new EnergyFluidGeneratorMachineConfig(90, 200000, 0.6, 20000);
+		
+		@Config.LangKey("gadgetron.config.machines.smelter_t3")
+		public EnergyFluidGeneratorMachineConfig smelter_t3 = new EnergyFluidGeneratorMachineConfig(100, 300000, 0.4, 40000);
+		
+		@Config.LangKey("gadgetron.config.machines.fabricator_t1")
+		public EnergyMachineConfig fabricator_t1 = new EnergyMachineConfig(60, 100000, 1);
+		
+		@Config.LangKey("gadgetron.config.machines.fabricator_t2")
+		public EnergyMachineConfig fabricator_t2 = new EnergyMachineConfig(90, 200000, 0.6);
+		
+		@Config.LangKey("gadgetron.config.machines.fabricator_t3")
+		public EnergyMachineConfig fabricator_t3 = new EnergyMachineConfig(100, 300000, 0.4);
+		
+		@Config.LangKey("gadgetron.config.machines.extractor_t1")
+		public EnergyMachineConfig extractor_t1 = new EnergyMachineConfig(60, 100000, 1);
+		
+		@Config.LangKey("gadgetron.config.machines.extractor_t2")
+		public EnergyMachineConfig extractor_t2 = new EnergyMachineConfig(90, 200000, 0.6);
+		
+		@Config.LangKey("gadgetron.config.machines.extractor_t3")
+		public EnergyMachineConfig extractor_t3 = new EnergyMachineConfig(100, 300000, 0.4);
+		
+		@Config.LangKey("gadgetron.config.machines.processor_t1")
+		public EnergyMachineConfig processor_t1 = new EnergyMachineConfig(60, 100000, 1);
+		
+		@Config.LangKey("gadgetron.config.machines.processor_t2")
+		public EnergyMachineConfig processor_t2 = new EnergyMachineConfig(90, 200000, 0.6);
+		
+		@Config.LangKey("gadgetron.config.machines.processor_t3")
+		public EnergyMachineConfig processor_t3 = new EnergyMachineConfig(100, 300000, 0.4);
 	
 	}
 	

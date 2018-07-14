@@ -25,15 +25,14 @@ public class TileEntityBattery extends TileEntityEnergyBase {
 
 	private Set<BlockPos> coordinates = new HashSet<BlockPos>();
 	
+	
+	public TileEntityBattery(int energyCapacity, int inputRF, int outputRF) {
+		super(new CustomEnergyStorage(energyCapacity, inputRF, outputRF));
+	}
+	
 	public TileEntityBattery() {
-		super(new CustomEnergyStorage(ModConfig.machines.battery_t1.capacity, ModConfig.machines.battery_t1.rfInputPerTick, ModConfig.machines.battery_t1.rfOutputPerTick));
+		this(ModConfig.machines.battery_t1.capacity, ModConfig.machines.battery_t1.rfInputPerTick, ModConfig.machines.battery_t1.rfOutputPerTick);
 	}
-
-	public TileEntityBattery(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.battery_t1.capacity, ModConfig.machines.battery_t1.rfInputPerTick, ModConfig.machines.battery_t1.rfOutputPerTick));
-		this.name = name;
-	}
-
 
 	@Override
 	public void update() {

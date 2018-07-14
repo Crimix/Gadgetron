@@ -26,7 +26,7 @@ public class CreativeTabGT{
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(ModBlocks.Generator);
+			return new ItemStack(ModBlocks.Generator_T1);
 		}
 
 		@Override

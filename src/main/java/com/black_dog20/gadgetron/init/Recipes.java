@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.init;
 import com.black_dog20.gadgetron.integration.mekanism.MekanismIntegration;
 import com.black_dog20.gadgetron.integration.te.ThermalExpansionIntegration;
 import com.black_dog20.gadgetron.recipehandler.ExtractorRecipes;
+import com.black_dog20.gadgetron.recipehandler.FabricatorRecipes;
 import com.black_dog20.gadgetron.recipehandler.ProcessorRecipes;
 import com.black_dog20.gadgetron.recipehandler.SmelterRecipes;
 import com.black_dog20.gadgetron.reference.Reference;
@@ -85,6 +86,7 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("stone", 200, new ItemStack(Blocks.COBBLESTONE));
 		ExtractorRecipes.instance().addRecipe("cobblestone", 200, new ItemStack(Blocks.GRAVEL));
 		ExtractorRecipes.instance().addRecipe("gravel", 200, new ItemStack(Blocks.SAND));
+		ExtractorRecipes.instance().addRecipe("sand", 200, new ItemStack(ModItems.Silicon));
 		
 		ExtractorRecipes.instance().addRecipe("oreAdamantine", 200, "dustAdamantine", 3);
 		ExtractorRecipes.instance().addRecipe("oreCarbonox", 200, "dustCarbonox", 3);
@@ -121,6 +123,7 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("ingotLead", 200, "dustLead", 1);
 		ExtractorRecipes.instance().addRecipe("ingotTin", 200, "dustTin", 1);
 		ExtractorRecipes.instance().addRecipe("ingotSilver", 200, "dustSilver", 1);
+		ExtractorRecipes.instance().addRecipe("ingotBronze", 200, "dustBronze", 1);
 		ExtractorRecipes.instance().addRecipe("ingotUranium", 200, "dustUranium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotAluminium", 200, "dustAluminium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotAluminum", 200, "dustAluminum", 1);
@@ -131,6 +134,7 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("ingotIridium", 200, "dustIridium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotNickel", 200, "dustNickel", 1);
 		ExtractorRecipes.instance().addRecipe("ingotManaInfused", 200, "dustManaInfused", 1);
+		ExtractorRecipes.instance().addRecipeForBlock(ModBlocks.RaritaniumCrystal, 200, new ItemStack(ModItems.RaritaniumShard, 4));
 	}
 	
 	private static void RegisterProcessorRecipes() {
@@ -148,6 +152,7 @@ public class Recipes {
 		ProcessorRecipes.instance().addRecipe("dustLead", 200, "ingotLead", 1);
 		ProcessorRecipes.instance().addRecipe("dustTin", 200, "ingotTin", 1);
 		ProcessorRecipes.instance().addRecipe("dustSilver", 200, "ingotSilver", 1);
+		ProcessorRecipes.instance().addRecipe("dustBronze", 200, "ingotBronze", 1);
 		ProcessorRecipes.instance().addRecipe("dustUranium", 200, "ingotUranium", 1);
 		ProcessorRecipes.instance().addRecipe("dustAluminium", 200, "ingotAluminium", 1);
 		ProcessorRecipes.instance().addRecipe("dustAluminum", 200, "ingotAluminum", 1);
@@ -179,10 +184,16 @@ public class Recipes {
 		ProcessorRecipes.instance().addRecipe("ingotIridium", 200, "plateIridium", 1);
 		ProcessorRecipes.instance().addRecipe("ingotNickel", 200, "plateNickel", 1);
 		ProcessorRecipes.instance().addRecipe("ingotManaInfused", 200, "plateManaInfused", 1);
+		ProcessorRecipes.instance().add(ModItems.ConductingIngot, 200, new ItemStack(ModItems.ConductingWire, 4));
 	}
 	
 	private static void RegisterFabricatorRecipes() {
-
+		FabricatorRecipes.instance().addRecipe("dustRedstone", "dustGlowstone", 200, new ItemStack(ModItems.RedGlowstoneDust,2));
+		FabricatorRecipes.instance().addRecipe("plateCarbonox",1 , new ItemStack(ModItems.RaritaniumShard), 200, new ItemStack(ModItems.RaritaniumEnhancedPlate));
+		FabricatorRecipes.instance().add(ModItems.RedGlowstoneDust, ModItems.AdamantineIngot, 200, new ItemStack(ModItems.ConductingIngot));
+		FabricatorRecipes.instance().addRecipe("ingotSilver", "ingotTin", 200, "ingotBronze",1);
+		FabricatorRecipes.instance().add(ModItems.Silicon, ModItems.ConductingWire, 200, new ItemStack(ModItems.Circuit));
+		
 	}
 	
 	private static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){

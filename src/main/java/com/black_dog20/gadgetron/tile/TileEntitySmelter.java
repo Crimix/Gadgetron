@@ -24,24 +24,22 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 	
 	private FluidStack result;
 	
-	public TileEntitySmelter() {
-		super(new CustomEnergyStorage(ModConfig.machines.smelter.capacity, Integer.MAX_VALUE, 0), new CustomItemHandler(2, 1, new boolean[] {true,false,false}), new CustomFluidTank(ModConfig.machines.smelter.capacityTank, (f) -> false));
+	public TileEntitySmelter(int energyCapcity, int capacityTank, int energyPerTick, double speed ) {
+		super(new CustomEnergyStorage(energyCapcity, Integer.MAX_VALUE, 0), new CustomItemHandler(2, 1, new boolean[] {true,false,false}), new CustomFluidTank(capacityTank, (f) -> false));
+		this.energyPerTick = energyPerTick;
+		this.speed = speed;
 		tankFaces = new MachineFaces(this, Varient.TANK, false, true);
 		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, true, false);
 	}
 
-	public TileEntitySmelter(String name) {
-		super(new CustomEnergyStorage(ModConfig.machines.smelter.capacity, Integer.MAX_VALUE, 0), new CustomItemHandler(2, 1, new boolean[] {true,false,false}), new CustomFluidTank(ModConfig.machines.smelter.capacityTank, (f) -> false));
-		this.name = name;
-		tankFaces = new MachineFaces(this, Varient.TANK, false, true);
-		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, true, false);
+	public TileEntitySmelter() {
+		this(ModConfig.machines.smelter_t1.capacity, ModConfig.machines.smelter_t1.capacityTank, ModConfig.machines.smelter_t1.consumeRfPertick, ModConfig.machines.smelter_t1.speed);
 	}
 
 
 	@Override
 	public void update() {
-		if(!world.isRemote) {
-			energyPerTick = ModConfig.machines.smelter.consumeRfPertick;
+		if(!world.isRemote) {	
 			if(!this.energyContainer.isEmpty() && !this.tank.isFull()) {
 				if(burnTime == 0) {
 					on = false;
@@ -50,7 +48,7 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 						result = SmelterRecipes.instance().getResult(s);
 						if(result != null && tank.hasSpacefor(result)) {
 							inventory.extractItemInternal(0, 1, false);
-							currentUsedTime = (int) Math.ceil(SmelterRecipes.instance().getSmeltingTime(s) * ModConfig.machines.smelter.speed);
+							currentUsedTime = (int) Math.ceil(SmelterRecipes.instance().getSmeltingTime(s) * speed);
 							burnTime++;
 							on = true;
 						}
