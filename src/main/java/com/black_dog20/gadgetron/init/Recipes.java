@@ -69,15 +69,16 @@ public class Recipes {
 		RegisterSmelterRecipes();
 		RegisterExtractorRecipes();
 		RegisterProcessorRecipes();
+		RegisterFabricatorRecipes();
 	}
 	
 	
 	private static void RegisterSmelterRecipes() {
-		SmelterRecipes.instance().addRecipeForBlock(ModBlocks.TrilliumOre, 500, new FluidStack(ModFluids.fluidTrillium, 1000));
-		SmelterRecipes.instance().addRecipe(new ItemStack(ModItems.TrilliumIngot), 250, new FluidStack(ModFluids.fluidTrillium, 500));
+		SmelterRecipes.instance().addRecipe("oreTrillium", 500, new FluidStack(ModFluids.fluidTrillium, 1000));
+		SmelterRecipes.instance().addRecipe("ingotTrillium", 250, new FluidStack(ModFluids.fluidTrillium, 500));
 		SmelterRecipes.instance().addRecipeForBlock(ModBlocks.TrilliumBlock, 1000, new FluidStack(ModFluids.fluidTrillium, 4500));
-		SmelterRecipes.instance().addRecipeForBlock(Blocks.COBBLESTONE, 100, new FluidStack(FluidRegistry.LAVA, 50));
-		SmelterRecipes.instance().addRecipeForBlock(Blocks.STONE, 100, new FluidStack(FluidRegistry.LAVA, 100));
+		SmelterRecipes.instance().addRecipe("cobblestone", 100, new FluidStack(FluidRegistry.LAVA, 50));
+		SmelterRecipes.instance().addRecipe("stone", 100, new FluidStack(FluidRegistry.LAVA, 100));
 	}
 	
 	private static void RegisterExtractorRecipes() {
@@ -158,29 +159,31 @@ public class Recipes {
 		ProcessorRecipes.instance().addRecipe("dustNickel", 200, "ingotNickel", 1);
 		ProcessorRecipes.instance().addRecipe("dustManaInfused", 200, "ingotManaInfused", 1);
 		
-		ExtractorRecipes.instance().addRecipe("ingotAdamantine", 200, "plateAdamantine", 1);
-		ExtractorRecipes.instance().addRecipe("ingotCarbonox", 200, "plateCarbonox", 1);
-		ExtractorRecipes.instance().addRecipe("ingotTitanium", 200, "plateTitanium", 1);
-		ExtractorRecipes.instance().addRecipe("ingotTrillium", 200, "plateTrillium", 1);
-		ExtractorRecipes.instance().addRecipe("ingotIron", 200, "plateIron", 1);
-		ExtractorRecipes.instance().addRecipe("ingotGold", 200, "plateGold", 1);
-		ExtractorRecipes.instance().addRecipe("ingotCopper", 200, "plateCopper", 1);
-		ExtractorRecipes.instance().addRecipe("ingotLead", 200, "plateLead", 1);
-		ExtractorRecipes.instance().addRecipe("ingotTin", 200, "plateTin", 1);
-		ExtractorRecipes.instance().addRecipe("ingotSilver", 200, "plateSilver", 1);
-		ExtractorRecipes.instance().addRecipe("ingotUranium", 200, "plateUranium", 1);
-		ExtractorRecipes.instance().addRecipe("ingotAluminium", 200, "plateAluminium", 1);
-		ExtractorRecipes.instance().addRecipe("ingotAluminum", 200, "plateAluminum", 1);
-		ExtractorRecipes.instance().addRecipe("ingotZinc", 200, "plateZinc", 1);
-		ExtractorRecipes.instance().addRecipe("ingotPlatinum", 200, "platePlatinum", 1);
-		ExtractorRecipes.instance().addRecipe("ingotShiny", 200, "plateShiny", 1);
-		ExtractorRecipes.instance().addRecipe("ingotOsmium", 200, "plateOsmium", 1);
-		ExtractorRecipes.instance().addRecipe("ingotIridium", 200, "plateIridium", 1);
-		ExtractorRecipes.instance().addRecipe("ingotNickel", 200, "plateNickel", 1);
-		ExtractorRecipes.instance().addRecipe("ingotManaInfused", 200, "plateManaInfused", 1);
+		ProcessorRecipes.instance().addRecipe("ingotAdamantine", 200, "plateAdamantine", 1);
+		ProcessorRecipes.instance().addRecipe("ingotCarbonox", 200, "plateCarbonox", 1);
+		ProcessorRecipes.instance().addRecipe("ingotTitanium", 200, "plateTitanium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotTrillium", 200, "plateTrillium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotIron", 200, "plateIron", 1);
+		ProcessorRecipes.instance().addRecipe("ingotGold", 200, "plateGold", 1);
+		ProcessorRecipes.instance().addRecipe("ingotCopper", 200, "plateCopper", 1);
+		ProcessorRecipes.instance().addRecipe("ingotLead", 200, "plateLead", 1);
+		ProcessorRecipes.instance().addRecipe("ingotTin", 200, "plateTin", 1);
+		ProcessorRecipes.instance().addRecipe("ingotSilver", 200, "plateSilver", 1);
+		ProcessorRecipes.instance().addRecipe("ingotUranium", 200, "plateUranium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotAluminium", 200, "plateAluminium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotAluminum", 200, "plateAluminum", 1);
+		ProcessorRecipes.instance().addRecipe("ingotZinc", 200, "plateZinc", 1);
+		ProcessorRecipes.instance().addRecipe("ingotPlatinum", 200, "platePlatinum", 1);
+		ProcessorRecipes.instance().addRecipe("ingotShiny", 200, "plateShiny", 1);
+		ProcessorRecipes.instance().addRecipe("ingotOsmium", 200, "plateOsmium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotIridium", 200, "plateIridium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotNickel", 200, "plateNickel", 1);
+		ProcessorRecipes.instance().addRecipe("ingotManaInfused", 200, "plateManaInfused", 1);
 	}
 	
-	
+	private static void RegisterFabricatorRecipes() {
+
+	}
 	
 	private static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){
 		ThermalExpansionIntegration.addPulverizerRecipe(4000, in, out, null, 0);

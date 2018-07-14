@@ -35,7 +35,7 @@ public class ExtractorRecipes {
 
 	public void add(Item input, int time, ItemStack stack)
 	{
-		this.addRecipe(new ItemStack(input, 1, 32767), time, stack);
+		this.addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), time, stack);
 	}
 
 	public void addRecipe(ItemStack input, int time, ItemStack stack)
@@ -53,7 +53,8 @@ public class ExtractorRecipes {
     	    ItemStack tStack = tList.get(i);
     	    tStack = tStack.copy();
     	    tStack.setCount(1);
-    	    this.addRecipe(OreDictionary.getOres(ore).get(i), time, out);
+    	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    	    this.addRecipe(tStack, time, out);
     	}
     }
     
@@ -64,11 +65,13 @@ public class ExtractorRecipes {
     		ItemStack tStack2 = tList2.get(0);
     		tStack2 = tStack2.copy();
     		tStack2.setCount(amount);
+    		tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
     		for (int i = 0; i < tList.size(); i++) {
     			ItemStack tStack = tList.get(i);
     			tStack = tStack.copy();
     			tStack.setCount(1);
-    			this.addRecipe(OreDictionary.getOres(ore).get(i), time, tStack2);
+    			tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    			this.addRecipe(tStack, time, tStack2);
     		}
     	}
 	}
@@ -102,18 +105,11 @@ public class ExtractorRecipes {
 
 	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
+		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == OreDictionary.WILDCARD_VALUE || stack2.getMetadata() == stack1.getMetadata());
 	}
 	
 	public boolean containsRecipe(ItemStack stack) {
-		for (Entry<ItemStack, Integer> entry : this.timeList.entrySet())
-		{
-			if (this.compareItemStacks(stack, (ItemStack)entry.getKey()))
-			{
-				return true;
-			}
-		}
-		return false;
+		return getResult(stack) != ItemStack.EMPTY;
 	}
 	
 

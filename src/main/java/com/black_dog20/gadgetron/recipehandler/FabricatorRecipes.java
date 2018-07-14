@@ -36,7 +36,7 @@ public class FabricatorRecipes {
 
 	public void add(Item inputA, Item inputB, int time, ItemStack stack)
 	{
-		this.addRecipe(new ItemStack(inputA, 1, 32767),new ItemStack(inputB, 1, 32767), time, stack);
+		this.addRecipe(new ItemStack(inputA, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(inputB, 1, OreDictionary.WILDCARD_VALUE), time, stack);
 	}
 
 	public void addRecipe(ItemStack inputA, ItemStack inputB, int time, ItemStack stack)
@@ -49,6 +49,16 @@ public class FabricatorRecipes {
 		this.timeList.put(temp, time);
 	}
     
+	public void addRecipe(String oreA, String oreB, int time,  String out, int amount) {
+    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
+    	if (tList2.size() > 0) {
+    		ItemStack tStack2 = tList2.get(0);
+    		tStack2 = tStack2.copy();
+    		tStack2.setCount(amount);
+    		this.addRecipe(oreA, oreB, time, tStack2);
+    	}
+	}
+	
 	public void addRecipe(String oreA, String oreB, int time,  ItemStack out) {
     	NonNullList<ItemStack> tList = OreDictionary.getOres(oreA);
     	NonNullList<ItemStack> tList2 = OreDictionary.getOres(oreB);
@@ -56,11 +66,13 @@ public class FabricatorRecipes {
     			ItemStack tStack = tList.get(i);
     			tStack = tStack.copy();
     			tStack.setCount(1);
+    			tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     			for (int j = 0; j < tList2.size(); j++) {
-        			ItemStack tStack2 = tList.get(j);
+        			ItemStack tStack2 = tList2.get(j);
         			tStack2 = tStack2.copy();
         			tStack2.setCount(1);
-        			this.addRecipe(OreDictionary.getOres(oreA).get(i), OreDictionary.getOres(oreB).get(i), time, out);
+        			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+        			this.addRecipe(tStack, tStack2, time, out);
         		}
     		}
 	}
@@ -100,18 +112,15 @@ public class FabricatorRecipes {
 	
 	private boolean compareItemStacks(ItemStack stack1,ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
+		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == OreDictionary.WILDCARD_VALUE || stack2.getMetadata() == stack1.getMetadata());
 	}
 	
 	public boolean containsRecipe(Tuple<ItemStack, ItemStack> stack) {
-		for (Entry<Tuple<ItemStack, ItemStack>, Integer> entry : this.timeList.entrySet())
-		{
-			if (this.compareItemStacks(stack, (Tuple<ItemStack, ItemStack>)entry.getKey()))
-			{
-				return true;
-			}
-		}
-		return false;
+		return getResult(stack) != ItemStack.EMPTY;
+	}
+	
+	public boolean containsRecipe(ItemStack stack, ItemStack stack2) {
+		return containsRecipe(new Tuple<ItemStack,ItemStack>(stack,stack2));
 	}
 	
 

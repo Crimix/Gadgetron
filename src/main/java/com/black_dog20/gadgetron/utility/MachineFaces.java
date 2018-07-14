@@ -15,6 +15,8 @@ public class MachineFaces {
 	
 	private boolean autoInput = false;
 	private boolean autoOutput = false;
+	private boolean canAutoInput = true;
+	private boolean canAutoOutput = true;
 	private boolean hasInput = false;
 	private boolean hasOutput = false;
 	
@@ -115,11 +117,27 @@ public class MachineFaces {
 	}
 	
 	public boolean isAutoOutput() {
-		return autoOutput;
+		return canAutoOutput && autoOutput;
 	}
 	
 	public boolean isAutoInput() {
-		return autoInput;
+		return canAutoInput && autoInput;
+	}
+	
+	public boolean canAutoOutput() {
+		return canAutoOutput;
+	}
+	
+	public boolean canAutoInput() {
+		return canAutoInput;
+	}
+	
+	public void SetCanAutoOutput(boolean value) {
+		canAutoOutput = value;
+	}
+	
+	public void SetCanAutoInput(boolean value) {
+		canAutoInput = value;
 	}
 	
 	public boolean hasInputSlots() {
@@ -135,6 +153,8 @@ public class MachineFaces {
 		tag.setString("facing", facing);
 		tag.setBoolean("autoInput", autoInput);
 		tag.setBoolean("autoOutput", autoOutput);
+		tag.setBoolean("canAutoInput", canAutoInput);
+		tag.setBoolean("canAutoOutput", canAutoOutput);
 		for(Face f : faces)
 			f.writeToNBT(tag);
 		
@@ -147,6 +167,8 @@ public class MachineFaces {
 		facing = tag.getString("facing");
 		autoInput = tag.getBoolean("autoInput");
 		autoOutput = tag.getBoolean("autoOutput");
+		canAutoInput = tag.getBoolean("canAutoInput");
+		canAutoOutput = tag.getBoolean("canAutoOutput");
 		for(Face f : faces)
 			f.readFromNBT(tag);
 	}

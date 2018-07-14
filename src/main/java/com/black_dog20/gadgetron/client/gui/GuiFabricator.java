@@ -60,7 +60,7 @@ public class GuiFabricator extends GuiContainerBase {
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		drawProgressVertical(te.getStoredEnergyPercentage(), power); //Powerbar
-		drawProgressHorizontal(100, arrow);
+		drawProgressHorizontal(te.getProgress(), arrow);
 	}	
 	
 	private List<String> getPowerTipList(){

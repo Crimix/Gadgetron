@@ -11,7 +11,9 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class SmelterRecipes {
 	private static final SmelterRecipes recipes = new SmelterRecipes();
@@ -34,7 +36,7 @@ public class SmelterRecipes {
 
 	public void add(Item input, int smeltingTime, FluidStack stack)
 	{
-		this.addRecipe(new ItemStack(input, 1, 32767), smeltingTime, stack);
+		this.addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), smeltingTime, stack);
 	}
 
 	public void addRecipe(ItemStack input, int smeltingTime, FluidStack stack)
@@ -46,6 +48,17 @@ public class SmelterRecipes {
 		this.recipeList.put(input, stack);
 		this.smeltingTime.put(input, smeltingTime);
 	}
+	
+	public void addRecipe(String ore, int time, FluidStack out) {
+    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
+    	for (int i = 0; i < tList.size(); i++) {
+    	    ItemStack tStack = tList.get(i);
+    	    tStack = tStack.copy();
+    	    tStack.setCount(1);
+    	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    	    this.addRecipe(tStack, time, out);
+    	}
+    }
 
 	public FluidStack getResult(ItemStack stack)
 	{
@@ -76,7 +89,7 @@ public class SmelterRecipes {
 
 	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
+		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == OreDictionary.WILDCARD_VALUE || stack2.getMetadata() == stack1.getMetadata());
 	}
 
 	public Map<ItemStack, FluidStack> getRecipeList()

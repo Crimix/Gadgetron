@@ -47,7 +47,7 @@ public class ItemPDA extends ItemBase {
 			TileEntity te = DimensionManager.getWorld(dim).getTileEntity(new BlockPos(x,y,z));
 			if(te != null && te instanceof TileEntityBattery) {
 				TileEntityBattery battery = (TileEntityBattery) te;
-				playerIn.sendMessage(new TextComponentString(String.format("%s %d %s",I18n.format("msg.gadgetron:deliver"), battery.getCoordinatesForPower().size(), I18n.format("msg.gadgetron:blocks"))));
+				playerIn.sendMessage(new TextComponentString(String.format("%s %d %s", new TextComponentTranslation("msg.gadgetron:deliver").getFormattedText(), battery.getCoordinatesForPower().size(), new TextComponentTranslation("msg.gadgetron:blocks").getFormattedText())));
 			}
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
@@ -67,15 +67,17 @@ public class ItemPDA extends ItemBase {
 			if(nbt == null)
 				nbt = new NBTTagCompound();
 			if(worldIn.getTileEntity(pos) instanceof TileEntityBattery && !nbt.hasKey("dim")) {
-				player.sendMessage(new TextComponentString(String.format("%s (%d,%d,%d)", I18n.format("msg.gadgetron:boundto"), pos.getX(), pos.getY(), pos.getZ())));
+				player.sendMessage(new TextComponentString(String.format("%s (%d,%d,%d)", new TextComponentTranslation("msg.gadgetron:boundto").getFormattedText(), pos.getX(), pos.getY(), pos.getZ())));
 
 				nbt.setInteger("dim", worldIn.provider.getDimension());
+				nbt.setString("dimName", worldIn.provider.getDimensionType().getName());
 				nbt.setInteger("x", pos.getX());
 				nbt.setInteger("y", pos.getY());
 				nbt.setInteger("z", pos.getZ());
 				tool.setTagCompound(nbt);
 			} else if(checkIfSameBattery(worldIn, tool, pos)){
 				nbt.removeTag("dim");
+				nbt.removeTag("dimName");
 				nbt.removeTag("x");
 				nbt.removeTag("y");
 				nbt.removeTag("z");
@@ -141,12 +143,13 @@ public class ItemPDA extends ItemBase {
 		if(stack.hasTagCompound()) {
 			NBTTagCompound nbt = stack.getTagCompound();
 			int dim = nbt.getInteger("dim");
+			String dimName = nbt.getString("dimName");
 			int x = nbt.getInteger("x");
 			int y = nbt.getInteger("y");
 			int z = nbt.getInteger("z");
-			if(nbt.hasKey("dim"))
-				tooltip.add(String.format("%s (%d,%d,%d) %s %s", I18n.format("tooltip.gadgetron:bound"), x, y, z, I18n.format("tooltip.gadgetron:in"), DimensionManager.getProvider(dim).getDimensionType().getName()));
-			else
+			if(nbt.hasKey("dim")) {
+				tooltip.add(String.format("%s (%d,%d,%d) %s %s", I18n.format("tooltip.gadgetron:bound"), x, y, z, I18n.format("tooltip.gadgetron:in"), dimName));
+			}else
 				tooltip.add(I18n.format("tooltip.gadgetron:notbound"));
 		}
 		else

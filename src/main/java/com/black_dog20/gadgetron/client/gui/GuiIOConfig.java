@@ -163,9 +163,9 @@ public class GuiIOConfig extends GuiContainerBase {
 			inventoryRight.displayString = te.inventoryFaces.getButtonState(FaceId.RIGHT);
 			inventoryBack.displayString = te.inventoryFaces.getButtonState(FaceId.BACK);
 			inventoryBottom.displayString = te.inventoryFaces.getButtonState(FaceId.BOTTOM);
-			((GuiCustomCheckBox)inventoryAutoI).visible = te.inventoryFaces.hasInputSlots();
+			((GuiCustomCheckBox)inventoryAutoI).visible = te.inventoryFaces.hasInputSlots() && te.inventoryFaces.canAutoInput();
 			((GuiCustomCheckBox)inventoryAutoI).setIsChecked(te.inventoryFaces.isAutoInput());
-			((GuiCustomCheckBox)inventoryAutoO).visible = te.inventoryFaces.hasOutputSlots();
+			((GuiCustomCheckBox)inventoryAutoO).visible = te.inventoryFaces.hasOutputSlots() && te.inventoryFaces.canAutoOutput();
 			((GuiCustomCheckBox)inventoryAutoO).setIsChecked(te.inventoryFaces.isAutoOutput());
 		}
 		if(tile instanceof TileEntityEnergyFluidBase) {
@@ -177,9 +177,9 @@ public class GuiIOConfig extends GuiContainerBase {
 			tankBack.displayString = te.tankFaces.getButtonState(FaceId.BACK);
 			tankBottom.displayString = te.tankFaces.getButtonState(FaceId.BOTTOM);
 			((GuiCustomCheckBox)tankAutoI).setIsChecked(te.tankFaces.isAutoInput());
-			((GuiCustomCheckBox)tankAutoI).visible = te.tankFaces.hasInputSlots();
+			((GuiCustomCheckBox)tankAutoI).visible = te.tankFaces.hasInputSlots() && te.tankFaces.canAutoInput();
 			((GuiCustomCheckBox)tankAutoO).setIsChecked(te.tankFaces.isAutoOutput());
-			((GuiCustomCheckBox)tankAutoO).visible = te.tankFaces.hasOutputSlots();
+			((GuiCustomCheckBox)tankAutoO).visible = te.tankFaces.hasOutputSlots() && te.tankFaces.canAutoOutput();
 		}else if(tile instanceof TileEntityEnergyInventoryFluidBase) {
 			TileEntityEnergyInventoryFluidBase te = (TileEntityEnergyInventoryFluidBase) tile;
 			tankTop.displayString = te.tankFaces.getButtonState(FaceId.TOP);
@@ -189,9 +189,9 @@ public class GuiIOConfig extends GuiContainerBase {
 			tankBack.displayString = te.tankFaces.getButtonState(FaceId.BACK);
 			tankBottom.displayString = te.tankFaces.getButtonState(FaceId.BOTTOM);
 			((GuiCustomCheckBox)tankAutoI).setIsChecked(te.tankFaces.isAutoInput());
-			((GuiCustomCheckBox)tankAutoI).visible = te.tankFaces.hasInputSlots();
+			((GuiCustomCheckBox)tankAutoI).visible = te.tankFaces.hasInputSlots() && te.tankFaces.canAutoInput();
 			((GuiCustomCheckBox)tankAutoO).setIsChecked(te.tankFaces.isAutoOutput());
-			((GuiCustomCheckBox)tankAutoO).visible = te.tankFaces.hasOutputSlots();
+			((GuiCustomCheckBox)tankAutoO).visible = te.tankFaces.hasOutputSlots() && te.tankFaces.canAutoOutput();
 		}
 	}
 }

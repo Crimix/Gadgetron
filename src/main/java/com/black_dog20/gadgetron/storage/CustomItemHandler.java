@@ -130,6 +130,7 @@ public class CustomItemHandler extends ItemStackHandler {
 					ItemStack returnedStack = this.insertItemInternal(i, stack, false);
 					if(returnedStack.isEmpty()) {
 						target.extractItem(k, 1, false);
+						break;
 					}
 				}
 			}
