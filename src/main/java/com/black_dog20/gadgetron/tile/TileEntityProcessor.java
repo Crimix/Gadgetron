@@ -1,6 +1,7 @@
 package com.black_dog20.gadgetron.tile;
 
 import com.black_dog20.gadgetron.client.gui.GuiMachine;
+import com.black_dog20.gadgetron.client.gui.GuiProcessor;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerMachine;
 import com.black_dog20.gadgetron.recipehandler.ProcessorRecipes;
@@ -71,7 +72,7 @@ public class TileEntityProcessor extends TileEntityEnergyInventoryBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public GuiContainer getGUI(EntityPlayer player) {
-		return new GuiMachine(player, this);
+		return new GuiProcessor(player, this);
 	}
 
 	@Override

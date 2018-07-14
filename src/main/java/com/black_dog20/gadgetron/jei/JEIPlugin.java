@@ -3,20 +3,30 @@ package com.black_dog20.gadgetron.jei;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.black_dog20.gadgetron.client.gui.GuiExtractor;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
+import com.black_dog20.gadgetron.jei.extractor.ExtractorRecipeCategory;
+import com.black_dog20.gadgetron.jei.extractor.ExtractorRecipeMaker;
+import com.black_dog20.gadgetron.jei.processor.ProcessorRecipeCategory;
+import com.black_dog20.gadgetron.jei.processor.ProcessorRecipeMaker;
 
 import mezz.jei.api.BlankModPlugin;
+import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin extends BlankModPlugin{
+	
+	 public static IJeiHelpers jeiHelper;
 
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
@@ -29,6 +39,18 @@ public class JEIPlugin extends BlankModPlugin{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registry) {
+		final IJeiHelpers jeiHelpers = registry.getJeiHelpers();
+		final IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
+		registry.addRecipeCategories(
+				new ExtractorRecipeCategory(guiHelper),
+				new ProcessorRecipeCategory(guiHelper)
+		);
+	}
+	
 
 	@Override
 	public void register(IModRegistry registry) {
@@ -52,6 +74,21 @@ public class JEIPlugin extends BlankModPlugin{
 		if(ModConfig.doesTrilliumCausePoison){
 			RegisterInfo(registry, list, ".poisonous");
 		}
+		
+		jeiHelper = registry.getJeiHelpers();
+		
+		registry.addRecipes(ExtractorRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.EXTRACTOR);
+		registry.addRecipeClickArea(GuiExtractor.class, 78, 32, 28, 23, RecipeCategoryUid.EXTRACTOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Extractor_T1), RecipeCategoryUid.EXTRACTOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Extractor_T2), RecipeCategoryUid.EXTRACTOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Extractor_T3), RecipeCategoryUid.EXTRACTOR);
+		
+		registry.addRecipes(ProcessorRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.PROCESSOR);
+		registry.addRecipeClickArea(GuiExtractor.class, 78, 32, 28, 23, RecipeCategoryUid.PROCESSOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T1), RecipeCategoryUid.PROCESSOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T2), RecipeCategoryUid.PROCESSOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T2), RecipeCategoryUid.PROCESSOR);
+		
 		
 	}
 	

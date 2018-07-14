@@ -1,5 +1,6 @@
 package com.black_dog20.gadgetron.tile;
 
+import com.black_dog20.gadgetron.client.gui.GuiExtractor;
 import com.black_dog20.gadgetron.client.gui.GuiMachine;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerMachine;
@@ -70,7 +71,7 @@ public class TileEntityExtractor extends TileEntityEnergyInventoryBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public GuiContainer getGUI(EntityPlayer player) {
-		return new GuiMachine(player, this);
+		return new GuiExtractor(player, this);
 	}
 
 	@Override
