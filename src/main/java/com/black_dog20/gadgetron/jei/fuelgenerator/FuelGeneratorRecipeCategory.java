@@ -1,14 +1,15 @@
-package com.black_dog20.gadgetron.jei.processor;
+package com.black_dog20.gadgetron.jei.fuelgenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.black_dog20.gadgetron.jei.RecipeCategoryUid;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
-import mezz.jei.api.gui.IGuiItemStackGroup;
+import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
@@ -16,23 +17,22 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeWrapper> {
+public class FuelGeneratorRecipeCategory implements IRecipeCategory<FuelGeneratorRecipeWrapper> {
 	
 	protected static final int inputSlot = 0;
-	protected static final int outputSlot = 1;
 
 	protected final IDrawableStatic staticArrow;
 	protected final IDrawableAnimated arrow;
 	private final String localizedName;
 	private final IDrawable background;
-
-	public ProcessorRecipeCategory(IGuiHelper guiHelper) {
-		ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/machine.png");
-		staticArrow = guiHelper.createDrawable(gui, 176, 14, 24, 17);
-		arrow = guiHelper.createAnimatedDrawable(staticArrow, 200, IDrawableAnimated.StartDirection.LEFT, false);
+	
+	public FuelGeneratorRecipeCategory(IGuiHelper guiHelper) {
+		ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/generator.png");
+		staticArrow = guiHelper.createDrawable(gui, 176, 0, 13, 13);
+		arrow = guiHelper.createAnimatedDrawable(staticArrow, 200, IDrawableAnimated.StartDirection.TOP, true);
 		
-		background = guiHelper.createDrawable(gui, 52, 27, 87, 31);
-		localizedName = I18n.format("gadgetron.container.processor");
+		background = guiHelper.createDrawable(gui, 27, 5, 145, 71);
+		localizedName = I18n.format("gadgetron.container.energy_generator");
 	}
 
 	@Override
@@ -49,20 +49,18 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 	public String getModName() {
 		return I18n.format("itemGroup.gadgetron");
 	}
-
+	
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-		arrow.draw(minecraft, 27, 7);		
+		arrow.draw(minecraft, 53, 31);	
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, ProcessorRecipeWrapper recipeWrapper, IIngredients ingredients) {
-		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+	public void setRecipe(IRecipeLayout recipeLayout, FuelGeneratorRecipeWrapper recipeWrapper, IIngredients ingredients) {
+		IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
-		guiItemStacks.init(inputSlot, true, 3, 7);
-		guiItemStacks.init(outputSlot, false, 63, 7);
-
-		guiItemStacks.set(ingredients);
+		guiFluidStacks.init(inputSlot, true, 4, 5, 16, 63, 1000, false, null);
+		guiFluidStacks.set(ingredients);
 	}
 
 	@Override
@@ -72,7 +70,7 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 
 	@Override
 	public String getUid() {
-		return RecipeCategoryUid.PROCESSOR;
+		return RecipeCategoryUid.FUEL_GENERATOR;
 	}
 
 	@Override

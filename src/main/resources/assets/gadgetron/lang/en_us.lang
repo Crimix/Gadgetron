@@ -139,6 +139,9 @@ gadgetron.container.extractor=Extractor
 gadgetron.container.processor=Processor
 gadgetron.container.fabricator=Fabricator
 
+//JEI
+gadgetron.jei.burn=Burns: %ds
+gadgetron.jei.generate=Generate: %dRF/t
 
 //Misc
 itemGroup.gadgetron=Gadgetron

@@ -49,7 +49,7 @@ public class CustomFluidTank extends FluidTank{
 	}
 	
 	public boolean hasSpacefor(FluidStack stack) {
-		return this.canFillFluidType(stack) && this.fillInternal(stack, false) == stack.amount;
+		return this.canFillFluidType(stack) && (this.fluid == null || this.fluid.isFluidEqual(stack)) && this.fillInternal(stack, false) == stack.amount;
 	}
 
 }

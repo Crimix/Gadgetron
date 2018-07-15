@@ -31,7 +31,7 @@ public class ExtractorRecipeCategory implements IRecipeCategory<ExtractorRecipeW
 		staticArrow = guiHelper.createDrawable(gui, 176, 14, 24, 17);
 		arrow = guiHelper.createAnimatedDrawable(staticArrow, 200, IDrawableAnimated.StartDirection.LEFT, false);
 		
-		background = guiHelper.createDrawable(new ResourceLocation("gadgetron:textures/gui/machine.png"), 52, 27, 87, 31);
+		background = guiHelper.createDrawable(gui, 52, 27, 87, 31);
 		localizedName = I18n.format("gadgetron.container.extractor");
 	}
 

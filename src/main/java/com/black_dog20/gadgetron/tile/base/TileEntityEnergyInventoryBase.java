@@ -27,7 +27,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	protected Function<ItemStack,Boolean> validatorItemInput;
 	
 	protected int burnTime = 0;
-	protected int currentUsedTime = 1;
+	protected int timeToBurn = 1;
 
 	public TileEntityEnergyInventoryBase() {
 		super();
@@ -80,7 +80,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
     	nbt.setTag("inventory", inventory.serializeNBT());
     	inventoryFaces.writeToNBT(nbt);
     	nbt.setInteger("burnTime", burnTime);
-    	nbt.setInteger("currentUsedTime", currentUsedTime);
+    	nbt.setInteger("currentUsedTime", timeToBurn);
         return super.writeToNBT(nbt);
     }
 
@@ -90,7 +90,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
         inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
         inventoryFaces.readFromNBT(nbt);
         burnTime = nbt.getInteger("burnTime");
-        currentUsedTime = nbt.getInteger("currentUsedTime");
+        timeToBurn = nbt.getInteger("currentUsedTime");
     }
     
     public ItemStackHandler getInventory() {
@@ -104,7 +104,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 		nbt.setTag("inventory", inventory.serializeNBT());
 		inventoryFaces.writeToNBT(nbt);
     	nbt.setInteger("burnTime", burnTime);
-    	nbt.setInteger("currentUsedTime", currentUsedTime);
+    	nbt.setInteger("currentUsedTime", timeToBurn);
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
@@ -114,7 +114,7 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	        inventory.deserializeNBT((NBTTagCompound) nbt.getTag("inventory"));
 	        inventoryFaces.readFromNBT(nbt);
 	        burnTime = nbt.getInteger("burnTime");
-	        currentUsedTime = nbt.getInteger("currentUsedTime");
+	        timeToBurn = nbt.getInteger("currentUsedTime");
 	        super.readFromCustomInfoNBT(nbt);
 		}
 	}
@@ -185,16 +185,16 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	}
 	
 	public int getProgress() {
-		if(currentUsedTime == 0) {
+		if(timeToBurn == 0) {
 			return 0;
 		}
-		double t = ((double)burnTime / currentUsedTime) *100;
+		double t = ((double)burnTime / timeToBurn) *100;
 		return (int) Math.ceil(t);
 	}
 
 	public String getRemainingTime() {
 		if(burnTime != 0) {
-			double ticksLeft = currentUsedTime - burnTime;
+			double ticksLeft = timeToBurn - burnTime;
 			double secs = ticksLeft / 20;
 			int secI = (int) Math.ceil(secs);
 			return Integer.toString(secI) + "s";

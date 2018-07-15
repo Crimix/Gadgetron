@@ -48,17 +48,17 @@ public class TileEntitySmelter extends TileEntityEnergyInventoryFluidBase {
 						result = SmelterRecipes.instance().getResult(s);
 						if(result != null && tank.hasSpacefor(result)) {
 							inventory.extractItemInternal(0, 1, false);
-							currentUsedTime = (int) Math.ceil(SmelterRecipes.instance().getSmeltingTime(s) * speed);
+							timeToBurn = (int) Math.ceil(SmelterRecipes.instance().getSmeltingTime(s) * speed);
 							burnTime++;
 							on = true;
 						}
 					}
-				} else if(burnTime % currentUsedTime == 0 && on) {
+				} else if(burnTime % timeToBurn == 0 && on) {
 					if(result != null && tank.hasSpacefor(result)) {
 						tank.fillInternal(result, true);
 						result = null;
 						burnTime = 0;
-						currentUsedTime = 1;
+						timeToBurn = 1;
 						on = false;
 					}
 				} else {

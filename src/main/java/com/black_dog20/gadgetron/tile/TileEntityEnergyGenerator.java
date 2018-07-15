@@ -6,7 +6,8 @@ import java.math.RoundingMode;
 import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerEnergyGenerator;
-import com.black_dog20.gadgetron.init.ModFluids;
+import com.black_dog20.gadgetron.recipehandler.FuelGeneratorHandler;
+import com.black_dog20.gadgetron.recipehandler.FuelGeneratorHandler.FuelObject;
 import com.black_dog20.gadgetron.storage.CustomEnergyStorage;
 import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.tile.base.TileEntityEnergyInventoryFluidBase;
@@ -27,26 +28,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBase {
 
-	protected int ticksToBurnfuel = 1;
-	protected int fuelUse = 1; 
+	protected int fuelUse = 100; 
 
-	public TileEntityEnergyGenerator(int capacity, int capacityTank, int energyPerTick, double speed, int fuelUse) {
+	public TileEntityEnergyGenerator(int capacity, int capacityTank, double speed) {
 		super(new CustomEnergyStorage(capacity, 0, Integer.MAX_VALUE), 1, 1, new CustomFluidTank(capacityTank, (f) -> isFuel(f)));
 		tankFaces = new MachineFaces(this, Varient.TANK, true, false);
 		inventoryFaces = new MachineFaces(this, Varient.IVENTORY, false, false);
-		this.energyPerTick = energyPerTick;
-		this.ticksToBurnfuel = (int)Math.ceil(1000*speed);
-		this.fuelUse = fuelUse;
+		this.speed = speed;
 	}
 	
 	
 	public TileEntityEnergyGenerator() {
-		this(ModConfig.machines.fuelGenerator_t1.capacity ,ModConfig.machines.fuelGenerator_t1.capacityTank, ModConfig.machines.fuelGenerator_t1.generateRfPerTick, ModConfig.machines.fuelGenerator_t1.speed, ModConfig.machines.fuelGenerator_t1.cosumeMbPerOperation);
+		this(ModConfig.machines.fuelGenerator_t1.capacity ,ModConfig.machines.fuelGenerator_t1.capacityTank, ModConfig.machines.fuelGenerator_t1.speed);
 	}
 
 	
 	private static boolean isFuel(FluidStack fluid) {
-		return fluid != null && fluid.getFluid() == ModFluids.fluidTrillium;
+		return fluid != null && FuelGeneratorHandler.instance().getFuel(fluid.getFluid()) != null;
 	}
 
 	@Override
@@ -56,14 +54,17 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 				if(burnTime == 0) {
 					on = false;
 					FluidStack fluid = this.tank.drain(fuelUse, false);
-					if(fluid != null && fluid.amount == fuelUse) {
+					if(isFuel(fluid)) {
+						FuelObject fuel = FuelGeneratorHandler.instance().getFuel(fluid.getFluid());
+						timeToBurn = (int)Math.ceil(fuel.getTotalBurningTime()*((double)(fluid.amount / (double)fuelUse)*speed));
+						energyPerTick = fuel.getPowerPerCycle();
 						this.tank.drain(fuelUse, true);
 						on = true;
 						burnTime++;
 						addEnergy();
 					}
 				}else {
-					if(burnTime % ticksToBurnfuel  == 0) {
+					if(burnTime % timeToBurn  == 0) {
 						burnTime = 0;
 						on = false;
 					}else {
@@ -119,14 +120,14 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 
 	@Override
 	public int getProgress() {
-		double t = ((double)burnTime / ticksToBurnfuel) *100;
+		double t = ((double)burnTime / timeToBurn) *100;
 		return (int) Math.ceil(t);
 	}
 
 	@Override
 	public String getRemainingTime() {
 		if(burnTime != 0) {
-			double ticksLeft = ticksToBurnfuel - burnTime;
+			double ticksLeft = timeToBurn - burnTime;
 			double secs = ticksLeft / 20;
 			int secI = (int) Math.ceil(secs);
 			return Integer.toString(secI) + "s";
@@ -141,16 +142,18 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 	}
 
 	public double getFuelUsePerTick() {
-		return new BigDecimal((double)fuelUse / ticksToBurnfuel).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		return new BigDecimal((double)fuelUse / timeToBurn).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		speed = nbt.getDouble("speed");
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setDouble("speed", speed);
 		return super.writeToNBT(nbt);
 	}
 	

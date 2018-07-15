@@ -1,7 +1,6 @@
 package com.black_dog20.gadgetron.tile;
 
 import com.black_dog20.gadgetron.client.gui.GuiExtractor;
-import com.black_dog20.gadgetron.client.gui.GuiMachine;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.container.ContainerMachine;
 import com.black_dog20.gadgetron.recipehandler.ExtractorRecipes;
@@ -44,17 +43,17 @@ public class TileEntityExtractor extends TileEntityEnergyInventoryBase {
 						result = ExtractorRecipes.instance().getResult(s);
 						if(result != null && !result.isEmpty() && inventory.canMerge(1, result)) {
 							inventory.extractItemInternal(0, 1, false);
-							currentUsedTime = (int) Math.ceil(ExtractorRecipes.instance().getTime(s) * speed);
+							timeToBurn = (int) Math.ceil(ExtractorRecipes.instance().getTime(s) * speed);
 							burnTime++;
 							on = true;
 						}
 					}
-				} else if(burnTime % currentUsedTime == 0 && on) {
+				} else if(burnTime % timeToBurn == 0 && on) {
 					if(result != null && !result.isEmpty() && inventory.canMerge(1, result)) {
 						inventory.insertItemInternal(1, result.copy(), false);
 						result = null;
 						burnTime = 0;
-						currentUsedTime = 1;
+						timeToBurn = 1;
 						on = false;
 					}
 				} else {

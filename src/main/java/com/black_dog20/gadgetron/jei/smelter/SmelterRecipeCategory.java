@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.jei.processor;
+package com.black_dog20.gadgetron.jei.smelter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
+import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
@@ -16,7 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeWrapper> {
+public class SmelterRecipeCategory implements IRecipeCategory<SmelterRecipeWrapper> {
 	
 	protected static final int inputSlot = 0;
 	protected static final int outputSlot = 1;
@@ -26,13 +27,13 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 	private final String localizedName;
 	private final IDrawable background;
 
-	public ProcessorRecipeCategory(IGuiHelper guiHelper) {
-		ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/machine.png");
+	public SmelterRecipeCategory(IGuiHelper guiHelper) {
+		ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/smelter.png");
 		staticArrow = guiHelper.createDrawable(gui, 176, 14, 24, 17);
 		arrow = guiHelper.createAnimatedDrawable(staticArrow, 200, IDrawableAnimated.StartDirection.LEFT, false);
 		
-		background = guiHelper.createDrawable(gui, 52, 27, 87, 31);
-		localizedName = I18n.format("gadgetron.container.processor");
+		background = guiHelper.createDrawable(gui, 36, 8, 125, 70);
+		localizedName = I18n.format("gadgetron.container.smelter");
 	}
 
 	@Override
@@ -52,17 +53,19 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-		arrow.draw(minecraft, 27, 7);		
+		arrow.draw(minecraft, 32, 26);		
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, ProcessorRecipeWrapper recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, SmelterRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+		IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
-		guiItemStacks.init(inputSlot, true, 3, 7);
-		guiItemStacks.init(outputSlot, false, 63, 7);
+		guiItemStacks.init(inputSlot, true, 5, 25);
+		guiFluidStacks.init(outputSlot, false, 96, 2, 16, 63, 10000, false, null);
 
 		guiItemStacks.set(ingredients);
+		guiFluidStacks.set(ingredients);
 	}
 
 	@Override
@@ -72,7 +75,7 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 
 	@Override
 	public String getUid() {
-		return RecipeCategoryUid.PROCESSOR;
+		return RecipeCategoryUid.SMELTER;
 	}
 
 	@Override

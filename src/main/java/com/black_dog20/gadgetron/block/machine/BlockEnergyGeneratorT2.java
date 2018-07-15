@@ -15,6 +15,6 @@ public class BlockEnergyGeneratorT2 extends BlockEnergyGenerator {
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityEnergyGenerator(ModConfig.machines.fuelGenerator_t2.capacity ,ModConfig.machines.fuelGenerator_t2.capacityTank, ModConfig.machines.fuelGenerator_t2.generateRfPerTick, ModConfig.machines.fuelGenerator_t2.speed, ModConfig.machines.fuelGenerator_t2.cosumeMbPerOperation);
+		return new TileEntityEnergyGenerator(ModConfig.machines.fuelGenerator_t2.capacity ,ModConfig.machines.fuelGenerator_t2.capacityTank, ModConfig.machines.fuelGenerator_t2.speed);
 	}
 }

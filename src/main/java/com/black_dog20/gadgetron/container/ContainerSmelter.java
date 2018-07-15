@@ -34,10 +34,10 @@ public class ContainerSmelter extends Container{
 			}
 		};
 		
-		bucketInput = new BucketSlot(true, null, (CustomItemHandler) tile.getInventory(), 1, 106, 17, (CustomFluidTank) tile.getTank()) {
+		bucketInput = new BucketSlot(true, (CustomItemHandler) tile.getInventory(), 1, 106, 17, (CustomFluidTank) tile.getTank()) {
 			@Override
 			public void onSlotChanged() {
-				if(isItemValid(getStack()) && !bucketoutput.getHasStack()) {
+				if(isItemValid(getStack()) && !bucketoutput.getHasStack() && isItemStackValid(getStack())) {
 					ItemStack copy = getStack().copy();
 					ItemStack s = decrStackSize(1);
 					IFluidHandlerItem handler = FluidUtil.getFluidHandler(s);

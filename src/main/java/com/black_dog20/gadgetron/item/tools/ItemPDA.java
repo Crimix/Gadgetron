@@ -142,7 +142,6 @@ public class ItemPDA extends ItemBase {
 		tooltip.add(I18n.format("tooltip.gadgetron:power_distribution_atuner"));
 		if(stack.hasTagCompound()) {
 			NBTTagCompound nbt = stack.getTagCompound();
-			int dim = nbt.getInteger("dim");
 			String dimName = nbt.getString("dimName");
 			int x = nbt.getInteger("x");
 			int y = nbt.getInteger("y");

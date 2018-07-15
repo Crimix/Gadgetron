@@ -75,13 +75,13 @@ public class ModConfig {
 		public GeneratorMachineConfig coalGenerator_t3 = new GeneratorMachineConfig(90, 1000000);
 		
 		@Config.LangKey("gadgetron.config.machines.fuelGenerator_t1")
-		public GeneratorFluidMachineConfig fuelGenerator_t1 = new GeneratorFluidMachineConfig(300, 100000, 1, 10, 10000);
+		public GeneratorFluidMachineConfig fuelGenerator_t1 = new GeneratorFluidMachineConfig(100000, 1, 10000);
 		
 		@Config.LangKey("gadgetron.config.machines.fuelGenerator_t2")
-		public GeneratorFluidMachineConfig fuelGenerator_t2 = new GeneratorFluidMachineConfig(600, 500000, 1.5, 10, 20000);
+		public GeneratorFluidMachineConfig fuelGenerator_t2 = new GeneratorFluidMachineConfig(500000, 1.5, 20000);
 		
 		@Config.LangKey("gadgetron.config.machines.fuelGenerator_t3")
-		public GeneratorFluidMachineConfig fuelGenerator_t3 = new GeneratorFluidMachineConfig(1000, 1000000, 2, 10, 30000);
+		public GeneratorFluidMachineConfig fuelGenerator_t3 = new GeneratorFluidMachineConfig(1000000, 2, 30000);
 		
 		@Config.LangKey("gadgetron.config.machines.battery_t1")
 		public BatteryConfig battery_t1 = new BatteryConfig(1500, Integer.MAX_VALUE, 1000000);

@@ -57,17 +57,17 @@ public class TileEntityFabricator extends TileEntityEnergyInventoryBase {
 						if(result != null && !result.isEmpty() && inventory.canMerge(2, result)) {
 							inventory.extractItemInternal(0, s.getCount(), false);
 							inventory.extractItemInternal(1, s2.getCount(), false);
-							currentUsedTime = (int) Math.ceil(FabricatorRecipes.instance().getTime(temp) * speed);
+							timeToBurn = (int) Math.ceil(FabricatorRecipes.instance().getTime(temp) * speed);
 							burnTime++;
 							on = true;
 						}
 					}
-				} else if(burnTime % currentUsedTime == 0 && on) {
+				} else if(burnTime % timeToBurn == 0 && on) {
 					if(result != null && !result.isEmpty() && inventory.canMerge(2, result)) {
 						inventory.insertItemInternal(2, result.copy(), false);
 						result = null;
 						burnTime = 0;
-						currentUsedTime = 1;
+						timeToBurn = 1;
 						on = false;
 					}
 				} else {

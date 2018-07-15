@@ -1,4 +1,4 @@
-package com.black_dog20.gadgetron.jei.processor;
+package com.black_dog20.gadgetron.jei.fabricator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +16,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeWrapper> {
+public class FabricatorRecipeCategory implements IRecipeCategory<FabricatorRecipeWrapper> {
 	
 	protected static final int inputSlot = 0;
-	protected static final int outputSlot = 1;
+	protected static final int inputSlotTwo = 1;
+	protected static final int outputSlot = 2;
 
 	protected final IDrawableStatic staticArrow;
 	protected final IDrawableAnimated arrow;
 	private final String localizedName;
 	private final IDrawable background;
 
-	public ProcessorRecipeCategory(IGuiHelper guiHelper) {
-		ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/machine.png");
+	public FabricatorRecipeCategory(IGuiHelper guiHelper) {
+		ResourceLocation gui = new ResourceLocation("gadgetron:textures/gui/fabricator.png");
 		staticArrow = guiHelper.createDrawable(gui, 176, 14, 24, 17);
 		arrow = guiHelper.createAnimatedDrawable(staticArrow, 200, IDrawableAnimated.StartDirection.LEFT, false);
 		
-		background = guiHelper.createDrawable(gui, 52, 27, 87, 31);
-		localizedName = I18n.format("gadgetron.container.processor");
+		background = guiHelper.createDrawable(gui, 29, 27, 117, 31);
+		localizedName = I18n.format("gadgetron.container.fabricator");
 	}
 
 	@Override
@@ -52,15 +53,16 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-		arrow.draw(minecraft, 27, 7);		
+		arrow.draw(minecraft, 57, 8);		
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, ProcessorRecipeWrapper recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, FabricatorRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
 		guiItemStacks.init(inputSlot, true, 3, 7);
-		guiItemStacks.init(outputSlot, false, 63, 7);
+		guiItemStacks.init(inputSlotTwo, true, 33, 7);
+		guiItemStacks.init(outputSlot, false, 93, 7);
 
 		guiItemStacks.set(ingredients);
 	}
@@ -72,7 +74,7 @@ public class ProcessorRecipeCategory implements IRecipeCategory<ProcessorRecipeW
 
 	@Override
 	public String getUid() {
-		return RecipeCategoryUid.PROCESSOR;
+		return RecipeCategoryUid.FABRICATOR;
 	}
 
 	@Override

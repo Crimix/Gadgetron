@@ -93,7 +93,7 @@ public class GuiEnergyGenerator extends GuiContainerBase {
 		}
 		tankList.add(getFormattedInt(te.getStoredFluid())+"mB");
 		tankList.add(Integer.toString(te.getStoredFluidPercentage()) + "%");
-		tankList.add("-" + Double.toString(te.getFuelUsePerTick())+"mB");
+		tankList.add("-" + Double.toString(te.getFuelUsePerTick())+"mB/t");
 		return tankList;
 	}
 }

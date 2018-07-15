@@ -1,5 +1,6 @@
 package com.black_dog20.gadgetron.fluid;
 
+import com.black_dog20.gadgetron.recipehandler.FuelGeneratorHandler;
 import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraft.util.ResourceLocation;
@@ -12,5 +13,6 @@ public class FluidTrillium extends Fluid {
 		super("trillium", new ResourceLocation(Reference.MOD_ID, "blocks/trillium_still"), new ResourceLocation(Reference.MOD_ID, "blocks/trillium_flow"));
 		FluidRegistry.registerFluid(this);
 		FluidRegistry.addBucketForFluid(this);
+		FuelGeneratorHandler.instance().addFuel(this, 300, 2000);
 	}
 }

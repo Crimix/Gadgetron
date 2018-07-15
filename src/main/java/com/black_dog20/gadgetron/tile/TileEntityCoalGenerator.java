@@ -72,13 +72,13 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 					ItemStack stack = inventory.getStackInSlot(0);
 					if(isItemFuel(stack)) {
 						inventory.extractItemInternal(0, 1, false);
-						currentUsedTime = getItemBurnTime(stack);
+						timeToBurn = getItemBurnTime(stack);
 						on = true;
 						burnTime++;
 						this.energyContainer.receiveEnergyInternal(energyPerTick, false);
 					}
 				}else {
-					if(burnTime % currentUsedTime  == 0) {
+					if(burnTime % timeToBurn  == 0) {
 						burnTime = 0;
 						on = false;
 					}else {

@@ -1,7 +1,6 @@
 package com.black_dog20.gadgetron.container;
 
 import com.black_dog20.gadgetron.container.slot.BucketSlot;
-import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.storage.CustomItemHandler;
 import com.black_dog20.gadgetron.tile.TileEntityEnergyGenerator;
@@ -30,7 +29,7 @@ public class ContainerEnergyGenerator extends Container{
 			}
 			
 		};
-		input = new BucketSlot(true, ModFluids.fluidTrillium, (CustomItemHandler) tile.getInventory(), 0, 54, 17, (CustomFluidTank) tile.getTank()) {
+		input = new BucketSlot(true, (CustomItemHandler) tile.getInventory(), 0, 54, 17, (CustomFluidTank) tile.getTank()) {
 			@Override
 			public void onSlotChanged() {
 				if(isItemValid(getStack()) && !output.getHasStack()) {
