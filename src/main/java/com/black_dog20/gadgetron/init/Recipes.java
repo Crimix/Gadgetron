@@ -78,8 +78,9 @@ public class Recipes {
 		SmelterRecipes.instance().addRecipe("oreTrillium", 500, new FluidStack(ModFluids.fluidTrillium, 1000));
 		SmelterRecipes.instance().addRecipe("ingotTrillium", 250, new FluidStack(ModFluids.fluidTrillium, 500));
 		SmelterRecipes.instance().addRecipeForBlock(ModBlocks.TrilliumBlock, 1000, new FluidStack(ModFluids.fluidTrillium, 4500));
-		SmelterRecipes.instance().addRecipe("cobblestone", 100, new FluidStack(FluidRegistry.LAVA, 50));
-		SmelterRecipes.instance().addRecipe("stone", 100, new FluidStack(FluidRegistry.LAVA, 100));
+		SmelterRecipes.instance().addRecipe("cobblestone", 100, new FluidStack(FluidRegistry.LAVA, 100));
+		SmelterRecipes.instance().addRecipe("stone", 100, new FluidStack(FluidRegistry.LAVA, 250));
+		SmelterRecipes.instance().addRecipe("netherrack", 100, new FluidStack(FluidRegistry.LAVA, 500));
 	}
 	
 	private static void RegisterExtractorRecipes() {
@@ -87,7 +88,13 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("cobblestone", 200, new ItemStack(Blocks.GRAVEL));
 		ExtractorRecipes.instance().addRecipe("gravel", 200, new ItemStack(Blocks.SAND));
 		ExtractorRecipes.instance().addRecipe("sand", 200, new ItemStack(ModItems.Silicon));
+		ExtractorRecipes.instance().addRecipe("blockWool", 200, new ItemStack(Items.STRING, 4));
+		ExtractorRecipes.instance().addRecipe("netherrack", 200, new ItemStack(Blocks.GRAVEL));
+		ExtractorRecipes.instance().addRecipe("flowerYellow", 200, new ItemStack(Items.DYE,1,11));
+		ExtractorRecipes.instance().addRecipeForBlock(Blocks.RED_SANDSTONE, 200, new ItemStack(Blocks.SAND,1,1));
+		ExtractorRecipes.instance().addRecipe("blockStainedHardenedClay", 200, new ItemStack(Items.CLAY_BALL, 4));
 		
+		ExtractorRecipes.instance().addRecipe("blockGlowstone", 200, "dustGlowstone",4);
 		ExtractorRecipes.instance().addRecipe("oreAdamantine", 200, "dustAdamantine", 3);
 		ExtractorRecipes.instance().addRecipe("oreCarbonox", 200, "dustCarbonox", 3);
 		ExtractorRecipes.instance().addRecipe("oreTitanium", 200, "dustTitanium", 2);
@@ -112,6 +119,9 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("oreSaltpeter", 200, "dustSaltpeter", 2);
 		ExtractorRecipes.instance().addRecipe("oreNickel", 200, "dustNickel", 2);
 		ExtractorRecipes.instance().addRecipe("oreManaInfused", 200, "dustManaInfused", 2);
+		ExtractorRecipes.instance().addRecipe("oreMithril", 200, "dustMithril", 2);
+		ExtractorRecipes.instance().addRecipe("oreRedstone", 200, "dustRedstone", 8);
+		ExtractorRecipes.instance().addRecipe("oreLapis", 200, "gemLapis", 8);
 		
 		ExtractorRecipes.instance().addRecipe("ingotAdamantine", 200, "dustAdamantine", 1);
 		ExtractorRecipes.instance().addRecipe("ingotCarbonox", 200, "dustCarbonox", 1);
@@ -124,6 +134,12 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("ingotTin", 200, "dustTin", 1);
 		ExtractorRecipes.instance().addRecipe("ingotSilver", 200, "dustSilver", 1);
 		ExtractorRecipes.instance().addRecipe("ingotBronze", 200, "dustBronze", 1);
+		ExtractorRecipes.instance().addRecipe("ingotInvar", 200, "dustInvar", 1);
+		ExtractorRecipes.instance().addRecipe("ingotSteel", 200, "dustSteel", 1);
+		ExtractorRecipes.instance().addRecipe("ingotElectrum", 200, "dustElectrum", 1);
+		ExtractorRecipes.instance().addRecipe("ingotConstantan", 200, "dustConstantan", 1);
+		ExtractorRecipes.instance().addRecipe("ingotSignalum", 200, "dustSignalum", 1);
+		ExtractorRecipes.instance().addRecipe("ingotDraconium", 200, "dustDraconium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotUranium", 200, "dustUranium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotAluminium", 200, "dustAluminium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotAluminum", 200, "dustAluminum", 1);
@@ -134,6 +150,14 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("ingotIridium", 200, "dustIridium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotNickel", 200, "dustNickel", 1);
 		ExtractorRecipes.instance().addRecipe("ingotManaInfused", 200, "dustManaInfused", 1);
+		ExtractorRecipes.instance().addRecipe("ingotMithril", 200, "dustMithril", 1);
+		ExtractorRecipes.instance().addRecipe("ingotEnderium", 200, "dustEnderium", 1);
+		ExtractorRecipes.instance().addRecipe("ingotElectrumFlux", 200, "dustElectrumFlux", 1);
+		ExtractorRecipes.instance().addRecipe("ingotBrass", 200, "plateBras", 1);
+		ExtractorRecipes.instance().addRecipe("ingotThaumium", 200, "plateThaumium", 1);
+		ExtractorRecipes.instance().addRecipe("ingotVoid", 200, "plateVoid", 1);
+		ExtractorRecipes.instance().addRecipe("gemLapis", 200, "dustLapis", 1);
+		
 		ExtractorRecipes.instance().addRecipeForBlock(ModBlocks.RaritaniumCrystal, 200, new ItemStack(ModItems.RaritaniumShard, 4));
 	}
 	
@@ -153,6 +177,12 @@ public class Recipes {
 		ProcessorRecipes.instance().addRecipe("dustTin", 200, "ingotTin", 1);
 		ProcessorRecipes.instance().addRecipe("dustSilver", 200, "ingotSilver", 1);
 		ProcessorRecipes.instance().addRecipe("dustBronze", 200, "ingotBronze", 1);
+		ProcessorRecipes.instance().addRecipe("dustInvar", 200, "ingotInvar", 1);
+		ProcessorRecipes.instance().addRecipe("dustSteel", 200, "ingotSteel", 1);
+		ProcessorRecipes.instance().addRecipe("dustElectrum", 200, "ingotElectrum", 1);
+		ProcessorRecipes.instance().addRecipe("dustConstantan", 200, "ingotConstantan", 1);
+		ProcessorRecipes.instance().addRecipe("dustSignalum", 200, "ingotSignalum", 1);
+		ProcessorRecipes.instance().addRecipe("dustDraconium", 200, "ingotDraconium", 1);
 		ProcessorRecipes.instance().addRecipe("dustUranium", 200, "ingotUranium", 1);
 		ProcessorRecipes.instance().addRecipe("dustAluminium", 200, "ingotAluminium", 1);
 		ProcessorRecipes.instance().addRecipe("dustAluminum", 200, "ingotAluminum", 1);
@@ -163,6 +193,9 @@ public class Recipes {
 		ProcessorRecipes.instance().addRecipe("dustIridium", 200, "ingotIridium", 1);
 		ProcessorRecipes.instance().addRecipe("dustNickel", 200, "ingotNickel", 1);
 		ProcessorRecipes.instance().addRecipe("dustManaInfused", 200, "ingotManaInfused", 1);
+		ProcessorRecipes.instance().addRecipe("dustMithril", 200, "ingotMithril", 1);
+		ProcessorRecipes.instance().addRecipe("dustEnderium", 200, "ingotEnderium", 1);
+		ProcessorRecipes.instance().addRecipe("dustElectrumFlux", 200, "ingotElectrumFlux", 1);
 		
 		ProcessorRecipes.instance().addRecipe("ingotAdamantine", 200, "plateAdamantine", 1);
 		ProcessorRecipes.instance().addRecipe("ingotCarbonox", 200, "plateCarbonox", 1);
@@ -184,16 +217,40 @@ public class Recipes {
 		ProcessorRecipes.instance().addRecipe("ingotIridium", 200, "plateIridium", 1);
 		ProcessorRecipes.instance().addRecipe("ingotNickel", 200, "plateNickel", 1);
 		ProcessorRecipes.instance().addRecipe("ingotManaInfused", 200, "plateManaInfused", 1);
-		ProcessorRecipes.instance().add(ModItems.ConductingIngot, 200, new ItemStack(ModItems.ConductingWire, 4));
+		ProcessorRecipes.instance().addRecipe("ingotMithril", 200, "plateMithril", 1);
+		ProcessorRecipes.instance().addRecipe("ingotBronze", 200, "plateBronze", 1);
+		ProcessorRecipes.instance().addRecipe("ingotInvar", 200, "plateInvar", 1);
+		ProcessorRecipes.instance().addRecipe("ingotSteel", 200, "plateSteel", 1);
+		ProcessorRecipes.instance().addRecipe("ingotElectrum", 200, "plateElectrum", 1);
+		ProcessorRecipes.instance().addRecipe("ingotConstantan", 200, "plateConstantan", 1);
+		ProcessorRecipes.instance().addRecipe("ingotSignalum", 200, "plateSignalum", 1);
+		ProcessorRecipes.instance().addRecipe("ingotConstantan", 200, "plateConstantan", 1);
+		ProcessorRecipes.instance().addRecipe("ingotLumium", 200, "plateLumium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotEnderium", 200, "plateEnderium", 1);
+		ProcessorRecipes.instance().addRecipe("ingotElectrumFlux", 200, "plateElectrumFlux", 1);
+		
+		ProcessorRecipes.instance().addRecipe("ingotConductingMetal", 200, new ItemStack(ModItems.ConductingWire, 4));
 	}
 	
 	private static void RegisterFabricatorRecipes() {
-		FabricatorRecipes.instance().addRecipe("dustRedstone", "dustGlowstone", 200, new ItemStack(ModItems.RedGlowstoneDust,2));
-		FabricatorRecipes.instance().addRecipe("plateCarbonox",1 , new ItemStack(ModItems.RaritaniumShard), 200, new ItemStack(ModItems.RaritaniumEnhancedPlate));
-		FabricatorRecipes.instance().add(ModItems.RedGlowstoneDust, ModItems.AdamantineIngot, 200, new ItemStack(ModItems.ConductingIngot));
-		FabricatorRecipes.instance().addRecipe("ingotSilver", "ingotTin", 200, "ingotBronze",1);
-		FabricatorRecipes.instance().add(ModItems.Silicon, ModItems.ConductingWire, 200, new ItemStack(ModItems.Circuit));
-		
+		FabricatorRecipes.instance().addRecipe("dustRedstone", "dustGlowstone", 400, new ItemStack(ModItems.RedGlowstoneDust,2));
+		FabricatorRecipes.instance().addRecipe("plateCarbonox",1 , new ItemStack(ModItems.RaritaniumShard), 400, new ItemStack(ModItems.RaritaniumEnhancedPlate));
+		FabricatorRecipes.instance().add(ModItems.RedGlowstoneDust, ModItems.AdamantineIngot, 400, new ItemStack(ModItems.ConductingIngot));
+		FabricatorRecipes.instance().addRecipe("ingotCopper", "ingotTin", 400, "ingotBronze",1);
+		FabricatorRecipes.instance().add(ModItems.Silicon, ModItems.ConductingWire, 400, new ItemStack(ModItems.Circuit));
+		FabricatorRecipes.instance().addRecipe("ingotNickel", 1, "igotIron", 2, 400, "ingotInvar",3);
+		FabricatorRecipes.instance().addRecipe("ingotNickel", 1, "igotCopper", 1, 400, "ingotConstantan",2);
+		FabricatorRecipes.instance().addRecipe("ingotIron", 1, "dustCoal", 2, 400, "ingotSteel",1);
+		FabricatorRecipes.instance().addRecipe("ingotSilver", 1, "ingotGold", 1, 400, "ingotElectrum",1);
+		FabricatorRecipes.instance().addRecipe("ingotBronze", 4, "dustRedstone", 10, 400, "ingotSignalum",4);
+		FabricatorRecipes.instance().addRecipe("ingotGold", 1, "dustRedstoneGlowstoneMix", 1, 400, "ingotEnergeticAlloy",1);
+		FabricatorRecipes.instance().addRecipe(new ItemStack(Items.ENDER_PEARL), "ingotEnergeticAlloy", 1, 400, "ingotVibrantAlloy",1);
+		FabricatorRecipes.instance().addRecipe("dustRedstone", 1, "silicon", 1, 400, "ingotRedstoneAlloy",1);
+		FabricatorRecipes.instance().addRecipe("dustRedstone", 1, "ingotIron", 1, 400, "ingotConductiveIron",1);
+		FabricatorRecipes.instance().addRecipe(new ItemStack(Items.ENDER_PEARL), "ingotIron", 1, 400, "ingotPulsatingIron",1);
+		FabricatorRecipes.instance().addRecipe("soulSand", 1, "ingotGold", 1, 400, "ingotSoularium",1);
+		FabricatorRecipes.instance().addRecipe("ingotCobalt", 1, "ingotArdite", 1, 400, "ingotManyullyn",1);
+		FabricatorRecipes.instance().addRecipe("ingotElectrum", 1, "dustRedstone", 10, 400, "dustElectrumFlux",1);
 	}
 	
 	private static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){

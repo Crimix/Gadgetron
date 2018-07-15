@@ -16,9 +16,9 @@ item.gadgetron:carbonox_plate.name=Carbonox Plate
 item.gadgetron:trillium_plate.name=Trillium Plate
 item.gadgetron:titanium_plate.name=Titanium Plate
 item.gadgetron:raritanium_shard.name=Raritanium Shard
-item.gadgetron:conducting_ingot.name=Conducting Ingot
+item.gadgetron:conducting_ingot.name=Conducting Metal Ingot
 item.gadgetron:raritanium_enhanced_plate.name=Raritanium Enhanced Plate
-item.gadgetron:conducting_wire.name=Conducting Wire
+item.gadgetron:conducting_wire.name=Conducting Metal Wire
 item.gadgetron:circuit.name=Circuit
 item.gadgetron:raritanium_hammer.name=Raritanium Hammer
 
