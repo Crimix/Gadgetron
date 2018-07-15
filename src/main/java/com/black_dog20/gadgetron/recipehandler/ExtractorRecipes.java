@@ -75,6 +75,17 @@ public class ExtractorRecipes {
     		}
     	}
 	}
+	
+	public void addRecipe(ItemStack input, int time, String out, int amount) {
+    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
+    	if (tList2.size() > 0) {
+    		ItemStack tStack2 = tList2.get(0);
+    		tStack2 = tStack2.copy();
+    		tStack2.setCount(amount);
+    		tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    		this.addRecipe(input, time, tStack2);
+    	}
+	}
     
 
 	public ItemStack getResult(ItemStack stack)

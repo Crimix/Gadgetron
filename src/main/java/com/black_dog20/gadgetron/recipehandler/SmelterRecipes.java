@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -39,7 +40,7 @@ public class SmelterRecipes {
 		this.addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), smeltingTime, stack);
 	}
 
-	private void addRecipe(ItemStack input, int smeltingTime, FluidStack stack)
+	public void addRecipe(ItemStack input, int smeltingTime, FluidStack stack)
 	{
 		if (getResult(input) != null) { 
 			Gadgetron.logger.log(Level.INFO, "Ignored Smelter recipe with conflicting input: {} = {}", input, stack); 
@@ -58,6 +59,18 @@ public class SmelterRecipes {
     	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     	    this.addRecipe(tStack, time, out);
     	}
+    }
+	
+	public void addRecipe(String ore, int time, String out, int mb) {
+		if(FluidRegistry.isFluidRegistered(out)) {
+			this.addRecipe(ore, time, new FluidStack(FluidRegistry.getFluid(out), mb));
+		}
+    }
+	
+	public void addRecipe(ItemStack input, int time, String out, int mb) {
+		if(FluidRegistry.isFluidRegistered(out)) {
+			this.addRecipe(input, time, new FluidStack(FluidRegistry.getFluid(out), mb));
+		}
     }
 
 	public FluidStack getResult(ItemStack stack)

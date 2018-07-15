@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class Recipes {
@@ -67,6 +68,11 @@ public class Recipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumShovel, new Object[]{" i "," s "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumSword, new Object[]{" i "," i "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Machine_block, new Object[]{"ccc","csc","tft", 'c', "ingotCarbonox", 's', "shardRaritanium", 't', "ingotTitanium", 'f', Blocks.FURNACE}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumHammer, new Object[]{" ii"," si","s  ", 'i', "crystalRaritanium", 's', "stickWood"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.RaritaniumShard, "crystalRaritanium", ModItems.RaritaniumHammer));
+		
+		
 		RegisterSmelterRecipes();
 		RegisterExtractorRecipes();
 		RegisterProcessorRecipes();
@@ -78,9 +84,32 @@ public class Recipes {
 		SmelterRecipes.instance().addRecipe("oreTrillium", 500, new FluidStack(ModFluids.fluidTrillium, 1000));
 		SmelterRecipes.instance().addRecipe("ingotTrillium", 250, new FluidStack(ModFluids.fluidTrillium, 500));
 		SmelterRecipes.instance().addRecipeForBlock(ModBlocks.TrilliumBlock, 1000, new FluidStack(ModFluids.fluidTrillium, 4500));
-		SmelterRecipes.instance().addRecipe("cobblestone", 100, new FluidStack(FluidRegistry.LAVA, 100));
-		SmelterRecipes.instance().addRecipe("stone", 100, new FluidStack(FluidRegistry.LAVA, 250));
-		SmelterRecipes.instance().addRecipe("netherrack", 100, new FluidStack(FluidRegistry.LAVA, 500));
+		SmelterRecipes.instance().addRecipe("cobblestone", 250, new FluidStack(FluidRegistry.LAVA, 100));
+		SmelterRecipes.instance().addRecipe("stone", 250, new FluidStack(FluidRegistry.LAVA, 250));
+		SmelterRecipes.instance().addRecipe("netherrack", 250, new FluidStack(FluidRegistry.LAVA, 500));
+		SmelterRecipes.instance().addRecipe(new ItemStack(Blocks.OBSIDIAN), 500, new FluidStack(FluidRegistry.LAVA, 1000));
+		SmelterRecipes.instance().addRecipe(new ItemStack(Blocks.MAGMA), 500, new FluidStack(FluidRegistry.LAVA, 1000));
+		
+		SmelterRecipes.instance().addRecipe("dustGlowstone", 250, "glowstone", 250);
+		SmelterRecipes.instance().addRecipe(new ItemStack(Blocks.GLOWSTONE), 250, "glowstone", 1000);
+		SmelterRecipes.instance().addRecipe("clathrateGlowstone", 250, "glowstone", 250);
+		SmelterRecipes.instance().addRecipe("oreClathrateGlowstone", 250, "glowstone", 1000);
+		SmelterRecipes.instance().addRecipe("dustRedstone", 250, "redstone", 250);
+		SmelterRecipes.instance().addRecipe("clathrateRedstone", 250, "redstone", 250);
+		SmelterRecipes.instance().addRecipe("oreClathrateRedstone", 250, "redstone", 1000);
+		SmelterRecipes.instance().addRecipe("blockRedstone", 250, "redstone", 900);
+		SmelterRecipes.instance().addRecipe(new ItemStack(Items.ENDER_PEARL), 250, "ender", 250);
+		SmelterRecipes.instance().addRecipe("clathrateEnder", 250, "ender", 250);
+		SmelterRecipes.instance().addRecipe("oreClathrateEnder", 250, "ender", 1000);
+		SmelterRecipes.instance().addRecipe("dustPyrotheum", 250, "pyrotheum", 250);
+		SmelterRecipes.instance().addRecipe("dustCryotheum", 250, "cryotheum", 250);
+		SmelterRecipes.instance().addRecipe("dustAerotheum", 250, "aerotheum", 250);
+		SmelterRecipes.instance().addRecipe("dustPetrotheum", 250, "petrotheum", 250);
+		SmelterRecipes.instance().addRecipe("seed", 250, "seed_oil", 50);
+		SmelterRecipes.instance().addRecipe("dustCoal", 250, "coal", 100);
+		SmelterRecipes.instance().addRecipe("clathrateOil", 250, "crude_oil", 250);
+		SmelterRecipes.instance().addRecipe("oreClathrateOilSand", 250, "crude_oil", 1000);
+		SmelterRecipes.instance().addRecipe("oreClathrateOilShale", 250, "crude_oil", 1000);
 	}
 	
 	private static void RegisterExtractorRecipes() {
@@ -121,7 +150,7 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("oreManaInfused", 200, "dustManaInfused", 2);
 		ExtractorRecipes.instance().addRecipe("oreMithril", 200, "dustMithril", 2);
 		ExtractorRecipes.instance().addRecipe("oreRedstone", 200, "dustRedstone", 8);
-		ExtractorRecipes.instance().addRecipe("oreLapis", 200, "gemLapis", 8);
+		ExtractorRecipes.instance().addRecipe("oreLapis", 200, new ItemStack(Items.DYE, 8, 4));
 		
 		ExtractorRecipes.instance().addRecipe("ingotAdamantine", 200, "dustAdamantine", 1);
 		ExtractorRecipes.instance().addRecipe("ingotCarbonox", 200, "dustCarbonox", 1);
@@ -156,7 +185,7 @@ public class Recipes {
 		ExtractorRecipes.instance().addRecipe("ingotBrass", 200, "plateBras", 1);
 		ExtractorRecipes.instance().addRecipe("ingotThaumium", 200, "plateThaumium", 1);
 		ExtractorRecipes.instance().addRecipe("ingotVoid", 200, "plateVoid", 1);
-		ExtractorRecipes.instance().addRecipe("gemLapis", 200, "dustLapis", 1);
+		ExtractorRecipes.instance().addRecipe(new ItemStack(Items.DYE, 1, 4), 200, "dustLapis", 1);
 		
 		ExtractorRecipes.instance().addRecipeForBlock(ModBlocks.RaritaniumCrystal, 200, new ItemStack(ModItems.RaritaniumShard, 4));
 	}

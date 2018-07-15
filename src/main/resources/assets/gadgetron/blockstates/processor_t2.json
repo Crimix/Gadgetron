@@ -1,0 +1,35 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "gadgetron:blocks/machine_top_t2",
+			"front": "gadgetron:blocks/processor_t2",
+			"side": "gadgetron:blocks/machine_side_t2",
+			"buttom": "gadgetron:blocks/machine_buttom"
+		},
+		"model": "orientable",
+		"uvlock": true
+	},
+	"variants": {
+        "normal": {
+            "model": "orientable"
+        },
+        "inventory": {
+            "model": "orientable"
+        },
+		"facing": {
+			"north": {
+				"y": 0,"model": "orientable"
+			},
+			"south": {
+				"y": 180,"model": "orientable"
+			},
+			"west": {
+				"y": 270,"model": "orientable"
+			},
+			"east": {
+				"y": 90,"model": "orientable"
+			}
+		}
+	}
+}
