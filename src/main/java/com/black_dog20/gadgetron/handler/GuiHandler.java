@@ -1,7 +1,9 @@
 package com.black_dog20.gadgetron.handler;
 
 import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.client.gui.GuiBelt;
 import com.black_dog20.gadgetron.client.gui.GuiIOConfig;
+import com.black_dog20.gadgetron.container.ContainerBelt;
 import com.black_dog20.gadgetron.container.ContainerIOConfig;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 
@@ -17,8 +19,10 @@ public class GuiHandler implements IGuiHandler {
 		TileEntityBase te = (TileEntityBase) world.getTileEntity(new BlockPos(x, y, z));
 		if(ID == Gadgetron.guiAutoTileEntityID)
 			return te.getContainer(player);
-		else
+		else if (ID == Gadgetron.guiIOConfig)
 			return new ContainerIOConfig(player.inventory, te);
+		else 
+			return new ContainerBelt(player.inventory, player);
 	}
 
 	@Override
@@ -26,7 +30,9 @@ public class GuiHandler implements IGuiHandler {
 		TileEntityBase te = (TileEntityBase) world.getTileEntity(new BlockPos(x, y, z));
 		if(ID == Gadgetron.guiAutoTileEntityID)
 			return te.getGUI(player);
-		else
+		else if (ID == Gadgetron.guiIOConfig)
 			return new GuiIOConfig(player, te);
+		else
+			return new GuiBelt(player);
 	}
 }

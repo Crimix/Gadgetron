@@ -29,7 +29,7 @@ public class ItemPDA extends ItemBase {
 
 	public ItemPDA() {
 		super("power_distribution_atuner");
-		// TODO Auto-generated constructor stub
+		this.setMaxStackSize(1);
 	}
 
 	@Override

@@ -9,9 +9,8 @@ import com.black_dog20.gadgetron.tile.base.TileEntityBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-public class CustomItemHandler extends ItemStackHandler {
+public class CustomItemHandler extends CustomItemHandlerBase {
 
 	private TileEntityBase base;
 	private int inputSlots;

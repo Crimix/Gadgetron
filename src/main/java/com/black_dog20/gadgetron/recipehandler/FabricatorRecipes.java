@@ -149,7 +149,6 @@ public class FabricatorRecipes {
 	
 	private boolean compareItemStacks(ItemStack stack1,ItemStack stack2)
 	{
-		System.out.println(stack2 + " "  + stack1);
 		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == OreDictionary.WILDCARD_VALUE || stack2.getMetadata() == stack1.getMetadata()) && stack2.getCount() == stack1.getCount();
 	}
 	

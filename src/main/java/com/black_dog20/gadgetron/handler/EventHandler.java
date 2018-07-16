@@ -74,6 +74,7 @@ public class EventHandler {
 			}
 		}
 	}
+
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

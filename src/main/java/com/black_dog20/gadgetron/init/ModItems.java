@@ -1,7 +1,9 @@
 package com.black_dog20.gadgetron.init;
 
 import com.black_dog20.gadgetron.item.ItemBase;
+import com.black_dog20.gadgetron.item.ItemBelt;
 import com.black_dog20.gadgetron.item.tools.ItemAxeBase;
+import com.black_dog20.gadgetron.item.tools.ItemHammer;
 import com.black_dog20.gadgetron.item.tools.ItemHoeBase;
 import com.black_dog20.gadgetron.item.tools.ItemPDA;
 import com.black_dog20.gadgetron.item.tools.ItemPickaxeBase;
@@ -54,7 +56,7 @@ public class ModItems {
 	public static ItemBase RaritaniumEnhancedPlate = new ItemBase("raritanium_enhanced_plate");
 	public static ItemBase ConductingWire = new ItemBase("conducting_wire");
 	public static ItemBase Circuit = new ItemBase("circuit");
-	public static ItemBase RaritaniumHammer = new ItemBase("raritanium_hammer");
+	public static ItemHammer RaritaniumHammer = new ItemHammer("raritanium_hammer");
 	
 	public static ItemAxeBase RaritaniumAxe = new ItemAxeBase("raritaniumAxe", Raritanium, Raritanium.getDamageVsEntity(), -2.5F);
 	public static ItemHoeBase RaritaniumHoe = new ItemHoeBase("raritaniumHoe", Raritanium);
@@ -83,6 +85,8 @@ public class ModItems {
 	public static ItemSwordBase TitaniumSword = new ItemSwordBase("titaniumSword", Titanium);
 	
 	public static ItemPDA pda = new ItemPDA();
+	public static ItemBelt belt = new ItemBelt("belt");
+	public static ItemBase blackLeather = new ItemBase("black_leather");
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -138,5 +142,7 @@ public class ModItems {
 		r.register(TitaniumSword);
 		
 		r.register(pda);
+		r.register(belt);
+		r.register(blackLeather);
 	}
 }
