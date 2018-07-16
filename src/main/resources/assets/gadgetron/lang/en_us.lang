@@ -76,7 +76,6 @@ item.gadgetron:adamantineingot.info=A hard metal has the same durability as Rari
 item.gadgetron:carbonoxingot.info=A very hard metal, its durability is far superior to Adamantine, Raritanium and Trillium
 item.gadgetron:trilliumingot.info=A hard poisonous metal, its durability is superior to Adamantine, but inferior to Carbonox
 item.gadgetron:belt.info=A belt that can be equiped and can safely store 27 slots of items and other items if other gadgetron mods are used
-item.gadgetron:belt.info2=Some baubles will work inside the belt
 item.gadgetron:power_distribution_atuner.info=The Power Distribution A-tuner or shorten PDA, is used to connect battery to machines
 item.gadgetron:power_distribution_atuner.info2=Does only work in the same dimension as the battery
 
