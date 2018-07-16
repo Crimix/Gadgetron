@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.handler.EventHandler;
 import com.black_dog20.gadgetron.handler.GuiHandler;
+import com.black_dog20.gadgetron.handler.ItemEventHandler;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.init.ModItems;
@@ -52,6 +53,7 @@ public class Gadgetron {
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
+		MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 		Proxy.registerKeyBindings();
 		registerOreDict();

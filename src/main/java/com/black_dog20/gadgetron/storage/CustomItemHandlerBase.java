@@ -25,5 +25,9 @@ public class CustomItemHandlerBase extends ItemStackHandler {
 		}
 		return false;
 	}
+	
+	public NonNullList<ItemStack> getStacks(){
+		return stacks;
+	}
 
 }

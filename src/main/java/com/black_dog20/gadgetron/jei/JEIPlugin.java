@@ -74,8 +74,11 @@ public class JEIPlugin extends BlankModPlugin{
 		list.add(new ItemStack(ModItems.AdamantineIngot));
 		list.add(new ItemStack(ModItems.CarbonoxIngot));
 		list.add(new ItemStack(ModItems.TrilliumIngot));
+		list.add(new ItemStack(ModItems.belt));
+		list.add(new ItemStack(ModItems.pda));
 		
 		RegisterInfo(registry, list, ".info");
+		RegisterInfo(registry, list, ".info2");
 		if(ModConfig.doesTrilliumWeaponsCausePoison){
 			RegisterInfo(registry, list, ".poison");
 		}
