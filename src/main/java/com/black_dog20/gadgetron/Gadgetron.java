@@ -115,6 +115,8 @@ public class Gadgetron {
 		OreDictionary.registerOre("dustTitanium", ModItems.TitaniumDust);
 		OreDictionary.registerOre("dustTrillium", ModItems.TrilliumDust);
 		OreDictionary.registerOre("dustRedstoneGlowstoneMix", ModItems.RedGlowstoneDust);
+		OreDictionary.registerOre("dustLeadPlatinumMix", ModItems.LeadPlatinumMixDust);
+		OreDictionary.registerOre("dustTinSilverMix", ModItems.TinSilverMixDust);
 		
 		OreDictionary.registerOre("ingotAdamantine", ModItems.AdamantineIngot);
 		OreDictionary.registerOre("ingotCarbonox", ModItems.CarbonoxIngot);

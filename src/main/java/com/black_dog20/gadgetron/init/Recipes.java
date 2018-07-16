@@ -10,6 +10,7 @@ import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -68,9 +69,54 @@ public class Recipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumShovel, new Object[]{" i "," s "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.TrilliumSword, new Object[]{" i "," i "," s ", 'i', "ingotTrillium", 's', "stickWood"}));
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Machine_block, new Object[]{"ccc","csc","tft", 'c', "ingotCarbonox", 's', "shardRaritanium", 't', "ingotTitanium", 'f', Blocks.FURNACE}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Machine_block, new Object[]{"ccc","csc","tft", 'c', "plateCarbonox", 's', "shardRaritanium", 't', "plateTitanium", 'f', Blocks.FURNACE}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumHammer, new Object[]{" ii"," si","s  ", 'i', "crystalRaritanium", 's', "stickWood"}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.RaritaniumShard, "crystalRaritanium", ModItems.RaritaniumHammer));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.blackLeather, Items.LEATHER, new ItemStack(Items.DYE, 1, EnumDyeColor.BLACK.getDyeDamage()), "ingotTitanium" ));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.blackLeather, 6), new Object[] { "ltl", "ldl", "ltl", 'l', Items.LEATHER , 'd', new ItemStack(Items.DYE, 1, EnumDyeColor.BLACK.getDyeDamage()), 't', "ingotTitanium" }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.belt, new Object[] { "lll", "tct", "lll", 'c', "plateCarbonox", 't', "ingotTitanium", 'l', ModItems.blackLeather }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.pda, new Object[] { "csc", "ctc", "csc", 'c', "plateCarbonox", 't', "paneGlass", 's', "shardRaritanium"}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.AdamantineBlock, new Object[]{"iii","iii","iii", 'i', "ingotAdamantine"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.AdamantineIngot, 9), ModBlocks.AdamantineBlock));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.CarbonoxBlock, new Object[]{"iii","iii","iii", 'i', "ingotCarbonox"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.CarbonoxIngot, 9), ModBlocks.CarbonoxBlock));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.TitaniumBlock, new Object[]{"iii","iii","iii", 'i', "ingotTitanium"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.TitaniumIngot, 9), ModBlocks.TitaniumBlock));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.TrilliumBlock, new Object[]{"iii","iii","iii", 'i', "ingotTrillium"}));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.TrilliumIngot, 9), ModBlocks.TrilliumBlock));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.AdamantinePlate, ModItems.AdamantineIngot, ModItems.RaritaniumHammer));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.CarbonoxPlate, ModItems.CarbonoxIngot, ModItems.RaritaniumHammer));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.TitaniumPlate, ModItems.TitaniumIngot, ModItems.RaritaniumHammer));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.TrilliumPlate, ModItems.TrilliumIngot, ModItems.RaritaniumHammer));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.CoalGenerator_T1, new Object[]{"ici","imi","tft", 'i', "plateCarbonox", 'c', Blocks.COAL_BLOCK, 't',"plateTitanium" , 'f', Items.FLINT_AND_STEEL, 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.CoalGenerator_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.CoalGenerator_T1}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.CoalGenerator_T3, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.CoalGenerator_T2}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T1, new Object[]{"ifi","imi","tct", 'i', "plateCarbonox", 'c', Blocks.OBSIDIAN, 't',"plateTitanium" , 'f', Items.LAVA_BUCKET, 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Generator_T1}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T2, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Generator_T2}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Smelter_T1, new Object[]{"ifi","imi","tit", 'i', "plateCarbonox", 't',"plateTitanium" , 'f', Items.BUCKET, 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Smelter_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Smelter_T1}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Smelter_T3, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Smelter_T2}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Battery_T1, new Object[]{"iri","imi","trt", 'i', "plateCarbonox", 'r', ModBlocks.RaritaniumCrystal, 't',"plateTitanium" , 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Battery_T2, new Object[]{"iri","tmt","iri", 'i', "plateAdamantine", 'r', ModBlocks.RaritaniumCrystal, 't',"plateTitanium" , 'm' , ModBlocks.Battery_T1 }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Battery_T3, new Object[]{"iri","tmt","iri", 'i', ModItems.RaritaniumEnhancedPlate, 'r', ModBlocks.RaritaniumCrystal, 't',"plateCarbonox" , 'm' , ModBlocks.Battery_T2}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Fabricator_T1, new Object[]{"ifi","imi","tlt", 'i', "plateCarbonox", 't',"plateTitanium" , 'f', Blocks.CRAFTING_TABLE, 'l', Blocks.FURNACE, 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Fabricator_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Fabricator_T1}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Fabricator_T3, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Fabricator_T2}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Extractor_T1, new Object[]{"ifi","imi","tlt", 'i', "plateCarbonox", 't',"plateTitanium" , 'f', Blocks.STICKY_PISTON, 'l', Blocks.FURNACE, 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Extractor_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Extractor_T1}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Extractor_T3, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Extractor_T2}));
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Processor_T1, new Object[]{"ili","imi","tlt", 'i', "plateCarbonox", 't',"plateTitanium", 'l', Blocks.FURNACE, 'm' , ModBlocks.Machine_block }));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Processor_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Processor_T1}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Processor_T3, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Processor_T2}));
 		
 		
 		RegisterSmelterRecipes();
@@ -263,7 +309,7 @@ public class Recipes {
 	
 	private static void RegisterFabricatorRecipes() {
 		FabricatorRecipes.instance().addRecipe("dustRedstone", "dustGlowstone", 400, new ItemStack(ModItems.RedGlowstoneDust,2));
-		FabricatorRecipes.instance().addRecipe("plateCarbonox",1 , new ItemStack(ModItems.RaritaniumShard), 400, new ItemStack(ModItems.RaritaniumEnhancedPlate));
+		FabricatorRecipes.instance().addRecipe("plateCarbonox",5 , new ItemStack(ModBlocks.RaritaniumCrystal,2), 400, new ItemStack(ModItems.RaritaniumEnhancedPlate));
 		FabricatorRecipes.instance().add(ModItems.RedGlowstoneDust, ModItems.AdamantineIngot, 400, new ItemStack(ModItems.ConductingIngot));
 		FabricatorRecipes.instance().addRecipe("ingotCopper", "ingotTin", 400, "ingotBronze",1);
 		FabricatorRecipes.instance().add(ModItems.Silicon, ModItems.ConductingWire, 400, new ItemStack(ModItems.Circuit));
@@ -280,6 +326,10 @@ public class Recipes {
 		FabricatorRecipes.instance().addRecipe("soulSand", 1, "ingotGold", 1, 400, "ingotSoularium",1);
 		FabricatorRecipes.instance().addRecipe("ingotCobalt", 1, "ingotArdite", 1, 400, "ingotManyullyn",1);
 		FabricatorRecipes.instance().addRecipe("ingotElectrum", 1, "dustRedstone", 10, 400, "dustElectrumFlux",1);
+		FabricatorRecipes.instance().addRecipe("dustLead", 3, "dustPlatium", 1, 400, "dustLeadPlatinumMix",4);
+		FabricatorRecipes.instance().addRecipe(new ItemStack(Items.ENDER_PEARL, 4), "dustLeadPlatinumMix", 4, 400, "ingotEnderium",4);
+		FabricatorRecipes.instance().addRecipe("dustTin", 3, "dustSilver", 1, 400, "dustTinSilverMix",4);
+		FabricatorRecipes.instance().addRecipe(new ItemStack(Items.GLOWSTONE_DUST, 4), "dustTinSilverMix", 4, 400, "ingotLumium",4);
 	}
 	
 	private static void RegisterIntegrationRecipes(ItemStack in, ItemStack out){

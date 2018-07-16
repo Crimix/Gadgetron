@@ -58,6 +58,9 @@ public class ModItems {
 	public static ItemBase Circuit = new ItemBase("circuit");
 	public static ItemHammer RaritaniumHammer = new ItemHammer("raritanium_hammer");
 	
+	public static ItemBase LeadPlatinumMixDust = new ItemBase("lead_platinum_mix_dust");
+	public static ItemBase TinSilverMixDust = new ItemBase("tin_silver_mix_dust");
+	
 	public static ItemAxeBase RaritaniumAxe = new ItemAxeBase("raritaniumAxe", Raritanium, Raritanium.getDamageVsEntity(), -2.5F);
 	public static ItemHoeBase RaritaniumHoe = new ItemHoeBase("raritaniumHoe", Raritanium);
 	public static ItemPickaxeBase RaritaniumPickaxe = new ItemPickaxeBase("raritaniumPickaxe", Raritanium);
@@ -103,6 +106,8 @@ public class ModItems {
 		r.register(RaritaniumRod);
 		
 		r.register(RedGlowstoneDust);
+		r.register(TinSilverMixDust);
+		r.register(LeadPlatinumMixDust);
 		r.register(Silicon);
 		r.register(AdamantinePlate);
 		r.register(CarbonoxPlate);

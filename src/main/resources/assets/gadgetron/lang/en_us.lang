@@ -11,7 +11,9 @@ item.gadgetron:raritaniumrod.name=Raritanium Rod
 item.gadgetron:black_leather.name=Titanium Reinforced Black Leather
 item.gadgetron:belt.name=Belt
 
+item.gadgetron:lead_platinum_mix_dust.name=Lead-Platinum Blend
 item.gadgetron:redglowstone_dust.name=Redstone-Glowstone Blend
+item.gadgetron:tin_silver_mix_dust.name=Tin-Silver Blend
 item.gadgetron:silicon.name=Silicon
 item.gadgetron:adamantine_plate.name=Adamantine Plate
 item.gadgetron:carbonox_plate.name=Carbonox Plate
