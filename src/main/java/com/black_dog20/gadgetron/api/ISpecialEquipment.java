@@ -26,6 +26,6 @@ public interface ISpecialEquipment {
 	public default void onWornTick(ItemStack stack, EntityPlayer player) {}
 	
 	public default void registerEquipment(ISpecialEquipment item) {
-		
+		GadgetronAPI.registerEquipment(item);
 	}
 }
