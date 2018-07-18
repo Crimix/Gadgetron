@@ -41,7 +41,7 @@ public class ItemBelt extends ItemBase {
 					mh.setHasBelt(true);
 					return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
 				} else {
-					player.sendMessage(new TextComponentTranslation("msg.already_have"));
+					player.sendMessage(new TextComponentTranslation("msg.gadgetron.already_have"));
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
 				}
 			}

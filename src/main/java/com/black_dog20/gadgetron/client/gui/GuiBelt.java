@@ -2,6 +2,8 @@ package com.black_dog20.gadgetron.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import com.black_dog20.gadgetron.api.GadgetronAPI;
+import com.black_dog20.gadgetron.api.ISpecialEquipment.SpecialEquipmentType;
 import com.black_dog20.gadgetron.capability.BeltHandler;
 import com.black_dog20.gadgetron.capability.IBeltHandler;
 import com.black_dog20.gadgetron.client.gui.utils.GuiLeftCheckBox;
@@ -14,7 +16,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -78,10 +79,10 @@ public class GuiBelt extends GuiContainer {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		if(!Loader.isModLoaded("gadgetronig")) {
+		if(!GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MAGNET)) {
 			this.drawTexturedModalRect(k + 67, l + 4, 176, 0, 18, 18);
 		}
-		if(!Loader.isModLoaded("gadgetronmt")) {
+		if(!GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MAGNET)) {
 			this.drawTexturedModalRect(k + 91, l + 4, 176, 0, 18, 18);
 		}
 	}	

@@ -19,7 +19,7 @@ public class SpecicalEquipmentSlot extends SlotItemHandler {
 	@Override
 	public boolean isItemValid(ItemStack stack) {
 		if(stack.getItem() instanceof ISpecialEquipment)
-			return ((ISpecialEquipment)stack.getItem()).getype() == type;
+			return ((ISpecialEquipment)stack.getItem()).getType() == type;
 		else
 			return false;
 	}

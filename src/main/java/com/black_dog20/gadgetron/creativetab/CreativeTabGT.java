@@ -1,11 +1,15 @@
 package com.black_dog20.gadgetron.creativetab;
 
 import com.black_dog20.gadgetron.init.ModBlocks;
+import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.fluids.UniversalBucket;
 
 public class CreativeTabGT{
 
@@ -20,6 +24,11 @@ public class CreativeTabGT{
 		public String getTranslatedTabLabel() {
 			return I18n.format("itemGroup.gadgetron");
 		}
+		@Override
+		public void displayAllRelevantItems(NonNullList<ItemStack> list) {
+			super.displayAllRelevantItems(list);
+			list.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.fluidTrillium));
+		};
 	};
 	
 	public static final CreativeTabs TAB_MACHINES = new CreativeTabs(Reference.MOD_ID.toLowerCase()+"_machines") {

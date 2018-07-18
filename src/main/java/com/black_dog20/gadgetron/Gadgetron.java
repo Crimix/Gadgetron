@@ -125,6 +125,7 @@ public class Gadgetron {
 		OreDictionary.registerOre("ingotTitanium", ModItems.TitaniumIngot);
 		OreDictionary.registerOre("ingotTrillium", ModItems.TrilliumIngot);
 		OreDictionary.registerOre("ingotConductingMetal", ModItems.ConductingIngot);
+		OreDictionary.registerOre("wireConductingMetal", ModItems.ConductingWire);
 		
 		OreDictionary.registerOre("plateAdamantine", ModItems.AdamantinePlate);
 		OreDictionary.registerOre("plateCarbonox", ModItems.CarbonoxPlate);

@@ -35,12 +35,13 @@ public class BeltRender implements LayerRenderer<EntityPlayer>{
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(0.1, 0.1, 0.1);
 			if(player.isSneaking()){
-				GlStateManager.translate(-0.1F, 7F, 1.1F);
+				GlStateManager.translate(-0.055F, 7.1F, 1.1F);
 				GlStateManager.rotate(90F / (float) Math.PI, 1.0F, 0.0F, 0.0F);
 			}
 			else {
-				GlStateManager.translate(-0.1F, 5.3F, -1.4F);
+				GlStateManager.translate(-0.055F, 5.3F, -1.4F);
 			}
+			GlStateManager.rotate(180F, 0.0F, 0.0F, 1.0F);
 			ItemStack stack = mh.getInventory().getStackInSlot(27);
 			if(stack!= null && !stack.isEmpty())
 				Minecraft.getMinecraft().getRenderItem().renderItem(stack , ItemCameraTransforms.TransformType.FIXED);

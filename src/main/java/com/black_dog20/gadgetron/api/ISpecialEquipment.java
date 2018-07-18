@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public interface ISpecialEquipment {
 
-	SpecialEquipmentType getype();
+	SpecialEquipmentType getType();
 
 	public enum SpecialEquipmentType{
 		GENERAL_ITEM(0),
@@ -24,4 +24,8 @@ public interface ISpecialEquipment {
 	}
 	
 	public default void onWornTick(ItemStack stack, EntityPlayer player) {}
+	
+	public default void registerEquipment(ISpecialEquipment item) {
+		
+	}
 }

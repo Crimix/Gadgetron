@@ -1,5 +1,6 @@
 package com.black_dog20.gadgetron.container;
 
+import com.black_dog20.gadgetron.api.GadgetronAPI;
 import com.black_dog20.gadgetron.api.ISpecialEquipment.SpecialEquipmentType;
 import com.black_dog20.gadgetron.capability.BeltHandler;
 import com.black_dog20.gadgetron.capability.IBeltHandler;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerBelt extends Container{
@@ -21,10 +21,10 @@ public class ContainerBelt extends Container{
 		IBeltHandler mh = BeltHandler.instanceFor(player);
 		if(mh != null && mh.getHasBelt()){
 			
-			if(Loader.isModLoaded("gadgetronig")) {
+			if(GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MAGNET)) {
 				this.addSlotToContainer(new SpecicalEquipmentSlot(mh.getInventory(), 27, 68, 5, SpecialEquipmentType.MAGNET));
 			}
-			if(Loader.isModLoaded("gadgetronmt")) {
+			if(GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MED)) {
 				this.addSlotToContainer(new SpecicalEquipmentSlot(mh.getInventory(), 28, 92, 5, SpecialEquipmentType.MED));
 			}
 

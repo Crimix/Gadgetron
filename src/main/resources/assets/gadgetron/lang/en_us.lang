@@ -229,4 +229,5 @@ msg.gadgetron:failedtoadd=Failed to add block to output list, check if the batte
 msg.gadgetron:boundto=PDA bound to block
 msg.gadgetron:unbound=PDA unbounded
 msg.gadgetron:failednotsamedim=Only blocks from the same dimension can added
-msg.already_have=You cannot equip another belt
+msg.gadgetron.already_have=You cannot equip another belt
+msg.gadgetron.no_belt=You have no belt on
