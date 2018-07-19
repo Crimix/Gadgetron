@@ -5,13 +5,23 @@ buildscript {
 			name = "forge"
 			url = "http://files.minecraftforge.net/maven"
 		}
+		maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+      		url "https://plugins.gradle.org/m2/"
+    	}
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.10'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
 
+ext.priv = parseConfig(file('private.properties'))
 
 version = version_major + '.' + version_minor + '.' + version_patch
 group = "${mod_group}"
@@ -93,5 +103,40 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+curseforge {
+  apiKey = priv.apiKey
+  project {
+    id = '289733'
+    changelogType = 'markdown'
+	changelog = file('changelog.txt')
+    releaseType = 'release'
+    addGameVersion 'Java 8'
+    addGameVersion '1.12'
+    addGameVersion '1.12.1'
+    addGameVersion '1.12.2'
+  }
+}
+
+task clearChangelog() {
+	doLast{
+		clearFile(file('changelog.txt'))
+	}
+}
+
+
+def clearFile(File f) {
+    f.withWriter  {
+    	writer -> writer.write('')
+    }
+}
+
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
     }
 }
