@@ -106,9 +106,18 @@ processResources
     }
 }
 
+task deobfJar(type: Jar) {
+     from sourceSets.main.output
+     classifier = "deobf"
+     destinationDir = file 'build/libs'
+     mustRunAfter "jar" 
+}
+
+
 curseforge {
   apiKey = priv.apiKey
   project {
+  	addArtifact (deobfJar)
     id = '289733'
     changelogType = 'markdown'
 	changelog = file('changelog.txt')
