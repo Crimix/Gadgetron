@@ -34,6 +34,7 @@ public class BlockModOre extends BlockOre implements IItemModelRegister{
 	protected IBlockState pickDefaultState() {
 		return blockState.getBaseState();
 	}
+
 	
 	@Override
 	public void initModel() {

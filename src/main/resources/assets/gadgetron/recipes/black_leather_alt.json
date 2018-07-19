@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ltl",
+    "ldl",
+    "ltl"
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "ingotTitanium"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "gadgetron:black_leather",
+    "count": 6
+  }
+}

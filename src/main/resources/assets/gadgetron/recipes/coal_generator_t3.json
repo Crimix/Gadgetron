@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ici",
+    "tmt",
+    "ifi"
+  ],
+  "key": {
+    "c": {
+      "item": "gadgetron:circuit"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "f": {
+      "type": "forge:ore_dict",
+      "ore": "ingotConductingMetal"
+    },
+    "i": {
+      "item": "gadgetron:raritanium_enhanced_plate"
+    },
+    "m": {
+      "item": "gadgetron:coal_generator_t2"
+    }
+  },
+  "result": {
+    "item": "gadgetron:coal_generator_t3"
+  }
+}

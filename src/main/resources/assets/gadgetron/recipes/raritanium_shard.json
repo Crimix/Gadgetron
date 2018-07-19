@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "crystalRaritanium"
+    },
+    {
+      "item": "gadgetron:raritanium_hammer"
+    }
+  ],
+  "result": {
+    "item": "gadgetron:raritanium_shard"
+  }
+}

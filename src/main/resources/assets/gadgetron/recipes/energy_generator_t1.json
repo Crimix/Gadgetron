@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ifi",
+    "imi",
+    "tct"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:obsidian"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "f": {
+      "item": "minecraft:lava_bucket"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "m": {
+      "item": "gadgetron:machine_block"
+    }
+  },
+  "result": {
+    "item": "gadgetron:energy_generator_t1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "gadgetron:items/tin_silver_mix_dust"
+    }
+    
+}

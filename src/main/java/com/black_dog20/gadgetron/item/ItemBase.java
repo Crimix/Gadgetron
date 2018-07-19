@@ -39,4 +39,5 @@ public class ItemBase extends Item implements IItemModelRegister{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(text);
 	}
+
 }

@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ccc",
+    "csc",
+    "tft"
+  ],
+  "key": {
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "shardRaritanium"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "f": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "gadgetron:machine_block"
+  }
+}

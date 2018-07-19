@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "csc",
+    "ctc",
+    "csc"
+  ],
+  "key": {
+    "c": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "shardRaritanium"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "paneGlass"
+    }
+  },
+  "result": {
+    "item": "gadgetron:power_distribution_atuner"
+  }
+}

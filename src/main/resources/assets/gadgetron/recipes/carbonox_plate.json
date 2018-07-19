@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "gadgetron:carbonoxingot"
+    },
+    {
+      "item": "gadgetron:raritanium_hammer"
+    }
+  ],
+  "result": {
+    "item": "gadgetron:carbonox_plate"
+  }
+}

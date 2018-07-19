@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ifi",
+    "imi",
+    "tlt"
+  ],
+  "key": {
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "f": {
+      "item": "minecraft:crafting_table"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "l": {
+      "item": "minecraft:furnace"
+    },
+    "m": {
+      "item": "gadgetron:machine_block"
+    }
+  },
+  "result": {
+    "item": "gadgetron:fabricator_t1"
+  }
+}

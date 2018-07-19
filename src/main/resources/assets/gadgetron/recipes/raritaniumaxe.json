@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ii ",
+    "is ",
+    " s "
+  ],
+  "key": {
+    "s": {
+      "item": "gadgetron:raritaniumrod"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "crystalRaritanium"
+    }
+  },
+  "result": {
+    "item": "gadgetron:raritaniumaxe"
+  }
+}

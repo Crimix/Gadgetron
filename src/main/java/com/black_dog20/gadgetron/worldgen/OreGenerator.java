@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.config.ModConfig;
-import com.black_dog20.gadgetron.config.OreGenConfig;
+import com.black_dog20.gadgetron.config.objects.OreGenConfig;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.utility.Helper;
