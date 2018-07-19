@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
 
-public class FabricatorRecipeWrapper extends BlankRecipeWrapper
+public class FabricatorRecipeWrapper implements IRecipeWrapper
 {
 
     private final List<List<ItemStack>> inputs = new ArrayList<>();

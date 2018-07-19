@@ -20,7 +20,6 @@ import com.black_dog20.gadgetron.reference.Reference;
 import com.black_dog20.gadgetron.worldgen.OreGenerator;
 
 import net.minecraft.block.Block;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fluids.FluidRegistry;

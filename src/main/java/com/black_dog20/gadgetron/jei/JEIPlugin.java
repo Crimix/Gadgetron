@@ -17,10 +17,10 @@ import com.black_dog20.gadgetron.jei.processor.ProcessorRecipeMaker;
 import com.black_dog20.gadgetron.jei.smelter.SmelterRecipeCategory;
 import com.black_dog20.gadgetron.jei.smelter.SmelterRecipeMaker;
 
-import mezz.jei.api.BlankModPlugin;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
+import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
@@ -29,7 +29,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 @mezz.jei.api.JEIPlugin
-public class JEIPlugin extends BlankModPlugin{
+public class JEIPlugin implements IModPlugin{
 	
 	 public static IJeiHelpers jeiHelper;
 

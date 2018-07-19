@@ -5,13 +5,13 @@ import java.awt.Color;
 import com.black_dog20.gadgetron.recipehandler.FuelGeneratorHandler.FuelObject;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FuelGeneratorRecipeWrapper extends BlankRecipeWrapper
+public class FuelGeneratorRecipeWrapper implements IRecipeWrapper
 {
 
     private final FluidStack inputs;

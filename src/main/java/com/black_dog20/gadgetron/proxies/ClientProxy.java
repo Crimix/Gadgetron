@@ -1,6 +1,5 @@
 package com.black_dog20.gadgetron.proxies;
 
-import com.black_dog20.gadgetron.init.ModFluids;
 import com.black_dog20.gadgetron.client.handler.KeyInputEventHandler;
 import com.black_dog20.gadgetron.client.render.BeltRender;
 import com.black_dog20.gadgetron.client.settings.Keybindings;

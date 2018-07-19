@@ -25,6 +25,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -40,22 +41,101 @@ public class TileEntityCoalGenerator extends TileEntityEnergyInventoryBase {
 	}
 
 	public static int getItemBurnTime(ItemStack stack)
-	{
-		if (stack.isEmpty())
-		{
-			return 0;
-		}
-		else
-		{
-			Item item = stack.getItem();
-			if (!item.getRegistryName().getResourceDomain().equals("minecraft"))
-			{
-				int burnTime = net.minecraftforge.fml.common.registry.GameRegistry.getFuelValue(stack);
-				if (burnTime != 0) return burnTime;
-			}
-			return item == Item.getItemFromBlock(Blocks.WOODEN_SLAB) ? 150 : (item == Item.getItemFromBlock(Blocks.WOOL) ? 100 : (item == Item.getItemFromBlock(Blocks.CARPET) ? 67 : (item == Item.getItemFromBlock(Blocks.LADDER) ? 300 : (item == Item.getItemFromBlock(Blocks.WOODEN_BUTTON) ? 100 : (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD ? 300 : (item == Item.getItemFromBlock(Blocks.COAL_BLOCK) ? 16000 : (item instanceof ItemTool && "WOOD".equals(((ItemTool)item).getToolMaterialName()) ? 200 : (item instanceof ItemSword && "WOOD".equals(((ItemSword)item).getToolMaterialName()) ? 200 : (item instanceof ItemHoe && "WOOD".equals(((ItemHoe)item).getMaterialName()) ? 200 : (item == Items.STICK ? 100 : (item != Items.BOW && item != Items.FISHING_ROD ? (item == Items.SIGN ? 200 : (item == Items.COAL ? 1600 : (item == Items.LAVA_BUCKET ? 20000 : (item != Item.getItemFromBlock(Blocks.SAPLING) && item != Items.BOWL ? (item == Items.BLAZE_ROD ? 2400 : (item instanceof ItemDoor && item != Items.IRON_DOOR ? 200 : (item instanceof ItemBoat ? 400 : 0))) : 100)))) : 300)))))))))));
-		}
-	}
+    {
+        if (stack.isEmpty())
+        {
+            return 0;
+        }
+        else
+        {
+            int burnTime = ForgeEventFactory.getItemBurnTime(stack);
+            if (burnTime >= 0) return burnTime;
+            Item item = stack.getItem();
+
+            if (item == Item.getItemFromBlock(Blocks.WOODEN_SLAB))
+            {
+                return 150;
+            }
+            else if (item == Item.getItemFromBlock(Blocks.WOOL))
+            {
+                return 100;
+            }
+            else if (item == Item.getItemFromBlock(Blocks.CARPET))
+            {
+                return 67;
+            }
+            else if (item == Item.getItemFromBlock(Blocks.LADDER))
+            {
+                return 300;
+            }
+            else if (item == Item.getItemFromBlock(Blocks.WOODEN_BUTTON))
+            {
+                return 100;
+            }
+            else if (Block.getBlockFromItem(item).getDefaultState().getMaterial() == Material.WOOD)
+            {
+                return 300;
+            }
+            else if (item == Item.getItemFromBlock(Blocks.COAL_BLOCK))
+            {
+                return 16000;
+            }
+            else if (item instanceof ItemTool && "WOOD".equals(((ItemTool)item).getToolMaterialName()))
+            {
+                return 200;
+            }
+            else if (item instanceof ItemSword && "WOOD".equals(((ItemSword)item).getToolMaterialName()))
+            {
+                return 200;
+            }
+            else if (item instanceof ItemHoe && "WOOD".equals(((ItemHoe)item).getMaterialName()))
+            {
+                return 200;
+            }
+            else if (item == Items.STICK)
+            {
+                return 100;
+            }
+            else if (item != Items.BOW && item != Items.FISHING_ROD)
+            {
+                if (item == Items.SIGN)
+                {
+                    return 200;
+                }
+                else if (item == Items.COAL)
+                {
+                    return 1600;
+                }
+                else if (item == Items.LAVA_BUCKET)
+                {
+                    return 20000;
+                }
+                else if (item != Item.getItemFromBlock(Blocks.SAPLING) && item != Items.BOWL)
+                {
+                    if (item == Items.BLAZE_ROD)
+                    {
+                        return 2400;
+                    }
+                    else if (item instanceof ItemDoor && item != Items.IRON_DOOR)
+                    {
+                        return 200;
+                    }
+                    else
+                    {
+                        return item instanceof ItemBoat ? 400 : 0;
+                    }
+                }
+                else
+                {
+                    return 100;
+                }
+            }
+            else
+            {
+                return 300;
+            }
+        }
+    }
 
 	public static boolean isItemFuel(ItemStack stack)
 	{
