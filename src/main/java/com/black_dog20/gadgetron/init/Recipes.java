@@ -96,7 +96,7 @@ public class Recipes {
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T1, new Object[]{"ifi","imi","tct", 'i', "plateCarbonox", 'c', Blocks.OBSIDIAN, 't',"plateTitanium" , 'f', Items.LAVA_BUCKET, 'm' , ModBlocks.Machine_block }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Generator_T1}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T2, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Generator_T2}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Generator_T3, new Object[]{"ici","tmt","ifi", 'i', ModItems.RaritaniumEnhancedPlate, 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Generator_T2}));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Smelter_T1, new Object[]{"ifi","imi","tit", 'i', "plateCarbonox", 't',"plateTitanium" , 'f', Items.BUCKET, 'm' , ModBlocks.Machine_block }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Smelter_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.Smelter_T1}));
