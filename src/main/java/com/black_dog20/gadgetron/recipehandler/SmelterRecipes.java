@@ -51,12 +51,12 @@ public class SmelterRecipes {
 	}
 	
 	public void addRecipe(String ore, int time, FluidStack out) {
-    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
+    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore, false);
     	for (int i = 0; i < tList.size(); i++) {
     	    ItemStack tStack = tList.get(i);
     	    tStack = tStack.copy();
     	    tStack.setCount(1);
-    	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    	    //tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     	    this.addRecipe(tStack, time, out);
     	}
     }

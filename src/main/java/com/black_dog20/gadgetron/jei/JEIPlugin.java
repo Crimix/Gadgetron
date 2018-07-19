@@ -98,7 +98,7 @@ public class JEIPlugin implements IModPlugin{
 		//registry.addRecipeClickArea(GuiProcessor.class, 78, 32, 28, 23, RecipeCategoryUid.PROCESSOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T1), RecipeCategoryUid.PROCESSOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T2), RecipeCategoryUid.PROCESSOR);
-		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T2), RecipeCategoryUid.PROCESSOR);
+		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T3), RecipeCategoryUid.PROCESSOR);
 		
 		registry.addRecipes(SmelterRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.SMELTER);
 		//registry.addRecipeClickArea(GuiSmelter.class, 68, 34, 28, 23, RecipeCategoryUid.SMELTER);
