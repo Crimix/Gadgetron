@@ -74,12 +74,12 @@ public class FabricatorRecipes {
     			ItemStack tStack = tList.get(i);
     			tStack = tStack.copy();
     			tStack.setCount(amountA);
-    			tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    			//tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     			for (int j = 0; j < tList2.size(); j++) {
         			ItemStack tStack2 = tList2.get(j);
         			tStack2 = tStack2.copy();
         			tStack2.setCount(amountB);
-        			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+        			//tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
         			this.addRecipe(tStack, tStack2, time, out);
         		}
     		}
@@ -91,7 +91,7 @@ public class FabricatorRecipes {
 			ItemStack tStack2 = tList2.get(j);
 			tStack2 = tStack2.copy();
 			tStack2.setCount(amountB);
-			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+			//tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
 			this.addRecipe(inputA, tStack2, time, out);
 		}
 	}

@@ -53,7 +53,7 @@ public class ExtractorRecipes {
     	    ItemStack tStack = tList.get(i);
     	    tStack = tStack.copy();
     	    tStack.setCount(1);
-    	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    	    //tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     	    this.addRecipe(tStack, time, out);
     	}
     }
@@ -65,12 +65,12 @@ public class ExtractorRecipes {
     		ItemStack tStack2 = tList2.get(0);
     		tStack2 = tStack2.copy();
     		tStack2.setCount(amount);
-    		tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    		//tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
     		for (int i = 0; i < tList.size(); i++) {
     			ItemStack tStack = tList.get(i);
     			tStack = tStack.copy();
     			tStack.setCount(1);
-    			tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    			//tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     			this.addRecipe(tStack, time, tStack2);
     		}
     	}
@@ -82,7 +82,7 @@ public class ExtractorRecipes {
     		ItemStack tStack2 = tList2.get(0);
     		tStack2 = tStack2.copy();
     		tStack2.setCount(amount);
-    		tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    		//tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
     		this.addRecipe(input, time, tStack2);
     	}
 	}

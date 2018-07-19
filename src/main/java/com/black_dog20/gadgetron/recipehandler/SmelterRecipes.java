@@ -56,7 +56,7 @@ public class SmelterRecipes {
     	    ItemStack tStack = tList.get(i);
     	    tStack = tStack.copy();
     	    tStack.setCount(1);
-    	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
+    	    //tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
     	    this.addRecipe(tStack, time, out);
     	}
     }
