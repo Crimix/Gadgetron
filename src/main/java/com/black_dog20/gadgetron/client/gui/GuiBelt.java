@@ -60,13 +60,6 @@ public class GuiBelt extends GuiContainer {
 			break;
 		}
 	}
-
-	
-	
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float par3) {
-		super.drawScreen(mouseX, mouseY, par3);
-	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {

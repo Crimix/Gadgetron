@@ -97,12 +97,6 @@ public abstract class GuiContainerBase extends GuiContainer{
 		}
 		
 	}
-	
-	@Override
-	protected abstract void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_);
-	
-	@Override
-	protected abstract void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_);
 
 	protected void drawProgressVertical(int progress, GuiElement e) {
 		int k = (this.width - this.xSize) / 2;
