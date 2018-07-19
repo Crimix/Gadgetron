@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " i ",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "ingotAdamantine"
+    }
+  },
+  "result": {
+    "item": "gadgetron:adamantineshovel"
+  }
+}

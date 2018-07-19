@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotTitanium"
+    }
+  ],
+  "result": {
+    "item": "gadgetron:black_leather"
+  }
+}

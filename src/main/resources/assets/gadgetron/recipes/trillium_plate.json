@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "gadgetron:trilliumingot"
+    },
+    {
+      "item": "gadgetron:raritanium_hammer"
+    }
+  ],
+  "result": {
+    "item": "gadgetron:trillium_plate"
+  }
+}

@@ -1,8 +1,12 @@
 package com.black_dog20.gadgetron.init;
 
+import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.item.ItemBase;
+import com.black_dog20.gadgetron.item.ItemBelt;
 import com.black_dog20.gadgetron.item.tools.ItemAxeBase;
+import com.black_dog20.gadgetron.item.tools.ItemHammer;
 import com.black_dog20.gadgetron.item.tools.ItemHoeBase;
+import com.black_dog20.gadgetron.item.tools.ItemPDA;
 import com.black_dog20.gadgetron.item.tools.ItemPickaxeBase;
 import com.black_dog20.gadgetron.item.tools.ItemShovelBase;
 import com.black_dog20.gadgetron.item.tools.ItemSwordBase;
@@ -43,6 +47,22 @@ public class ModItems {
 	public static ItemBase TitaniumDust = new ItemBase("titaniumDust");
 	public static ItemBase RaritaniumRod = new ItemBase("raritaniumRod");
 	
+	public static ItemBase RedGlowstoneDust = new ItemBase("redglowstone_dust");
+	public static ItemBase Silicon = new ItemBase("silicon");
+	public static ItemBase AdamantinePlate = new ItemBase("adamantine_plate");
+	public static ItemBase CarbonoxPlate = new ItemBase("carbonox_plate");
+	public static ItemBase TrilliumPlate = new ItemBase("trillium_plate");
+	public static ItemBase TitaniumPlate = new ItemBase("titanium_plate");
+	public static ItemBase RaritaniumShard = new ItemBase("raritanium_shard");
+	public static ItemBase ConductingIngot = new ItemBase("conducting_ingot");
+	public static ItemBase RaritaniumEnhancedPlate = new ItemBase("raritanium_enhanced_plate");
+	public static ItemBase ConductingWire = new ItemBase("conducting_wire");
+	public static ItemBase Circuit = new ItemBase("circuit");
+	public static ItemHammer RaritaniumHammer = new ItemHammer("raritanium_hammer");
+	
+	public static ItemBase LeadPlatinumMixDust = new ItemBase("lead_platinum_mix_dust");
+	public static ItemBase TinSilverMixDust = new ItemBase("tin_silver_mix_dust");
+	
 	public static ItemAxeBase RaritaniumAxe = new ItemAxeBase("raritaniumAxe", Raritanium, Raritanium.getAttackDamage(), -2.5F);
 	public static ItemHoeBase RaritaniumHoe = new ItemHoeBase("raritaniumHoe", Raritanium);
 	public static ItemPickaxeBase RaritaniumPickaxe = new ItemPickaxeBase("raritaniumPickaxe", Raritanium);
@@ -69,11 +89,14 @@ public class ModItems {
 	public static ItemShovelBase TitaniumShovel = new ItemShovelBase("titaniumShovel", Titanium);
 	public static ItemSwordBase TitaniumSword = new ItemSwordBase("titaniumSword", Titanium);
 	
+	public static ItemPDA pda = new ItemPDA();
+	public static ItemBelt belt = new ItemBelt("belt");
+	public static ItemBase blackLeather = new ItemBase("black_leather");
+	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
 		IForgeRegistry<Item> r = evt.getRegistry();
 		
-		//r.register(RaritaniumCrystal);
 		r.register(AdamantineIngot);
 		r.register(CarbonoxIngot);
 		r.register(TrilliumIngot);
@@ -83,6 +106,21 @@ public class ModItems {
 		r.register(TrilliumDust);
 		r.register(TitaniumDust);
 		r.register(RaritaniumRod);
+		
+		r.register(RedGlowstoneDust);
+		r.register(TinSilverMixDust);
+		r.register(LeadPlatinumMixDust);
+		r.register(Silicon);
+		r.register(AdamantinePlate);
+		r.register(CarbonoxPlate);
+		r.register(TrilliumPlate);
+		r.register(TitaniumPlate);
+		r.register(RaritaniumShard);
+		r.register(ConductingIngot);
+		r.register(RaritaniumEnhancedPlate );
+		r.register(ConductingWire);
+		r.register(Circuit);
+		r.register(RaritaniumHammer);
 		
 		r.register(RaritaniumAxe);
 		r.register(RaritaniumHoe);
@@ -110,20 +148,38 @@ public class ModItems {
 		r.register(TitaniumShovel);
 		r.register(TitaniumSword);
 		
-		registerOreDict();
+		r.register(pda);
+		r.register(belt);
+		r.register(blackLeather);
 		
+		registerOreDict();
 	}
-
+	
 	private static void registerOreDict() {
 		OreDictionary.registerOre("dustAdamantine", ModItems.AdamantineDust);
 		OreDictionary.registerOre("dustCarbonox", ModItems.CarbonoxDust);
 		OreDictionary.registerOre("dustTitanium", ModItems.TitaniumDust);
 		OreDictionary.registerOre("dustTrillium", ModItems.TrilliumDust);
+		OreDictionary.registerOre("dustRedstoneGlowstoneMix", ModItems.RedGlowstoneDust);
+		OreDictionary.registerOre("dustLeadPlatinumMix", ModItems.LeadPlatinumMixDust);
+		OreDictionary.registerOre("dustTinSilverMix", ModItems.TinSilverMixDust);
 		
 		OreDictionary.registerOre("ingotAdamantine", ModItems.AdamantineIngot);
 		OreDictionary.registerOre("ingotCarbonox", ModItems.CarbonoxIngot);
 		OreDictionary.registerOre("ingotTitanium", ModItems.TitaniumIngot);
 		OreDictionary.registerOre("ingotTrillium", ModItems.TrilliumIngot);
+		OreDictionary.registerOre("ingotConductingMetal", ModItems.ConductingIngot);
+		OreDictionary.registerOre("wireConductingMetal", ModItems.ConductingWire);
 		
+		OreDictionary.registerOre("plateAdamantine", ModItems.AdamantinePlate);
+		OreDictionary.registerOre("plateCarbonox", ModItems.CarbonoxPlate);
+		OreDictionary.registerOre("plateTitanium", ModItems.TitaniumPlate);
+		OreDictionary.registerOre("plateTrillium", ModItems.TrilliumPlate);
+		
+		OreDictionary.registerOre("shardRaritanium", ModItems.RaritaniumShard);
+		OreDictionary.registerOre("silicon", ModItems.Silicon);
+		OreDictionary.registerOre("reinforcedLeather", ModItems.blackLeather);
+		
+		Gadgetron.logger.info("OreDictionary items register complete!");
 	}
 }

@@ -10,6 +10,8 @@ import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
+//import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -39,4 +41,5 @@ public class ItemBase extends Item implements IItemModelRegister{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(text);
 	}
+
 }

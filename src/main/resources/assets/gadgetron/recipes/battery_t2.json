@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "iri",
+    "tmt",
+    "iri"
+  ],
+  "key": {
+    "r": {
+      "item": "gadgetron:raritaniumcrystal"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "plateAdamantine"
+    },
+    "m": {
+      "item": "gadgetron:battery_t1"
+    }
+  },
+  "result": {
+    "item": "gadgetron:battery_t2"
+  }
+}

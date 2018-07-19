@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ili",
+    "imi",
+    "tlt"
+  ],
+  "key": {
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "l": {
+      "item": "minecraft:furnace"
+    },
+    "m": {
+      "item": "gadgetron:machine_block"
+    }
+  },
+  "result": {
+    "item": "gadgetron:processor_t1"
+  }
+}

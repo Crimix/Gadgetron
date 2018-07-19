@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ici",
+    "imi",
+    "tft"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:coal_block"
+    },
+    "t": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "f": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "plateCarbonox"
+    },
+    "m": {
+      "item": "gadgetron:machine_block"
+    }
+  },
+  "result": {
+    "item": "gadgetron:coal_generator_t1"
+  }
+}

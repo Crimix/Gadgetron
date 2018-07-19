@@ -1,5 +1,6 @@
 package com.black_dog20.gadgetron.client.render;
 
+import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.reference.Reference;
 
 import net.minecraft.block.Block;
@@ -31,6 +32,9 @@ public final class ModelHandler {
 			if(block instanceof ISpecialModel)
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 		}
+		
+		ModBlocks.blockFluidTrillium.render();
+		
 	}
 	
 	public static void registerBlockToState(Block b, int meta, ModelResourceLocation location) {

@@ -26,7 +26,7 @@ public class BlockBase extends Block implements IItemModelRegister{
 	protected IBlockState pickDefaultState() {
 		return blockState.getBaseState();
 	}
-	
+
 	
 	@Override
 	public void initModel() {

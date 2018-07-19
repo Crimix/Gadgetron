@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "gadgetron:adamantineingot"
+    },
+    {
+      "item": "gadgetron:raritanium_hammer"
+    }
+  ],
+  "result": {
+    "item": "gadgetron:adamantine_plate"
+  }
+}
