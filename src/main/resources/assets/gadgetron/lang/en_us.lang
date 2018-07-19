@@ -62,7 +62,7 @@ tooltip.gadgetron:in=in
 tooltip.gadgetron:notbound=Not bound
 
 tooltip.gadgetron:right_click=Right click to put on belt
-tooltip.gadgetron:open_gui=To open belt gui press
+tooltip.gadgetron:open_gui=To open belt gui when equipped press
 
 //Info Items
 item.gadgetron:trilliumpickaxe.poison=On contact with the pickaxe head applies §2Poison II§r for 30 seconds
