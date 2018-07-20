@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.client.gui;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import com.black_dog20.gadgetron.api.GadgetronAPI;
@@ -11,10 +13,15 @@ import com.black_dog20.gadgetron.container.ContainerBelt;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageUpdateVisibleState;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -25,6 +32,10 @@ public class GuiBelt extends GuiContainer {
 	protected final int xSizeOfTexture = 192 , ySizeOfTexture = 135;
 	private final EntityPlayer player;
 	private GuiLeftCheckBox checkbox;
+	private int currentTick = 1;
+	private int tickBeforeSwitch = 400;
+	private int currentItem = 0;
+	private int currentItemMED = 0;
 	
 	public GuiBelt(EntityPlayer player) {
 		super(new ContainerBelt(player.inventory,player));
@@ -63,6 +74,37 @@ public class GuiBelt extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+
+	}
+	
+	private void renderItemIntoGui(List<Item> list, int slot, int currentItem, int xPos, int yPos) {
+		
+		if(list.size() == 0 || list.size() <= currentItem)
+			return;
+		
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		
+		IBeltHandler bh = BeltHandler.instanceFor(player);
+		if(bh != null) {
+			if(!bh.getInventory().getStackInSlot(slot).isEmpty())
+				return;
+		}
+		
+		ItemStack stack = new ItemStack(list.get(currentItem));		
+
+		GlStateManager.pushMatrix();
+		GlStateManager.enableAlpha();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        RenderItem renderitem = Minecraft.getMinecraft().getRenderItem();
+        renderitem.renderItemAndEffectIntoGUI(stack, xPos, yPos);
+        this.mc.getTextureManager().bindTexture(gui);
+        GlStateManager.depthFunc(516);
+        this.drawTexturedModalRect(xPos, yPos, 176, 18, 16, 16);
+        GlStateManager.depthFunc(515);	
+        GlStateManager.popMatrix();
+        currentTick++;
+		
 	}
 
 	@Override
@@ -78,5 +120,34 @@ public class GuiBelt extends GuiContainer {
 		if(!GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MED)) {
 			this.drawTexturedModalRect(k + 91, l + 4, 176, 0, 18, 18);
 		}
+		
+
+		
+		
+
+		
+		if(GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MAGNET)) {
+			renderItemIntoGui(GadgetronAPI.getEquipmentList(SpecialEquipmentType.MAGNET), 27, currentItem, k + 68, l+5);
+		}
+		if(GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MED)) {
+			renderItemIntoGui(GadgetronAPI.getEquipmentList(SpecialEquipmentType.MED), 28, currentItemMED, k+92, l+5);
+		}
+		
+		if(currentTick % tickBeforeSwitch == 0) {
+			if(GadgetronAPI.getEquipmentList(SpecialEquipmentType.MAGNET).size() == (currentItem+1))
+				currentItem = 0;
+			else
+				currentItem++;
+			
+			if(GadgetronAPI.getEquipmentList(SpecialEquipmentType.MED).size() == (currentItemMED+1))
+				currentItemMED = 0;
+			else
+				currentItemMED++;
+			
+			currentTick = 0;
+		}
+		
+		currentTick++;
+		
 	}	
 }

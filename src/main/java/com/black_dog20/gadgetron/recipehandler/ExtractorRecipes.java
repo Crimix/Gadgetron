@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.Level;
 
 import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.utility.OreDicHelper;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
@@ -17,7 +18,9 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ExtractorRecipes {
 	private static final ExtractorRecipes recipes = new ExtractorRecipes();
 	private final Map<ItemStack, ItemStack> recipeList = Maps.<ItemStack, ItemStack>newHashMap();
+	private final Map<String, ItemStack> recipeOreList = Maps.<String, ItemStack>newHashMap();
 	private final Map<ItemStack, Integer> timeList = Maps.<ItemStack, Integer>newHashMap();
+	private final Map<String, Integer> timeOreList = Maps.<String, Integer>newHashMap();
 
 	public static ExtractorRecipes instance()
 	{
@@ -48,43 +51,26 @@ public class ExtractorRecipes {
 	}
 	
 	public void addRecipe(String ore, int time, ItemStack out) {
-    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
-    	for (int i = 0; i < tList.size(); i++) {
-    	    ItemStack tStack = tList.get(i);
-    	    tStack = tStack.copy();
-    	    tStack.setCount(1);
-    	    //tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
-    	    this.addRecipe(tStack, time, out);
-    	}
+		if(!OreDictionary.doesOreNameExist(ore)) return;
+		recipeOreList.put(ore,out);
+		timeOreList.put(ore, time);
     }
     
 	public void addRecipe(String ore, int time, String out, int amount) {
-    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
-    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
-    	if (tList2.size() > 0) {
-    		ItemStack tStack2 = tList2.get(0);
-    		tStack2 = tStack2.copy();
-    		tStack2.setCount(amount);
-    		//tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
-    		for (int i = 0; i < tList.size(); i++) {
-    			ItemStack tStack = tList.get(i);
-    			tStack = tStack.copy();
-    			tStack.setCount(1);
-    			//tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
-    			this.addRecipe(tStack, time, tStack2);
-    		}
-    	}
+		if(!OreDictionary.doesOreNameExist(ore)) return;
+		ItemStack stack = OreDicHelper.getDefaultOreDic(out);
+		if(stack.isEmpty()) return;
+    	stack = stack.copy();
+    	stack.setCount(amount);
+    	this.addRecipe(ore, time, stack);
 	}
 	
 	public void addRecipe(ItemStack input, int time, String out, int amount) {
-    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
-    	if (tList2.size() > 0) {
-    		ItemStack tStack2 = tList2.get(0);
-    		tStack2 = tStack2.copy();
-    		tStack2.setCount(amount);
-    		//tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
-    		this.addRecipe(input, time, tStack2);
-    	}
+    	ItemStack stack = OreDicHelper.getDefaultOreDic(out);
+    	if(stack.isEmpty()) return;
+    	stack = stack.copy();
+    	stack.setCount(amount);
+    	this.addRecipe(input, time, stack);
 	}
     
 
@@ -93,6 +79,14 @@ public class ExtractorRecipes {
 		for (Entry<ItemStack, ItemStack> entry : this.recipeList.entrySet())
 		{
 			if (this.compareItemStacks(stack, (ItemStack)entry.getKey()))
+			{
+				return (ItemStack)entry.getValue();
+			}
+		}
+		
+		for (Entry<String, ItemStack> entry : this.recipeOreList.entrySet())
+		{
+			if (OreDicHelper.stackBelongsTo(entry.getKey(), stack))
 			{
 				return (ItemStack)entry.getValue();
 			}
@@ -106,6 +100,14 @@ public class ExtractorRecipes {
 		for (Entry<ItemStack, Integer> entry : this.timeList.entrySet())
 		{
 			if (this.compareItemStacks(stack, (ItemStack)entry.getKey()))
+			{
+				return (int)entry.getValue();
+			}
+		}
+		
+		for (Entry<String, Integer> entry : this.timeOreList.entrySet())
+		{
+			if (OreDicHelper.stackBelongsTo(entry.getKey(), stack))
 			{
 				return (int)entry.getValue();
 			}
@@ -133,4 +135,17 @@ public class ExtractorRecipes {
 	{
 		return this.timeList;
 	}
+	
+	public Map<String, ItemStack> getRecipeOreList()
+	{
+		return this.recipeOreList;
+	}
+	
+	public Map<String, Integer> getTimeOreList()
+	{
+		return this.timeOreList;
+	}
+	
+	
+
 }
