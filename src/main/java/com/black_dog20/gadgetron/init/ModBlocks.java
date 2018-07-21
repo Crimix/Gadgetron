@@ -194,8 +194,8 @@ public class ModBlocks {
 		
 		OreDictionary.registerOre("blockAdamantine", ModBlocks.AdamantineBlock);
 		OreDictionary.registerOre("blockCarbonox", ModBlocks.CarbonoxBlock);
-		OreDictionary.registerOre("blockTitanium", ModBlocks.TrilliumBlock);
-		OreDictionary.registerOre("blockTrillium", ModBlocks.TitaniumBlock);
+		OreDictionary.registerOre("blockTitanium", ModBlocks.TitaniumBlock);
+		OreDictionary.registerOre("blockTrillium", ModBlocks.TrilliumBlock);
 		
 		Gadgetron.logger.info("OreDictionary blocks register complete!");
 	}
