@@ -57,6 +57,12 @@ public class GuiBelt extends GuiContainer {
 	}
 	
 	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
+	}
+	
+	@Override
 	public void actionPerformed(GuiButton button)
 	{
 		switch (button.id) {
@@ -70,11 +76,6 @@ public class GuiBelt extends GuiContainer {
 		default:
 			break;
 		}
-	}
-	
-	@Override
-	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-
 	}
 	
 	private void renderItemIntoGui(List<Item> list, int slot, int currentItem, int xPos, int yPos) {
@@ -93,11 +94,11 @@ public class GuiBelt extends GuiContainer {
 		ItemStack stack = new ItemStack(list.get(currentItem));		
 
 		GlStateManager.pushMatrix();
+        RenderItem renderitem = Minecraft.getMinecraft().getRenderItem();
+        renderitem.renderItemAndEffectIntoGUI(stack, xPos, yPos);
 		GlStateManager.enableAlpha();
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderItem renderitem = Minecraft.getMinecraft().getRenderItem();
-        renderitem.renderItemAndEffectIntoGUI(stack, xPos, yPos);
         this.mc.getTextureManager().bindTexture(gui);
         GlStateManager.depthFunc(516);
         this.drawTexturedModalRect(xPos, yPos, 176, 18, 16, 16);
@@ -109,6 +110,7 @@ public class GuiBelt extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+		super.drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(gui);
 		int k = (this.width - this.xSize) / 2;
@@ -120,11 +122,6 @@ public class GuiBelt extends GuiContainer {
 		if(!GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MED)) {
 			this.drawTexturedModalRect(k + 91, l + 4, 176, 0, 18, 18);
 		}
-		
-
-		
-		
-
 		
 		if(GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MAGNET)) {
 			renderItemIntoGui(GadgetronAPI.getEquipmentList(SpecialEquipmentType.MAGNET), 27, currentItem, k + 68, l+5);

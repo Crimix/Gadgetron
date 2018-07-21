@@ -86,6 +86,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 		int l = (this.height - this.ySize) / 2;
 		
 		super.drawScreen(mouseX, mouseY, par3);
+		this.renderHoveredToolTip(mouseX, mouseY);
 		for(GuiElement e : elements) {
 			if(mouseX >= k+e.x && mouseX <= k+e.x+e.width && mouseY >= l+e.y && mouseY <= l+e.y + e.height) {
 				drawHoveringText(e.getHoverText(), mouseX, mouseY);

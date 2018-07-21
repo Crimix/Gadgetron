@@ -39,20 +39,14 @@ public class GuiBattery extends GuiContainerBase {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
         String s = I18n.format("gadgetron.container.battery");
-        int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96+4, 4210752);
         String capacity = I18n.format("%s: %s RF",I18n.format("gadgetron.container.capacity"), getFormattedInt(te.getEnergyCapacity()));
         String input = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.inputRf"), getFormattedInt(te.getEnergyStorage().getMaxReceive()));
         String output = I18n.format("%s: %s RF/t",I18n.format("gadgetron.container.outputperblock"), getFormattedInt(te.getEnergyStorage().getMaxExtract()));
-        l-=10;
-        k-=90;
-        this.fontRenderer.drawString(capacity, k, l, 4210752);
-        l+=fontRenderer.FONT_HEIGHT;
-        this.fontRenderer.drawString(input, k, l, 4210752);
-        l+=fontRenderer.FONT_HEIGHT;
-        this.fontRenderer.drawString(output, k, l, 4210752);
+        this.fontRenderer.drawString(capacity, 35, 27, 4210752);
+        this.fontRenderer.drawString(input, 35, 37, 4210752);
+        this.fontRenderer.drawString(output, 35, 47, 4210752);
 	}
 
 	@Override
