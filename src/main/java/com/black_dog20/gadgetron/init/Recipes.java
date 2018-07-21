@@ -1,5 +1,6 @@
 package com.black_dog20.gadgetron.init;
 
+import com.black_dog20.gadgetron.integration.enderio.EnderIOIntegration;
 import com.black_dog20.gadgetron.integration.mekanism.MekanismIntegration;
 import com.black_dog20.gadgetron.integration.te.ThermalExpansionIntegration;
 import com.black_dog20.gadgetron.recipehandler.ExtractorRecipes;
@@ -347,7 +348,7 @@ public class Recipes {
 		else{
 			MekanismIntegration.AddRecipeToCrusher(in, out);
 		}
-		
+		EnderIOIntegration.AddRecipeToSagmill(in, out);
 	}
 
 }

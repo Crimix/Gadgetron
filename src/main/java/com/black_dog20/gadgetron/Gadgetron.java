@@ -141,6 +141,11 @@ public class Gadgetron {
 		OreDictionary.registerOre("oreCarbonox", ModBlocks.CarbonoxOre);
 		OreDictionary.registerOre("oreTitanium", ModBlocks.TitaniumOre);
 		OreDictionary.registerOre("oreTrillium", ModBlocks.TrilliumOre);
+		
+		OreDictionary.registerOre("blockAdamantine", ModBlocks.AdamantineBlock);
+		OreDictionary.registerOre("blockCarbonox", ModBlocks.CarbonoxBlock);
+		OreDictionary.registerOre("blockTitanium", ModBlocks.TitaniumBlock);
+		OreDictionary.registerOre("blockTrillium", ModBlocks.TrilliumBlock);
 		logger.info("OreDictionary register complete!");
 	}
 }
