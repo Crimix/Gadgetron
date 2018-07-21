@@ -6,19 +6,28 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.Level;
 
 import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.utility.OreDicHelper;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class FabricatorRecipes {
 	private static final FabricatorRecipes recipes = new FabricatorRecipes();
+	
 	private final Map<Tuple<ItemStack,ItemStack>, ItemStack> recipeList = Maps.<Tuple<ItemStack,ItemStack>, ItemStack>newHashMap();
 	private final Map<Tuple<ItemStack, ItemStack>, Integer> timeList = Maps.<Tuple<ItemStack, ItemStack>, Integer>newHashMap();
+
+	
+	private final Map<Tuple<OreInput,ItemStack>, ItemStack> recipeOreList = Maps.<Tuple<OreInput,ItemStack>, ItemStack>newHashMap();
+	private final Map<Tuple<OreInput, ItemStack>, Integer> timeOreList = Maps.<Tuple<OreInput, ItemStack>, Integer>newHashMap();
+
+	
+	private final Map<Tuple<OreInput,OreInput>, ItemStack> recipeOre2List = Maps.<Tuple<OreInput,OreInput>, ItemStack>newHashMap();
+	private final Map<Tuple<OreInput, OreInput>, Integer> timeOre2List = Maps.<Tuple<OreInput, OreInput>, Integer>newHashMap();
 
 	public static FabricatorRecipes instance()
 	{
@@ -50,77 +59,76 @@ public class FabricatorRecipes {
 	}
     
 	public void addRecipe(String oreA, String oreB, int time, String out, int amount) {
-		addRecipe(oreA, 1, oreB, 1, time, out, amount);
+		this.addRecipe(oreA, 1, oreB, 1, time, out, amount);
 	}
 	
 	public void addRecipe(String oreA, String oreB, int time, ItemStack out) {
-		addRecipe(oreA,1,oreB,1,time,out);
+		this.addRecipe(oreA, 1, oreB, 1, time, out);
 	}
 	
 	public void addRecipe(String oreA, int amountA, String oreB, int amountB, int time, String out, int amount) {
-    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
-    	if (tList2.size() > 0) {
-    		ItemStack tStack2 = tList2.get(0);
-    		tStack2 = tStack2.copy();
-    		tStack2.setCount(amount);
-    		this.addRecipe(oreA, amountA, oreB, amountB, time, tStack2);
-    	}
+		ItemStack stack = OreDicHelper.getDefaultOreDic(out);
+		if(stack.isEmpty()) return;
+    	stack = stack.copy();
+    	stack.setCount(amount);
+    	this.addRecipe(oreA, amountA, oreB, amountB, time, stack);
 	}
 	
 	public void addRecipe(String oreA, int amountA, String oreB, int amountB, int time, ItemStack out) {
-    	NonNullList<ItemStack> tList = OreDictionary.getOres(oreA);
-    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(oreB);
-    		for (int i = 0; i < tList.size(); i++) {
-    			ItemStack tStack = tList.get(i);
-    			tStack = tStack.copy();
-    			tStack.setCount(amountA);
-    			tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
-    			for (int j = 0; j < tList2.size(); j++) {
-        			ItemStack tStack2 = tList2.get(j);
-        			tStack2 = tStack2.copy();
-        			tStack2.setCount(amountB);
-        			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
-        			this.addRecipe(tStack, tStack2, time, out);
-        		}
-    		}
+		if(!OreDictionary.doesOreNameExist(oreA)) return;
+		if(!OreDictionary.doesOreNameExist(oreB)) return;
+    	Tuple<OreInput, OreInput> temp = new Tuple<OreInput, OreInput>(new OreInput(oreA, amountA), new OreInput(oreB, amountB));
+    	this.recipeOre2List.put(temp, out);
+    	this.timeOre2List.put(temp, time);
 	}
 	
 	public void addRecipe(ItemStack inputA, String oreB, int amountB, int time, ItemStack out) {
-		NonNullList<ItemStack> tList2 = OreDictionary.getOres(oreB);
-		for (int j = 0; j < tList2.size(); j++) {
-			ItemStack tStack2 = tList2.get(j);
-			tStack2 = tStack2.copy();
-			tStack2.setCount(amountB);
-			tStack2.setItemDamage(OreDictionary.WILDCARD_VALUE);
-			this.addRecipe(inputA, tStack2, time, out);
-		}
+		if(!OreDictionary.doesOreNameExist(oreB)) return;
+    	Tuple<OreInput, ItemStack> temp = new Tuple<OreInput, ItemStack>(new OreInput(oreB, amountB), inputA);
+    	this.recipeOreList.put(temp, out);
+    	this.timeOreList.put(temp, time);
 	}
 	
 	public void addRecipe(String oreA, int amountA, ItemStack inputB, int time, ItemStack out) {
-		addRecipe(inputB, oreA, amountA, time, out);
+		this.addRecipe(inputB, oreA, amountA, time, out);
 	}
     
 	
 	public void addRecipe(String oreA, int amountA, ItemStack inputB, int time, String out, int amount) {
-		addRecipe(inputB, oreA, amountA, time, out, amount);
+		this.addRecipe(inputB, oreA, amountA, time, out, amount);
 	}
 	
 	public void addRecipe(ItemStack inputA, String oreB, int amountB, int time, String out, int amount) {
-    	NonNullList<ItemStack> tList2 = OreDictionary.getOres(out);
-    	if (tList2.size() > 0) {
-    		ItemStack tStack2 = tList2.get(0);
-    		tStack2 = tStack2.copy();
-    		tStack2.setCount(amount);
-    		addRecipe(inputA, oreB, amountB, time, tStack2);
-    	}
+		ItemStack stack = OreDicHelper.getDefaultOreDic(out);
+		if(stack.isEmpty()) return;
+    	stack = stack.copy();
+    	stack.setCount(amount);
+    	this.addRecipe(inputA, oreB, amountB, time, stack);
 	}
 
 	public ItemStack getResult(Tuple<ItemStack, ItemStack> stack)
 	{
+
 		for (Entry<Tuple<ItemStack, ItemStack>, ItemStack> entry : this.recipeList.entrySet())
 		{
 			if (this.compareItemStacks(stack, (Tuple<ItemStack, ItemStack>)entry.getKey()))
 			{
+				return (ItemStack)entry.getValue();
+			}
+		}
+		
+		for (Entry<Tuple<OreInput, ItemStack>, ItemStack> entry : this.recipeOreList.entrySet())
+		{
+			if (compareItemStacksOre(entry.getKey(), stack))
+			{
+				return (ItemStack)entry.getValue();
+			}
+		}
+		
+		for (Entry<Tuple<OreInput, OreInput>, ItemStack> entry : this.recipeOre2List.entrySet())
+		{
+			if (compareItemStacksOre2(entry.getKey(), stack))
+			{	
 				return (ItemStack)entry.getValue();
 			}
 		}
@@ -130,6 +138,7 @@ public class FabricatorRecipes {
 	
 	public int getTime(Tuple<ItemStack, ItemStack> stack)
 	{
+	
 		for (Entry<Tuple<ItemStack, ItemStack>, Integer> entry : this.timeList.entrySet())
 		{
 			if (this.compareItemStacks(stack, (Tuple<ItemStack, ItemStack>)entry.getKey()))
@@ -137,8 +146,52 @@ public class FabricatorRecipes {
 				return (int)entry.getValue();
 			}
 		}
+		
+		for (Entry<Tuple<OreInput, ItemStack>, Integer> entry : this.timeOreList.entrySet())
+		{
+			if (compareItemStacksOre(entry.getKey(), stack))
+			{
+				return (int)entry.getValue();
+			}
+		}
+		
+		for (Entry<Tuple<OreInput, OreInput>, Integer> entry : this.timeOre2List.entrySet())
+		{
+			if (compareItemStacksOre2(entry.getKey(), stack))
+			{
+				return (int)entry.getValue();
+			}
+		}
 
 		return 1;
+	}
+	
+	
+	private boolean compareItemStacksOre2(Tuple<OreInput, OreInput> stack1, Tuple<ItemStack, ItemStack> stack2)
+	{
+		if(OreDicHelper.stackBelongsToWithAmount(stack1.getFirst().getInput(), stack1.getFirst().getAmount(), stack2.getFirst()))			
+			if(OreDicHelper.stackBelongsToWithAmount(stack1.getSecond().getInput(), stack1.getSecond().getAmount(), stack2.getSecond()))			
+				return true;
+		if(OreDicHelper.stackBelongsToWithAmount(stack1.getFirst().getInput(), stack1.getFirst().getAmount(), stack2.getSecond()))		
+			if(OreDicHelper.stackBelongsToWithAmount(stack1.getSecond().getInput(), stack1.getSecond().getAmount(), stack2.getFirst()))			
+				return true;
+		
+		return false;
+				
+	}
+	
+	
+	private boolean compareItemStacksOre(Tuple<OreInput, ItemStack> stack1, Tuple<ItemStack, ItemStack> stack2)
+	{
+		if(OreDicHelper.stackBelongsToWithAmount(stack1.getFirst().getInput(), stack1.getFirst().getAmount(), stack2.getFirst()))			
+			if(compareItemStacks(stack1.getSecond(), stack2.getSecond()))
+				return true;
+		if(OreDicHelper.stackBelongsToWithAmount(stack1.getFirst().getInput(), stack1.getFirst().getAmount(), stack2.getSecond()))			
+			if(compareItemStacks(stack1.getSecond(), stack2.getFirst()))
+				return true;
+		
+		return false;
+				
 	}
 
 	private boolean compareItemStacks(Tuple<ItemStack, ItemStack> stack1, Tuple<ItemStack, ItemStack> stack2)
@@ -169,5 +222,25 @@ public class FabricatorRecipes {
 	public Map<Tuple<ItemStack, ItemStack>, Integer> getTimeList()
 	{
 		return this.timeList;
+	}
+	
+	public Map<Tuple<OreInput, ItemStack>, ItemStack> getRecipeOreList()
+	{
+		return this.recipeOreList;
+	}
+	
+	public Map<Tuple<OreInput, ItemStack>, Integer> getTimeOreList()
+	{
+		return this.timeOreList;
+	}
+	
+	public Map<Tuple<OreInput, OreInput>, ItemStack> getRecipeOre2List()
+	{
+		return this.recipeOre2List;
+	}
+	
+	public Map<Tuple<OreInput, OreInput>, Integer> getTimeOre2List()
+	{
+		return this.timeOre2List;
 	}
 }

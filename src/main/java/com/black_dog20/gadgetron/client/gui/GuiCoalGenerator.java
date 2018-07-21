@@ -35,6 +35,15 @@ public class GuiCoalGenerator extends GuiContainerBase {
 
 	
 	@Override
+	public void initGui()
+	{
+		super.initGui();
+		if(this.recipeButton != null)
+			this.recipeButton.visible = false;
+	}
+	
+	
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
 		power.updateDynamicList(getPowerTipList());
 		String t = te.getRemainingTime();
@@ -55,7 +64,6 @@ public class GuiCoalGenerator extends GuiContainerBase {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-		super.drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(gui);
 		int k = (this.width - this.xSize) / 2;

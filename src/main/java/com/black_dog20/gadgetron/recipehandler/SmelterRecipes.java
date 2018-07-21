@@ -6,12 +6,12 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.Level;
 
 import com.black_dog20.gadgetron.Gadgetron;
+import com.black_dog20.gadgetron.utility.OreDicHelper;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -20,6 +20,8 @@ public class SmelterRecipes {
 	private static final SmelterRecipes recipes = new SmelterRecipes();
 	private final Map<ItemStack, FluidStack> recipeList = Maps.<ItemStack, FluidStack>newHashMap();
 	private final Map<ItemStack, Integer> smeltingTime = Maps.<ItemStack, Integer>newHashMap();
+	private final Map<String, FluidStack> recipeOreList = Maps.<String, FluidStack>newHashMap();
+	private final Map<String, Integer> smeltingOreTime = Maps.<String, Integer>newHashMap();
 
 	public static SmelterRecipes instance()
 	{
@@ -51,17 +53,13 @@ public class SmelterRecipes {
 	}
 	
 	public void addRecipe(String ore, int time, FluidStack out) {
-    	NonNullList<ItemStack> tList = OreDictionary.getOres(ore);
-    	for (int i = 0; i < tList.size(); i++) {
-    	    ItemStack tStack = tList.get(i);
-    	    tStack = tStack.copy();
-    	    tStack.setCount(1);
-    	    tStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
-    	    this.addRecipe(tStack, time, out);
-    	}
+		if(!OreDictionary.doesOreNameExist(ore)) return;
+		this.recipeOreList.put(ore, out);
+		this.smeltingOreTime.put(ore, time);
     }
 	
 	public void addRecipe(String ore, int time, String out, int mb) {
+		if(!OreDictionary.doesOreNameExist(ore)) return;
 		if(FluidRegistry.isFluidRegistered(out)) {
 			this.addRecipe(ore, time, new FluidStack(FluidRegistry.getFluid(out), mb));
 		}
@@ -82,6 +80,14 @@ public class SmelterRecipes {
 				return (FluidStack)entry.getValue();
 			}
 		}
+		
+		for (Entry<String, FluidStack> entry : this.recipeOreList.entrySet())
+		{
+			if (OreDicHelper.stackBelongsTo(entry.getKey(), stack))
+			{
+				return (FluidStack)entry.getValue();
+			}
+		}
 
 		return null;
 	}
@@ -95,8 +101,16 @@ public class SmelterRecipes {
 				return (int)entry.getValue();
 			}
 		}
+		
+		for (Entry<String, Integer> entry : this.smeltingOreTime.entrySet())
+		{
+			if (OreDicHelper.stackBelongsTo(entry.getKey(), stack))
+			{
+				return (int)entry.getValue();
+			}
+		}
 
-		return 0;
+		return 1;
 	}
 
 
@@ -113,5 +127,15 @@ public class SmelterRecipes {
 	public Map<ItemStack, Integer> getSmeltingTimeList()
 	{
 		return this.smeltingTime;
+	}
+	
+	public Map<String, FluidStack> getRecipeOreList()
+	{
+		return this.recipeOreList;
+	}
+	
+	public Map<String, Integer> getSmeltingOreTimeList()
+	{
+		return this.smeltingOreTime;
 	}
 }
