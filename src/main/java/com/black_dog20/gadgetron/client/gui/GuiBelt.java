@@ -123,11 +123,6 @@ public class GuiBelt extends GuiContainer {
 			this.drawTexturedModalRect(k + 91, l + 4, 176, 0, 18, 18);
 		}
 		
-
-		
-		
-
-		
 		if(GadgetronAPI.doesEquipmentListContainType(SpecialEquipmentType.MAGNET)) {
 			renderItemIntoGui(GadgetronAPI.getEquipmentList(SpecialEquipmentType.MAGNET), 27, currentItem, k + 68, l+5);
 		}
