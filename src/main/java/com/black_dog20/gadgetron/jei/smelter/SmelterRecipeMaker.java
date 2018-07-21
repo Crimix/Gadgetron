@@ -10,6 +10,7 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public final class SmelterRecipeMaker {
 
@@ -20,6 +21,7 @@ public final class SmelterRecipeMaker {
 		IStackHelper stackHelper = helpers.getStackHelper();
 		SmelterRecipes smelter = SmelterRecipes.instance();
 		Map<ItemStack, FluidStack> map = smelter.getRecipeList();
+		Map<String, FluidStack> mapOre = smelter.getRecipeOreList();
 
 		List<SmelterRecipeWrapper> recipes = new ArrayList<>();
 
@@ -30,6 +32,16 @@ public final class SmelterRecipeMaker {
 			List<ItemStack> inputs = stackHelper.getSubtypes(input);
 			SmelterRecipeWrapper recipe = new SmelterRecipeWrapper(inputs, output);
 			recipes.add(recipe);
+		}
+		
+		for (Map.Entry<String, FluidStack> entry : mapOre.entrySet()) {
+			FluidStack output = entry.getValue();
+
+			List<ItemStack> inputs = OreDictionary.getOres(entry.getKey(), true);
+			if(!inputs.isEmpty()) {
+				SmelterRecipeWrapper recipe = new SmelterRecipeWrapper(inputs, output);
+				recipes.add(recipe);
+			}
 		}
 
 		return recipes;
