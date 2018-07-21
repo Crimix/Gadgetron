@@ -35,6 +35,15 @@ public class GuiCoalGenerator extends GuiContainerBase {
 
 	
 	@Override
+	public void initGui()
+	{
+		super.initGui();
+		if(this.recipeButton != null)
+			this.recipeButton.visible = false;
+	}
+	
+	
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
 		power.updateDynamicList(getPowerTipList());
 		String t = te.getRemainingTime();

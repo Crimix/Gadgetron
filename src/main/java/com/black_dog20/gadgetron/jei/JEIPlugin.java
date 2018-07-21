@@ -3,6 +3,11 @@ package com.black_dog20.gadgetron.jei;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.black_dog20.gadgetron.client.gui.GuiEnergyGenerator;
+import com.black_dog20.gadgetron.client.gui.GuiExtractor;
+import com.black_dog20.gadgetron.client.gui.GuiFabricator;
+import com.black_dog20.gadgetron.client.gui.GuiProcessor;
+import com.black_dog20.gadgetron.client.gui.GuiSmelter;
 import com.black_dog20.gadgetron.config.ModConfig;
 import com.black_dog20.gadgetron.init.ModBlocks;
 import com.black_dog20.gadgetron.init.ModItems;
@@ -89,31 +94,31 @@ public class JEIPlugin extends BlankModPlugin{
 		jeiHelper = registry.getJeiHelpers();
 		
 		registry.addRecipes(ExtractorRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.EXTRACTOR);
-		//registry.addRecipeClickArea(GuiExtractor.class, 78, 32, 28, 23, RecipeCategoryUid.EXTRACTOR);
+		registry.addRecipeClickArea(GuiExtractor.class, 150, 22, 20, 20, RecipeCategoryUid.EXTRACTOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Extractor_T1), RecipeCategoryUid.EXTRACTOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Extractor_T2), RecipeCategoryUid.EXTRACTOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Extractor_T3), RecipeCategoryUid.EXTRACTOR);
 		
 		registry.addRecipes(ProcessorRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.PROCESSOR);
-		//registry.addRecipeClickArea(GuiProcessor.class, 78, 32, 28, 23, RecipeCategoryUid.PROCESSOR);
+		registry.addRecipeClickArea(GuiProcessor.class, 150, 22, 20, 20, RecipeCategoryUid.PROCESSOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T1), RecipeCategoryUid.PROCESSOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T2), RecipeCategoryUid.PROCESSOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Processor_T2), RecipeCategoryUid.PROCESSOR);
 		
 		registry.addRecipes(SmelterRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.SMELTER);
-		//registry.addRecipeClickArea(GuiSmelter.class, 68, 34, 28, 23, RecipeCategoryUid.SMELTER);
+		registry.addRecipeClickArea(GuiSmelter.class, 150, 22, 20, 20, RecipeCategoryUid.SMELTER);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Smelter_T1), RecipeCategoryUid.SMELTER);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Smelter_T2), RecipeCategoryUid.SMELTER);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Smelter_T3), RecipeCategoryUid.SMELTER);
 		
 		registry.addRecipes(FuelGeneratorRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.FUEL_GENERATOR);
-		//registry.addRecipeClickArea(GuiEnergyGenerator.class, 79, 34, 15, 15, RecipeCategoryUid.FUEL_GENERATOR);
+		registry.addRecipeClickArea(GuiEnergyGenerator.class, 150, 22, 20, 20, RecipeCategoryUid.FUEL_GENERATOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Generator_T1), RecipeCategoryUid.FUEL_GENERATOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Generator_T2), RecipeCategoryUid.FUEL_GENERATOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Generator_T3), RecipeCategoryUid.FUEL_GENERATOR);
 		
 		registry.addRecipes(FabricatorRecipeMaker.getRecipes(jeiHelper), RecipeCategoryUid.FABRICATOR);
-		//registry.addRecipeClickArea(GuiFabricator.class, 86, 34, 34, 17, RecipeCategoryUid.FABRICATOR);
+		registry.addRecipeClickArea(GuiFabricator.class, 150, 22, 20, 20, RecipeCategoryUid.FABRICATOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Fabricator_T1), RecipeCategoryUid.FABRICATOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Fabricator_T2), RecipeCategoryUid.FABRICATOR);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.Fabricator_T3), RecipeCategoryUid.FABRICATOR);

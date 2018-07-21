@@ -1,13 +1,5 @@
 package com.black_dog20.gadgetron.utility;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import mezz.jei.util.Log;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
@@ -31,10 +23,16 @@ public class OreDicHelper {
 	}
 	
 	public static boolean stackBelongsTo(String ore, ItemStack stack) {
-		return stackBelongsTo(ore, 1, stack);
+		int[] ids = OreDictionary.getOreIDs(stack);
+		for(int id : ids) {
+			if(OreDictionary.getOreName(id).equals(ore)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
-	public static boolean stackBelongsTo(String ore, int amount, ItemStack stack) {
+	public static boolean stackBelongsToWithAmount(String ore, int amount, ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for(int id : ids) {
 			if(OreDictionary.getOreName(id).equals(ore) && amount == stack.getCount()) {

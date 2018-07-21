@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.black_dog20.gadgetron.jei.processor.ProcessorRecipeWrapper;
 import com.black_dog20.gadgetron.recipehandler.SmelterRecipes;
 
 import mezz.jei.api.IJeiHelpers;

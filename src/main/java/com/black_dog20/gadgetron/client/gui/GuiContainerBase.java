@@ -7,6 +7,7 @@ import com.black_dog20.gadgetron.Gadgetron;
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomButton;
 import com.black_dog20.gadgetron.client.gui.utils.GuiCustomCheckBox;
 import com.black_dog20.gadgetron.client.gui.utils.GuiElement;
+import com.black_dog20.gadgetron.client.gui.utils.GuiItemIconButton;
 import com.black_dog20.gadgetron.network.PacketHandler;
 import com.black_dog20.gadgetron.network.message.MessageOpenGuiOnServer;
 import com.black_dog20.gadgetron.tile.base.TileEntityBase;
@@ -17,9 +18,11 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,6 +33,7 @@ public abstract class GuiContainerBase extends GuiContainer{
 	protected final int xSizeOfTexture = 192 , ySizeOfTexture = 135;
 	protected TileEntityBase tile;
 	protected boolean overrideTile = false;
+	protected GuiItemIconButton recipeButton;
 	
 	public GuiContainerBase(Container inventorySlotsIn, TileEntityBase tile, EntityPlayer player) {
 		super(inventorySlotsIn);
@@ -52,6 +56,11 @@ public abstract class GuiContainerBase extends GuiContainer{
 			int z = tile.getPos().getZ();
 			this.buttonList.add(new GuiCustomButton(0, "I/O", k+160, l-10, 20, 0.80, ()-> PacketHandler.network.sendToServer(new MessageOpenGuiOnServer(Gadgetron.guiIOConfig,x,y,z)), I18n.format("gadgetron.container.io")));
 			
+			if(Loader.isModLoaded("jei")) {
+				recipeButton = new GuiItemIconButton(0, Items.PAPER, k+160, l+10, 0.80, I18n.format("gadgetron.container.recipes"));
+				this.buttonList.add(recipeButton);
+			}
+
 		}
 		
 	}
