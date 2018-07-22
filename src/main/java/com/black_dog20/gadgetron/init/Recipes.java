@@ -19,6 +19,7 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class Recipes {
@@ -44,7 +45,7 @@ public class Recipes {
 		RegisterIntegrationRecipes(new ItemStack(ModItems.TrilliumIngot), new ItemStack(ModItems.TrilliumDust));
 		
 
-		//generateJSON();
+		generateJSON();
 		
 		RegisterSmelterRecipes();
 		RegisterExtractorRecipes();
@@ -57,7 +58,7 @@ public class Recipes {
 		Boolean devEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 		if(!devEnv) return;
 		
-		RecipeToJSON toJson = new RecipeToJSON(Reference.MOD_NAME, true);
+		RecipeToJSON toJson = new RecipeToJSON(Reference.MOD_ID, true);
 	
 		toJson.addShapedRecipe(ModItems.RaritaniumRod, new Object[]{"c","c", 'c', "crystalRaritanium"});
 		toJson.addShapedRecipe(ModItems.RaritaniumAxe, new Object[]{"ii ","is "," s ", 'i', "crystalRaritanium", 's', ModItems.RaritaniumRod});
@@ -89,7 +90,7 @@ public class Recipes {
 		
 		toJson.addShapedRecipe(ModBlocks.Machine_block, new Object[]{"ccc","csc","tft", 'c', "plateCarbonox", 's', "shardRaritanium", 't', "plateTitanium", 'f', Blocks.FURNACE});
 		toJson.addShapedRecipe(ModItems.RaritaniumHammer, new Object[]{" ii"," si","s  ", 'i', "crystalRaritanium", 's', "stickWood"});
-		toJson.addShapelessRecipe(ModItems.RaritaniumShard, "crystalRaritanium", ModItems.RaritaniumHammer);
+		toJson.addShapelessRecipe(ModItems.RaritaniumShard, "crystalRaritanium", new ItemStack(ModItems.RaritaniumHammer,1, OreDictionary.WILDCARD_VALUE));
 		toJson.addShapelessRecipe(ModItems.blackLeather, Items.LEATHER, new ItemStack(Items.DYE, 1, EnumDyeColor.BLACK.getDyeDamage()), "ingotTitanium" );
 		toJson.addShapedRecipe(new ItemStack(ModItems.blackLeather, 6), new Object[] { "ltl", "ldl", "ltl", 'l', Items.LEATHER , 'd', new ItemStack(Items.DYE, 1, EnumDyeColor.BLACK.getDyeDamage()), 't', "ingotTitanium" });
 		toJson.addShapedRecipe(ModItems.belt, new Object[] { "lll", "tct", "lll", 'c', "plateCarbonox", 't', "ingotTitanium", 'l', ModItems.blackLeather });
@@ -103,10 +104,10 @@ public class Recipes {
 		toJson.addShapelessRecipe(new ItemStack(ModItems.TitaniumIngot, 9), ModBlocks.TitaniumBlock);
 		toJson.addShapedRecipe(ModBlocks.TrilliumBlock, new Object[]{"iii","iii","iii", 'i', "ingotTrillium"});
 		toJson.addShapelessRecipe(new ItemStack(ModItems.TrilliumIngot, 9), ModBlocks.TrilliumBlock);
-		toJson.addShapelessRecipe(ModItems.AdamantinePlate, ModItems.AdamantineIngot, ModItems.RaritaniumHammer);
-		toJson.addShapelessRecipe(ModItems.CarbonoxPlate, ModItems.CarbonoxIngot, ModItems.RaritaniumHammer);
-		toJson.addShapelessRecipe(ModItems.TitaniumPlate, ModItems.TitaniumIngot, ModItems.RaritaniumHammer);
-		toJson.addShapelessRecipe(ModItems.TrilliumPlate, ModItems.TrilliumIngot, ModItems.RaritaniumHammer);
+		toJson.addShapelessRecipe(ModItems.AdamantinePlate, ModItems.AdamantineIngot, new ItemStack(ModItems.RaritaniumHammer,1, OreDictionary.WILDCARD_VALUE));
+		toJson.addShapelessRecipe(ModItems.CarbonoxPlate, ModItems.CarbonoxIngot, new ItemStack(ModItems.RaritaniumHammer,1, OreDictionary.WILDCARD_VALUE));
+		toJson.addShapelessRecipe(ModItems.TitaniumPlate, ModItems.TitaniumIngot, new ItemStack(ModItems.RaritaniumHammer,1, OreDictionary.WILDCARD_VALUE));
+		toJson.addShapelessRecipe(ModItems.TrilliumPlate, ModItems.TrilliumIngot, new ItemStack(ModItems.RaritaniumHammer,1, OreDictionary.WILDCARD_VALUE));
 		
 		toJson.addShapedRecipe(ModBlocks.CoalGenerator_T1, new Object[]{"ici","imi","tft", 'i', "plateCarbonox", 'c', Blocks.COAL_BLOCK, 't',"plateTitanium" , 'f', Items.FLINT_AND_STEEL, 'm' , ModBlocks.Machine_block });
 		toJson.addShapedRecipe(ModBlocks.CoalGenerator_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.CoalGenerator_T1});

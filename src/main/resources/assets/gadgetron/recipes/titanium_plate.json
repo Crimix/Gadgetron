@@ -5,7 +5,8 @@
       "item": "gadgetron:titaniumingot"
     },
     {
-      "item": "gadgetron:raritanium_hammer"
+      "item": "gadgetron:raritanium_hammer",
+      "data": 32767
     }
   ],
   "result": {
