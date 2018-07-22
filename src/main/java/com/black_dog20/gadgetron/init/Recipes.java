@@ -45,7 +45,7 @@ public class Recipes {
 		RegisterIntegrationRecipes(new ItemStack(ModItems.TrilliumIngot), new ItemStack(ModItems.TrilliumDust));
 		
 
-		generateJSON();
+		//generateJSON();
 		
 		RegisterSmelterRecipes();
 		RegisterExtractorRecipes();
