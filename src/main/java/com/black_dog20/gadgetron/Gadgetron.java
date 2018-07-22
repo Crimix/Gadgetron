@@ -134,8 +134,8 @@ public class Gadgetron {
 		
 		OreDictionary.registerOre("crystalRaritanium", ModBlocks.RaritaniumCrystal);
 		OreDictionary.registerOre("shardRaritanium", ModItems.RaritaniumShard);
-		OreDictionary.registerOre("silicon", ModItems.Silicon);
-		OreDictionary.registerOre("reinforcedLeather", ModItems.blackLeather);
+		OreDictionary.registerOre("itemSilicon", ModItems.Silicon);
+		OreDictionary.registerOre("leatherReinforced", ModItems.blackLeather);
 		
 		OreDictionary.registerOre("oreAdamantine", ModBlocks.AdamantineOre);
 		OreDictionary.registerOre("oreCarbonox", ModBlocks.CarbonoxOre);

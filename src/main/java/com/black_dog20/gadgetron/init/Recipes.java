@@ -320,7 +320,7 @@ public class Recipes {
 		FabricatorRecipes.instance().addRecipe("plateCarbonox",5 , new ItemStack(ModBlocks.RaritaniumCrystal,2), 400, new ItemStack(ModItems.RaritaniumEnhancedPlate));
 		FabricatorRecipes.instance().add(ModItems.RedGlowstoneDust, ModItems.AdamantineIngot, 400, new ItemStack(ModItems.ConductingIngot));
 		FabricatorRecipes.instance().addRecipe("ingotCopper", "ingotTin", 400, "ingotBronze",1);
-		FabricatorRecipes.instance().add(ModItems.Silicon, ModItems.ConductingWire, 400, new ItemStack(ModItems.Circuit));
+		FabricatorRecipes.instance().addRecipe("itemSilicon", "wireConductingMetal", 400, new ItemStack(ModItems.Circuit));
 		FabricatorRecipes.instance().addRecipe("ingotNickel", 1, "ingotIron", 2, 400, "ingotInvar",3);
 		FabricatorRecipes.instance().addRecipe("ingotNickel", 1, "ingotCopper", 1, 400, "ingotConstantan",2);
 		FabricatorRecipes.instance().addRecipe("ingotIron", 1, "dustCoal", 2, 400, "ingotSteel",1);
