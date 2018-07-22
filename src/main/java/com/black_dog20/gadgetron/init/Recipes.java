@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -72,7 +73,7 @@ public class Recipes {
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.Machine_block, new Object[]{"ccc","csc","tft", 'c', "plateCarbonox", 's', "shardRaritanium", 't', "plateTitanium", 'f', Blocks.FURNACE}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.RaritaniumHammer, new Object[]{" ii"," si","s  ", 'i', "crystalRaritanium", 's', "stickWood"}));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.RaritaniumShard, "crystalRaritanium", ModItems.RaritaniumHammer));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.RaritaniumShard, "crystalRaritanium", new ItemStack(ModItems.RaritaniumHammer, 1, OreDictionary.WILDCARD_VALUE)));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.blackLeather, Items.LEATHER, new ItemStack(Items.DYE, 1, EnumDyeColor.BLACK.getDyeDamage()), "ingotTitanium" ));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.blackLeather, 6), new Object[] { "ltl", "ldl", "ltl", 'l', Items.LEATHER , 'd', new ItemStack(Items.DYE, 1, EnumDyeColor.BLACK.getDyeDamage()), 't', "ingotTitanium" }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.belt, new Object[] { "lll", "tct", "lll", 'c', "plateCarbonox", 't', "ingotTitanium", 'l', ModItems.blackLeather }));
@@ -86,10 +87,10 @@ public class Recipes {
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.TitaniumIngot, 9), ModBlocks.TitaniumBlock));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.TrilliumBlock, new Object[]{"iii","iii","iii", 'i', "ingotTrillium"}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.TrilliumIngot, 9), ModBlocks.TrilliumBlock));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.AdamantinePlate, ModItems.AdamantineIngot, ModItems.RaritaniumHammer));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.CarbonoxPlate, ModItems.CarbonoxIngot, ModItems.RaritaniumHammer));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.TitaniumPlate, ModItems.TitaniumIngot, ModItems.RaritaniumHammer));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.TrilliumPlate, ModItems.TrilliumIngot, ModItems.RaritaniumHammer));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.AdamantinePlate,  ModItems.AdamantineIngot, new ItemStack(ModItems.RaritaniumHammer, 1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.CarbonoxPlate, ModItems.CarbonoxIngot, new ItemStack(ModItems.RaritaniumHammer, 1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.TitaniumPlate, ModItems.TitaniumIngot, new ItemStack(ModItems.RaritaniumHammer, 1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(ModItems.TrilliumPlate, ModItems.TrilliumIngot, new ItemStack(ModItems.RaritaniumHammer, 1, OreDictionary.WILDCARD_VALUE)));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.CoalGenerator_T1, new Object[]{"ici","imi","tft", 'i', "plateCarbonox", 'c', Blocks.COAL_BLOCK, 't',"plateTitanium" , 'f', Items.FLINT_AND_STEEL, 'm' , ModBlocks.Machine_block }));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.CoalGenerator_T2, new Object[]{"ici","tmt","ifi", 'i', "plateAdamantine", 'c', ModItems.Circuit, 't',"plateCarbonox" , 'f', "ingotConductingMetal", 'm' , ModBlocks.CoalGenerator_T1}));
