@@ -340,7 +340,7 @@ public class Recipes {
 		FabricatorRecipes.instance().addRecipe("ingotBronze", 4, "dustRedstone", 10, 400, "ingotSignalum",4);
 		FabricatorRecipes.instance().addRecipe("ingotGold", 1, "dustRedstoneGlowstoneMix", 1, 400, "ingotEnergeticAlloy",1);
 		FabricatorRecipes.instance().addRecipe(new ItemStack(Items.ENDER_PEARL), "ingotEnergeticAlloy", 1, 400, "ingotVibrantAlloy",1);
-		FabricatorRecipes.instance().addRecipe("dustRedstone", 1, "silicon", 1, 400, "ingotRedstoneAlloy",1);
+		FabricatorRecipes.instance().addRecipe("dustRedstone", 1, "itemSilicon", 1, 400, "ingotRedstoneAlloy",1);
 		FabricatorRecipes.instance().addRecipe("dustRedstone", 1, "ingotIron", 1, 400, "ingotConductiveIron",1);
 		FabricatorRecipes.instance().addRecipe(new ItemStack(Items.ENDER_PEARL), "ingotIron", 1, 400, "ingotPulsatingIron",1);
 		FabricatorRecipes.instance().addRecipe("soulSand", 1, "ingotGold", 1, 400, "ingotSoularium",1);
