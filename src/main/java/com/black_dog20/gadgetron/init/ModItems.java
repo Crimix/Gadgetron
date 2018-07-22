@@ -177,8 +177,8 @@ public class ModItems {
 		OreDictionary.registerOre("plateTrillium", ModItems.TrilliumPlate);
 		
 		OreDictionary.registerOre("shardRaritanium", ModItems.RaritaniumShard);
-		OreDictionary.registerOre("silicon", ModItems.Silicon);
-		OreDictionary.registerOre("reinforcedLeather", ModItems.blackLeather);
+		OreDictionary.registerOre("itemSilicon", ModItems.Silicon);
+		OreDictionary.registerOre("leatherReinforced", ModItems.blackLeather);
 		
 		Gadgetron.logger.info("OreDictionary items register complete!");
 	}
