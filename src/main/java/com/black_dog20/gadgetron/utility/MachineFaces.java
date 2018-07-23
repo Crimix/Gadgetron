@@ -155,6 +155,8 @@ public class MachineFaces {
 		tag.setBoolean("autoOutput", autoOutput);
 		tag.setBoolean("canAutoInput", canAutoInput);
 		tag.setBoolean("canAutoOutput", canAutoOutput);
+		tag.setBoolean("hasInput", hasInput);
+		tag.setBoolean("hasOutput", hasOutput);
 		for(Face f : faces)
 			f.writeToNBT(tag);
 		
@@ -169,6 +171,8 @@ public class MachineFaces {
 		autoOutput = tag.getBoolean("autoOutput");
 		canAutoInput = tag.getBoolean("canAutoInput");
 		canAutoOutput = tag.getBoolean("canAutoOutput");
+		hasInput = tag.getBoolean("hasInput");
+		hasOutput = tag.getBoolean("hasOutput");
 		for(Face f : faces)
 			f.readFromNBT(tag);
 	}

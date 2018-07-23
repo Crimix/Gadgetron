@@ -34,7 +34,7 @@ public class ModConfig {
 	public static class Worldgen {
 	
 		@Config.LangKey("gadgetron.config.worldgen.raritanium")
-		public OreGenConfig raritanium = new OreGenConfig(true, 5, 3, 1, 20);
+		public OreGenConfig raritanium = new OreGenConfig(true, 6, 3, 1, 15);
 		
 		@Config.LangKey("gadgetron.config.worldgen.adamantine")
 		public OreGenConfig adamantine = new OreGenConfig(true, 5, 4, 1, 60);
@@ -96,37 +96,37 @@ public class ModConfig {
 		public EnergyFluidGeneratorMachineConfig smelter_t1 = new EnergyFluidGeneratorMachineConfig(60, 100000, 1, 10000);
 		
 		@Config.LangKey("gadgetron.config.machines.smelter_t2")
-		public EnergyFluidGeneratorMachineConfig smelter_t2 = new EnergyFluidGeneratorMachineConfig(90, 200000, 0.6, 20000);
+		public EnergyFluidGeneratorMachineConfig smelter_t2 = new EnergyFluidGeneratorMachineConfig(90, 200000, 0.4, 20000);
 		
 		@Config.LangKey("gadgetron.config.machines.smelter_t3")
-		public EnergyFluidGeneratorMachineConfig smelter_t3 = new EnergyFluidGeneratorMachineConfig(100, 300000, 0.4, 40000);
+		public EnergyFluidGeneratorMachineConfig smelter_t3 = new EnergyFluidGeneratorMachineConfig(100, 300000, 0.2, 40000);
 		
 		@Config.LangKey("gadgetron.config.machines.fabricator_t1")
 		public EnergyMachineConfig fabricator_t1 = new EnergyMachineConfig(60, 100000, 1);
 		
 		@Config.LangKey("gadgetron.config.machines.fabricator_t2")
-		public EnergyMachineConfig fabricator_t2 = new EnergyMachineConfig(90, 200000, 0.6);
+		public EnergyMachineConfig fabricator_t2 = new EnergyMachineConfig(90, 200000, 0.4);
 		
 		@Config.LangKey("gadgetron.config.machines.fabricator_t3")
-		public EnergyMachineConfig fabricator_t3 = new EnergyMachineConfig(100, 300000, 0.4);
+		public EnergyMachineConfig fabricator_t3 = new EnergyMachineConfig(100, 300000, 0.2);
 		
 		@Config.LangKey("gadgetron.config.machines.extractor_t1")
 		public EnergyMachineConfig extractor_t1 = new EnergyMachineConfig(60, 100000, 1);
 		
 		@Config.LangKey("gadgetron.config.machines.extractor_t2")
-		public EnergyMachineConfig extractor_t2 = new EnergyMachineConfig(90, 200000, 0.6);
+		public EnergyMachineConfig extractor_t2 = new EnergyMachineConfig(90, 200000, 0.4);
 		
 		@Config.LangKey("gadgetron.config.machines.extractor_t3")
-		public EnergyMachineConfig extractor_t3 = new EnergyMachineConfig(100, 300000, 0.4);
+		public EnergyMachineConfig extractor_t3 = new EnergyMachineConfig(100, 300000, 0.2);
 		
 		@Config.LangKey("gadgetron.config.machines.processor_t1")
 		public EnergyMachineConfig processor_t1 = new EnergyMachineConfig(60, 100000, 1);
 		
 		@Config.LangKey("gadgetron.config.machines.processor_t2")
-		public EnergyMachineConfig processor_t2 = new EnergyMachineConfig(90, 200000, 0.6);
+		public EnergyMachineConfig processor_t2 = new EnergyMachineConfig(90, 200000, 0.4);
 		
 		@Config.LangKey("gadgetron.config.machines.processor_t3")
-		public EnergyMachineConfig processor_t3 = new EnergyMachineConfig(100, 300000, 0.4);
+		public EnergyMachineConfig processor_t3 = new EnergyMachineConfig(100, 300000, 0.2);
 	
 	}
 	

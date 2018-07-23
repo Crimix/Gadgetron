@@ -3,6 +3,7 @@ package com.black_dog20.gadgetron.container.slot;
 import com.black_dog20.gadgetron.storage.CustomFluidTank;
 import com.black_dog20.gadgetron.storage.CustomItemHandler;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -33,6 +34,8 @@ public class BucketSlot extends CustomSlotItemHandler {
 		if(handler != null && f != null)
 			return tank.canFillFluidType(f) && tank.hasSpacefor(f);
 		else if(handler != null && f != null && f.amount == 0)
+			return true;
+		else if (stack.getItem() == Items.BUCKET)
 			return true;
 		else
 			return false;
