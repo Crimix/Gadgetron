@@ -91,6 +91,8 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
         inventoryFaces.readFromNBT(nbt);
         burnTime = nbt.getInteger("burnTime");
         timeToBurn = nbt.getInteger("currentUsedTime");
+        if(timeToBurn == 0)
+        	timeToBurn = 1;
     }
     
     public ItemStackHandler getInventory() {
@@ -115,6 +117,8 @@ public abstract class TileEntityEnergyInventoryBase extends TileEntityEnergyBase
 	        inventoryFaces.readFromNBT(nbt);
 	        burnTime = nbt.getInteger("burnTime");
 	        timeToBurn = nbt.getInteger("currentUsedTime");
+	        if(timeToBurn == 0)
+	        	timeToBurn = 1;
 	        super.readFromCustomInfoNBT(nbt);
 		}
 	}
