@@ -1,5 +1,7 @@
 package com.black_dog20.gadgetron.container;
 
+import javax.annotation.Nonnull;
+
 import com.black_dog20.gadgetron.container.slot.BucketSlot;
 import com.black_dog20.gadgetron.container.slot.CustomSlotItemHandler;
 import com.black_dog20.gadgetron.storage.CustomFluidTank;
@@ -8,6 +10,7 @@ import com.black_dog20.gadgetron.tile.TileEntitySmelter;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -24,8 +27,16 @@ public class ContainerSmelter extends Container{
 	public ContainerSmelter(InventoryPlayer playerInventory, TileEntitySmelter tile){
 		
 		
-		input = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 0, 42, 34);
-		bucketoutput = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 2, 106, 53)
+		input = new CustomSlotItemHandler((CustomItemHandler) tile.getInventory(), 0, 42, 34) {
+			@Override
+		    public boolean isItemValid(@Nonnull ItemStack stack)
+		    {
+				if(stack.getItem() == Items.BUCKET)
+					return false;
+				return super.isItemValid(stack);
+		    }
+		};
+		bucketoutput = new BucketSlot(false, (CustomItemHandler) tile.getInventory(), 2, 106, 53, (CustomFluidTank) tile.getTank())
 		{
 			@Override
 			public void onSlotChanged() {

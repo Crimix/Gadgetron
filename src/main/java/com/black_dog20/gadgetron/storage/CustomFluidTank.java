@@ -2,6 +2,7 @@ package com.black_dog20.gadgetron.storage;
 
 import java.util.function.Function;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -18,6 +19,18 @@ public class CustomFluidTank extends FluidTank{
 	public CustomFluidTank(int capacity) {
 		super(capacity);
 	}
+	
+    public FluidTank readFromNBT(NBTTagCompound nbt)
+    {
+    	this.setCapacity(nbt.getInteger("fluidCap"));
+    	return super.readFromNBT(nbt);
+    }
+    
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+    {
+    	nbt.setInteger("fluidCap", getCapacity());
+    	return super.writeToNBT(nbt);
+    }
 	
 	@Override
     public boolean canFillFluidType(FluidStack fluid)

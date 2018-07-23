@@ -24,6 +24,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	}
 	
 	public TileEntityEnergyBase() {
+		super();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,6 +51,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 		this.energyContainer.readFromNBT(nbt);
 		on = nbt.getBoolean("on");
 		energyPerTick = nbt.getInteger("energyPerTick");
+		speed = nbt.getDouble("speed");
 		super.readFromNBT(nbt);
 	}
 
@@ -58,6 +60,7 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 		this.energyContainer.writeToNBT(nbt);
 		nbt.setBoolean("on",on);
 		nbt.setInteger("energyPerTick", energyPerTick);
+		nbt.setDouble("speed", speed);
 		return super.writeToNBT(nbt);
 	}
 	
@@ -91,7 +94,8 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 		if(nbt == null)
 			nbt = new NBTTagCompound();
 		this.energyContainer.writeToNBT(nbt);
-		on = nbt.getBoolean("on");
+		nbt.setBoolean("on", on);
+		nbt.setInteger("energyPerTick", energyPerTick);
 		return super.writeCustomInfoToNBT(nbt);
 	}
 	
@@ -99,7 +103,8 @@ public abstract class TileEntityEnergyBase extends TileEntityBase {
 	public void readFromCustomInfoNBT(NBTTagCompound nbt) {
 		if(nbt != null) {
 			this.energyContainer.readFromNBT(nbt);
-			nbt.setBoolean("on", on);
+			on = nbt.getBoolean("on");
+			energyPerTick = nbt.getInteger("energyPerTick");
 			super.readFromCustomInfoNBT(nbt);
 		}
 	}

@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class TileEntityBase extends TileEntity implements ITickable{
 
 	protected String faceing = "north";
+	protected int tier = 1;
 	
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
@@ -74,12 +75,14 @@ public abstract class TileEntityBase extends TileEntity implements ITickable{
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		this.faceing = nbt.getString("faceing");
+		this.tier = nbt.getInteger("tier");
 		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setString("faceing", faceing);
+		nbt.setInteger("tier", tier);
 		return super.writeToNBT(nbt);
 	}
 	

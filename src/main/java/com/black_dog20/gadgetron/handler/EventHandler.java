@@ -68,7 +68,7 @@ public class EventHandler {
 		if(ModConfig.doesTrilliumCausePoison){
 			if(event.getEntity() instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer) event.getEntity();
-				if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre))){
+				if(player.inventory.hasItemStack(new ItemStack(ModBlocks.TrilliumOre)) && !player.isPotionActive(MobEffects.POISON)){
 					player.addPotionEffect(new PotionEffect(MobEffects.POISON, 100));
 				}
 			}
