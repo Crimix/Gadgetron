@@ -64,6 +64,8 @@ public class TileEntityEnergyGenerator extends TileEntityEnergyInventoryFluidBas
 						addEnergy();
 					}
 				}else {
+					if(timeToBurn == 0)
+						return;
 					if(burnTime % timeToBurn  == 0) {
 						burnTime = 0;
 						on = false;
